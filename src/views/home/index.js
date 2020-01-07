@@ -10,7 +10,21 @@ import logo3 from '../../images/logos/logo3.png';
 import logo4 from '../../images/logos/logo4.png';
 import logo5 from '../../images/logos/logo5.png';
 import logo6 from '../../images/logos/logo6.png';
-import placeholder1 from '../../images/gallery/1.jpg';
+import ph1 from '../../images/gallery/1.jpg';
+import ph2 from '../../images/gallery/2.jpg';
+import ph3 from '../../images/gallery/3.jpg';
+import ph4 from '../../images/gallery/4.jpg';
+import ph5 from '../../images/gallery/5.jpg';
+import ph6 from '../../images/gallery/6.jpg';
+import ph7 from '../../images/gallery/7.jpg';
+import ph8 from '../../images/gallery/8.jpg';
+import ph9 from '../../images/gallery/9.jpg';
+
+import slide1 from '../../images/slide1.jpg';
+import slide2 from '../../images/slide2.jpg';
+
+import service1 from '../../images/service1.jpg';
+
 // ==================================
 
 class Home extends Component {
@@ -63,7 +77,7 @@ class Home extends Component {
         </ol>
         {/*  Wrapper for slides */}
         <div className="carousel-inner" role="listbox">
-          <div className="item"> <img src="../../../public/assetscopy/images//slide1.jpg" alt="First Image" />
+          <div className="item"> <img src={slide1} alt="First Image" />
             <div className="carousel-caption">
               <div className="carousel-caption-inner">
                 <div className="container">
@@ -81,7 +95,7 @@ class Home extends Component {
             {/* carousel-caption*/}
           </div>
           {/* item 1*/}
-          <div className="item"> <img src="assets/images/slide2.jpg" alt="" />
+          <div className="item"> <img src={slide2} alt="" />
             <div className="carousel-caption">
               <div className="carousel-caption-inner">
                 <div className="container">
@@ -114,7 +128,7 @@ class Home extends Component {
           <div className="row">
             <div className="col-md-4 col-sm-6">
               <div className="service-box service-color-one">
-                <div className="service-img"><img src="assets/images/service1.jpg" alt=""/></div>
+                <div className="service-img"><img src={service1} alt=""/></div>
                 <div className="service-contents">
                   <h1>Bridal Makeup</h1>
                   <p>Considering just how important the makeup arts are for these industries, the quality of my work was required to match the className. After hundreds of sessions it seems it did!</p>
@@ -127,7 +141,7 @@ class Home extends Component {
             {/* col-md-4*/}
             <div className="col-md-4 col-sm-6">
               <div className="service-box service-color-two">
-                <div className="service-img"><img src="assets/images/service1.jpg" alt=""/></div>
+                <div className="service-img"><img src={service1} alt=""/></div>
                 <div className="service-contents">
                   <h1>tv film commercial</h1>
                   <p>Considering just how important the makeup arts are for these industries, the quality of my work was required to match the className. After hundreds of sessions it seems it did!</p>
@@ -140,7 +154,7 @@ class Home extends Component {
             {/* col-md-4*/}
             <div className="col-md-4 col-sm-6">
               <div className="service-box service-color-three">
-                <div className="service-img"><img src="assets/images/service1.jpg" alt=""/></div>
+                <div className="service-img"><img src={service1} alt=""/></div>
                 <div className="service-contents">
                   <h1>Special occasions</h1>
                   <p>Considering just how important the makeup arts are for these industries, the quality of my work was required to match the className. After hundreds of sessions it seems it did!</p>
@@ -174,32 +188,32 @@ class Home extends Component {
           </ul>
           <div className="portfolio-items row">
             <div className="portfolio-item item height-2x fashion col-xs-12 col-sm-6 col-md-4">
-              <div className="a-img" style={{ backgroundImage: `url( ${placeholder1})` }}></div>
-              <a href="assets/images/gallery/1.jpg" className="mfp-image"><i className="fa fa-search"></i></a> </div>
+              <div className="a-img" style={{ backgroundImage: `url( ${ph1})` }}></div>
+              <a href={ph1} className="mfp-image"><i className="fa fa-search"></i></a> </div>
             <div className="portfolio-item item wedding col-xs-12 col-sm-6 col-md-4">
-              <div className="a-img" style={{ backgroundImage: 'url(../../images/gallery/2.jpg)'}}></div>
-              <a href="../../../public/assetscopy/images/gallery/2.jpg" className="mfp-image"><i className="fa fa-search"></i></a> </div>
+              <div className="a-img" style={{ backgroundImage: `url( ${ph2})`}}></div>
+              <a href={ph2} className="mfp-image"><i className="fa fa-search"></i></a> </div>
             <div className="portfolio-item item nature col-xs-12 col-sm-6 col-md-4">
-              <div className="a-img" style={{ backgroundImage: 'url(../../../public/assetscopy/images/gallery/3.jpg)'}}></div>
-              <a href="../../images/gallery/3.jpg" className="mfp-image"><i className="fa fa-search"></i></a> </div>
+              <div className="a-img" style={{ backgroundImage: `url( ${ph3})`}}></div>
+              <a href={ph3} className="mfp-image"><i className="fa fa-search"></i></a> </div>
             <div className="portfolio-item item studio col-xs-12 col-sm-6 col-md-4">
-              <div className="a-img" style={{backgroundImage: 'url(../../../public/assetscopy/images/gallery/4.jpg)'}}></div>
-              <a href="../../images/gallery/4.jpg" className="mfp-image"><i className="fa fa-search"></i></a> </div>
+              <div className="a-img" style={{backgroundImage: `url( ${ph4})` }}></div>
+              <a href={ph4} className="mfp-image"><i className="fa fa-search"></i></a> </div>
             <div className="portfolio-item item fashion col-xs-12 col-sm-6 col-md-4">
-              <div className="a-img" style={{backgroundImage: 'url(../../../public/assetscopy/images/gallery/5.jpg)'}}></div>
-              <a href="../../images/gallery/5.jpg" className="mfp-image"><i className="fa fa-search"></i></a> </div>
+              <div className="a-img" style={{backgroundImage: `url( ${ph5})`}}></div>
+              <a href={ph5} className="mfp-image"><i className="fa fa-search"></i></a> </div>
             <div className="portfolio-item item width-2x wedding col-xs-12 col-sm-6 col-md-8">
-              <div className="a-img" style={{backgroundImage: 'url(../../../public/assetscopy/images/gallery/6.jpg)'}}></div>
-              <a href="../../images/gallery/6.jpg" className="mfp-image"><i className="fa fa-search"></i></a> </div>
+              <div className="a-img" style={{backgroundImage: `url( ${ph6})` }}></div>
+              <a href={ph6} className="mfp-image"><i className="fa fa-search"></i></a> </div>
             <div className="portfolio-item item height-2x nature col-xs-12 col-sm-6 col-md-4">
-              <div className="a-img" style={{backgroundImage: 'url(../../../public/assetscopy/images/gallery/7.jpg)'}}></div>
-              <a href="../../images/gallery/7.jpg" className="mfp-image"><i className="fa fa-search"></i></a> </div>
+              <div className="a-img" style={{backgroundImage: `url( ${ph7})` }}></div>
+              <a href={ph7} className="mfp-image"><i className="fa fa-search"></i></a> </div>
             <div className="portfolio-item item studio col-xs-12 col-sm-6 col-md-4">
-              <div className="a-img" style={{backgroundImage: 'url(../../images/gallery/8.jpg)'}}></div>
-              <a href="../../images/gallery/8.jpg" className="mfp-image"><i className="fa fa-search"></i></a> </div>
+              <div className="a-img" style={{backgroundImage: `url( ${ph8})` }}></div>
+              <a href={ph8} className="mfp-image"><i className="fa fa-search"></i></a> </div>
             <div className="portfolio-item item fashion col-xs-12 col-sm-6 col-md-4">
-              <div className="a-img" style={{backgroundImage: 'url(../../images/gallery/9.jpg)'}}></div>
-              <a href="../../images/gallery/9.jpg" className="mfp-image"><i className="fa fa-search"></i></a> </div>
+              <div className="a-img" style={{backgroundImage: `url( ${ph9})` }}></div>
+              <a href={ph9} className="mfp-image"><i className="fa fa-search"></i></a> </div>
           </div>
           {/*  END Portfolio items */}
         </div>
