@@ -10,6 +10,10 @@ import SingleService from './views/services/singleservice';
 import Portfolio from './views/portfolio';
 import Blog from './views/blog';
 import Contact from './views/contact';
+import Post1 from './views/blog/post1';
+import LeftSideBar from './views/blog/leftsidebar';
+import Admin from './views/admin';
+
 
 
 class App extends Component {
@@ -20,6 +24,9 @@ class App extends Component {
       <Header />
       {/* Header goes above */}
       <Switch>
+      <Route exact path={'/admin'} render={() =>
+        <Admin />
+        } />
       <Route exact path={['/' ,'/home']} render={() =>
         <Home />
        } />
@@ -41,6 +48,15 @@ class App extends Component {
       <Route exact path={'/contact'} render={() =>
         <Contact />
         } />
+      <Route exact path={'/post1'} render={() =>
+        <Post1 />
+        } />
+      <Route exact path={'/leftsidebar'} render={() =>
+        <LeftSideBar />
+        } />
+
+
+
       </Switch>
       {/* footer goes below here */}
       <Footer />

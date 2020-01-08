@@ -4,7 +4,7 @@ import service from '../../images/service.jpg';
 class Services extends Component {
   render() {
     return(
-      <div classNameName="services">
+      <div className="services">
       <section className="section section-page-title" style={{backgroundImage: `url( ${service})` }}>
         <div className="overlay">
           <h1>Services</h1>

@@ -24,10 +24,10 @@ const Header = () => {
               </ul>
             </li>
             <li><a href="/portfolio">Portfolio</a></li>
-            <li className="dropdown"> <a href="blog.html" className="dropdown-toggle" data-toggle="dropdown">Blog</a>
+            <li className="dropdown"> <a href="/blog" className="dropdown-toggle" data-toggle="dropdown">Blog</a>
               <ul className="dropdown-menu">
-                <li><a href="blog-left-sidebar.html">Left Sidebar</a></li>
-                <li><a href="post.html">Single Post</a></li>
+                <li><a href="leftsidebar">Left Sidebar</a></li>
+                <li><a href="/post1">Single Post</a></li>
               </ul>
             </li>
             <li><a href="/contact">Contact Us</a></li>

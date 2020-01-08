@@ -11,13 +11,13 @@ $(document).ready(function() {
    });
   });
  }
- 
+
 /* hero carousel*/
 var $headerHeight = $('.navbar-default').height();
-var $item = $('.carousel .item'); 
+var $item = $('.carousel .item');
 var $wHeight = $(window).height()-$headerHeight;
 $item.eq(0).addClass('active');
-$item.height($wHeight); 
+$item.height($wHeight);
 $item.addClass('full-screen');
 
 $('.carousel img').each(function() {
@@ -87,7 +87,7 @@ $('.carousel').carousel({
    nav: false
   });
  }
- 
+
 /*==========================================
   contact form
  ===========================================*/
@@ -108,7 +108,7 @@ $('.carousel').carousel({
    });
   }
  });
- 
+
   //back to top start
     var $top = $('.goto-top');
     var $html_body = $("html,body");
@@ -126,8 +126,8 @@ $('.carousel').carousel({
         } else {
             $top.fadeOut(1000);
         }
- }); 
- 
- 
+ });
+
+
 
 }); // END function

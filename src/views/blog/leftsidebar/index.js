@@ -1,26 +1,23 @@
 import React, { Component } from 'react';
-import girl from '../../images/girl.jpg';
-import placeholder from '../../images/blog/placeholder.jpg';
-import ad from '../../images/ad.jpg'
+import placeholder from '../../../images/blog/placeholder.jpg';
+import girl from '../../../images/girl.jpg';
+import ad from '../../../images/ad.jpg'
 
 
-
-class Blog extends Component {
+class LeftSideBar extends Component {
   render() {
     return(
-
-      <div className="blog">
-        <section className="section section-page-title">
-          <div className="overlay">
-            <h1>Blog/News</h1>
-          </div>
-          {/*overlay*/}
-        </section>
-        {/*section-page-title*/}
+      <div className="leftsidebar">
+      <section class="section section-page-title">
+        <div class="overlay">
+          <h1>Blog/News</h1>
+        </div>
+        {/*overlay*/}
+      </section>
         <section className="section main-section">
           <div className="container">
             <div className="row">
-              <div className="col-md-8 col-sm-8">
+              <div className="col-md-8 col-sm-8 pull-right">
                 <div className="post-loop clearfix">
                   <div className="post-thumbnail"><img src={placeholder} alt="" /><a href="post.html"><i className="fa fa-link"></i></a></div>
                   <div className="post-loop-info clearfix">
@@ -113,7 +110,7 @@ class Blog extends Component {
               </div>
               {/*col-md-8*/}
               {/*sidebar*/}
-              <div className="col-md-4 col-sm-4" id="sidebar">
+              <div className="col-md-4 col-sm-4 pull-left" id="sidebar">
                 <div className="sidebar-box clearfix">
                   <h3 className="widget-title">About me</h3>
                   <p><img src={girl} alt="" /></p>
@@ -158,9 +155,9 @@ class Blog extends Component {
             {/*row*/}
           </div>
         </section>
-      </div>
+    </div>
     );
   }
 }
 
-export default Blog;
+export default LeftSideBar;
