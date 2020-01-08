@@ -1,10 +1,43 @@
 import React from 'react';
 import './index.css';
+import companylogo from '../../images/logo.png';
 
 const Header = () => {
   return(
-    <h1>This is the header.</h1>
+    <nav className="navbar navbar-default bootsnav">
+      <div className="container">
+        {/*  Start Header Navigation */}
+        <div className="navbar-header">
+          <button type="button" className="navbar-toggle" data-toggle="collapse" data-target="#navbar-menu"> <i className="fa fa-bars"></i> </button>
+          <a className="navbar-brand" href="/home"><img src={companylogo} className="logo" alt="" /></a></div>
+        {/*  End Header Navigation */}
+        {/*  Collect the nav links, forms, and other content for toggling */}
+        <div className="collapse navbar-collapse" id="navbar-menu">
+          <ul className="nav navbar-nav navbar-right" data-in="fadeInUp" data-out="fadeOutDown">
+            <li><a href="/home">Home</a></li>
+            <li><a href="/about">About</a></li>
+            <li className="dropdown"> <a href="/services" className="dropdown-toggle" data-toggle="dropdown">Services</a>
+              <ul className="dropdown-menu">
+                <li><a href="/singleservice">Bridal Makeup</a></li>
+                <li><a href="/">TV Film Commercial</a></li>
+                <li><a href="/">Special occasions</a></li>
+              </ul>
+            </li>
+            <li><a href="/portfolio">Portfolio</a></li>
+            <li className="dropdown"> <a href="blog.html" className="dropdown-toggle" data-toggle="dropdown">Blog</a>
+              <ul className="dropdown-menu">
+                <li><a href="blog-left-sidebar.html">Left Sidebar</a></li>
+                <li><a href="post.html">Single Post</a></li>
+              </ul>
+            </li>
+            <li><a href="/contact">Contact Us</a></li>
+          </ul>
+        </div>
+        {/*  /.navbar-collapse */}
+      </div>
+      {/* container*/}
+    </nav>
   )
 }
 
-export default Header; 
+export default Header;

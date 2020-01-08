@@ -1,15 +1,10 @@
 import React, { Component } from 'react';
-
+import Header from '../../components/header';
+import Featured from '../../components/featured';
 // ========= image imports =========
 import clientphoto from '../../images/client.jpg';
 import placeholder from '../../images/blog/placeholder.jpg';
-import companylogo from '../../images/logo.png';
-import logo1 from '../../images/logos/logo1.png';
-import logo2 from '../../images/logos/logo2.png';
-import logo3 from '../../images/logos/logo3.png';
-import logo4 from '../../images/logos/logo4.png';
-import logo5 from '../../images/logos/logo5.png';
-import logo6 from '../../images/logos/logo6.png';
+
 import ph1 from '../../images/gallery/1.jpg';
 import ph2 from '../../images/gallery/2.jpg';
 import ph3 from '../../images/gallery/3.jpg';
@@ -27,6 +22,17 @@ import service1 from '../../images/service1.jpg';
 
 // ==================================
 
+//Questions:
+//imports is there another way for image imports;
+//2 image folders issue;
+//JQuery
+//
+
+
+
+
+
+
 class Home extends Component {
   render() {
     return (
@@ -35,40 +41,7 @@ class Home extends Component {
         <div className="animation circle"></div>
       </div>
       {/* ============== end preloader ============== */}
-      <nav className="navbar navbar-default bootsnav">
-        <div className="container">
-          {/*  Start Header Navigation */}
-          <div className="navbar-header">
-            <button type="button" className="navbar-toggle" data-toggle="collapse" data-target="#navbar-menu"> <i className="fa fa-bars"></i> </button>
-            <a className="navbar-brand" href="index.html"><img src={companylogo} className="logo" alt="" /></a></div>
-          {/*  End Header Navigation */}
-          {/*  Collect the nav links, forms, and other content for toggling */}
-          <div className="collapse navbar-collapse" id="navbar-menu">
-            <ul className="nav navbar-nav navbar-right" data-in="fadeInUp" data-out="fadeOutDown">
-              <li><a href="index.html">Home</a></li>
-              <li><a href="about.html">About</a></li>
-              <li className="dropdown"> <a href="services.html" className="dropdown-toggle" data-toggle="dropdown">Services</a>
-                <ul className="dropdown-menu">
-                  <li><a href="single-service.html">Bridal Makeup</a></li>
-                  <li><a href="single-service.html">TV Film Commercial</a></li>
-                  <li><a href="single-service.html">Special occasions</a></li>
-                </ul>
-              </li>
-              <li><a href="portfolio.html">Portfolio</a></li>
-              <li className="dropdown"> <a href="blog.html" className="dropdown-toggle" data-toggle="dropdown">Blog</a>
-                <ul className="dropdown-menu">
-                  <li><a href="blog-left-sidebar.html">Left Sidebar</a></li>
-                  <li><a href="post.html">Single Post</a></li>
-                </ul>
-              </li>
-              <li><a href="contact.html">Contact Us</a></li>
-            </ul>
-          </div>
-          {/*  /.navbar-collapse */}
-        </div>
-        {/* container*/}
-      </nav>
-      {/* navbar*/}
+
       <div id="mycarousel" className="carousel slide carousel-fade" data-ride="carousel">
         {/*  Indicators */}
         <ol className="carousel-indicators">
@@ -317,88 +290,11 @@ class Home extends Component {
         {/* container*/}
       </section>
       {/* section-blog*/}
-      <section className="section section-logos pt-zero">
-        {/*  section-title */}
-        <div className="section-title text-center">
-          <h1 className="decor">Featured <span>on</span></h1>
-        </div>
-        {/*  end section-title */}
-        <div className="container">
-          <div className="row">
-            <div className="col-lg-2 col-md-2 col-sm-4 col-xs-6 text-center">
-              <div className="cleint-logo"> <img src={logo1} alt="" /></div>
-            </div>
-            {/* end col*/}
-            <div className="col-lg-2 col-md-2 col-sm-4 col-xs-6 text-center">
-              <div className="cleint-logo"> <img src={logo2} alt="" /> </div>
-            </div>
-            {/* end col*/}
-            <div className="col-lg-2 col-md-2 col-sm-4 col-xs-6 text-center">
-              <div className="cleint-logo"> <img src={logo3} alt="" /> </div>
-            </div>
-            {/* end col*/}
-            <div className="col-lg-2 col-md-2 col-sm-4 col-xs-6 text-center">
-              <div className="cleint-logo"> <img src={logo4} alt="" /> </div>
-            </div>
-            {/* end col*/}
-            <div className="col-lg-2 col-md-2 col-sm-4 col-xs-6 text-center">
-              <div className="cleint-logo"> <img src={logo5} alt="" /> </div>
-            </div>
-            {/* end col*/}
-            <div className="col-lg-2 col-md-2 col-sm-4 col-xs-6 text-center">
-              <div className="cleint-logo"> <img src={logo6} alt="" /> </div>
-            </div>
-            {/* end col*/}
-          </div>
-          {/* row*/}
-        </div>
-        {/* container*/}
-      </section>
+      <Featured />
       {/* section-logo*/}
-      <footer>
-        <section className="section footer-primary">
-          <div className="container">
-            <div className="row">
-              <div className="col-md-6 col-md-offset-3 text-center">
-                <h3>Newsletter Signup</h3>
-                <p className="pb-20">Get Our special offers and the ultimate hair care tips & tricks!</p>
-                <form className="pb-40">
-                  <div className="input-group">
-                    <input type="email" className="form-control" required  name="nemail" id="nemail" placeholder="Email address" />
-                    <div className="input-group-btn">
-                      <button type="submit" className="btn btn-primary">Subscribe</button>
-                    </div>
-                    {/*  /btn-group */}
-                  </div>
-                  {/*  /input-group */}
-                </form>
-                <h3 className="pb-10">Let's Stay Connected</h3>
-                <div className="footer-social-icons"> <a href="#" target="_blank"><i className="fa fa-facebook"></i></a> <a href="#" target="_blank"><i className="fa fa-twitter"></i></a> <a href="#" target="_blank"><i className="fa fa-linkedin"></i></a> <a href="#" target="_blank"><i className="fa fa-instagram"></i></a> <a href="#" target="_blank"><i className="fa fa-google-plus"></i></a> </div>
-              </div>
-              {/* col*/}
-            </div>
-            {/* row*/}
-          </div>
-          {/* container*/}
-        </section>
-        {/* footer-primary*/}
-        <section className="section footer-copyright">
-          <div className="container">
-            <ul className="footer-nav">
-              <li><a href="#">Home</a></li>
-              <li><a href="#">About</a></li>
-              <li><a href="#">Services</a></li>
-              <li><a href="#">Portfolio</a></li>
-              <li><a href="#">Contact Us</a></li>
-            </ul>
-            <p>2020 Jerlicia Jordan. All Rights reserved.</p>
-          </div>
-          {/* container*/}
-        </section>
-        {/* footer-primary*/}
-      </footer>
-      <a className="goto-top"><i className="fa fa-angle-double-up" aria-hidden="true"></i></a>
 
+
+      {/* footer is here  */}
       </div>
 
     );
