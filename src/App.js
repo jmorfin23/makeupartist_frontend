@@ -54,9 +54,6 @@ class App extends Component {
       <Route exact path={'/leftsidebar'} render={() =>
         <LeftSideBar />
         } />
-
-
-
       </Switch>
       {/* footer goes below here */}
       <Footer />
