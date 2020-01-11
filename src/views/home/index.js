@@ -26,7 +26,7 @@ import service1 from '../../images/service1.jpg';
 //imports is there another way for image imports;
 //2 image folders issue;
 //JQuery
-//
+//ads
 
 
 
@@ -300,6 +300,5 @@ class Home extends Component {
     );
   }
 }
-
 
 export default Home;

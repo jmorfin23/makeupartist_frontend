@@ -1,6 +1,8 @@
 import React from 'react';
 import './index.css';
 import companylogo from '../../images/logo.png';
+import { useSelector} from 'react-redux';
+
 
 const Header = () => {
   return(

@@ -1,30 +1,22 @@
 import React, { Component } from 'react';
+import { useSelector } from 'react-redux';
 
 
-class Admin extends Component {
+const Admin = () => {
 
-  constructor(props) {
-    super(props);
+  const loggedIn = useSelector(state => state.logged);
 
-    this.state = {
-      username: '',
-      password: ''
-    }
-  }
-
-  adminLogin = async(e) => {
+  const adminLogin = async(e) => {
     e.preventDefault();
-    console.log('login pressed');
 
-
-    //call api
+    // //call api
     const URL = 'http://127.0.0.1:5000/api/admin-login';
 
     let response = await fetch(URL, {
       headers: {
         'Content-Type': 'application/json',
-        'username': this.state.username,
-        'password': this.state.password
+        'username': e.target.username.value,
+        'password': e.target.password.value
       }
     });
 
@@ -34,31 +26,23 @@ class Admin extends Component {
 
     if (data.Success) {
       console.log('successfully logged in ')
+
     }
   }
 
-  setUsername = (e) => {
-    this.setState({ username: e.target.value });
-  }
-  setPassword = (e) => {
-    this.setState({password: e.target.value });
-  }
-
-
-  render() {
     return(
       <div className="admin">
           <div className="row">
             <div className="col-md-4 offset-md-4">
               <h2>Admin Login</h2>
-              <form onSubmit={this.adminLogin}>
+              <form onSubmit={(e) => adminLogin(e)}>
                 <div className="form-group">
                   <label>Username</label>
-                  <input type="username" onChange={this.setUsername} className="form-control" required="required" placeholder="Username" value={this.state.username}/>
+                  <input name="username" type="username" className="form-control" required="required" placeholder="Username" />
                 </div>
                 <div className="form-group">
-                  <label for="exampleInputPassword1">Password</label>
-                  <input type="password" onChange={this.setPassword} required="required" className="form-control" value={this.state.password} placeholder="Password"/>
+                  <label>Password</label>
+                  <input name='password' type="password" required="required" className="form-control" placeholder="Password"/>
                 </div>
                 <button type="submit" className="btn btn-primary">Submit</button>
               </form>
@@ -66,7 +50,6 @@ class Admin extends Component {
           </div>
         </div>
     );
-  }
 }
 
 export default Admin;
