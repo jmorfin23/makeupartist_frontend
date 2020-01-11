@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
-import { useSelector } from 'react-redux';
+import React, { Component, useState } from 'react';
+
 
 
 const Admin = () => {
 
-  const loggedIn = useSelector(state => state.logged);
-
+  const [logged, setLogged] = useState(false);
+  console.log(logged);
   const adminLogin = async(e) => {
     e.preventDefault();
 
@@ -25,31 +25,35 @@ const Admin = () => {
     console.log(data);
 
     if (data.Success) {
-      console.log('successfully logged in ')
-
+      setLogged(!logged);
     }
   }
 
+  if (logged) {
     return(
-      <div className="admin">
-          <div className="row">
-            <div className="col-md-4 offset-md-4">
-              <h2>Admin Login</h2>
-              <form onSubmit={(e) => adminLogin(e)}>
-                <div className="form-group">
-                  <label>Username</label>
-                  <input name="username" type="username" className="form-control" required="required" placeholder="Username" />
-                </div>
-                <div className="form-group">
-                  <label>Password</label>
-                  <input name='password' type="password" required="required" className="form-control" placeholder="Password"/>
-                </div>
-                <button type="submit" className="btn btn-primary">Submit</button>
-              </form>
-            </div>
+      <h1>You are now logged in.</h1>
+    );
+  } else {
+    return (<div className="admin">
+        <div className="row">
+          <div className="col-md-4 offset-md-4">
+            <h2>Admin Login</h2>
+            <form onSubmit={(e) => adminLogin(e)}>
+              <div className="form-group">
+                <label>Username</label>
+                <input name="username" type="username" className="form-control" required="required" placeholder="Username" />
+              </div>
+              <div className="form-group">
+                <label>Password</label>
+                <input name='password' type="password" required="required" className="form-control" placeholder="Password"/>
+              </div>
+              <button type="submit" className="btn btn-primary">Submit</button>
+            </form>
           </div>
         </div>
-    );
+      </div>
+  );}
+
 }
 
 export default Admin;
