@@ -2,6 +2,35 @@ import React, { Component } from 'react';
 
 
 class Contact extends Component {
+
+  constructor(props) {
+    super(props);
+  }
+
+  submitMessage = async(e) => {
+    console.log('inside submit message');
+
+    const URL = 'http://127.0.0.1:5000/api/contact';
+
+    let response = await fetch(URL, {
+      method: 'POST',
+      headers: {
+        'Contact-Type': 'application/json',
+        'name': e.target.cname.value,
+        'email': e.target.cemailaddress.value,
+        'subject': e.target.subject.value,
+        'phone': e.target.cphone.value,
+        'message': e.target.cmessage.value,
+      }
+    });
+
+    let data = await response.json();
+
+    if (data.Success) {
+      console.log('message sent successfully');
+    }
+  }
+
   render() {
     return(
       <div className="contact">
@@ -45,7 +74,7 @@ class Contact extends Component {
                 <div className="alert alert-danger alert-danger-contact" role="alert" style={{ display: 'none' }}>
                   <button type="button" className="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">&times;</span> </button>
                   Opps! There was problem sending email. Please try Again! </div>
-                <form className="contactform" id="contactform" action="email.php" method="post">
+                <form className="contactform" id="contactform" onSubmit={(e) => this.submitMessage(e)}>
                   <div className="row">
                     <div className="col-md-6">
                       <p>

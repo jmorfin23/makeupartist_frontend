@@ -27,6 +27,7 @@ import service1 from '../../images/service1.jpg';
 //2 image folders issue;
 //JQuery
 //ads
+//mail servers
 
 
 
