@@ -1,11 +1,17 @@
 import React, { Component, useState } from 'react';
+import './index.css';
 
 
+//== cloudinary presets for uploading images ==//
+const CLOUDINARY_URL = 	'https://api.cloudinary.com/v1_1/dozvqlete/upload';
+const CLOUDINARY_UPLOAD_PRESET = 'zzmnc51n';
+//=============================================//
 
 const Admin = () => {
 
   const [logged, setLogged] = useState(false);
-  console.log(logged);
+  const [admin, setAdmin] = useState(null);
+
   const adminLogin = async(e) => {
     e.preventDefault();
 
@@ -21,17 +27,64 @@ const Admin = () => {
     });
 
     let data = await response.json();
-
     console.log(data);
-
     if (data.Success) {
       setLogged(!logged);
+      setAdmin(data.username);
     }
+
+  }
+
+  const uploadImage = async(image) => {
+    let res = await fetch(URL, {
+      headers: {
+        'Content-Type': 'application/json',
+        'image': image,
+        'admin': admin
+      }
+    });
+    let returned = await res.json();
+
+    console.log(returned);
+  }
+
+  const onChange = async(e) => {
+
+    let file = e.target.files[0];
+
+    var formData = new FormData();
+    formData.append('file', file);
+    formData.append('upload_preset', CLOUDINARY_UPLOAD_PRESET);
+
+    //request
+    let response = await fetch(CLOUDINARY_URL, {
+      method: 'POST',
+      body: formData
+    });
+    let data = await response.json();
+    //call testfunct to add to profile pic to database
+    uploadImage(data.secure_url);
   }
 
   if (logged) {
     return(
-      <h1>You are now logged in.</h1>
+      <div className="make-centered">
+        <h1>You are now logged in : { admin }</h1>
+
+        <div className="type-container">
+          <h2>Upload Image</h2>
+
+          <ul className="type-list">
+            <li onClick={() => console.log('pressed')} className="type type-1">Wedding</li>
+            <li className="type type-2">Hairstyle</li>
+            <li className="type type-3">Commercial</li>
+            <li className="type type-4">Portfolio</li>
+          </ul>
+
+        </div>
+
+
+      </div>
     );
   } else {
     return (<div className="admin">
@@ -57,3 +110,8 @@ const Admin = () => {
 }
 
 export default Admin;
+
+
+
+//<label htmlFor="file-input"></label>
+//<input onChange={onChange} id="file-input" type="file"></input>

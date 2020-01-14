@@ -1,0 +1,33 @@
+.make-centered h1 {
+  text-align: center;
+}
+
+.type-container {
+  list-style-type: none;
+  text-align: center;
+  margin-top: 40px;
+}
+
+.type-container li {
+  font-size: 25px;
+  display: inline-block;
+  color: white;
+  padding: 15px 32px;
+  font-weight: bold;
+  border: 1px solid black;
+  margin: 4px 4px;
+  cursor: pointer;
+}
+
+.type-container .type-1 {
+  background-color: red;
+}
+.type-container .type-2 {
+  background-color: blue;
+}
+.type-container .type-3 {
+  background-color: green;
+}
+.type-container .type-4 {
+  background-color: pink;
+}
