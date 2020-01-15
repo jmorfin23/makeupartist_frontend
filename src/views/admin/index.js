@@ -47,7 +47,8 @@ const Admin = () => {
       headers: {
         'Content-Type': 'application/json',
         'image': imageURL,
-        'admin': admin
+        'admin': admin,
+        'type': uploadType
       }
     });
     let returned = await res.json();
@@ -66,7 +67,6 @@ const Admin = () => {
     //request
     let response = await fetch(CLOUDINARY_URL, {
       method: 'POST',
-      'type': uploadType,
       body: formData
     });
     console.log('test3')
@@ -94,7 +94,7 @@ const Admin = () => {
             <li id="1" onClick={() => setUploadType('Wedding')} className="type type-1">Wedding</li>
             <li onClick={() => setUploadType('HairStyle')} className="type type-2">Hairstyle</li>
             <li onClick={() => setUploadType('Commercial')} className="type type-3">Commercial</li>
-            <li onClick={() => setUploadType('Portfolio')} className="type type-4">Portfolio</li>
+            <li onClick={() => setUploadType('Studio')} className="type type-4">Studio</li>
           </ul>
           <h3>{ uploadType ? 'Add image to: ' + uploadType : 'Type has not been selected.' }</h3>
           <div className="input-container">

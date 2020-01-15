@@ -13,6 +13,33 @@ import ph9 from '../../images/gallery/9.jpg';
 
 
 class Portfolio extends Component {
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      typeID: ''
+    }
+  }
+
+  retrieveAllPosts = async() => {
+    console.log('retrieve all posts');
+
+    const URL = 'http://127.0.0.1:5000/api/retrieve-images';
+
+    let response = await fetch(URL);
+
+    let data = await response.json();
+
+    console.log(data);
+  }
+
+  componentDidMount() {
+    console.log('inside component did mount');
+    this.retrieveAllPosts();
+  }
+
+
   render() {
     return(
       <div>
