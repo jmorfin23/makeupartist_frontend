@@ -28,6 +28,7 @@ import service1 from '../../images/service1.jpg';
 //JQuery
 //ads
 //mail servers
+//adding onclick events is it more efficient just to use //normal javascript or should i have an onClick eventfor each ?
 
 
 

@@ -11,6 +11,8 @@ const Admin = () => {
 
   const [logged, setLogged] = useState(false);
   const [admin, setAdmin] = useState(null);
+  const [uploadType, setUploadType] = useState(null);
+
 
   const adminLogin = async(e) => {
     e.preventDefault();
@@ -29,17 +31,22 @@ const Admin = () => {
     let data = await response.json();
     console.log(data);
     if (data.Success) {
+      alert('You have successfully logged in.');
       setLogged(!logged);
       setAdmin(data.username);
     }
 
   }
 
-  const uploadImage = async(image) => {
-    let res = await fetch(URL, {
+  const uploadImage = async(imageURL) => {
+    console.log('inside uploadimage');
+    const URL1 = 'http://127.0.0.1:5000/api/image-save';
+    console.log('this is the image url: ' + imageURL);
+    let res = await fetch(URL1, {
+      method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'image': image,
+        'image': imageURL,
         'admin': admin
       }
     });
@@ -49,47 +56,61 @@ const Admin = () => {
   }
 
   const onChange = async(e) => {
-
+    console.log('test1')
     let file = e.target.files[0];
 
     var formData = new FormData();
     formData.append('file', file);
     formData.append('upload_preset', CLOUDINARY_UPLOAD_PRESET);
-
+    console.log('test2')
     //request
     let response = await fetch(CLOUDINARY_URL, {
       method: 'POST',
+      'type': uploadType,
       body: formData
     });
+    console.log('test3')
     let data = await response.json();
-    //call testfunct to add to profile pic to database
+    console.log('test4')
+    console.log(data);
+    if (data.error) {
+      alert(data.error.message);
+      return;
+    }
+    //call uploadImage to add to profile pic to database
     uploadImage(data.secure_url);
+    console.log('test5')
   }
 
   if (logged) {
     return(
       <div className="make-centered">
-        <h1>You are now logged in : { admin }</h1>
-
         <div className="type-container">
-          <h2>Upload Image</h2>
+          <h2>Upload an Image</h2>
+
+          { uploadType ? null : <p>Please select a type.</p> }
 
           <ul className="type-list">
-            <li onClick={() => console.log('pressed')} className="type type-1">Wedding</li>
-            <li className="type type-2">Hairstyle</li>
-            <li className="type type-3">Commercial</li>
-            <li className="type type-4">Portfolio</li>
+            <li id="1" onClick={() => setUploadType('Wedding')} className="type type-1">Wedding</li>
+            <li onClick={() => setUploadType('HairStyle')} className="type type-2">Hairstyle</li>
+            <li onClick={() => setUploadType('Commercial')} className="type type-3">Commercial</li>
+            <li onClick={() => setUploadType('Portfolio')} className="type type-4">Portfolio</li>
           </ul>
-
+          <h3>{ uploadType ? 'Add image to: ' + uploadType : 'Type has not been selected.' }</h3>
+          <div className="input-container">
+            <div className="input-2">
+              <label htmlFor="file-input"></label>
+              <input onChange={onChange} type="file"></input>
+            </div>
+          </div>
         </div>
 
 
       </div>
     );
   } else {
-    return (<div className="admin">
-        <div className="row">
-          <div className="col-md-4 offset-md-4">
+    return (
+          <div className="admin">
             <h2>Admin Login</h2>
             <form onSubmit={(e) => adminLogin(e)}>
               <div className="form-group">
@@ -103,15 +124,8 @@ const Admin = () => {
               <button type="submit" className="btn btn-primary">Submit</button>
             </form>
           </div>
-        </div>
-      </div>
   );}
 
 }
 
 export default Admin;
-
-
-
-//<label htmlFor="file-input"></label>
-//<input onChange={onChange} id="file-input" type="file"></input>

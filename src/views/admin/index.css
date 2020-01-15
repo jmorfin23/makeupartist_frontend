@@ -1,17 +1,31 @@
-.make-centered h1 {
+.admin {
   text-align: center;
+  display: block;
+}
+.admin form {
+  display: inline-block;
+  text-align: left;
+  margin: 15px auto;
 }
 
+.make-centered > h1, h2, h3 {
+  font-family: 'Quattrocento', serif;
+}
+
+.make-centered h2 {
+  text-decoration: underline;
+}
 .type-container {
   list-style-type: none;
   text-align: center;
   margin-top: 40px;
 }
 
+
 .type-container li {
   font-size: 25px;
   display: inline-block;
-  color: white;
+  color: black;
   padding: 15px 32px;
   font-weight: bold;
   border: 1px solid black;
@@ -19,11 +33,19 @@
   cursor: pointer;
 }
 
+.type-container li:hover {
+  color: white;
+}
+
+.make-darker {
+  background-color: black;
+}
+
 .type-container .type-1 {
   background-color: red;
 }
 .type-container .type-2 {
-  background-color: blue;
+  background-color: lightblue;
 }
 .type-container .type-3 {
   background-color: green;
@@ -31,3 +53,35 @@
 .type-container .type-4 {
   background-color: pink;
 }
+
+.input-container {
+  display: inline-block;
+}
+
+.input-container > .input-2 {
+  /* margin: auto; */
+}
+
+
+/*======= Media Tags ========*/
+/*============================*/
+@media only screen and (min-width: 1000px) {
+  .admin form {
+    width: 400px;
+  }
+}
+
+@media only screen and (min-width: 600px) and (max-width: 1000px) {
+  .admin form {
+    width: 450px;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .admin form {
+    width: 450px;
+  }
+}
+
+
+/*============================*/
