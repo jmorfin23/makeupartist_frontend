@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import work from "../../images/work.jpg";
-
-import ph1 from "../../images/gallery/1.jpg";
+import PortfolioImage from "../../components/portfolioImage";
 
 class Portfolio extends Component {
   constructor(props) {
@@ -12,24 +11,6 @@ class Portfolio extends Component {
       typeID: ""
     };
   }
-
-  retrieveAllPosts = async () => {
-    const URL = "http://127.0.0.1:5000/api/retrieve-images";
-    let response = await fetch(URL);
-    let data = await response.json();
-
-    if (data.error) {
-      alert(data.error.message);
-    }
-
-    let d = data.success.data;
-
-    for (let i = 0; i < d.length; i++) {
-      this.setState(prevState => ({
-        images: [...prevState.images, d[i]]
-      }));
-    }
-  };
 
   retrieveSpecificPost = async () => {
     console.log("specific post");
@@ -43,21 +24,16 @@ class Portfolio extends Component {
     console.log(data);
   };
 
-  testfunction = () => {
-    console.log("test");
+  testfunction = async () => {
+    console.log("hello");
   };
-
-  componentDidMount() {
-    console.log("inside component did mount");
-    this.retrieveAllPosts();
-  }
 
   render() {
     return (
       <div>
         <section
           className="section section-page-title"
-          style={{ backgroundImage: `url(${work})` }}
+          style={{ backgroundImage: `url(` + work + `)` }}
         >
           <div className="overlay">
             <h1>Portfolio</h1>
@@ -73,12 +49,13 @@ class Portfolio extends Component {
           <div className="container">
             {/* Portfolio items */}
             <ul className="portfolio-filter list-inline text-center">
-              <li className="current">
+              {/* * deleted the 'current class' * */}
+              <li className="">
                 <a href="" data-filter="*">
                   All Works
                 </a>
               </li>
-              <li className="">
+              <li className="filter-">
                 <a href="" data-filter=".wedding">
                   Wedding
                 </a>
@@ -99,21 +76,7 @@ class Portfolio extends Component {
                 </a>
               </li>
             </ul>
-            <div className="portfolio-items row">
-              {/* should i put this in a component or will it be faster like this? */}
-              {this.state.images &&
-                this.state.images.map(image => (
-                  <div className="portfolio-item item fashion col-xs-12 col-sm-6 col-md-4">
-                    <div
-                      className="a-img"
-                      style={{ backgroundImage: `url(` + image + `)` }}
-                    ></div>
-                    <a href={image} className="mfp-image">
-                      <i className="fa fa-search"></i>
-                    </a>{" "}
-                  </div>
-                ))}
-            </div>
+            <PortfolioImage images={this.state.images} />
             {/* END Portfolio items */}
           </div>
           {/*container*/}
@@ -124,7 +87,3 @@ class Portfolio extends Component {
 }
 
 export default Portfolio;
-
-// <PortfolioImages
-//   images={this.state.images}
-//   />

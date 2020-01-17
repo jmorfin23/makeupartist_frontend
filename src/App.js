@@ -14,24 +14,39 @@ import Post1 from "./views/blog/post1";
 import LeftSideBar from "./views/blog/leftsidebar";
 import Admin from "./views/admin";
 
+//will probably have to use redux to store images
 class App extends Component {
   constructor(props) {
     super(props);
+
+    this.state = {
+      images: []
+    };
   }
 
-  newsletterSignUp = async () => {
-    console.log("newsletter func");
+  componentDidMount() {
+    console.log("inside component did mount.");
+    this.retrieveAllPosts();
+  }
 
-    const URL = "http://127.0.0.1:5000/api/newsletter";
+  retrieveAllPosts = async () => {
+    const URL = "http://127.0.0.1:5000/api/retrieve-images";
+    let response = await fetch(URL);
+    let data = await response.json();
 
-    let response = await fetch(URL, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      }
-    });
+    if (data.error) {
+      alert(data.error.message);
+    }
+
+    let d = data.success.data;
+    console.log(d);
+    for (let i = 0; i < d.length; i++) {
+      this.setState(prevState => ({
+        images: [...prevState.images, d[i]]
+      }));
+    }
+    console.log(this.state.images);
   };
-
   render() {
     return (
       <div className="App">

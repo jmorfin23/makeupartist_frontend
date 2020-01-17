@@ -129,6 +129,10 @@ const Admin = () => {
             </div>
           </div>
         </div>
+
+        <div className="delete-img">
+          <h2>Delete an Image: </h2>
+        </div>
       </div>
     );
   } else {

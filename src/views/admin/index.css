@@ -1,3 +1,6 @@
+/* ==================================*/
+/* ======== ADD IMAGE SECTION =======*/
+/* ==================================*/
 .admin {
   text-align: center;
   display: block;
@@ -8,8 +11,10 @@
   margin: 15px auto;
 }
 
-.make-centered > h1, h2, h3 {
-  font-family: 'Quattrocento', serif;
+.make-centered > h1,
+h2,
+h3 {
+  font-family: "Quattrocento", serif;
 }
 
 .make-centered h2 {
@@ -20,7 +25,6 @@
   text-align: center;
   margin-top: 40px;
 }
-
 
 .type-container li {
   font-size: 25px;
@@ -61,10 +65,31 @@
 .input-container > .input-2 {
   /* margin: auto; */
 }
+/* ==================================*/
+/* ============= END ================*/
+/* ==================================*/
 
+/* ==================================*/
+/* ====== DELETE IMAGE SECTION ======*/
+/* ==================================*/
 
-/*======= Media Tags ========*/
-/*============================*/
+.delete-img {
+  text-align: center;
+}
+
+.delete-img h2 {
+  font-family: "Quattrocento", serif;
+  margin: 55px auto;
+}
+
+/* ==================================*/
+/* ============= END ================*/
+/* ==================================*/
+
+/* ==================================*/
+/* ========== MEDIA TAGS ============*/
+/* ==================================*/
+
 @media only screen and (min-width: 1000px) {
   .admin form {
     width: 400px;
@@ -82,6 +107,3 @@
     width: 450px;
   }
 }
-
-
-/*============================*/
