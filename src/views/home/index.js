@@ -5,20 +5,12 @@ import Featured from "../../components/featured";
 import clientphoto from "../../images/client.jpg";
 import placeholder from "../../images/blog/placeholder.jpg";
 
-import ph1 from "../../images/gallery/1.jpg";
-import ph2 from "../../images/gallery/2.jpg";
-import ph3 from "../../images/gallery/3.jpg";
-import ph4 from "../../images/gallery/4.jpg";
-import ph5 from "../../images/gallery/5.jpg";
-import ph6 from "../../images/gallery/6.jpg";
-import ph7 from "../../images/gallery/7.jpg";
-import ph8 from "../../images/gallery/8.jpg";
-import ph9 from "../../images/gallery/9.jpg";
-
 import slide1 from "../../images/slide1.jpg";
 import slide2 from "../../images/slide2.jpg";
 
 import service1 from "../../images/service1.jpg";
+
+import PortfolioImage from "../../components/portfolioImage";
 
 // ==================================
 
@@ -284,89 +276,7 @@ class Home extends Component {
                 </a>
               </li>
             </ul>
-            <div className="portfolio-items row">
-              <div className="portfolio-item item height-2x fashion col-xs-12 col-sm-6 col-md-4">
-                <div
-                  className="a-img"
-                  style={{ backgroundImage: `url( ${ph1})` }}
-                ></div>
-                <a href={ph1} className="mfp-image">
-                  <i className="fa fa-search"></i>
-                </a>{" "}
-              </div>
-              <div className="portfolio-item item wedding col-xs-12 col-sm-6 col-md-4">
-                <div
-                  className="a-img"
-                  style={{ backgroundImage: `url( ${ph2})` }}
-                ></div>
-                <a href={ph2} className="mfp-image">
-                  <i className="fa fa-search"></i>
-                </a>{" "}
-              </div>
-              <div className="portfolio-item item nature col-xs-12 col-sm-6 col-md-4">
-                <div
-                  className="a-img"
-                  style={{ backgroundImage: `url( ${ph3})` }}
-                ></div>
-                <a href={ph3} className="mfp-image">
-                  <i className="fa fa-search"></i>
-                </a>{" "}
-              </div>
-              <div className="portfolio-item item studio col-xs-12 col-sm-6 col-md-4">
-                <div
-                  className="a-img"
-                  style={{ backgroundImage: `url( ${ph4})` }}
-                ></div>
-                <a href={ph4} className="mfp-image">
-                  <i className="fa fa-search"></i>
-                </a>{" "}
-              </div>
-              <div className="portfolio-item item fashion col-xs-12 col-sm-6 col-md-4">
-                <div
-                  className="a-img"
-                  style={{ backgroundImage: `url( ${ph5})` }}
-                ></div>
-                <a href={ph5} className="mfp-image">
-                  <i className="fa fa-search"></i>
-                </a>{" "}
-              </div>
-              <div className="portfolio-item item width-2x wedding col-xs-12 col-sm-6 col-md-8">
-                <div
-                  className="a-img"
-                  style={{ backgroundImage: `url( ${ph6})` }}
-                ></div>
-                <a href={ph6} className="mfp-image">
-                  <i className="fa fa-search"></i>
-                </a>{" "}
-              </div>
-              <div className="portfolio-item item height-2x nature col-xs-12 col-sm-6 col-md-4">
-                <div
-                  className="a-img"
-                  style={{ backgroundImage: `url( ${ph7})` }}
-                ></div>
-                <a href={ph7} className="mfp-image">
-                  <i className="fa fa-search"></i>
-                </a>{" "}
-              </div>
-              <div className="portfolio-item item studio col-xs-12 col-sm-6 col-md-4">
-                <div
-                  className="a-img"
-                  style={{ backgroundImage: `url( ${ph8})` }}
-                ></div>
-                <a href={ph8} className="mfp-image">
-                  <i className="fa fa-search"></i>
-                </a>{" "}
-              </div>
-              <div className="portfolio-item item fashion col-xs-12 col-sm-6 col-md-4">
-                <div
-                  className="a-img"
-                  style={{ backgroundImage: `url( ${ph9})` }}
-                ></div>
-                <a href={ph9} className="mfp-image">
-                  <i className="fa fa-search"></i>
-                </a>{" "}
-              </div>
-            </div>
+            <PortfolioImage />
             {/*  END Portfolio items */}
           </div>
           {/* container*/}

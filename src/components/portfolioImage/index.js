@@ -1,10 +1,14 @@
 import React from "react";
+import { useSelector } from "react-redux";
 
-const PortfolioImage = props => {
+const PortfolioImage = () => {
+  console.log("portfolio");
+  const images = useSelector(state => state.images.items);
+  console.log(images.data);
   return (
     <div className="portfolio-items row">
-      {props.images &&
-        props.images.map(image => (
+      {images.data &&
+        images.data.map(image => (
           <div className="portfolio-item item fashion col-xs-12 col-sm-6 col-md-4">
             <div
               className="a-img"

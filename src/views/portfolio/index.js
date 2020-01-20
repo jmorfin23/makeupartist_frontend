@@ -5,29 +5,7 @@ import PortfolioImage from "../../components/portfolioImage";
 class Portfolio extends Component {
   constructor(props) {
     super(props);
-
-    this.state = {
-      images: [],
-      typeID: ""
-    };
   }
-
-  retrieveSpecificPost = async () => {
-    console.log("specific post");
-
-    const URL1 = "http://127.0.0.1:5000/api/newsletter";
-
-    let response = await fetch(URL);
-
-    let data = await response.json();
-
-    console.log(data);
-  };
-
-  testfunction = async () => {
-    console.log("hello");
-  };
-
   render() {
     return (
       <div>
@@ -76,7 +54,7 @@ class Portfolio extends Component {
                 </a>
               </li>
             </ul>
-            <PortfolioImage images={this.state.images} />
+            <PortfolioImage />
             {/* END Portfolio items */}
           </div>
           {/*container*/}

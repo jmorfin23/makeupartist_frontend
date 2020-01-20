@@ -1,15 +1,14 @@
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
 
 const Footer = () => {
   const [input, setInput] = useState(null);
+  console.log("footer");
 
   const newsletterSignUp = async e => {
     e.preventDefault();
-    console.log("newsletter func");
 
-    const URL = "http://127.0.0.1:5000/api/sub-newsletter";
-
-    let response = await fetch(URL, {
+    let response = await fetch("http://127.0.0.1:5000/api/sub-newsletter", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -18,7 +17,8 @@ const Footer = () => {
     });
 
     let data = await response.json();
-    console.log(data);
+
+    data.success ? alert(data.success.message) : alert(data.error.message);
   };
 
   return (

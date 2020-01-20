@@ -13,41 +13,21 @@ import Contact from "./views/contact";
 import Post1 from "./views/blog/post1";
 import LeftSideBar from "./views/blog/leftsidebar";
 import Admin from "./views/admin";
+import { connect } from "react-redux";
+import { fetchImages } from "./actions/imageActions.js";
 
-//will probably have to use redux to store images
 class App extends Component {
   constructor(props) {
     super(props);
-
-    this.state = {
-      images: []
-    };
   }
 
   componentDidMount() {
-    console.log("inside component did mount.");
-    this.retrieveAllPosts();
+    this.props.fetchImages();
   }
-
-  retrieveAllPosts = async () => {
-    const URL = "http://127.0.0.1:5000/api/retrieve-images";
-    let response = await fetch(URL);
-    let data = await response.json();
-
-    if (data.error) {
-      alert(data.error.message);
-    }
-
-    let d = data.success.data;
-    console.log(d);
-    for (let i = 0; i < d.length; i++) {
-      this.setState(prevState => ({
-        images: [...prevState.images, d[i]]
-      }));
-    }
-    console.log(this.state.images);
-  };
   render() {
+    const images = this.props.images.data;
+    console.log(images);
+
     return (
       <div className="App">
         {/* Header goes below here */}
@@ -77,4 +57,9 @@ class App extends Component {
   }
 }
 
-export default App;
+//using this to map to our component
+const mapStateToProps = state => ({
+  images: state.images.items
+});
+
+export default connect(mapStateToProps, { fetchImages })(App);
