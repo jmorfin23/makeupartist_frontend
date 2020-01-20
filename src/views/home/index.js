@@ -2,13 +2,11 @@ import React, { Component } from "react";
 import Header from "../../components/header";
 import Featured from "../../components/featured";
 // ========= image imports =========
-import clientphoto from "../../images/client.jpg";
 import placeholder from "../../images/blog/placeholder.jpg";
-
 import slide1 from "../../images/slide1.jpg";
 import slide2 from "../../images/slide2.jpg";
-
 import service1 from "../../images/service1.jpg";
+import clientPhoto from "../../images/client.jpg";
 
 import PortfolioImage from "../../components/portfolioImage";
 
@@ -17,10 +15,11 @@ import PortfolioImage from "../../components/portfolioImage";
 //Questions:
 //imports is there another way for image imports;
 //2 image folders issue;
-//JQuery
+//JQuery i heard in react should avoid.
 //ads
 //mail servers
 //adding onclick events is it more efficient just to use //normal javascript or should i have an onClick eventfor each ?
+//============================================
 //should i use refs or e.target.element.value?
 //arrow functions explain more(thisbindthis), async functions explain more.
 //if i have a global state management system like redux should i utilize local state at all or should i keep it compact. ?
@@ -29,6 +28,8 @@ import PortfolioImage from "../../components/portfolioImage";
 //with in mail.py backend
 //how would we make the site if she wanted to be able to update things on a weekly basis.
 //api call for images in top component to send to home page and portfolio page.
+//no lambda functions in js?
+//go over redux stuff.
 
 class Home extends Component {
   render() {
@@ -299,7 +300,7 @@ class Home extends Component {
                 >
                   <div className="testimonial-item">
                     <div className="client-img text-center">
-                      <img src={clientphoto} alt="" className="img-circle" />
+                      <img src={clientPhoto} alt="" className="img-circle" />
                     </div>
                     <div className="quote-icons">
                       <i className="fa fa-quote-left" aria-hidden="true"></i>
@@ -317,7 +318,7 @@ class Home extends Component {
                   {/* testmonial-item 1*/}
                   <div className="testimonial-item">
                     <div className="client-img text-center">
-                      <img src={clientphoto} alt="" className="img-circle" />
+                      <img src={clientPhoto} alt="" className="img-circle" />
                     </div>
                     <div className="quote-icons">
                       <i className="fa fa-quote-left" aria-hidden="true"></i>
@@ -335,7 +336,7 @@ class Home extends Component {
                   {/* testmonial-item 2*/}
                   <div className="testimonial-item">
                     <div className="client-img text-center">
-                      <img src={clientphoto} alt="" className="img-circle" />
+                      <img src={clientPhoto} alt="" className="img-circle" />
                     </div>
                     <div className="quote-icons">
                       <i className="fa fa-quote-left" aria-hidden="true"></i>
