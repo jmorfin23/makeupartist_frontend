@@ -9,15 +9,14 @@ const CLOUDINARY_UPLOAD_PRESET = "zzmnc51n";
 const Admin = () => {
   const [logged, setLogged] = useState(false);
   const [admin, setAdmin] = useState(null);
+  const [image, setImage] = useState(null);
   const [uploadType, setUploadType] = useState(null);
+  const [imageURL, setImageURL] = useState(null);
 
   const adminLogin = async e => {
     e.preventDefault();
 
-    // //call api
-    const URL = "http://127.0.0.1:5000/api/admin-login";
-
-    let response = await fetch(URL, {
+    let response = await fetch("http://127.0.0.1:5000/api/admin-login", {
       headers: {
         "Content-Type": "application/json",
         username: e.target.username.value,
@@ -26,7 +25,7 @@ const Admin = () => {
     });
 
     let data = await response.json();
-    console.log(data);
+
     if (data.Success) {
       alert("You have successfully logged in.");
       setLogged(!logged);
@@ -34,11 +33,12 @@ const Admin = () => {
     }
   };
 
-  const uploadImage = async imageURL => {
-    console.log("inside uploadimage");
-    const URL1 = "http://127.0.0.1:5000/api/image-save";
-    console.log("this is the image url: " + imageURL);
-    let res = await fetch(URL1, {
+  const uploadImage = async e => {
+    e.preventDefault();
+    //call method to upload to cloudinary.
+    uploadToCloud();
+
+    let res = await fetch("http://127.0.0.1:5000/api/image-save", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -49,7 +49,6 @@ const Admin = () => {
     });
     let returned = await res.json();
 
-    console.log(returned);
     if (returned.success) {
       alert(returned.success);
     } else if (returned.error) {
@@ -59,30 +58,45 @@ const Admin = () => {
     }
   };
 
-  const onChange = async e => {
-    console.log("test1");
-    let file = e.target.files[0];
-
+  const uploadToCloud = async () => {
     var formData = new FormData();
-    formData.append("file", file);
+    formData.append("file", image);
     formData.append("upload_preset", CLOUDINARY_UPLOAD_PRESET);
-    console.log("test2");
-    //request
+
     let response = await fetch(CLOUDINARY_URL, {
       method: "POST",
       body: formData
     });
-    console.log("test3");
+
     let data = await response.json();
-    console.log("test4");
-    console.log(data);
+
     if (data.error) {
       alert(data.error.message);
       return;
     }
-    //call uploadImage to add to profile pic to database
-    uploadImage(data.secure_url);
-    console.log("test5");
+    //set cloudinary URL to state.
+    console.log("sucessfully uploaded to cloud" + data.secure_url);
+    setImageURL(data.secure_url);
+  };
+
+  const addBlogPost = async e => {
+    e.preventDefault();
+    console.log("inside blog post");
+    uploadToCloud();
+    console.log("test1");
+    let response = await fetch("http://127.0.0.1:5000/api/add-blogpost", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        title: e.target.title.value,
+        text: e.target.text.value,
+        url: imageURL
+      }
+    });
+    console.log("test2");
+    let data = await response.json();
+    console.log("test2");
+    console.log(data);
   };
 
   if (logged) {
@@ -124,14 +138,62 @@ const Admin = () => {
           </h3>
           <div className="input-container">
             <div className="input-2">
-              <label htmlFor="file-input"></label>
-              <input onChange={onChange} type="file"></input>
+              <form onSubmit={e => uploadImage(e)}>
+                <label htmlFor="file-input"></label>
+                <input
+                  onChange={e => setImage(e.target.files[0])}
+                  type="file"
+                ></input>
+                <br />
+                <button type="submit" className="btn btn-primary">
+                  Submit
+                </button>
+              </form>
             </div>
           </div>
         </div>
 
         <div className="delete-img">
           <h2>Delete an Image: </h2>
+          <p>to do</p>
+        </div>
+
+        <div className="blog-post">
+          <h2>Add a Blog Post: </h2>
+          <form onSubmit={e => addBlogPost(e)}>
+            <div className="form-group">
+              <label>Title</label>
+              <input
+                name="title"
+                className="form-control"
+                required="required"
+                placeholder="Title"
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="file-input">Image</label>
+              <input
+                onChange={e => setImage(e.target.files[0])}
+                name="image"
+                type="file"
+                className="form-control"
+              />
+            </div>
+            <div className="form-group">
+              <label>Text</label>
+              <textarea
+                cols="50"
+                rows="20"
+                name="text"
+                className="form-control"
+                required="required"
+                placeholder="Text"
+              />
+            </div>
+            <button type="submit" className="btn btn-primary">
+              Submit
+            </button>
+          </form>
         </div>
       </div>
     );

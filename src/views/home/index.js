@@ -20,6 +20,11 @@ import PortfolioImage from "../../components/portfolioImage";
 //mail servers
 //adding onclick events is it more efficient just to use //normal javascript or should i have an onClick eventfor each ?
 //============================================
+//bootstrap
+//emmet and lorem and other packages stopped working ?
+//"clean code"
+//input issue with calling api throws an error if there is a space in the text.
+
 //should i use refs or e.target.element.value?
 //arrow functions explain more(thisbindthis), async functions explain more.
 //if i have a global state management system like redux should i utilize local state at all or should i keep it compact. ?
