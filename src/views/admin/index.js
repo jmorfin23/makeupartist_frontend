@@ -1,17 +1,16 @@
 import React, { Component, useState } from "react";
 import "./index.css";
-
-//== cloudinary presets for uploading images ==//
+//CLOUDINARY URL & PRESET
 const CLOUDINARY_URL = "https://api.cloudinary.com/v1_1/dozvqlete/upload";
 const CLOUDINARY_UPLOAD_PRESET = "zzmnc51n";
-//=============================================//
 
 const Admin = () => {
   const [logged, setLogged] = useState(false);
   const [admin, setAdmin] = useState(null);
   const [image, setImage] = useState(null);
   const [uploadType, setUploadType] = useState(null);
-  const [imageURL, setImageURL] = useState(null);
+  const [text, setText] = useState("");
+  const [blogTitle, setBlogTitle] = useState("");
 
   const adminLogin = async e => {
     e.preventDefault();
@@ -26,7 +25,7 @@ const Admin = () => {
 
     let data = await response.json();
 
-    if (data.Success) {
+    if (data.success) {
       alert("You have successfully logged in.");
       setLogged(!logged);
       setAdmin(data.username);
@@ -35,18 +34,23 @@ const Admin = () => {
 
   const uploadImage = async e => {
     e.preventDefault();
-    //call method to upload to cloudinary.
-    uploadToCloud();
+    if (uploadType == null) {
+      alert("Please select an upload type.");
+      return;
+    }
+    //call method to upload to cloudinary get back the URL
+    let cloudURL = await uploadToCloud();
 
     let res = await fetch("http://127.0.0.1:5000/api/image-save", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        image: imageURL,
+        image: cloudURL,
         admin: admin,
         type: uploadType
       }
     });
+
     let returned = await res.json();
 
     if (returned.success) {
@@ -59,7 +63,7 @@ const Admin = () => {
   };
 
   const uploadToCloud = async () => {
-    var formData = new FormData();
+    let formData = new FormData();
     formData.append("file", image);
     formData.append("upload_preset", CLOUDINARY_UPLOAD_PRESET);
 
@@ -74,29 +78,38 @@ const Admin = () => {
       alert(data.error.message);
       return;
     }
-    //set cloudinary URL to state.
-    console.log("sucessfully uploaded to cloud" + data.secure_url);
-    setImageURL(data.secure_url);
+
+    //return cloud image URL
+
+    return data.secure_url;
   };
 
   const addBlogPost = async e => {
     e.preventDefault();
-    console.log("inside blog post");
-    uploadToCloud();
-    console.log("test1");
+
+    let blogPostInfo = new Object();
+
+    let cloudURL = "www.myurl.com"; // = await uploadToCloud();
+
+    blogPostInfo = {
+      title: blogTitle,
+      url: cloudURL,
+      text: text
+    };
+
     let response = await fetch("http://127.0.0.1:5000/api/add-blogpost", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        title: e.target.title.value,
-        text: e.target.text.value,
-        url: imageURL
+        postInfo: JSON.stringify(blogPostInfo)
       }
     });
-    console.log("test2");
+
     let data = await response.json();
-    console.log("test2");
-    console.log(data);
+    //i can just add an alert to display a response instead of havint to display error and success
+    if (data.success) {
+      alert(data.success.message);
+    }
   };
 
   if (logged) {
@@ -155,7 +168,6 @@ const Admin = () => {
 
         <div className="delete-img">
           <h2>Delete an Image: </h2>
-          <p>to do</p>
         </div>
 
         <div className="blog-post">
@@ -164,7 +176,9 @@ const Admin = () => {
             <div className="form-group">
               <label>Title</label>
               <input
+                onChange={e => setBlogTitle(e.target.value)}
                 name="title"
+                type="text"
                 className="form-control"
                 required="required"
                 placeholder="Title"
@@ -182,12 +196,15 @@ const Admin = () => {
             <div className="form-group">
               <label>Text</label>
               <textarea
+                onChange={e => setText(e.target.value)}
                 cols="50"
                 rows="20"
+                type="text"
                 name="text"
                 className="form-control"
                 required="required"
                 placeholder="Text"
+                value={text}
               />
             </div>
             <button type="submit" className="btn btn-primary">

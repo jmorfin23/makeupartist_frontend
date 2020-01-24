@@ -20,21 +20,21 @@ import PortfolioImage from "../../components/portfolioImage";
 //mail servers
 //adding onclick events is it more efficient just to use //normal javascript or should i have an onClick eventfor each ?
 //============================================
+//image uploaded to cloud
 //bootstrap
 //emmet and lorem and other packages stopped working ?
 //"clean code"
 //input issue with calling api throws an error if there is a space in the text.
 
-//should i use refs or e.target.element.value?
 //arrow functions explain more(thisbindthis), async functions explain more.
+
 //if i have a global state management system like redux should i utilize local state at all or should i keep it compact. ?
-//react event listeners? yes or no
+
 //component unmounting.
 //with in mail.py backend
 //how would we make the site if she wanted to be able to update things on a weekly basis.
 //api call for images in top component to send to home page and portfolio page.
 //no lambda functions in js?
-//go over redux stuff.
 
 class Home extends Component {
   render() {
