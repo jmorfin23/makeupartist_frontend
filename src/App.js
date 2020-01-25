@@ -15,6 +15,7 @@ import LeftSideBar from "./views/blog/leftsidebar";
 import Admin from "./views/admin";
 import { connect } from "react-redux";
 import { fetchImages } from "./actions/imageActions.js";
+import { fetchBlogPosts } from "./actions/blogActions.js";
 
 class App extends Component {
   constructor(props) {
@@ -22,12 +23,13 @@ class App extends Component {
   }
 
   componentDidMount() {
+    //retrieve portfolio images from backend
     this.props.fetchImages();
+    //retrieve blog posts from backend
+    this.props.fetchBlogPosts();
   }
   render() {
     const images = this.props.images.data;
-    console.log(images);
-
     return (
       <div className="App">
         {/* Header goes below here */}
@@ -57,9 +59,10 @@ class App extends Component {
   }
 }
 
-//using this to map to our component
+//using this to map to props
 const mapStateToProps = state => ({
-  images: state.images.items
+  images: state.images.items,
+  posts: state.posts.items
 });
 
-export default connect(mapStateToProps, { fetchImages })(App);
+export default connect(mapStateToProps, { fetchBlogPosts, fetchImages })(App);

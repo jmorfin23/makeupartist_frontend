@@ -1,5 +1,6 @@
 import { FETCH_IMAGES, NEW_IMAGE } from "./types.js";
 
+//retrieving images upon loading application
 export const fetchImages = () => {
   return function(dispatch) {
     console.log("fetching");
@@ -14,21 +15,4 @@ export const fetchImages = () => {
   };
 };
 
-// retrieveAllPosts = async () => {
-//
-//   let response = await fetch();
-//   let data = await response.json();
-//
-//   if (data.error) {
-//     alert(data.error.message);
-//   }
-//
-//   let d = data.success.data;
-//   console.log(d);
-//   for (let i = 0; i < d.length; i++) {
-//     this.setState(prevState => ({
-//       images: [...prevState.images, d[i]]
-//     }));
-//   }
-//   console.log(this.state.images);
-// };
+//deleting image when called called

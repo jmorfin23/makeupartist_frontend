@@ -1,16 +1,16 @@
 import React, { Component } from "react";
 import Header from "../../components/header";
 import Featured from "../../components/featured";
-// ========= image imports =========
+import { useSelector, connect } from "react-redux";
+// ========= Image imports =========
 import placeholder from "../../images/blog/placeholder.jpg";
 import slide1 from "../../images/slide1.jpg";
 import slide2 from "../../images/slide2.jpg";
 import service1 from "../../images/service1.jpg";
 import clientPhoto from "../../images/client.jpg";
-
+// ========= Component imports =========
 import PortfolioImage from "../../components/portfolioImage";
-
-// ==================================
+import BlogPosts from "../../components/blogPosts";
 
 //Questions:
 //imports is there another way for image imports;
@@ -38,6 +38,7 @@ import PortfolioImage from "../../components/portfolioImage";
 
 class Home extends Component {
   render() {
+    const posts = this.props.posts.data;
     return (
       <div className="homepage">
         <div className="preloader">
@@ -62,7 +63,6 @@ class Home extends Component {
           {/*  Wrapper for slides */}
           <div className="carousel-inner" role="listbox">
             <div className="item">
-              {" "}
               <img src={slide1} alt="First Image" />
               <div className="carousel-caption">
                 <div className="carousel-caption-inner">
@@ -75,7 +75,7 @@ class Home extends Component {
                           Makeup Artist
                         </h1>
                         <p>
-                          Whatever the occasion is, be sure that my{" "}
+                          Whatever the occasion is, be sure that my
                           <strong>professional makeup</strong> work and products
                           will make you <strong>shine</strong> and stand out!
                         </p>
@@ -89,7 +89,6 @@ class Home extends Component {
             </div>
             {/* item 1*/}
             <div className="item">
-              {" "}
               <img src={slide2} alt="" />
               <div className="carousel-caption">
                 <div className="carousel-caption-inner">
@@ -102,7 +101,7 @@ class Home extends Component {
                           Makeup Artist
                         </h1>
                         <p>
-                          Whatever the occasion is, be sure that{" "}
+                          Whatever the occasion is, be sure that
                           <strong>my professional</strong> makeup work and
                           products will make you <strong>shine </strong>and
                           stand out!
@@ -125,18 +124,16 @@ class Home extends Component {
             role="button"
             data-slide="prev"
           >
-            {" "}
-            <span className="fa fa-angle-left" aria-hidden="true"></span>{" "}
-          </a>{" "}
+            <span className="fa fa-angle-left" aria-hidden="true"></span>
+          </a>
           <a
             className="right carousel-control"
             href="#mycarousel"
             role="button"
             data-slide="next"
           >
-            {" "}
-            <span className="fa fa-angle-right" aria-hidden="true"></span>{" "}
-          </a>{" "}
+            <span className="fa fa-angle-right" aria-hidden="true"></span>
+          </a>
         </div>
         {/* mycarousel*/}
         <section className="section section-services">
@@ -163,16 +160,16 @@ class Home extends Component {
                       it did!
                     </p>
                     <p className="service-price pb-10">
-                      <span className="decor-text">starts from</span>{" "}
+                      <span className="decor-text">starts from</span>
                       <strong>$156.00</strong>
                     </p>
                     <a className="btn btn-primary" href="#">
-                      Read More{" "}
+                      Read More
                       <i
                         className="fa fa-angle-double-right"
                         aria-hidden="true"
-                      ></i>{" "}
-                    </a>{" "}
+                      ></i>
+                    </a>
                   </div>
                   {/* service-contents*/}
                 </div>
@@ -193,16 +190,16 @@ class Home extends Component {
                       it did!
                     </p>
                     <p className="service-price pb-10">
-                      <span className="decor-text">starts from</span>{" "}
+                      <span className="decor-text">starts from</span>
                       <strong>$156.00</strong>
                     </p>
                     <a className="btn btn-primary" href="#">
-                      Read More{" "}
+                      Read More
                       <i
                         className="fa fa-angle-double-right"
                         aria-hidden="true"
-                      ></i>{" "}
-                    </a>{" "}
+                      ></i>
+                    </a>
                   </div>
                   {/* service-contents*/}
                 </div>
@@ -223,16 +220,16 @@ class Home extends Component {
                       it did!
                     </p>
                     <p className="service-price pb-10">
-                      <span className="decor-text">starts from</span>{" "}
+                      <span className="decor-text">starts from</span>
                       <strong>$156.00</strong>
                     </p>
                     <a className="btn btn-primary" href="#">
-                      Read More{" "}
+                      Read More
                       <i
                         className="fa fa-angle-double-right"
                         aria-hidden="true"
-                      ></i>{" "}
-                    </a>{" "}
+                      ></i>
+                    </a>
                   </div>
                   {/* service-contents*/}
                 </div>
@@ -376,134 +373,22 @@ class Home extends Component {
           </div>
           {/*  end section-title */}
           <div className="container">
-            <div className="row">
-              <div className="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-                <div className="post-entry">
-                  <div className="post-thumbnail">
-                    {" "}
-                    <img src={placeholder} alt="" />{" "}
-                    <a href="#">
-                      {" "}
-                      <i className="fa fa-link"></i>{" "}
-                    </a>{" "}
-                  </div>
-                  {/* post-thumbnial*/}
-                  <h2>
-                    {" "}
-                    <a href="#">How to wash and style curly hair</a>{" "}
-                  </h2>
-                  <ul className="entry-meta">
-                    <li>
-                      {" "}
-                      <i className="fa fa-calendar"></i>07 June 2014{" "}
-                    </li>
-                    <li>
-                      {" "}
-                      <i className="fa fa-comments"></i>{" "}
-                      <a href="#">7 Comments</a>{" "}
-                    </li>
-                  </ul>
-                  <p>
-                    In recent years, an increasingly big number of African
-                    American women take a fashion decision to return to their
-                    natural...
-                  </p>
-                  <a className="btn btn-primary" href="post.html">
-                    Read More{" "}
-                  </a>{" "}
-                </div>
-                {/* post-entry*/}
-              </div>
-              {/* end col*/}
-              <div className="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-                <div className="post-entry">
-                  <div className="post-thumbnail">
-                    {" "}
-                    <img src={placeholder} alt="" />{" "}
-                    <a href="#">
-                      {" "}
-                      <i className="fa fa-link"></i>{" "}
-                    </a>{" "}
-                  </div>
-                  {/* post-thumbnial*/}
-                  <h2>
-                    {" "}
-                    <a href="#">Returning to a natural hair texture</a>{" "}
-                  </h2>
-                  <ul className="entry-meta">
-                    <li>
-                      {" "}
-                      <i className="fa fa-calendar"></i>07 June 2014{" "}
-                    </li>
-                    <li>
-                      {" "}
-                      <i className="fa fa-comments"></i>{" "}
-                      <a href="#">9 Comments</a>{" "}
-                    </li>
-                  </ul>
-                  <p>
-                    In recent years, an increasingly big number of African
-                    American women take a fashion decision to return to their
-                    natural...
-                  </p>
-                  <a className="btn btn-primary" href="post.html">
-                    Read More{" "}
-                  </a>{" "}
-                </div>
-                {/* post-entry*/}
-              </div>
-              {/* end col*/}
-              <div className="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-                <div className="post-entry">
-                  <div className="post-thumbnail">
-                    {" "}
-                    <img src={placeholder} alt="" />{" "}
-                    <a href="#">
-                      {" "}
-                      <i className="fa fa-link"></i>{" "}
-                    </a>{" "}
-                  </div>
-                  {/* post-thumbnial*/}
-                  <h2>
-                    {" "}
-                    <a href="#">Winterish version of rainbow hair?</a>{" "}
-                  </h2>
-                  <ul className="entry-meta">
-                    <li>
-                      {" "}
-                      <i className="fa fa-calendar"></i>07 June 2014{" "}
-                    </li>
-                    <li>
-                      {" "}
-                      <i className="fa fa-comments"></i>{" "}
-                      <a href="#">3 Comments</a>{" "}
-                    </li>
-                  </ul>
-                  <p>
-                    In recent years, an increasingly big number of African
-                    American women take a fashion decision to return to their
-                    natural...{" "}
-                  </p>
-                  <a className="btn btn-primary" href="post.html">
-                    Read More{" "}
-                  </a>{" "}
-                </div>
-                {/* post-entry*/}
-              </div>
-              {/* end col*/}
-            </div>
-            {/* row*/}
+            <BlogPosts />
           </div>
           {/* container*/}
         </section>
         {/* section-blog*/}
         <Featured />
         {/* section-logo*/}
-
         {/* footer is here  */}
       </div>
     );
   }
 }
 
-export default Home;
+//map state to props
+const mapStateToProps = state => ({
+  posts: state.posts.items
+});
+
+export default connect(mapStateToProps)(Home);

@@ -2,9 +2,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 
 const PortfolioImage = () => {
-  console.log("portfolio");
   const images = useSelector(state => state.images.items);
-  console.log(images.data);
   return (
     <div className="portfolio-items row">
       {images.data &&
@@ -16,7 +14,7 @@ const PortfolioImage = () => {
             ></div>
             <a href={image} className="mfp-image">
               <i className="fa fa-search"></i>
-            </a>{" "}
+            </a>
           </div>
         ))}
     </div>

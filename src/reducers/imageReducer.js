@@ -7,6 +7,7 @@ const initialState = {
 };
 
 const imageReducer = (state = initialState, action) => {
+  console.log("image reducer");
   switch (action.type) {
     case FETCH_IMAGES:
       console.log("reducer");

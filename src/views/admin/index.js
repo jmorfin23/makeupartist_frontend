@@ -1,5 +1,7 @@
 import React, { Component, useState } from "react";
 import "./index.css";
+import PortfolioImage from "../../components/portfolioImage";
+
 //CLOUDINARY URL & PRESET
 const CLOUDINARY_URL = "https://api.cloudinary.com/v1_1/dozvqlete/upload";
 const CLOUDINARY_UPLOAD_PRESET = "zzmnc51n";
@@ -11,6 +13,21 @@ const Admin = () => {
   const [uploadType, setUploadType] = useState(null);
   const [text, setText] = useState("");
   const [blogTitle, setBlogTitle] = useState("");
+
+  // add event handler for selecting images to delete
+  let x = document.getElementsByClassName("portfolio-items");
+  if (x) {
+    for (let i = 0; i < x.length; i++) {
+      x[i].addEventListener("click", function() {
+        console.log("this should log");
+      });
+    }
+  }
+  //remove a tag
+  let element = document.getElementsByClassName("mfp-image");
+  for (let i = 0; i < element.length; i++) {
+    element[i].parentNode.removeChild(element[i]);
+  }
 
   const adminLogin = async e => {
     e.preventDefault();
@@ -80,7 +97,6 @@ const Admin = () => {
     }
 
     //return cloud image URL
-
     return data.secure_url;
   };
 
@@ -89,14 +105,15 @@ const Admin = () => {
 
     let blogPostInfo = new Object();
 
-    let cloudURL = "www.myurl.com"; // = await uploadToCloud();
+    //this issue is within uploadtocloud.
+    let cloudURL = "https://placeholder.it/250x250"; //await uploadToCloud();
 
     blogPostInfo = {
       title: blogTitle,
       url: cloudURL,
       text: text
     };
-
+    console.log("Info. " + blogPostInfo);
     let response = await fetch("http://127.0.0.1:5000/api/add-blogpost", {
       method: "POST",
       headers: {
@@ -168,6 +185,9 @@ const Admin = () => {
 
         <div className="delete-img">
           <h2>Delete an Image: </h2>
+          <div className="delete-img-2">
+            <PortfolioImage />
+          </div>
         </div>
 
         <div className="blog-post">
