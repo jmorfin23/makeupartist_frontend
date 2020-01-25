@@ -6,8 +6,11 @@ const PortfolioImage = () => {
   return (
     <div className="portfolio-items row">
       {images.data &&
-        images.data.map(image => (
-          <div className="portfolio-item item fashion col-xs-12 col-sm-6 col-md-4">
+        images.data.map((image, index) => (
+          <div
+            key={index}
+            className="portfolio-item item fashion col-xs-12 col-sm-6 col-md-4"
+          >
             <div
               className="a-img"
               style={{ backgroundImage: `url(` + image + `)` }}

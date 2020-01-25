@@ -1,4 +1,4 @@
-import React, { Component, useState } from "react";
+import React, { useState } from "react";
 import "./index.css";
 import PortfolioImage from "../../components/portfolioImage";
 
@@ -80,7 +80,7 @@ const Admin = () => {
   };
 
   const uploadToCloud = async () => {
-    let formData = new FormData();
+    let formData = {};
     formData.append("file", image);
     formData.append("upload_preset", CLOUDINARY_UPLOAD_PRESET);
 
@@ -103,7 +103,7 @@ const Admin = () => {
   const addBlogPost = async e => {
     e.preventDefault();
 
-    let blogPostInfo = new Object();
+    let blogPostInfo = {};
 
     //this issue is within uploadtocloud.
     let cloudURL = "https://placeholder.it/250x250"; //await uploadToCloud();

@@ -373,7 +373,7 @@ class Home extends Component {
           </div>
           {/*  end section-title */}
           <div className="container">
-            <BlogPosts />
+            <BlogPosts items={2} />
           </div>
           {/* container*/}
         </section>

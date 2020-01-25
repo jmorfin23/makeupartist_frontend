@@ -18,10 +18,6 @@ import { fetchImages } from "./actions/imageActions.js";
 import { fetchBlogPosts } from "./actions/blogActions.js";
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   componentDidMount() {
     //retrieve portfolio images from backend
     this.props.fetchImages();
