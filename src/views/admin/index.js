@@ -1,70 +1,104 @@
-import React, { useState } from "react";
+import React, { Component, useState } from "react";
 import "./index.css";
 import PortfolioImage from "../../components/portfolioImage";
+import { connect } from "react-redux";
+import { loginAdmin } from "../../actions/adminActions.js";
 
 //CLOUDINARY URL & PRESET
 const CLOUDINARY_URL = "https://api.cloudinary.com/v1_1/dozvqlete/upload";
 const CLOUDINARY_UPLOAD_PRESET = "zzmnc51n";
 
-const Admin = () => {
-  const [logged, setLogged] = useState(false);
-  const [admin, setAdmin] = useState(null);
-  const [image, setImage] = useState(null);
-  const [uploadType, setUploadType] = useState(null);
-  const [text, setText] = useState("");
-  const [blogTitle, setBlogTitle] = useState("");
+class Admin extends Component {
+  constructor(props) {
+    super(props);
 
-  // add event handler for selecting images to delete
-  let x = document.getElementsByClassName("portfolio-items");
-  if (x) {
-    for (let i = 0; i < x.length; i++) {
-      x[i].addEventListener("click", function() {
-        console.log("this should log");
-      });
-    }
-  }
-  //remove a tag
-  let element = document.getElementsByClassName("mfp-image");
-  for (let i = 0; i < element.length; i++) {
-    element[i].parentNode.removeChild(element[i]);
+    this.state = {
+      uploadType: null,
+      image: null,
+      admin: null,
+      text: "",
+      blogTitle: "",
+      logged: false
+    };
   }
 
-  const adminLogin = async e => {
-    e.preventDefault();
+  // const [logged, setLogged] = useState(false);
+  // const [admin, setAdmin] = useState(null);
+  // const [image, setImage] = useState(null);
+  // const [uploadType, setUploadType] = useState(null);
+  // const [text, setText] = useState("");
+  // const [blogTitle, setBlogTitle] = useState("");
 
-    let response = await fetch("http://127.0.0.1:5000/api/admin-login", {
-      headers: {
-        "Content-Type": "application/json",
-        username: e.target.username.value,
-        password: e.target.password.value
+  componentDidMount() {
+    // add event handler for selecting images to delete
+    let x = document.getElementsByClassName("portfolio-items");
+    if (x) {
+      for (let i = 0; i < x.length; i++) {
+        x[i].addEventListener("click", function() {
+          console.log("this should log");
+        });
       }
-    });
-
-    let data = await response.json();
-
-    if (data.success) {
-      alert("You have successfully logged in.");
-      setLogged(!logged);
-      setAdmin(data.username);
     }
+    //remove a tag
+    let element = document.getElementsByClassName("mfp-image");
+    for (let i = 0; i < element.length; i++) {
+      element[i].parentNode.removeChild(element[i]);
+    }
+  }
+
+  submitLoginForm = e => {
+    e.preventDefault();
+    console.log("submit login form is called");
+
+    //set user info into obj
+    const login = {
+      username: e.target.username.value,
+      password: e.target.password.value
+    };
+    console.log(login);
+    console.log("before login admin is called");
+    //call login action with login info
+    this.props.loginAdmin(login);
+    console.log("after login admin is called");
+
+    console.log(this.props.user);
+    // console.log(user);
+    // console.log('this is user success' + user.success);
+    // console.log(isLogged);
+
+    // if (user.success) {
+    //   alert("You have successfully logged in.");
+    //   setAdmin(user.data.username);
+    //   console.log(user.data.username);
+    //   console.log(isLogged);
+    // }
   };
 
-  const uploadImage = async e => {
+  componentDidUpdate() {
+    console.log("inside component did update");
+    console.log(this.props.user);
+  }
+  componentWillReceiveProps(nextProps) {
+    console.log("inside component will recieve props");
+    console.log(nextProps);
+  }
+
+  uploadImage = async e => {
     e.preventDefault();
-    if (uploadType == null) {
+    if (this.state.uploadType == null) {
       alert("Please select an upload type.");
       return;
     }
     //call method to upload to cloudinary get back the URL
-    let cloudURL = await uploadToCloud();
+    let cloudURL = await this.uploadToCloud();
 
     let res = await fetch("http://127.0.0.1:5000/api/image-save", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
         image: cloudURL,
-        admin: admin,
-        type: uploadType
+        admin: this.state.admin,
+        type: this.state.uploadType
       }
     });
 
@@ -79,9 +113,9 @@ const Admin = () => {
     }
   };
 
-  const uploadToCloud = async () => {
+  uploadToCloud = async () => {
     let formData = {};
-    formData.append("file", image);
+    formData.append("file", this.state.image);
     formData.append("upload_preset", CLOUDINARY_UPLOAD_PRESET);
 
     let response = await fetch(CLOUDINARY_URL, {
@@ -100,7 +134,7 @@ const Admin = () => {
     return data.secure_url;
   };
 
-  const addBlogPost = async e => {
+  addBlogPost = async e => {
     e.preventDefault();
 
     let blogPostInfo = {};
@@ -109,9 +143,9 @@ const Admin = () => {
     let cloudURL = "https://placeholder.it/250x250"; //await uploadToCloud();
 
     blogPostInfo = {
-      title: blogTitle,
+      title: this.state.blogTitle,
       url: cloudURL,
-      text: text
+      text: this.state.text
     };
     console.log("Info. " + blogPostInfo);
     let response = await fetch("http://127.0.0.1:5000/api/add-blogpost", {
@@ -128,103 +162,139 @@ const Admin = () => {
       alert(data.success.message);
     }
   };
+  render() {
+    console.log("**********");
+    console.log(this.props.user);
+    if (this.state.logged) {
+      return (
+        <div className="make-centered">
+          <div className="type-container">
+            <h2>Upload an Image</h2>
+            {this.state.uploadType ? null : <p>Please select a type.</p>}
 
-  if (logged) {
-    return (
-      <div className="make-centered">
-        <div className="type-container">
-          <h2>Upload an Image</h2>
+            <ul className="type-list">
+              <li
+                id="1"
+                onClick={() => this.setState({ uploadType: "Wedding" })}
+                className="type type-1"
+              >
+                Wedding
+              </li>
+              <li
+                onClick={() => this.setState({ uploadType: "HairStyle" })}
+                className="type type-2"
+              >
+                Hairstyle
+              </li>
+              <li
+                onClick={() => this.setState({ uploadType: "Commercial" })}
+                className="type type-3"
+              >
+                Commercial
+              </li>
+              <li
+                onClick={() => this.setState({ uploadType: "Studio" })}
+                className="type type-4"
+              >
+                Studio
+              </li>
+            </ul>
+            <h3>
+              {this.state.uploadType
+                ? "Add image to: " + this.state.uploadType
+                : "Type has not been selected."}
+            </h3>
+            <div className="input-container">
+              <div className="input-2">
+                <form onSubmit={e => this.uploadImage(e)}>
+                  <label htmlFor="file-input"></label>
+                  <input
+                    onChange={e => this.setState({ image: e.target.files[0] })}
+                    type="file"
+                  ></input>
+                  <br />
+                  <button type="submit" className="btn btn-primary">
+                    Submit
+                  </button>
+                </form>
+              </div>
+            </div>
+          </div>
 
-          {uploadType ? null : <p>Please select a type.</p>}
+          <div className="delete-img">
+            <h2>Delete an Image: </h2>
+            <div className="delete-img-2">
+              <PortfolioImage />
+            </div>
+          </div>
 
-          <ul className="type-list">
-            <li
-              id="1"
-              onClick={() => setUploadType("Wedding")}
-              className="type type-1"
-            >
-              Wedding
-            </li>
-            <li
-              onClick={() => setUploadType("HairStyle")}
-              className="type type-2"
-            >
-              Hairstyle
-            </li>
-            <li
-              onClick={() => setUploadType("Commercial")}
-              className="type type-3"
-            >
-              Commercial
-            </li>
-            <li onClick={() => setUploadType("Studio")} className="type type-4">
-              Studio
-            </li>
-          </ul>
-          <h3>
-            {uploadType
-              ? "Add image to: " + uploadType
-              : "Type has not been selected."}
-          </h3>
-          <div className="input-container">
-            <div className="input-2">
-              <form onSubmit={e => uploadImage(e)}>
-                <label htmlFor="file-input"></label>
+          <div className="blog-post">
+            <h2>Add a Blog Post: </h2>
+            <form onSubmit={e => this.addBlogPost(e)}>
+              <div className="form-group">
+                <label>Title</label>
                 <input
-                  onChange={e => setImage(e.target.files[0])}
+                  onChange={e => this.setState({ blogTitle: e.target.value })}
+                  name="title"
+                  type="text"
+                  className="form-control"
+                  required="required"
+                  placeholder="Title"
+                />
+              </div>
+              <div className="form-group">
+                <label htmlFor="file-input">Image</label>
+                <input
+                  onChange={e => this.setState({ image: e.target.files[0] })}
+                  name="image"
                   type="file"
-                ></input>
-                <br />
-                <button type="submit" className="btn btn-primary">
-                  Submit
-                </button>
-              </form>
-            </div>
+                  className="form-control"
+                />
+              </div>
+              <div className="form-group">
+                <label>Text</label>
+                <textarea
+                  onChange={e => this.setState({ text: e.target.value })}
+                  cols="50"
+                  rows="20"
+                  type="text"
+                  name="text"
+                  className="form-control"
+                  required="required"
+                  placeholder="Text"
+                  value={this.state.text}
+                />
+              </div>
+              <button type="submit" className="btn btn-primary">
+                Submit
+              </button>
+            </form>
           </div>
         </div>
-
-        <div className="delete-img">
-          <h2>Delete an Image: </h2>
-          <div className="delete-img-2">
-            <PortfolioImage />
-          </div>
-        </div>
-
-        <div className="blog-post">
-          <h2>Add a Blog Post: </h2>
-          <form onSubmit={e => addBlogPost(e)}>
+      );
+    } else {
+      return (
+        <div className="admin">
+          <h2>Admin Login</h2>
+          <form onSubmit={e => this.submitLoginForm(e)}>
             <div className="form-group">
-              <label>Title</label>
+              <label>Username</label>
               <input
-                onChange={e => setBlogTitle(e.target.value)}
-                name="title"
-                type="text"
+                name="username"
+                type="username"
                 className="form-control"
                 required="required"
-                placeholder="Title"
+                placeholder="Username"
               />
             </div>
             <div className="form-group">
-              <label htmlFor="file-input">Image</label>
+              <label>Password</label>
               <input
-                onChange={e => setImage(e.target.files[0])}
-                name="image"
-                type="file"
-                className="form-control"
-              />
-            </div>
-            <div className="form-group">
-              <label>Text</label>
-              <textarea
-                onChange={e => setText(e.target.value)}
-                cols="50"
-                rows="20"
-                type="text"
-                name="text"
-                className="form-control"
+                name="password"
+                type="password"
                 required="required"
-                placeholder="Text"
-                value={text}
+                className="form-control"
+                placeholder="Password"
               />
             </div>
             <button type="submit" className="btn btn-primary">
@@ -232,40 +302,14 @@ const Admin = () => {
             </button>
           </form>
         </div>
-      </div>
-    );
-  } else {
-    return (
-      <div className="admin">
-        <h2>Admin Login</h2>
-        <form onSubmit={e => adminLogin(e)}>
-          <div className="form-group">
-            <label>Username</label>
-            <input
-              name="username"
-              type="username"
-              className="form-control"
-              required="required"
-              placeholder="Username"
-            />
-          </div>
-          <div className="form-group">
-            <label>Password</label>
-            <input
-              name="password"
-              type="password"
-              required="required"
-              className="form-control"
-              placeholder="Password"
-            />
-          </div>
-          <button type="submit" className="btn btn-primary">
-            Submit
-          </button>
-        </form>
-      </div>
-    );
+      );
+    }
   }
-};
+}
 
-export default Admin;
+//map state to props
+const mapStateToProps = state => ({
+  user: state.user.items
+});
+
+export default connect(mapStateToProps, { loginAdmin })(Admin);

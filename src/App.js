@@ -58,7 +58,8 @@ class App extends Component {
 //using this to map to props
 const mapStateToProps = state => ({
   images: state.images.items,
-  posts: state.posts.items
+  posts: state.posts.items,
+  user: state.user.items
 });
 
 export default connect(mapStateToProps, { fetchBlogPosts, fetchImages })(App);

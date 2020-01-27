@@ -13,32 +13,15 @@ import PortfolioImage from "../../components/portfolioImage";
 import BlogPosts from "../../components/blogPosts";
 
 //Questions:
-//imports is there another way for image imports;
-//2 image folders issue;
-//JQuery i heard in react should avoid.
-//ads
-//mail servers
-//adding onclick events is it more efficient just to use //normal javascript or should i have an onClick eventfor each ?
 //============================================
-//image uploaded to cloud
-//bootstrap
-//emmet and lorem and other packages stopped working ?
-//"clean code"
-//input issue with calling api throws an error if there is a space in the text.
-
-//arrow functions explain more(thisbindthis), async functions explain more.
-
-//if i have a global state management system like redux should i utilize local state at all or should i keep it compact. ?
-
-//component unmounting.
-//with in mail.py backend
-//how would we make the site if she wanted to be able to update things on a weekly basis.
-//api call for images in top component to send to home page and portfolio page.
-//no lambda functions in js?
+//putting my api requests in app.js, that gets called everytime i click
+//on a  new page.
+//
 
 class Home extends Component {
   render() {
     const posts = this.props.posts.data;
+    console.log("POSTS: " + posts);
     return (
       <div className="homepage">
         <div className="preloader">
