@@ -24,8 +24,26 @@ class Admin extends Component {
     };
   }
 
+  componentWillMount() {
+    console.log("inside component will mount");
+  }
   componentDidMount() {
+    console.log("inside component did mount");
     // add event handler for selecting images to delete
+    //remove a tag
+    console.log("**");
+    // let element = document.getElementsByClassName("mfp-image");
+    //
+    // console.log(element);
+    //
+    // let element2 = document.getElementsByTagName("a")
+    //
+    // console.log(element2.document.getElementsByClassName("mfp-image"));
+    // for (let i = 0; i < element.length; i++) {
+    //   console.log(element[i].parentNode);
+    // }
+    console.log("**");
+    //
     let x = document.getElementsByClassName("portfolio-items");
     if (x) {
       for (let i = 0; i < x.length; i++) {
@@ -34,11 +52,7 @@ class Admin extends Component {
         });
       }
     }
-    //remove a tag
-    let element = document.getElementsByClassName("mfp-image");
-    for (let i = 0; i < element.length; i++) {
-      element[i].parentNode.removeChild(element[i]);
-    }
+    console.log("**");
   }
 
   submitLoginForm = e => {
@@ -59,32 +73,47 @@ class Admin extends Component {
   }
   shouldComponentUpdate() {
     console.log("inside should component update");
+    return true;
   }
   componentWillReceiveProps(nextProps, prevProps) {
-    //if success set variables to enter into admin panel
-    console.log(nextProps);
-    if (nextProps.user.success) {
+    //if success set admin variable to component state
+    if (nextProps.user != this.props.user && nextProps.user.success) {
       alert("You have logged in");
       this.setState({ admin: nextProps.user.data.username });
-      this.setState({ logged: nextProps.user.data.status });
     }
+
     //if error alert the error to user
     if (nextProps.user.error) {
       alert(nextProps.user.error);
+    }
+
+    //if error in uploading images
+    if (nextProps.image.error) {
+      alert(nextProps.image.error);
+    }
+    //connect uploaded image to images list
+    if (nextProps.image.success && nextProps.image.posted_image) {
+      this.props.images.data.unshift(nextProps.image.posted_image);
+      alert(nextProps.image.success);
     }
   }
 
   uploadImage = async e => {
     e.preventDefault();
+
     if (this.state.uploadType == null) {
       alert("Please select an upload type.");
       return;
+    } else if (
+      this.state.image.type !== "image/png" ||
+      this.state.image.type !== "image/jpeg"
+    ) {
+      alert("Upload failed. The selected file is not an image");
+      return;
     }
-
     //call method to upload to cloudinary get back the URL
     let cloudURL = await this.uploadToCloud();
 
-    console.log("Image uploaded to cloud: " + cloudURL);
     let imageInfo = {
       cloudURL: cloudURL,
       admin: this.state.admin,
@@ -146,9 +175,7 @@ class Admin extends Component {
     }
   };
   render() {
-    console.log("testing123");
-    console.log(this.props.images);
-    if (this.state.logged) {
+    if (this.props.isLogged) {
       return (
         <div className="make-centered">
           <div className="type-container">
@@ -299,7 +326,9 @@ Admin.propTypes = {
 //map state to props
 const mapStateToProps = state => ({
   user: state.user.items,
-  images: state.images.item
+  images: state.images.items,
+  isLogged: state.user.isLogged,
+  image: state.images.item
 });
 
 export default connect(mapStateToProps, { loginAdmin, addImage })(Admin);

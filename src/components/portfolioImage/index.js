@@ -2,7 +2,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 
 const PortfolioImage = () => {
-  const images = useSelector(state => state.images.items);
+  let images = useSelector(state => state.images.items);
   return (
     <div className="portfolio-items row">
       {images.data &&

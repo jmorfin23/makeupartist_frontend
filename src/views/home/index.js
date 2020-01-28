@@ -16,7 +16,7 @@ import BlogPosts from "../../components/blogPosts";
 //============================================
 //putting my api requests in app.js, that gets called everytime i click
 //on a  new page.
-//
+//try setting state in local state with redux states
 
 class Home extends Component {
   render() {
