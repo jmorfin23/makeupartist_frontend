@@ -2,7 +2,7 @@
 export const LOGIN_ADMIN = "LOGIN_ADMIN";
 // =========== IMAGES ==========
 export const FETCH_IMAGES = "FETCH_IMAGES";
-export const NEW_IMAGE = "NEW_IMAGE";
+export const ADD_IMAGE = "NEW_IMAGE";
 export const DELETE_IMAGE = "DELETE_IMAGE";
 // =========== BLOGPOSTS ==========
 export const FETCH_BLOG_POSTS = "FETCH_BLOGPOSTS";

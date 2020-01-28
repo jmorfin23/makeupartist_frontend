@@ -3,6 +3,8 @@ import "./index.css";
 import PortfolioImage from "../../components/portfolioImage";
 import { connect } from "react-redux";
 import { loginAdmin } from "../../actions/adminActions.js";
+import { addImage } from "../../actions/imageActions.js";
+import PropTypes from "prop-types";
 
 //CLOUDINARY URL & PRESET
 const CLOUDINARY_URL = "https://api.cloudinary.com/v1_1/dozvqlete/upload";
@@ -21,13 +23,6 @@ class Admin extends Component {
       logged: false
     };
   }
-
-  // const [logged, setLogged] = useState(false);
-  // const [admin, setAdmin] = useState(null);
-  // const [image, setImage] = useState(null);
-  // const [uploadType, setUploadType] = useState(null);
-  // const [text, setText] = useState("");
-  // const [blogTitle, setBlogTitle] = useState("");
 
   componentDidMount() {
     // add event handler for selecting images to delete
@@ -48,39 +43,35 @@ class Admin extends Component {
 
   submitLoginForm = e => {
     e.preventDefault();
-    console.log("submit login form is called");
 
-    //set user info into obj
+    //set user info
     const login = {
       username: e.target.username.value,
       password: e.target.password.value
     };
-    console.log(login);
-    console.log("before login admin is called");
+
     //call login action with login info
     this.props.loginAdmin(login);
-    console.log("after login admin is called");
-
-    console.log(this.props.user);
-    // console.log(user);
-    // console.log('this is user success' + user.success);
-    // console.log(isLogged);
-
-    // if (user.success) {
-    //   alert("You have successfully logged in.");
-    //   setAdmin(user.data.username);
-    //   console.log(user.data.username);
-    //   console.log(isLogged);
-    // }
   };
 
   componentDidUpdate() {
     console.log("inside component did update");
-    console.log(this.props.user);
   }
-  componentWillReceiveProps(nextProps) {
-    console.log("inside component will recieve props");
+  shouldComponentUpdate() {
+    console.log("inside should component update");
+  }
+  componentWillReceiveProps(nextProps, prevProps) {
+    //if success set variables to enter into admin panel
     console.log(nextProps);
+    if (nextProps.user.success) {
+      alert("You have logged in");
+      this.setState({ admin: nextProps.user.data.username });
+      this.setState({ logged: nextProps.user.data.status });
+    }
+    //if error alert the error to user
+    if (nextProps.user.error) {
+      alert(nextProps.user.error);
+    }
   }
 
   uploadImage = async e => {
@@ -89,35 +80,27 @@ class Admin extends Component {
       alert("Please select an upload type.");
       return;
     }
+
     //call method to upload to cloudinary get back the URL
     let cloudURL = await this.uploadToCloud();
 
-    let res = await fetch("http://127.0.0.1:5000/api/image-save", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        image: cloudURL,
-        admin: this.state.admin,
-        type: this.state.uploadType
-      }
-    });
-
-    let returned = await res.json();
-
-    if (returned.success) {
-      alert(returned.success);
-    } else if (returned.error) {
-      alert(returned.error.message);
-    } else {
-      alert("There was an issue.");
-    }
+    console.log("Image uploaded to cloud: " + cloudURL);
+    let imageInfo = {
+      cloudURL: cloudURL,
+      admin: this.state.admin,
+      uploadType: this.state.uploadType
+    };
+    //call redux action
+    this.props.addImage(imageInfo);
   };
 
   uploadToCloud = async () => {
-    let formData = {};
+    let formData = new FormData();
+
     formData.append("file", this.state.image);
     formData.append("upload_preset", CLOUDINARY_UPLOAD_PRESET);
 
+    console.log("formdata: " + formData);
     let response = await fetch(CLOUDINARY_URL, {
       method: "POST",
       body: formData
@@ -163,8 +146,8 @@ class Admin extends Component {
     }
   };
   render() {
-    console.log("**********");
-    console.log(this.props.user);
+    console.log("testing123");
+    console.log(this.props.images);
     if (this.state.logged) {
       return (
         <div className="make-centered">
@@ -307,9 +290,16 @@ class Admin extends Component {
   }
 }
 
+//set propTypes
+Admin.propTypes = {
+  loginAdmin: PropTypes.func.isRequired,
+  user: PropTypes.object.isRequired
+};
+
 //map state to props
 const mapStateToProps = state => ({
-  user: state.user.items
+  user: state.user.items,
+  images: state.images.item
 });
 
-export default connect(mapStateToProps, { loginAdmin })(Admin);
+export default connect(mapStateToProps, { loginAdmin, addImage })(Admin);
