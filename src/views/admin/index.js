@@ -29,30 +29,6 @@ class Admin extends Component {
   }
   componentDidMount() {
     console.log("inside component did mount");
-    // add event handler for selecting images to delete
-    //remove a tag
-    console.log("**");
-    // let element = document.getElementsByClassName("mfp-image");
-    //
-    // console.log(element);
-    //
-    // let element2 = document.getElementsByTagName("a")
-    //
-    // console.log(element2.document.getElementsByClassName("mfp-image"));
-    // for (let i = 0; i < element.length; i++) {
-    //   console.log(element[i].parentNode);
-    // }
-    console.log("**");
-    //
-    let x = document.getElementsByClassName("portfolio-items");
-    if (x) {
-      for (let i = 0; i < x.length; i++) {
-        x[i].addEventListener("click", function() {
-          console.log("this should log");
-        });
-      }
-    }
-    console.log("**");
   }
 
   submitLoginForm = e => {
@@ -68,8 +44,30 @@ class Admin extends Component {
     this.props.loginAdmin(login);
   };
 
-  componentDidUpdate() {
+  componentDidUpdate(prevProps) {
     console.log("inside component did update");
+    // console.log(prevProps);
+    //   console.log('hit');
+    //   //remove link to image
+    //   let element = document.getElementsByClassName("mfp-image");
+    //   console.log(element);
+    //   console.log(element.length);
+    //
+    //   for (let i = 0; i < element.length; i++) {
+    //     console.log(element[i]);
+    //     element[i].parentNode.removeChild(element[i]);
+    //   }
+
+    //add onclick function
+    // let x = document.getElementsByClassName("mfp-image");
+    // console.log(x)
+    // if (x) {
+    //   for (let i = 0; i < x.length; i++) {
+    //     x[i].addEventListener("click", function() {
+    //       console.log("this should log");
+    //     });
+    //   }
+    // }
   }
   shouldComponentUpdate() {
     console.log("inside should component update");
@@ -97,6 +95,9 @@ class Admin extends Component {
       alert(nextProps.image.success);
     }
   }
+  componentWillUpdate() {
+    console.log("inside component will mount");
+  }
 
   uploadImage = async e => {
     e.preventDefault();
@@ -104,23 +105,28 @@ class Admin extends Component {
     if (this.state.uploadType == null) {
       alert("Please select an upload type.");
       return;
-    } else if (
-      this.state.image.type !== "image/png" ||
-      this.state.image.type !== "image/jpeg"
-    ) {
-      alert("Upload failed. The selected file is not an image");
-      return;
     }
-    //call method to upload to cloudinary get back the URL
-    let cloudURL = await this.uploadToCloud();
 
-    let imageInfo = {
-      cloudURL: cloudURL,
-      admin: this.state.admin,
-      uploadType: this.state.uploadType
-    };
-    //call redux action
-    this.props.addImage(imageInfo);
+    //if image type is not jpeg or png catch
+    if (
+      this.state.image.type != "image/png" ||
+      this.state.image.type != "image/jpeg"
+    ) {
+      console.log("The image is a png or jpeg");
+
+      //call method to upload to cloudinary get back the URL
+      let cloudURL = await this.uploadToCloud();
+
+      let imageInfo = {
+        cloudURL: cloudURL,
+        admin: this.state.admin,
+        uploadType: this.state.uploadType
+      };
+      //call redux action
+      this.props.addImage(imageInfo);
+    } else {
+      alert("Invalid image. Image must be either png or jpeg.");
+    }
   };
 
   uploadToCloud = async () => {
@@ -174,7 +180,15 @@ class Admin extends Component {
       alert(data.success.message);
     }
   };
+
+  deleteImage = image => {
+    console.log("inside delete image");
+    console.log(image);
+    //call action to delete image
+  };
+
   render() {
+    console.log(this.props.images.data);
     if (this.props.isLogged) {
       return (
         <div className="make-centered">
@@ -234,7 +248,26 @@ class Admin extends Component {
           <div className="delete-img">
             <h2>Delete an Image: </h2>
             <div className="delete-img-2">
-              <PortfolioImage />
+              <div className="portfolio-items row">
+                {this.props.images.data &&
+                  this.props.images.data.map((image, index) => (
+                    <div
+                      key={index}
+                      className="portfolio-item item fashion col-xs-12 col-sm-6 col-md-4"
+                    >
+                      <div
+                        className="a-img"
+                        style={{ backgroundImage: `url(` + image + `)` }}
+                      ></div>
+                      <a
+                        onClick={() => this.deleteImage(image)}
+                        className="mfp-image"
+                      >
+                        <i className="fa fa-search"></i>
+                      </a>
+                    </div>
+                  ))}
+              </div>
             </div>
           </div>
 
