@@ -3,7 +3,7 @@ import "./index.css";
 import PortfolioImage from "../../components/portfolioImage";
 import { connect } from "react-redux";
 import { loginAdmin } from "../../actions/adminActions.js";
-import { addImage } from "../../actions/imageActions.js";
+import { addImage, deleteImage } from "../../actions/imageActions.js";
 import PropTypes from "prop-types";
 
 //CLOUDINARY URL & PRESET
@@ -20,15 +20,10 @@ class Admin extends Component {
       admin: null,
       text: "",
       blogTitle: "",
-      logged: false
+      logged: false,
+      imageToDelete: null,
+      deleteButton: null
     };
-  }
-
-  componentWillMount() {
-    console.log("inside component will mount");
-  }
-  componentDidMount() {
-    console.log("inside component did mount");
   }
 
   submitLoginForm = e => {
@@ -85,7 +80,7 @@ class Admin extends Component {
       alert(nextProps.user.error);
     }
 
-    //if error in uploading images
+    //if error in uploading images or deleting
     if (nextProps.image.error) {
       alert(nextProps.image.error);
     }
@@ -94,9 +89,18 @@ class Admin extends Component {
       this.props.images.data.unshift(nextProps.image.posted_image);
       alert(nextProps.image.success);
     }
-  }
-  componentWillUpdate() {
-    console.log("inside component will mount");
+
+    console.log("**");
+    console.log("**");
+    console.log(nextProps);
+    console.log(prevProps);
+    console.log("**");
+    console.log("**");
+    //check if image was deleted
+    // if (nextProps.deletedImage) {
+    //   alert('image successfully deleted.');
+    //   this.props.images.data.filter(image => image == this.props.deletedImage ? null : image);
+    // }
   }
 
   uploadImage = async e => {
@@ -115,7 +119,8 @@ class Admin extends Component {
       console.log("The image is a png or jpeg");
 
       //call method to upload to cloudinary get back the URL
-      let cloudURL = await this.uploadToCloud();
+      let cloudURL =
+        "https://res.cloudinary.com/dozvqlete/image/upload/v1580334806/pyuozh0stjlgk0vtkxm2.png"; //= await this.uploadToCloud();
 
       let imageInfo = {
         cloudURL: cloudURL,
@@ -181,14 +186,17 @@ class Admin extends Component {
     }
   };
 
-  deleteImage = image => {
+  deleteImage = (imageURL, index) => {
     console.log("inside delete image");
-    console.log(image);
+    // set state for image to delete
+
     //call action to delete image
+    this.props.deleteImage(imageURL);
   };
 
   render() {
-    console.log(this.props.images.data);
+    console.log(this.props.image);
+
     if (this.props.isLogged) {
       return (
         <div className="make-centered">
@@ -260,14 +268,14 @@ class Admin extends Component {
                         style={{ backgroundImage: `url(` + image + `)` }}
                       ></div>
                       <a
-                        onClick={() => this.deleteImage(image)}
+                        onClick={() => this.deleteImage(image, index)}
                         className="mfp-image"
-                      >
-                        <i className="fa fa-search"></i>
-                      </a>
+                      ></a>
                     </div>
                   ))}
               </div>
+              <br />
+              <button className="btn btn-primary">Submit</button>
             </div>
           </div>
 
@@ -361,7 +369,10 @@ const mapStateToProps = state => ({
   user: state.user.items,
   images: state.images.items,
   isLogged: state.user.isLogged,
-  image: state.images.item
+  image: state.images.item,
+  deletedImage: state.images.deletedImage
 });
 
-export default connect(mapStateToProps, { loginAdmin, addImage })(Admin);
+export default connect(mapStateToProps, { loginAdmin, addImage, deleteImage })(
+  Admin
+);

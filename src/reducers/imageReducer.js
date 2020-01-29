@@ -1,9 +1,10 @@
 //REDUCER : checks action and modifies store accordingly
-import { FETCH_IMAGES, ADD_IMAGE } from "../actions/types.js";
+import { FETCH_IMAGES, ADD_IMAGE, DELETE_IMAGE } from "../actions/types.js";
 
 const initialState = {
   items: [],
-  item: {}
+  item: {},
+  deletedImage: null
 };
 
 const imageReducer = (state = initialState, action) => {
@@ -18,6 +19,13 @@ const imageReducer = (state = initialState, action) => {
       return {
         ...state,
         item: action.payload
+      };
+    case DELETE_IMAGE:
+      console.log("case delete image hit");
+      console.log(action.payload);
+      return {
+        ...state,
+        deleteSuccessful: action.payload.deleted
       };
     default:
       return state;
