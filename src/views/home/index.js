@@ -18,6 +18,7 @@ import BlogPosts from "../../components/blogPosts";
 //on a  new page.
 //try setting state in local state with redux states
 //try and catch where are good places.
+//should i delete images based on index or value?
 
 class Home extends Component {
   render() {

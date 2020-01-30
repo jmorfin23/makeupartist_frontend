@@ -15,14 +15,13 @@ class Admin extends Component {
     super(props);
 
     this.state = {
-      uploadType: null,
+      uploadType: "",
       image: null,
       admin: null,
       text: "",
       blogTitle: "",
-      logged: false,
-      imageToDelete: null,
-      deleteButton: null
+      isLogged: false,
+      error: ""
     };
   }
 
@@ -34,79 +33,82 @@ class Admin extends Component {
       username: e.target.username.value,
       password: e.target.password.value
     };
-
+    console.log("inside submit login form");
     //call login action with login info
     this.props.loginAdmin(login);
   };
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate(prevProps, prevState) {
     console.log("inside component did update");
-    // console.log(prevProps);
-    //   console.log('hit');
-    //   //remove link to image
-    //   let element = document.getElementsByClassName("mfp-image");
-    //   console.log(element);
-    //   console.log(element.length);
-    //
-    //   for (let i = 0; i < element.length; i++) {
-    //     console.log(element[i]);
-    //     element[i].parentNode.removeChild(element[i]);
-    //   }
-
-    //add onclick function
-    // let x = document.getElementsByClassName("mfp-image");
-    // console.log(x)
-    // if (x) {
-    //   for (let i = 0; i < x.length; i++) {
-    //     x[i].addEventListener("click", function() {
-    //       console.log("this should log");
-    //     });
-    //   }
-    // }
+    console.log(prevProps);
+    console.log(prevState);
   }
   shouldComponentUpdate() {
     console.log("inside should component update");
     return true;
   }
-  componentWillReceiveProps(nextProps, prevProps) {
-    //if success set admin variable to component state
-    if (nextProps.user != this.props.user && nextProps.user.success) {
-      alert("You have logged in");
-      this.setState({ admin: nextProps.user.data.username });
-    }
 
-    //if error alert the error to user
-    if (nextProps.user.error) {
-      alert(nextProps.user.error);
-    }
-
-    //if error in uploading images or deleting
-    if (nextProps.image.error) {
-      alert(nextProps.image.error);
-    }
-    //connect uploaded image to images list
-    if (nextProps.image.success && nextProps.image.posted_image) {
-      this.props.images.data.unshift(nextProps.image.posted_image);
-      alert(nextProps.image.success);
-    }
-
-    console.log("**");
-    console.log("**");
+  static getDerivedStateFromProps(nextProps, prevState) {
+    console.log("inside get derived state from props");
     console.log(nextProps);
-    console.log(prevProps);
-    console.log("**");
-    console.log("**");
-    //check if image was deleted
-    // if (nextProps.deletedImage) {
-    //   alert('image successfully deleted.');
-    //   this.props.images.data.filter(image => image == this.props.deletedImage ? null : image);
-    // }
+    console.log(prevState);
+
+    //login user
+    if (nextProps.user.isLogged != prevState.isLogged) {
+      alert("You have logged in");
+      return {
+        isLogged: nextProps.user.isLogged,
+        admin: nextProps.user.items.data.username
+      };
+    }
+    //for display login errors
+    if (nextProps.user.items.error) {
+      alert(nextProps.user.items.error);
+    }
+    return null;
   }
+
+  //this is depreciating.
+  // componentWillReceiveProps(nextProps, prevState) {
+  //
+  //   //if success set admin variable to component state
+  //   console.log('**');
+  //   console.log(nextProps);
+  //   console.log(prevState);
+  //   console.log('**');
+  //   if (nextProps.user.items != this.props.user.items && nextProps.user.items.success) {
+  //     alert("You have logged in");
+  //     this.setState({ admin: nextProps.user.items.data.username });
+  //   }
+  //
+  //   //if error alert the error to user
+  //   if (nextProps.user.items.error) {
+  //     alert(nextProps.user.items.error);
+  //   }
+  //
+  //   //if error in uploading images or deleting
+  //   if (nextProps.image.error) {
+  //     alert(nextProps.image.error);
+  //   }
+  //   //connect uploaded image to images list
+  //   if (nextProps.image.success && nextProps.image.posted_image) {
+  //     this.props.images.data.unshift(nextProps.image.posted_image);
+  //     alert(nextProps.image.success);
+  //   }
+  //
+  //   //check if image was deleted
+  //   if (nextProps.deletedStatus && nextProps.deletedImage) {
+  //     alert('image successfully deleted.');
+  //     this.props.images.data.splice(this.props.images.data.indexOf(nextProps.deletedImage), 1);
+  //     //reset state to deleted to false
+  //     console.log('status: ' + nextProps.deletedStatus);
+  //   }
+  // }
 
   uploadImage = async e => {
     e.preventDefault();
 
-    if (this.state.uploadType == null) {
+    if (this.state.uploadType == "") {
       alert("Please select an upload type.");
       return;
     }
@@ -120,7 +122,7 @@ class Admin extends Component {
 
       //call method to upload to cloudinary get back the URL
       let cloudURL =
-        "https://res.cloudinary.com/dozvqlete/image/upload/v1580334806/pyuozh0stjlgk0vtkxm2.png"; //= await this.uploadToCloud();
+        "https://res.cloudinary.com/dozvqlete/image/upload/v1580333508/dk5asu1ehbrhtzkxuzkj.png"; //await this.uploadToCloud();
 
       let imageInfo = {
         cloudURL: cloudURL,
@@ -188,16 +190,21 @@ class Admin extends Component {
 
   deleteImage = (imageURL, index) => {
     console.log("inside delete image");
-    // set state for image to delete
+    //perhaps delete based on index, would need to reverse the array
+    //if there are two of the same in portfolio, deleting occurs on the ///first one in the array
+    //after deleting something and then adding a new image to portfolio,
+    //
 
     //call action to delete image
     this.props.deleteImage(imageURL);
   };
 
   render() {
-    console.log(this.props.image);
+    console.log("**");
+    console.log("test");
+    console.log(this.state.admin);
 
-    if (this.props.isLogged) {
+    if (this.state.isLogged) {
       return (
         <div className="make-centered">
           <div className="type-container">
@@ -364,13 +371,15 @@ Admin.propTypes = {
   user: PropTypes.object.isRequired
 };
 
+//consolodate this l8r
 //map state to props
 const mapStateToProps = state => ({
-  user: state.user.items,
+  user: state.user,
   images: state.images.items,
-  isLogged: state.user.isLogged,
   image: state.images.item,
-  deletedImage: state.images.deletedImage
+  deletedImage: state.images.deletedImage,
+  deletedStatus: state.images.deletedStatus,
+  addedStatus: state.images.addedStatus
 });
 
 export default connect(mapStateToProps, { loginAdmin, addImage, deleteImage })(

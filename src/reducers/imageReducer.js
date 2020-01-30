@@ -4,7 +4,9 @@ import { FETCH_IMAGES, ADD_IMAGE, DELETE_IMAGE } from "../actions/types.js";
 const initialState = {
   items: [],
   item: {},
-  deletedImage: null
+  deletedImage: null,
+  deletedStatus: false,
+  addedStatus: false
 };
 
 const imageReducer = (state = initialState, action) => {
@@ -16,16 +18,19 @@ const imageReducer = (state = initialState, action) => {
         items: action.payload
       };
     case ADD_IMAGE:
-      return {
-        ...state,
-        item: action.payload
-      };
-    case DELETE_IMAGE:
-      console.log("case delete image hit");
+      console.log("add image hit");
       console.log(action.payload);
       return {
         ...state,
-        deleteSuccessful: action.payload.deleted
+        item: action.payload,
+        addedStatus: action.payload.status
+      };
+    case DELETE_IMAGE:
+      console.log("case delete image hit");
+      return {
+        ...state,
+        deletedImage: action.payload.deletedImage,
+        deletedStatus: action.payload.status
       };
     default:
       return state;
