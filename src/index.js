@@ -5,6 +5,8 @@ import App from "./App";
 import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
 import store from "./store.js";
+import ErrorBoundary from "./components/errorBoundary";
+
 //TODO: finish redux setup for updating images;
 
 //STORE -> GLOBAL state
@@ -12,10 +14,12 @@ import store from "./store.js";
 //dispatch : the way we execute the action "dispatch action to reducer"
 
 ReactDOM.render(
-  <Provider store={store}>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
-  </Provider>,
+  <ErrorBoundary>
+    <Provider store={store}>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </Provider>
+  </ErrorBoundary>,
   document.getElementById("root")
 );

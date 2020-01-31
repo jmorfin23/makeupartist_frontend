@@ -25,7 +25,6 @@ class App extends Component {
     this.props.fetchBlogPosts();
   }
   render() {
-    const images = this.props.images.data;
     return (
       <div className="App">
         {/* Header goes below here */}

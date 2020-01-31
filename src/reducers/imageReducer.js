@@ -29,6 +29,7 @@ const imageReducer = (state = initialState, action) => {
       console.log("case delete image hit");
       return {
         ...state,
+        item: action.payload,
         deletedImage: action.payload.deletedImage,
         deletedStatus: action.payload.status
       };

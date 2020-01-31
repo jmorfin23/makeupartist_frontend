@@ -21,7 +21,9 @@ class Admin extends Component {
       text: "",
       blogTitle: "",
       isLogged: false,
-      error: ""
+      imageList: [],
+      error: null,
+      addedStatus: false
     };
   }
 
@@ -38,22 +40,65 @@ class Admin extends Component {
     this.props.loginAdmin(login);
   };
 
-  componentDidUpdate(prevProps, prevState) {
+  componentDidUpdate(prevProps, prevState, snapshot) {
     console.log("inside component did update");
-    console.log(prevProps);
-    console.log(prevState);
+
+    //add images to DOM // may need to change this later
+    if (this.props.images.data != prevState.imageList) {
+      this.setState({ imageList: this.props.images.data });
+    }
+    //if user login error alert error
+    if (this.props.user.items.error) {
+      alert(this.props.user.items.error);
+    }
+
+    //alert error if image error
+    if (this.props.image.error != prevState.error) {
+      alert(this.props.image.error);
+    }
+
+    // console.log('**');
+    // console.log('newLength ' + this.props.image.newLength);
+    // console.log('state length: ' + prevState.imageList.length);
+    if (this.props.image.newLength == prevState.imageList.length + 1) {
+      alert(this.props.image.success);
+
+      //add new image to state image list
+      let newList = prevState.imageList;
+      newList.unshift(this.props.image.posted_image);
+      this.setState({ imageList: newList });
+    }
+
+    //alert if delete image successful and take out of imageList
+    if (this.props.image.newLength == this.state.imageList.length - 1) {
+      alert("Deleted Image");
+      let newList = this.state.imageList;
+      newList.splice(newList.indexOf(this.props.deletedImage), 1);
+      this.setState({ imageList: newList });
+    }
+  }
+
+  componentDidMount() {
+    console.log("component did mount");
   }
   shouldComponentUpdate() {
     console.log("inside should component update");
     return true;
   }
 
+  //has access to this
+  getSnapshotBeforeUpdate(prevProps, prevState) {
+    console.log("get snapshot before updating");
+    return null;
+  }
+
+  //used for updating state
   static getDerivedStateFromProps(nextProps, prevState) {
     console.log("inside get derived state from props");
     console.log(nextProps);
     console.log(prevState);
 
-    //login user
+    //alert and set state if login successful
     if (nextProps.user.isLogged != prevState.isLogged) {
       alert("You have logged in");
       return {
@@ -61,49 +106,8 @@ class Admin extends Component {
         admin: nextProps.user.items.data.username
       };
     }
-    //for display login errors
-    if (nextProps.user.items.error) {
-      alert(nextProps.user.items.error);
-    }
     return null;
   }
-
-  //this is depreciating.
-  // componentWillReceiveProps(nextProps, prevState) {
-  //
-  //   //if success set admin variable to component state
-  //   console.log('**');
-  //   console.log(nextProps);
-  //   console.log(prevState);
-  //   console.log('**');
-  //   if (nextProps.user.items != this.props.user.items && nextProps.user.items.success) {
-  //     alert("You have logged in");
-  //     this.setState({ admin: nextProps.user.items.data.username });
-  //   }
-  //
-  //   //if error alert the error to user
-  //   if (nextProps.user.items.error) {
-  //     alert(nextProps.user.items.error);
-  //   }
-  //
-  //   //if error in uploading images or deleting
-  //   if (nextProps.image.error) {
-  //     alert(nextProps.image.error);
-  //   }
-  //   //connect uploaded image to images list
-  //   if (nextProps.image.success && nextProps.image.posted_image) {
-  //     this.props.images.data.unshift(nextProps.image.posted_image);
-  //     alert(nextProps.image.success);
-  //   }
-  //
-  //   //check if image was deleted
-  //   if (nextProps.deletedStatus && nextProps.deletedImage) {
-  //     alert('image successfully deleted.');
-  //     this.props.images.data.splice(this.props.images.data.indexOf(nextProps.deletedImage), 1);
-  //     //reset state to deleted to false
-  //     console.log('status: ' + nextProps.deletedStatus);
-  //   }
-  // }
 
   uploadImage = async e => {
     e.preventDefault();
@@ -122,13 +126,17 @@ class Admin extends Component {
 
       //call method to upload to cloudinary get back the URL
       let cloudURL =
-        "https://res.cloudinary.com/dozvqlete/image/upload/v1580333508/dk5asu1ehbrhtzkxuzkj.png"; //await this.uploadToCloud();
+        "https://res.cloudinary.com/dozvqlete/image/upload/v1580264807/hk0jyszxywgvtoc8gxa4.png"; //await this.uploadToCloud();
 
       let imageInfo = {
         cloudURL: cloudURL,
         admin: this.state.admin,
         uploadType: this.state.uploadType
       };
+
+      //set state to false for added status
+      // this.setState({ addedStatus: false });
+
       //call redux action
       this.props.addImage(imageInfo);
     } else {
@@ -200,10 +208,6 @@ class Admin extends Component {
   };
 
   render() {
-    console.log("**");
-    console.log("test");
-    console.log(this.state.admin);
-
     if (this.state.isLogged) {
       return (
         <div className="make-centered">
@@ -264,8 +268,8 @@ class Admin extends Component {
             <h2>Delete an Image: </h2>
             <div className="delete-img-2">
               <div className="portfolio-items row">
-                {this.props.images.data &&
-                  this.props.images.data.map((image, index) => (
+                {this.state.imageList &&
+                  this.state.imageList.map((image, index) => (
                     <div
                       key={index}
                       className="portfolio-item item fashion col-xs-12 col-sm-6 col-md-4"

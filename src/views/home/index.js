@@ -19,6 +19,7 @@ import BlogPosts from "../../components/blogPosts";
 //try setting state in local state with redux states
 //try and catch where are good places.
 //should i delete images based on index or value?
+//when adding and deleting images should i return the whole image list ////from backend? or splice it.
 
 class Home extends Component {
   render() {
