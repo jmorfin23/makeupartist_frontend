@@ -5,7 +5,7 @@ import userReducer from "./userReducer.js";
 
 const allReducers = combineReducers({
   images: imageReducer,
-  posts: blogPostReducer,
+  blogposts: blogPostReducer,
   user: userReducer
 });
 

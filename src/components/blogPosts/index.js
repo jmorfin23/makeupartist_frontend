@@ -12,7 +12,7 @@ import "./index.css";
 import { useSelector } from "react-redux";
 
 const BlogPosts = props => {
-  const posts = useSelector(state => state.posts.items);
+  const posts = useSelector(state => state.blogposts.items);
 
   //if post length >= 2 display only those: FOR HOMEPAGE
   if (posts.data && props.items) {

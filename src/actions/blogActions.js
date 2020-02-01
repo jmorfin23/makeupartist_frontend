@@ -14,8 +14,24 @@ export const fetchBlogPosts = () => {
   };
 };
 
-export const addBlogPost = () => {
+export const addBlogPost = blogPostInfo => {
   console.log("inside of blog post action");
+  return function(dispatch) {
+    fetch("http://127.0.0.1:5000/api/add-blogpost", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        postInfo: JSON.stringify(blogPostInfo)
+      }
+    })
+      .then(res => res.json())
+      .then(data =>
+        dispatch({
+          type: ADD_BLOG_POST,
+          payload: data
+        })
+      );
+  };
 };
 
 export const deleteBlogPost = () => {

@@ -1,4 +1,4 @@
-import { FETCH_BLOG_POSTS } from "../actions/types.js";
+import { FETCH_BLOG_POSTS, ADD_BLOG_POST } from "../actions/types.js";
 
 const initialState = {
   items: [],
@@ -12,6 +12,13 @@ const blogPostReducer = (state = initialState, action) => {
       return {
         ...state,
         items: action.payload
+      };
+    case ADD_BLOG_POST:
+      console.log("inside add blog post reducer hit");
+      console.log(action.payload);
+      return {
+        ...state,
+        item: action.payload
       };
     default:
       return state;

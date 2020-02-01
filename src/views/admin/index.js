@@ -4,6 +4,7 @@ import PortfolioImage from "../../components/portfolioImage";
 import { connect } from "react-redux";
 import { loginAdmin } from "../../actions/adminActions.js";
 import { addImage, deleteImage } from "../../actions/imageActions.js";
+import { addBlogPost } from "../../actions/blogActions.js";
 import PropTypes from "prop-types";
 
 //CLOUDINARY URL & PRESET
@@ -76,6 +77,20 @@ class Admin extends Component {
       newList.splice(newList.indexOf(this.props.deletedImage), 1);
       this.setState({ imageList: newList });
     }
+
+    // console.log('*******');
+    // console.log(this.props.blogposts.item);
+    // console.log(prevProps.blogposts);
+    //alert if blogpost was successful
+    // if (this.props.blogposts.item.success != prevProps.blogposts.item.success) {
+    //   alert(this.props.blogposts.item.success.message);
+    //   //clear state for next blogpost
+    // }
+    // console.log('local storage items: ');
+    // console.log(localStorage);
+
+    // console.log('this is the state images');
+    // console.log(this.state.image);
   }
 
   componentDidMount() {
@@ -106,6 +121,18 @@ class Admin extends Component {
         admin: nextProps.user.items.data.username
       };
     }
+    console.log("**111");
+    console.log(localStorage);
+    //check if local storage has blogPostInfo
+    //  if (localStorage.getItem('blogTitle')) {
+    //   console.log('there is blogpost in the local storage!!!');
+    //   let title = localStorage.blogTitle;
+    //   let image = JSON.parse(localStorage.blogImage);
+    //   let text = localStorage.blogText;
+
+    //   //save to state
+    //   return {blogTitle: title, text: text, image: image };
+    // }
     return null;
   }
 
@@ -123,6 +150,8 @@ class Admin extends Component {
       this.state.image.type != "image/jpeg"
     ) {
       console.log("The image is a png or jpeg");
+
+      //if this.state.image type is a string skip uploading to cloud
 
       //call method to upload to cloudinary get back the URL
       let cloudURL =
@@ -146,6 +175,7 @@ class Admin extends Component {
 
   uploadToCloud = async () => {
     let formData = new FormData();
+    console.log("image uploaded: " + this.state.image);
 
     formData.append("file", this.state.image);
     formData.append("upload_preset", CLOUDINARY_UPLOAD_PRESET);
@@ -180,20 +210,11 @@ class Admin extends Component {
       url: cloudURL,
       text: this.state.text
     };
-    console.log("Info. " + blogPostInfo);
-    let response = await fetch("http://127.0.0.1:5000/api/add-blogpost", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        postInfo: JSON.stringify(blogPostInfo)
-      }
-    });
 
-    let data = await response.json();
-    //i can just add an alert to display a response instead of havint to display error and success
-    if (data.success) {
-      alert(data.success.message);
-    }
+    //call redux action
+    console.log("blogPost Info: " + blogPostInfo);
+    this.props.addBlogPost(blogPostInfo);
+    console.log("after blog post is sent");
   };
 
   deleteImage = (imageURL, index) => {
@@ -205,6 +226,29 @@ class Admin extends Component {
 
     //call action to delete image
     this.props.deleteImage(imageURL);
+  };
+
+  saveMywork = () => {
+    console.log("states for saving: ");
+    console.log(this.state.image);
+    let image = this.state.image;
+    let text = this.state.text;
+    let title = this.state.blogTitle;
+    console.log(JSON.stringify(image));
+    //if not 1 input filled, alert user
+    // if (!image && !text && !title) {
+    //   alert('You cannot save because all input are emtpy.');
+    //   document.getElementById('checkbox').checked = false;
+    //   return;
+    // }
+
+    // // //save to localStorage
+    // localStorage.setItem('blogTitle', title);
+    // localStorage.setItem('blogText', text);
+    // localStorage.setItem('blogImage', image);
+
+    // alert('Your work is saved! Next time you login your work will be here.');
+    // document.getElementById('checkbox').checked = false;
   };
 
   render() {
@@ -296,17 +340,20 @@ class Admin extends Component {
               <div className="form-group">
                 <label>Title</label>
                 <input
+                  id="blogTitle"
                   onChange={e => this.setState({ blogTitle: e.target.value })}
                   name="title"
                   type="text"
                   className="form-control"
                   required="required"
                   placeholder="Title"
+                  value={this.state.blogTitle}
                 />
               </div>
               <div className="form-group">
                 <label htmlFor="file-input">Image</label>
                 <input
+                  id="blogImage"
                   onChange={e => this.setState({ image: e.target.files[0] })}
                   name="image"
                   type="file"
@@ -316,6 +363,7 @@ class Admin extends Component {
               <div className="form-group">
                 <label>Text</label>
                 <textarea
+                  id="blogText"
                   onChange={e => this.setState({ text: e.target.value })}
                   cols="50"
                   rows="20"
@@ -327,6 +375,15 @@ class Admin extends Component {
                   value={this.state.text}
                 />
               </div>
+              <input
+                id="checkbox"
+                onClick={() => this.saveMywork()}
+                type="checkbox"
+                name="save"
+              />{" "}
+              Check this box to save the post
+              <br />
+              <br />
               <button type="submit" className="btn btn-primary">
                 Submit
               </button>
@@ -369,7 +426,7 @@ class Admin extends Component {
   }
 }
 
-//set propTypes
+//set propTypes TODO
 Admin.propTypes = {
   loginAdmin: PropTypes.func.isRequired,
   user: PropTypes.object.isRequired
@@ -383,9 +440,13 @@ const mapStateToProps = state => ({
   image: state.images.item,
   deletedImage: state.images.deletedImage,
   deletedStatus: state.images.deletedStatus,
-  addedStatus: state.images.addedStatus
+  addedStatus: state.images.addedStatus,
+  blogposts: state.blogposts
 });
 
-export default connect(mapStateToProps, { loginAdmin, addImage, deleteImage })(
-  Admin
-);
+export default connect(mapStateToProps, {
+  loginAdmin,
+  addImage,
+  deleteImage,
+  addBlogPost
+})(Admin);

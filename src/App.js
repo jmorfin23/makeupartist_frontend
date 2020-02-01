@@ -57,7 +57,7 @@ class App extends Component {
 //using this to map to props
 const mapStateToProps = state => ({
   images: state.images.items,
-  posts: state.posts.items,
+  blogposts: state.blogposts.items,
   user: state.user.items
 });
 

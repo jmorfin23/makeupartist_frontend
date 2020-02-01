@@ -20,11 +20,10 @@ import BlogPosts from "../../components/blogPosts";
 //try and catch where are good places.
 //should i delete images based on index or value?
 //when adding and deleting images should i return the whole image list ////from backend? or splice it.
+//should i use tokens?
 
 class Home extends Component {
   render() {
-    const posts = this.props.posts.data;
-    console.log("POSTS: " + posts);
     return (
       <div className="homepage">
         <div className="preloader">
@@ -373,8 +372,8 @@ class Home extends Component {
 }
 
 //map state to props
-const mapStateToProps = state => ({
-  posts: state.posts.items
-});
+// const mapStateToProps = state => ({
+//   blogposts: state.blogposts.items
+// });
 
-export default connect(mapStateToProps)(Home);
+export default Home;
