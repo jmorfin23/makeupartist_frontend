@@ -24,7 +24,8 @@ class Admin extends Component {
       isLogged: false,
       imageList: [],
       error: null,
-      addedStatus: false
+      addedStatus: false,
+      saveFlag: false
     };
   }
 
@@ -77,7 +78,21 @@ class Admin extends Component {
       newList.splice(newList.indexOf(this.props.deletedImage), 1);
       this.setState({ imageList: newList });
     }
+    console.log(localStorage);
+    if (
+      this.state.isLogged &&
+      localStorage.getItem("blogTitle") &&
+      localStorage.getItem("blogText")
+    ) {
+      console.log("this was hit!!!");
 
+      let title = localStorage.blogTitle;
+      let text = localStorage.blogText;
+
+      localStorage.clear();
+
+      this.setState({ blogTitle: title, text: text });
+    }
     // console.log('*******');
     // console.log(this.props.blogposts.item);
     // console.log(prevProps.blogposts);
@@ -104,6 +119,7 @@ class Admin extends Component {
   //has access to this
   getSnapshotBeforeUpdate(prevProps, prevState) {
     console.log("get snapshot before updating");
+
     return null;
   }
 
@@ -121,17 +137,16 @@ class Admin extends Component {
         admin: nextProps.user.items.data.username
       };
     }
-    console.log("**111");
-    console.log(localStorage);
+
     //check if local storage has blogPostInfo
-    //  if (localStorage.getItem('blogTitle')) {
+    //  if (localStorage.getItem('blogTitle') && localStorage.getItem('blogText') && prevState.saveFlag != nextProps.saveFlag) {
     //   console.log('there is blogpost in the local storage!!!');
     //   let title = localStorage.blogTitle;
-    //   let image = JSON.parse(localStorage.blogImage);
     //   let text = localStorage.blogText;
 
+    //   localStorage.clear();
     //   //save to state
-    //   return {blogTitle: title, text: text, image: image };
+    //   return { blogTitle: title, text: text };
     // }
     return null;
   }
@@ -229,26 +244,26 @@ class Admin extends Component {
   };
 
   saveMywork = () => {
-    console.log("states for saving: ");
-    console.log(this.state.image);
-    let image = this.state.image;
     let text = this.state.text;
     let title = this.state.blogTitle;
-    console.log(JSON.stringify(image));
-    //if not 1 input filled, alert user
-    // if (!image && !text && !title) {
-    //   alert('You cannot save because all input are emtpy.');
-    //   document.getElementById('checkbox').checked = false;
-    //   return;
-    // }
 
-    // // //save to localStorage
-    // localStorage.setItem('blogTitle', title);
-    // localStorage.setItem('blogText', text);
-    // localStorage.setItem('blogImage', image);
+    // if not 1 input filled, alert user
+    if (!text && !title) {
+      alert("You cannot save because all input are emtpy.");
+      document.getElementById("checkbox").checked = false;
+      return;
+    }
 
-    // alert('Your work is saved! Next time you login your work will be here.');
-    // document.getElementById('checkbox').checked = false;
+    //save to localStorage
+    localStorage.setItem("blogTitle", title);
+    localStorage.setItem("blogText", text);
+
+    //set state for saveFlag
+
+    alert("Your work is saved! Next time you login your work will be here.");
+    document.getElementById("checkbox").checked = false;
+
+    window.location.reload(false);
   };
 
   render() {
@@ -381,7 +396,7 @@ class Admin extends Component {
                 type="checkbox"
                 name="save"
               />{" "}
-              Check this box to save the post
+              Save post and exit
               <br />
               <br />
               <button type="submit" className="btn btn-primary">
