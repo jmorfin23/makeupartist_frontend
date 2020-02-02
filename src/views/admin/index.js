@@ -59,13 +59,10 @@ class Admin extends Component {
       alert(this.props.image.error);
     }
 
-    // console.log('**');
-    // console.log('newLength ' + this.props.image.newLength);
-    // console.log('state length: ' + prevState.imageList.length);
+    //add uploaded image to state image list
     if (this.props.image.newLength == prevState.imageList.length + 1) {
       alert(this.props.image.success);
 
-      //add new image to state image list
       let newList = prevState.imageList;
       newList.unshift(this.props.image.posted_image);
       this.setState({ imageList: newList });
@@ -78,14 +75,12 @@ class Admin extends Component {
       newList.splice(newList.indexOf(this.props.deletedImage), 1);
       this.setState({ imageList: newList });
     }
-    console.log(localStorage);
+
     if (
       this.state.isLogged &&
       localStorage.getItem("blogTitle") &&
       localStorage.getItem("blogText")
     ) {
-      console.log("this was hit!!!");
-
       let title = localStorage.blogTitle;
       let text = localStorage.blogText;
 
@@ -93,19 +88,13 @@ class Admin extends Component {
 
       this.setState({ blogTitle: title, text: text });
     }
-    // console.log('*******');
-    // console.log(this.props.blogposts.item);
-    // console.log(prevProps.blogposts);
-    //alert if blogpost was successful
-    // if (this.props.blogposts.item.success != prevProps.blogposts.item.success) {
-    //   alert(this.props.blogposts.item.success.message);
-    //   //clear state for next blogpost
-    // }
-    // console.log('local storage items: ');
-    // console.log(localStorage);
-
-    // console.log('this is the state images');
-    // console.log(this.state.image);
+    console.log(this.props);
+    //if blog post successful alert the user
+    if (this.props.blogposts.item.success != prevProps.blogposts.item.success) {
+      alert(this.props.blogposts.item.success.message);
+      //force a reload
+      window.location.reload(false);
+    }
   }
 
   componentDidMount() {
@@ -237,7 +226,6 @@ class Admin extends Component {
     //perhaps delete based on index, would need to reverse the array
     //if there are two of the same in portfolio, deleting occurs on the ///first one in the array
     //after deleting something and then adding a new image to portfolio,
-    //
 
     //call action to delete image
     this.props.deleteImage(imageURL);
