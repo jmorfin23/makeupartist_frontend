@@ -37,13 +37,17 @@ const PortfolioImage = () => {
           images.data.map((image, index) => (
             <div
               key={index}
-              className="portfolio-item item fashion col-xs-12 col-sm-6 col-md-4"
+              className={
+                `portfolio-item item ` +
+                image.type +
+                ` wedding col-xs-12 col-sm-6 col-md-4`
+              }
             >
               <div
                 className="a-img"
-                style={{ backgroundImage: `url(` + image + `)` }}
+                style={{ backgroundImage: `url(` + image.url + `)` }}
               ></div>
-              <a href={image} className="mfp-image">
+              <a href={image.url} className="mfp-image">
                 <i className="fa fa-search"></i>
               </a>
             </div>

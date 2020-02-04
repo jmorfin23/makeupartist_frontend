@@ -96,6 +96,7 @@ class Home extends Component {
   };
 
   render() {
+    console.log(this.props.images.data);
     return (
       <div className="homepage">
         <div className="preloader">
@@ -364,13 +365,17 @@ class Home extends Component {
                 this.props.images.data.map((image, index) => (
                   <div
                     key={index}
-                    className="portfolio-item item nature wedding col-xs-12 col-sm-6 col-md-4"
+                    className={
+                      `portfolio-item item ` +
+                      image.type +
+                      ` wedding col-xs-12 col-sm-6 col-md-4`
+                    }
                   >
                     <div
                       className="a-img"
-                      style={{ backgroundImage: `url(` + image + `)` }}
+                      style={{ backgroundImage: `url(` + image.url + `)` }}
                     ></div>
-                    <a href={image} className="mfp-image">
+                    <a href={image.url} className="mfp-image">
                       <i className="fa fa-search"></i>
                     </a>
                   </div>

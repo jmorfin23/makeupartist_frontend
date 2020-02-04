@@ -159,7 +159,7 @@ class Admin extends Component {
 
       //call method to upload to cloudinary get back the URL
       let cloudURL =
-        "https://res.cloudinary.com/dozvqlete/image/upload/v1580264807/hk0jyszxywgvtoc8gxa4.png"; //await this.uploadToCloud();
+        "https://res.cloudinary.com/dozvqlete/image/upload/v1580264710/qowiu9z1lc3awvs9oamx.jpg"; //await this.uploadToCloud();
 
       let imageInfo = {
         cloudURL: cloudURL,
@@ -319,14 +319,18 @@ class Admin extends Component {
                   this.state.imageList.map((image, index) => (
                     <div
                       key={index}
-                      className="portfolio-item item fashion col-xs-12 col-sm-6 col-md-4"
+                      className={
+                        `portfolio-item item ` +
+                        image.type +
+                        ` wedding col-xs-12 col-sm-6 col-md-4`
+                      }
                     >
                       <div
                         className="a-img"
-                        style={{ backgroundImage: `url(` + image + `)` }}
+                        style={{ backgroundImage: `url(` + image.url + `)` }}
                       ></div>
                       <a
-                        onClick={() => this.deleteImage(image, index)}
+                        onClick={() => this.deleteImage(image.url, index)}
                         className="mfp-image"
                       ></a>
                     </div>
