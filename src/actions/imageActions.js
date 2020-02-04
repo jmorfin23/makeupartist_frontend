@@ -1,6 +1,6 @@
 import { FETCH_IMAGES, ADD_IMAGE, DELETE_IMAGE } from "./types.js";
 
-//retrieving images upon loading application
+//retrieve images from database
 export const fetchImages = () => {
   return function(dispatch) {
     console.log("fetching images");
@@ -15,7 +15,7 @@ export const fetchImages = () => {
   };
 };
 
-//adding image
+//add image to database
 export const addImage = imageInfo => {
   return function(dispatch) {
     console.log("inside add image action");

@@ -9,8 +9,13 @@ import slide2 from "../../images/slide2.jpg";
 import service1 from "../../images/service1.jpg";
 import clientPhoto from "../../images/client.jpg";
 // ========= Component imports =========
-import PortfolioImage from "../../components/portfolioImage";
+// import PortfolioImage from "../../components/portfolioImage";
 import BlogPosts from "../../components/blogPosts";
+import * as $ from "jquery";
+import "./index.css";
+
+// import 'bootstrap';
+//import jQuery from 'jquery';
 
 //Questions:
 //============================================
@@ -22,7 +27,74 @@ import BlogPosts from "../../components/blogPosts";
 //when adding and deleting images should i return the whole image list ////from backend? or splice it.
 //should i use tokens?
 
+//https://developers.redhat.com/blog/2016/01/07/react-js-with-isotope-and-flux/
+
+// issues:
+//pagination stuck on how to start, frontend or backend pagination
+//the jquery issue, 2 versions??
 class Home extends Component {
+  filterMe(c, e) {
+    e.preventDefault();
+    console.log(c);
+
+    console.log("test1");
+    //call filterSelection
+    this.filterSelection(c);
+    console.log("test2");
+
+    // Add active class to the current control button (highlight it)
+    var btnContainer = document.getElementById("portfolio-filter");
+    var btns = btnContainer.getElementsByClassName("filter-buttons");
+
+    for (var i = 0; i < btns.length; i++) {
+      btns[i].addEventListener("click", function() {
+        var current = document.getElementsByClassName("current");
+        current[0].className = current[0].className.replace(" current", "");
+        this.className += " current";
+      });
+    }
+  }
+  filterSelection = c => {
+    var x, i;
+    x = document.getElementsByClassName("portfolio-item");
+    if (c == "all") c = "";
+    // Add the "show" class (display:block) to the filtered elements, and remove the "show" class from the elements that are not selected
+    for (i = 0; i < x.length; i++) {
+      this.w3RemoveClass(x[i], "hide");
+      console.log(x[i].className.indexOf(c) > -1);
+      if (x[i].className.indexOf(c) > -1) {
+        continue;
+      } else {
+        this.w3AddClass(x[i], "hide");
+      }
+    }
+  };
+
+  // Show filtered elements
+  w3AddClass = (element, name) => {
+    var i, arr1, arr2;
+    arr1 = element.className.split(" ");
+    arr2 = name.split(" ");
+    for (i = 0; i < arr2.length; i++) {
+      if (arr1.indexOf(arr2[i]) == -1) {
+        element.className += " " + arr2[i];
+      }
+    }
+  };
+
+  // Hide elements that are not selected
+  w3RemoveClass = (element, name) => {
+    var i, arr1, arr2;
+    arr1 = element.className.split(" ");
+    arr2 = name.split(" ");
+    for (i = 0; i < arr2.length; i++) {
+      while (arr1.indexOf(arr2[i]) > -1) {
+        arr1.splice(arr1.indexOf(arr2[i]), 1);
+      }
+    }
+    element.className = arr1.join(" ");
+  };
+
   render() {
     return (
       <div className="homepage">
@@ -237,34 +309,73 @@ class Home extends Component {
           {/*  end section-title */}
           <div className="container">
             {/*  Portfolio items */}
-            <ul className="portfolio-filter list-inline text-center">
-              <li className="current">
-                <a href="" data-filter="*">
+            <ul
+              id="portfolio-filter"
+              className="portfolio-filter list-inline text-center"
+            >
+              <li className="filter-buttons current">
+                <a
+                  href=""
+                  data-filter="*"
+                  onClick={e => this.filterMe("all", e)}
+                >
                   All Works
                 </a>
               </li>
-              <li className="">
-                <a href="" data-filter=".wedding">
+              <li className="filter-buttons">
+                <a
+                  href=""
+                  data-filter=".wedding"
+                  onClick={e => this.filterMe("wedding", e)}
+                >
                   Wedding
                 </a>
               </li>
-              <li className="">
-                <a href="" data-filter=".fashion">
+              <li className="filter-buttons">
+                <a
+                  href=""
+                  data-filter=".fashion"
+                  onClick={e => this.filterMe("fashion", e)}
+                >
                   Hairstyle
                 </a>
               </li>
-              <li className="">
-                <a href="" data-filter=".nature">
+              <li className="filter-buttons">
+                <a
+                  href=""
+                  data-filter=".nature"
+                  onClick={e => this.filterMe("nature", e)}
+                >
                   Commercial
                 </a>
               </li>
-              <li className="">
-                <a href="" data-filter=".studio">
+              <li className="filter-buttons">
+                <a
+                  href=""
+                  data-filter=".studio"
+                  onClick={e => this.filterMe("studio", e)}
+                >
                   Studio
                 </a>
               </li>
             </ul>
-            <PortfolioImage />
+            <div className="portfolio-items row">
+              {this.props.images.data &&
+                this.props.images.data.map((image, index) => (
+                  <div
+                    key={index}
+                    className="portfolio-item item nature wedding col-xs-12 col-sm-6 col-md-4"
+                  >
+                    <div
+                      className="a-img"
+                      style={{ backgroundImage: `url(` + image + `)` }}
+                    ></div>
+                    <a href={image} className="mfp-image">
+                      <i className="fa fa-search"></i>
+                    </a>
+                  </div>
+                ))}
+            </div>
             {/*  END Portfolio items */}
           </div>
           {/* container*/}
@@ -372,8 +483,8 @@ class Home extends Component {
 }
 
 //map state to props
-// const mapStateToProps = state => ({
-//   blogposts: state.blogposts.items
-// });
+const mapStateToProps = state => ({
+  images: state.images.items
+});
 
-export default Home;
+export default connect(mapStateToProps)(Home);
