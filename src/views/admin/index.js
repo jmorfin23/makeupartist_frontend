@@ -42,6 +42,14 @@ class Admin extends Component {
     this.props.loginAdmin(login);
   };
 
+  //find index of images object list to be deleted
+  indexToDelete = (arr, attr, value) => {
+    for (let i = 0; i < arr.length; i++) {
+      if (arr[i][attr] == value) return i;
+    }
+    return -1;
+  };
+
   componentDidUpdate(prevProps, prevState, snapshot) {
     console.log("inside component did update");
 
@@ -71,8 +79,10 @@ class Admin extends Component {
     //alert if delete image successful and take out of imageList
     if (this.props.image.newLength == this.state.imageList.length - 1) {
       alert("Deleted Image");
+
       let newList = this.state.imageList;
-      newList.splice(newList.indexOf(this.props.deletedImage), 1);
+      let index = this.indexToDelete(newList, "url", this.props.deletedImage);
+      newList.splice(index, 1);
       this.setState({ imageList: newList });
     }
 
@@ -159,7 +169,7 @@ class Admin extends Component {
 
       //call method to upload to cloudinary get back the URL
       let cloudURL =
-        "https://res.cloudinary.com/dozvqlete/image/upload/v1580264710/qowiu9z1lc3awvs9oamx.jpg"; //await this.uploadToCloud();
+        "https://res.cloudinary.com/dozvqlete/image/upload/v1580264807/hk0jyszxywgvtoc8gxa4.png"; //await this.uploadToCloud();
 
       let imageInfo = {
         cloudURL: cloudURL,
@@ -227,6 +237,8 @@ class Admin extends Component {
     //if there are two of the same in portfolio, deleting occurs on the ///first one in the array
     //after deleting something and then adding a new image to portfolio,
 
+    let p = prompt("Are you sure you want to delete this image?");
+    if (p != "yes") return;
     //call action to delete image
     this.props.deleteImage(imageURL);
   };
@@ -337,7 +349,6 @@ class Admin extends Component {
                   ))}
               </div>
               <br />
-              <button className="btn btn-primary">Submit</button>
             </div>
           </div>
 
