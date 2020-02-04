@@ -169,7 +169,7 @@ class Admin extends Component {
 
       //call method to upload to cloudinary get back the URL
       let cloudURL =
-        "https://res.cloudinary.com/dozvqlete/image/upload/v1580264807/hk0jyszxywgvtoc8gxa4.png"; //await this.uploadToCloud();
+        "https://res.cloudinary.com/dozvqlete/image/upload/v1580181082/q3hz2d3qpqnzr66d5dqu.png"; //await this.uploadToCloud();
 
       let imageInfo = {
         cloudURL: cloudURL,
@@ -334,7 +334,7 @@ class Admin extends Component {
                       className={
                         `portfolio-item item ` +
                         image.type +
-                        ` wedding col-xs-12 col-sm-6 col-md-4`
+                        ` col-xs-12 col-sm-6 col-md-4`
                       }
                     >
                       <div

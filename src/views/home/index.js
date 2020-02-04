@@ -11,6 +11,7 @@ import clientPhoto from "../../images/client.jpg";
 // ========= Component imports =========
 // import PortfolioImage from "../../components/portfolioImage";
 import BlogPosts from "../../components/blogPosts";
+import PortfolioImage from "../../components/portfolioImage";
 import * as $ from "jquery";
 import "./index.css";
 
@@ -28,73 +29,12 @@ import "./index.css";
 //should i use tokens?
 
 //https://developers.redhat.com/blog/2016/01/07/react-js-with-isotope-and-flux/
-
+//pagination
 // issues:
 //pagination stuck on how to start, frontend or backend pagination
 //the jquery issue, 2 versions??
+//time complexity and space complexity
 class Home extends Component {
-  filterMe(c, e) {
-    e.preventDefault();
-    console.log(c);
-
-    console.log("test1");
-    //call filterSelection
-    this.filterSelection(c);
-    console.log("test2");
-
-    // Add active class to the current control button (highlight it)
-    var btnContainer = document.getElementById("portfolio-filter");
-    var btns = btnContainer.getElementsByClassName("filter-buttons");
-
-    for (var i = 0; i < btns.length; i++) {
-      btns[i].addEventListener("click", function() {
-        var current = document.getElementsByClassName("current");
-        current[0].className = current[0].className.replace(" current", "");
-        this.className += " current";
-      });
-    }
-  }
-  filterSelection = c => {
-    var x, i;
-    x = document.getElementsByClassName("portfolio-item");
-    if (c == "all") c = "";
-    // Add the "show" class (display:block) to the filtered elements, and remove the "show" class from the elements that are not selected
-    for (i = 0; i < x.length; i++) {
-      this.w3RemoveClass(x[i], "hide");
-      console.log(x[i].className.indexOf(c) > -1);
-      if (x[i].className.indexOf(c) > -1) {
-        continue;
-      } else {
-        this.w3AddClass(x[i], "hide");
-      }
-    }
-  };
-
-  // Show filtered elements
-  w3AddClass = (element, name) => {
-    var i, arr1, arr2;
-    arr1 = element.className.split(" ");
-    arr2 = name.split(" ");
-    for (i = 0; i < arr2.length; i++) {
-      if (arr1.indexOf(arr2[i]) == -1) {
-        element.className += " " + arr2[i];
-      }
-    }
-  };
-
-  // Hide elements that are not selected
-  w3RemoveClass = (element, name) => {
-    var i, arr1, arr2;
-    arr1 = element.className.split(" ");
-    arr2 = name.split(" ");
-    for (i = 0; i < arr2.length; i++) {
-      while (arr1.indexOf(arr2[i]) > -1) {
-        arr1.splice(arr1.indexOf(arr2[i]), 1);
-      }
-    }
-    element.className = arr1.join(" ");
-  };
-
   render() {
     console.log(this.props.images.data);
     return (
@@ -310,77 +250,7 @@ class Home extends Component {
           {/*  end section-title */}
           <div className="container">
             {/*  Portfolio items */}
-            <ul
-              id="portfolio-filter"
-              className="portfolio-filter list-inline text-center"
-            >
-              <li className="filter-buttons current">
-                <a
-                  href=""
-                  data-filter="*"
-                  onClick={e => this.filterMe("all", e)}
-                >
-                  All Works
-                </a>
-              </li>
-              <li className="filter-buttons">
-                <a
-                  href=""
-                  data-filter=".wedding"
-                  onClick={e => this.filterMe("wedding", e)}
-                >
-                  Wedding
-                </a>
-              </li>
-              <li className="filter-buttons">
-                <a
-                  href=""
-                  data-filter=".fashion"
-                  onClick={e => this.filterMe("fashion", e)}
-                >
-                  Hairstyle
-                </a>
-              </li>
-              <li className="filter-buttons">
-                <a
-                  href=""
-                  data-filter=".nature"
-                  onClick={e => this.filterMe("nature", e)}
-                >
-                  Commercial
-                </a>
-              </li>
-              <li className="filter-buttons">
-                <a
-                  href=""
-                  data-filter=".studio"
-                  onClick={e => this.filterMe("studio", e)}
-                >
-                  Studio
-                </a>
-              </li>
-            </ul>
-            <div className="portfolio-items row">
-              {this.props.images.data &&
-                this.props.images.data.map((image, index) => (
-                  <div
-                    key={index}
-                    className={
-                      `portfolio-item item ` +
-                      image.type +
-                      ` wedding col-xs-12 col-sm-6 col-md-4`
-                    }
-                  >
-                    <div
-                      className="a-img"
-                      style={{ backgroundImage: `url(` + image.url + `)` }}
-                    ></div>
-                    <a href={image.url} className="mfp-image">
-                      <i className="fa fa-search"></i>
-                    </a>
-                  </div>
-                ))}
-            </div>
+            <PortfolioImage />
             {/*  END Portfolio items */}
           </div>
           {/* container*/}

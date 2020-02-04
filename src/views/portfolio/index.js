@@ -26,34 +26,6 @@ class Portfolio extends Component {
           {/* end section-title */}
           <div className="container">
             {/* Portfolio items */}
-            <ul className="portfolio-filter list-inline text-center">
-              {/* * deleted the 'current class' * */}
-              <li className="">
-                <a href="" data-filter="*">
-                  All Works
-                </a>
-              </li>
-              <li className="filter-">
-                <a href="" data-filter=".wedding">
-                  Wedding
-                </a>
-              </li>
-              <li className="">
-                <a href="" data-filter=".fashion">
-                  Hairstyle
-                </a>
-              </li>
-              <li className="">
-                <a href="" data-filter=".nature">
-                  Commercial
-                </a>
-              </li>
-              <li className="">
-                <a href="" data-filter=".studio">
-                  Studio
-                </a>
-              </li>
-            </ul>
             <PortfolioImage />
             {/* END Portfolio items */}
           </div>
