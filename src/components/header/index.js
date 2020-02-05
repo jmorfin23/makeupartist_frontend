@@ -36,26 +36,8 @@ const Header = () => {
             <li>
               <a href="/about">About</a>
             </li>
-            <li className="dropdown">
-              {" "}
-              <a
-                href="/services"
-                className="dropdown-toggle"
-                data-toggle="dropdown"
-              >
-                Services
-              </a>
-              <ul className="dropdown-menu">
-                <li>
-                  <a href="/singleservice">Bridal Makeup</a>
-                </li>
-                <li>
-                  <a href="/">TV Film Commercial</a>
-                </li>
-                <li>
-                  <a href="/">Special occasions</a>
-                </li>
-              </ul>
+            <li>
+              <a href="/services">Services</a>
             </li>
             <li>
               <a href="/portfolio">Portfolio</a>

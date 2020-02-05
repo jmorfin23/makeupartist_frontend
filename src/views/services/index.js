@@ -1,8 +1,14 @@
 import React, { Component } from "react";
 import service from "../../images/service.jpg";
 import service1 from "../../images/service1.jpg";
+import bridal from "../../images/bridal.jpg";
+import "./index.css";
 
 class Services extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { displaySection: "Bridal" };
+  }
   render() {
     return (
       <div className="services">
@@ -15,196 +21,289 @@ class Services extends Component {
           </div>
           {/*overlay*/}
         </section>
-        <section className="section section-services-inner">
+        <section className="section">
           <div className="container">
             <div className="row">
-              <div className="col-md-4 col-sm-6">
-                <div className="service-box service-color-one">
-                  <div className="service-img">
-                    <img src={service1} alt="" />
-                  </div>
-                  <div className="service-contents">
-                    <h1>Bridal Makeup</h1>
-                    <p>
-                      Considering just how important the makeup arts are for
-                      these industries, the quality of my work was required to
-                      match the className. After hundreds of sessions it seems
-                      it did!
-                    </p>
-                    <p className="service-price pb-10">
-                      <span className="decor-text">starts from</span>{" "}
-                      <strong>$156.00</strong>
-                    </p>
-                    <a className="btn btn-primary" href="single-service.html">
-                      Read More{" "}
-                      <i
-                        className="fa fa-angle-double-right"
-                        aria-hidden="true"
-                      ></i>{" "}
-                    </a>{" "}
-                  </div>
-                  {/*service-contents*/}
+              {this.state.displaySection == "Bridal" && (
+                <div className="col-md-8 col-sm-8 pull-right">
+                  <p>
+                    <img src={bridal} alt="" />
+                  </p>
+                  <h3>On Location Makeup for the Bride & Bridal Party</h3>
+                  <p>
+                    Donec laoreet malesuada varius. Aenean sit amet neque in est
+                    feugiat auctor. Vivamus condimentum consectetur sem vel
+                    tempor. Etiam et porta quam. Aliquam erat volutpat. Sed ut
+                    odio quis magna fringilla sodales a sed quam. Maecenas
+                    sollicitudin volutpat egestas. Nam quis purus ac purus
+                    tempus.{" "}
+                  </p>
+                  <h3>Bridal Makeup</h3>
+                  <p>
+                    Ut in lorem consequat, elementum ligula id, cursus leo. Nam
+                    eu ex eget metus rhoncus sollicitudin vel eu nunc. Orci
+                    varius natoque penatibus et magnis dis parturient montes,
+                    nascetur ridiculus mus. Nunc mollis purus nibh, non viverra
+                    ipsum condimentum vitae. Praesent consequat, ante laoreet
+                    pulvinar cursus, urna lectus aliquam nunc, a viverra turpis
+                    ipsum rhoncus mauris. Sed a massa consequat, mattis tortor
+                    sed, tincidunt nunc. Pellentesque aliquet sem iaculis,
+                    ultrices dolor eget, consequat mauris.{" "}
+                  </p>
+                  <h3>Perfect Wedding Make Up</h3>
+                  <p>
+                    Donec laoreet malesuada varius. Aenean sit amet neque in est
+                    feugiat auctor. Vivamus condimentum consectetur sem vel
+                    tempor. Etiam et porta quam. Aliquam erat volutpat. Sed ut
+                    odio quis magna fringilla sodales a sed quam. Maecenas
+                    sollicitudin volutpat egestas. Nam quis purus ac purus
+                    tempus iaculis.{" "}
+                  </p>
                 </div>
-                {/*service-box*/}
-              </div>
-              {/*col-md-4*/}
-              <div className="col-md-4 col-sm-6">
-                <div className="service-box service-color-two">
-                  <div className="service-img">
-                    <img src={service1} alt="" />
-                  </div>
-                  <div className="service-contents">
-                    <h1>tv film commercial</h1>
-                    <p>
-                      Considering just how important the makeup arts are for
-                      these industries, the quality of my work was required to
-                      match the className. After hundreds of sessions it seems
-                      it did!
-                    </p>
-                    <p className="service-price pb-10">
-                      <span className="decor-text">starts from</span>{" "}
-                      <strong>$156.00</strong>
-                    </p>
-                    <a className="btn btn-primary" href="#">
-                      Read More{" "}
-                      <i
-                        className="fa fa-angle-double-right"
-                        aria-hidden="true"
-                      ></i>{" "}
-                    </a>{" "}
-                  </div>
-                  {/*service-contents*/}
+              )}
+              {this.state.displaySection == "TV" && (
+                <div className="col-md-8 col-sm-8 pull-right">
+                  <p>
+                    <img src={bridal} alt="" />
+                  </p>
+                  <h3>TV Film Commercial</h3>
+                  <p>
+                    Donec laoreet malesuada varius. Aenean sit amet neque in est
+                    feugiat auctor. Vivamus condimentum consectetur sem vel
+                    tempor. Etiam et porta quam. Aliquam erat volutpat. Sed ut
+                    odio quis magna fringilla sodales a sed quam. Maecenas
+                    sollicitudin volutpat egestas. Nam quis purus ac purus
+                    tempus.{" "}
+                  </p>
+                  <h3>Bridal Makeup</h3>
+                  <p>
+                    Ut in lorem consequat, elementum ligula id, cursus leo. Nam
+                    eu ex eget metus rhoncus sollicitudin vel eu nunc. Orci
+                    varius natoque penatibus et magnis dis parturient montes,
+                    nascetur ridiculus mus. Nunc mollis purus nibh, non viverra
+                    ipsum condimentum vitae. Praesent consequat, ante laoreet
+                    pulvinar cursus, urna lectus aliquam nunc, a viverra turpis
+                    ipsum rhoncus mauris. Sed a massa consequat, mattis tortor
+                    sed, tincidunt nunc. Pellentesque aliquet sem iaculis,
+                    ultrices dolor eget, consequat mauris.{" "}
+                  </p>
+                  <h3>Perfect Wedding Make Up</h3>
+                  <p>
+                    Donec laoreet malesuada varius. Aenean sit amet neque in est
+                    feugiat auctor. Vivamus condimentum consectetur sem vel
+                    tempor. Etiam et porta quam. Aliquam erat volutpat. Sed ut
+                    odio quis magna fringilla sodales a sed quam. Maecenas
+                    sollicitudin volutpat egestas. Nam quis purus ac purus
+                    tempus iaculis.{" "}
+                  </p>
                 </div>
-                {/*service-box*/}
-              </div>
-              {/*col-md-4*/}
-              <div className="col-md-4 col-sm-6">
-                <div className="service-box service-color-three">
-                  <div className="service-img">
-                    <img src={service1} alt="" />
-                  </div>
-                  <div className="service-contents">
-                    <h1>Special occasions</h1>
-                    <p>
-                      Considering just how important the makeup arts are for
-                      these industries, the quality of my work was required to
-                      match the className. After hundreds of sessions it seems
-                      it did!
-                    </p>
-                    <p className="service-price pb-10">
-                      <span className="decor-text">starts from</span>{" "}
-                      <strong>$156.00</strong>
-                    </p>
-                    <a className="btn btn-primary" href="#">
-                      Read More{" "}
-                      <i
-                        className="fa fa-angle-double-right"
-                        aria-hidden="true"
-                      ></i>{" "}
-                    </a>{" "}
-                  </div>
-                  {/*service-contents*/}
+              )}
+              {this.state.displaySection == "Special" && (
+                <div className="col-md-8 col-sm-8 pull-right">
+                  <p>
+                    <img src={bridal} alt="" />
+                  </p>
+                  <h3>Special occasions</h3>
+                  <p>
+                    Donec laoreet malesuada varius. Aenean sit amet neque in est
+                    feugiat auctor. Vivamus condimentum consectetur sem vel
+                    tempor. Etiam et porta quam. Aliquam erat volutpat. Sed ut
+                    odio quis magna fringilla sodales a sed quam. Maecenas
+                    sollicitudin volutpat egestas. Nam quis purus ac purus
+                    tempus.{" "}
+                  </p>
+                  <h3>Bridal Makeup</h3>
+                  <p>
+                    Ut in lorem consequat, elementum ligula id, cursus leo. Nam
+                    eu ex eget metus rhoncus sollicitudin vel eu nunc. Orci
+                    varius natoque penatibus et magnis dis parturient montes,
+                    nascetur ridiculus mus. Nunc mollis purus nibh, non viverra
+                    ipsum condimentum vitae. Praesent consequat, ante laoreet
+                    pulvinar cursus, urna lectus aliquam nunc, a viverra turpis
+                    ipsum rhoncus mauris. Sed a massa consequat, mattis tortor
+                    sed, tincidunt nunc. Pellentesque aliquet sem iaculis,
+                    ultrices dolor eget, consequat mauris.{" "}
+                  </p>
+                  <h3>Perfect Wedding Make Up</h3>
+                  <p>
+                    Donec laoreet malesuada varius. Aenean sit amet neque in est
+                    feugiat auctor. Vivamus condimentum consectetur sem vel
+                    tempor. Etiam et porta quam. Aliquam erat volutpat. Sed ut
+                    odio quis magna fringilla sodales a sed quam. Maecenas
+                    sollicitudin volutpat egestas. Nam quis purus ac purus
+                    tempus iaculis.{" "}
+                  </p>
                 </div>
-                {/*service-box*/}
+              )}
+              {this.state.displaySection == "Model" && (
+                <div className="col-md-8 col-sm-8 pull-right">
+                  <p>
+                    <img src={bridal} alt="" />
+                  </p>
+                  <h3>Model Photo Shoots</h3>
+                  <p>
+                    Donec laoreet malesuada varius. Aenean sit amet neque in est
+                    feugiat auctor. Vivamus condimentum consectetur sem vel
+                    tempor. Etiam et porta quam. Aliquam erat volutpat. Sed ut
+                    odio quis magna fringilla sodales a sed quam. Maecenas
+                    sollicitudin volutpat egestas. Nam quis purus ac purus
+                    tempus.{" "}
+                  </p>
+                  <h3>Bridal Makeup</h3>
+                  <p>
+                    Ut in lorem consequat, elementum ligula id, cursus leo. Nam
+                    eu ex eget metus rhoncus sollicitudin vel eu nunc. Orci
+                    varius natoque penatibus et magnis dis parturient montes,
+                    nascetur ridiculus mus. Nunc mollis purus nibh, non viverra
+                    ipsum condimentum vitae. Praesent consequat, ante laoreet
+                    pulvinar cursus, urna lectus aliquam nunc, a viverra turpis
+                    ipsum rhoncus mauris. Sed a massa consequat, mattis tortor
+                    sed, tincidunt nunc. Pellentesque aliquet sem iaculis,
+                    ultrices dolor eget, consequat mauris.{" "}
+                  </p>
+                  <h3>Perfect Wedding Make Up</h3>
+                  <p>
+                    Donec laoreet malesuada varius. Aenean sit amet neque in est
+                    feugiat auctor. Vivamus condimentum consectetur sem vel
+                    tempor. Etiam et porta quam. Aliquam erat volutpat. Sed ut
+                    odio quis magna fringilla sodales a sed quam. Maecenas
+                    sollicitudin volutpat egestas. Nam quis purus ac purus
+                    tempus iaculis.{" "}
+                  </p>
+                </div>
+              )}
+              {this.state.displaySection == "Engagement" && (
+                <div className="col-md-8 col-sm-8 pull-right">
+                  <p>
+                    <img src={bridal} alt="" />
+                  </p>
+                  <h3>Engagement</h3>
+                  <p>
+                    Donec laoreet malesuada varius. Aenean sit amet neque in est
+                    feugiat auctor. Vivamus condimentum consectetur sem vel
+                    tempor. Etiam et porta quam. Aliquam erat volutpat. Sed ut
+                    odio quis magna fringilla sodales a sed quam. Maecenas
+                    sollicitudin volutpat egestas. Nam quis purus ac purus
+                    tempus.{" "}
+                  </p>
+                  <h3>Bridal Makeup</h3>
+                  <p>
+                    Ut in lorem consequat, elementum ligula id, cursus leo. Nam
+                    eu ex eget metus rhoncus sollicitudin vel eu nunc. Orci
+                    varius natoque penatibus et magnis dis parturient montes,
+                    nascetur ridiculus mus. Nunc mollis purus nibh, non viverra
+                    ipsum condimentum vitae. Praesent consequat, ante laoreet
+                    pulvinar cursus, urna lectus aliquam nunc, a viverra turpis
+                    ipsum rhoncus mauris. Sed a massa consequat, mattis tortor
+                    sed, tincidunt nunc. Pellentesque aliquet sem iaculis,
+                    ultrices dolor eget, consequat mauris.{" "}
+                  </p>
+                  <h3>Perfect Wedding Make Up</h3>
+                  <p>
+                    Donec laoreet malesuada varius. Aenean sit amet neque in est
+                    feugiat auctor. Vivamus condimentum consectetur sem vel
+                    tempor. Etiam et porta quam. Aliquam erat volutpat. Sed ut
+                    odio quis magna fringilla sodales a sed quam. Maecenas
+                    sollicitudin volutpat egestas. Nam quis purus ac purus
+                    tempus iaculis.{" "}
+                  </p>
+                </div>
+              )}
+              {this.state.displaySection == "Airbrush" && (
+                <div className="col-md-8 col-sm-8 pull-right">
+                  <p>
+                    <img src={bridal} alt="" />
+                  </p>
+                  <h3>Airbrush Makeup</h3>
+                  <p>
+                    Donec laoreet malesuada varius. Aenean sit amet neque in est
+                    feugiat auctor. Vivamus condimentum consectetur sem vel
+                    tempor. Etiam et porta quam. Aliquam erat volutpat. Sed ut
+                    odio quis magna fringilla sodales a sed quam. Maecenas
+                    sollicitudin volutpat egestas. Nam quis purus ac purus
+                    tempus.{" "}
+                  </p>
+                  <h3>Bridal Makeup</h3>
+                  <p>
+                    Ut in lorem consequat, elementum ligula id, cursus leo. Nam
+                    eu ex eget metus rhoncus sollicitudin vel eu nunc. Orci
+                    varius natoque penatibus et magnis dis parturient montes,
+                    nascetur ridiculus mus. Nunc mollis purus nibh, non viverra
+                    ipsum condimentum vitae. Praesent consequat, ante laoreet
+                    pulvinar cursus, urna lectus aliquam nunc, a viverra turpis
+                    ipsum rhoncus mauris. Sed a massa consequat, mattis tortor
+                    sed, tincidunt nunc. Pellentesque aliquet sem iaculis,
+                    ultrices dolor eget, consequat mauris.{" "}
+                  </p>
+                  <h3>Perfect Wedding Make Up</h3>
+                  <p>
+                    Donec laoreet malesuada varius. Aenean sit amet neque in est
+                    feugiat auctor. Vivamus condimentum consectetur sem vel
+                    tempor. Etiam et porta quam. Aliquam erat volutpat. Sed ut
+                    odio quis magna fringilla sodales a sed quam. Maecenas
+                    sollicitudin volutpat egestas. Nam quis purus ac purus
+                    tempus iaculis.{" "}
+                  </p>
+                </div>
+              )}
+
+              {/* col-md-8*/}
+              <div className="col-md-4 col-sm-4 pull-left holdit">
+                <ul className="service-list-group">
+                  <li>
+                    <a
+                      onClick={() =>
+                        this.setState({ displaySection: "Bridal" })
+                      }
+                    >
+                      Bridal Makeup
+                    </a>
+                  </li>
+                  <li>
+                    <a onClick={() => this.setState({ displaySection: "TV" })}>
+                      tv film commercial
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      onClick={() =>
+                        this.setState({ displaySection: "Special" })
+                      }
+                    >
+                      Special occasions
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      onClick={() => this.setState({ displaySection: "Model" })}
+                    >
+                      Model Photo Shoots
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      onClick={() =>
+                        this.setState({ displaySection: "Engagement" })
+                      }
+                    >
+                      Engagement Photos
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      onClick={() =>
+                        this.setState({ displaySection: "Airbrush" })
+                      }
+                    >
+                      Airbrush Makeup
+                    </a>
+                  </li>
+                </ul>
               </div>
-              {/*col-md-4*/}
             </div>
-            {/*row*/}
-            <div className="row">
-              <div className="col-md-4 col-sm-6">
-                <div className="service-box service-color-one">
-                  <div className="service-img">
-                    <img src={service1} alt="" />
-                  </div>
-                  <div className="service-contents">
-                    <h1>Model Photo Shoots</h1>
-                    <p>
-                      Considering just how important the makeup arts are for
-                      these industries, the quality of my work was required to
-                      match the className. After hundreds of sessions it seems
-                      it did!
-                    </p>
-                    <p className="service-price pb-10">
-                      <span className="decor-text">starts from</span>{" "}
-                      <strong>$156.00</strong>
-                    </p>
-                    <a className="btn btn-primary" href="#">
-                      Read More{" "}
-                      <i
-                        className="fa fa-angle-double-right"
-                        aria-hidden="true"
-                      ></i>{" "}
-                    </a>{" "}
-                  </div>
-                  {/*service-contents*/}
-                </div>
-                {/*service-box*/}
-              </div>
-              {/*col-md-4*/}
-              <div className="col-md-4 col-sm-6">
-                <div className="service-box service-color-two">
-                  <div className="service-img">
-                    <img src={service1} alt="" />
-                  </div>
-                  <div className="service-contents">
-                    <h1>Engagement Photos</h1>
-                    <p>
-                      Considering just how important the makeup arts are for
-                      these industries, the quality of my work was required to
-                      match the className. After hundreds of sessions it seems
-                      it did!
-                    </p>
-                    <p className="service-price pb-10">
-                      <span className="decor-text">starts from</span>{" "}
-                      <strong>$156.00</strong>
-                    </p>
-                    <a className="btn btn-primary" href="#">
-                      Read More{" "}
-                      <i
-                        className="fa fa-angle-double-right"
-                        aria-hidden="true"
-                      ></i>{" "}
-                    </a>{" "}
-                  </div>
-                  {/*service-contents*/}
-                </div>
-                {/*service-box*/}
-              </div>
-              {/*col-md-4*/}
-              <div className="col-md-4 col-sm-6">
-                <div className="service-box service-color-three">
-                  <div className="service-img">
-                    <img src={service1} alt="" />
-                  </div>
-                  <div className="service-contents">
-                    <h1>Airbrush Makeup</h1>
-                    <p>
-                      Considering just how important the makeup arts are for
-                      these industries, the quality of my work was required to
-                      match the className. After hundreds of sessions it seems
-                      it did!
-                    </p>
-                    <p className="service-price pb-10">
-                      <span className="decor-text">starts from</span>{" "}
-                      <strong>$156.00</strong>
-                    </p>
-                    <a className="btn btn-primary" href="#">
-                      Read More{" "}
-                      <i
-                        className="fa fa-angle-double-right"
-                        aria-hidden="true"
-                      ></i>{" "}
-                    </a>{" "}
-                  </div>
-                  {/*service-contents*/}
-                </div>
-                {/*service-box*/}
-              </div>
-              {/*col-md-4*/}
-            </div>
-            {/*row*/}
+            {/* row*/}
           </div>
-          {/*container*/}
+          {/* container*/}
         </section>
         {/*section-services*/}
         <section className="section parallax">
@@ -216,11 +315,11 @@ class Services extends Component {
               <p className="max-500 intro pb-20">
                 Japanese nail art design is a trend that increases its
                 popularity every year. It plays a major role in trend-setting
-                fashion, and is the top choice in nail art competitions.{" "}
+                fashion, and is the top choice in nail art competitions.
               </p>
               <a className="btn btn-primary btn-rounded btn-pink" href="#">
                 Book Now!
-              </a>{" "}
+              </a>
             </div>
             {/*container*/}
           </div>
@@ -250,8 +349,7 @@ class Services extends Component {
                       <li>Veil Placement</li>
                     </ul>
                     <div className="pricing-button-box">
-                      {" "}
-                      <a className="btn btn-primary">Get it now!</a>{" "}
+                      <a className="btn btn-primary">Get it now!</a>
                     </div>
                     {/*pricing-button-box*/}
                   </div>
@@ -275,8 +373,7 @@ class Services extends Component {
                       <li>Veil Placement</li>
                     </ul>
                     <div className="pricing-button-box">
-                      {" "}
-                      <a className="btn btn-primary">Get it now!</a>{" "}
+                      <a className="btn btn-primary">Get it now!</a>
                     </div>
                     {/*pricing-button-box*/}
                   </div>
@@ -300,8 +397,7 @@ class Services extends Component {
                       <li>Veil Placement</li>
                     </ul>
                     <div className="pricing-button-box">
-                      {" "}
-                      <a className="btn btn-primary">Get it now!</a>{" "}
+                      <a className="btn btn-primary">Get it now!</a>
                     </div>
                     {/*pricing-button-box*/}
                   </div>
@@ -325,8 +421,7 @@ class Services extends Component {
                       <li>Veil Placement</li>
                     </ul>
                     <div className="pricing-button-box">
-                      {" "}
-                      <a className="btn btn-primary">Get it now!</a>{" "}
+                      <a className="btn btn-primary">Get it now!</a>
                     </div>
                     {/*pricing-button-box*/}
                   </div>

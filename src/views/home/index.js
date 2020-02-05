@@ -22,7 +22,6 @@ import "./index.css";
 //============================================
 //putting my api requests in app.js, that gets called everytime i click
 //on a  new page.
-//try setting state in local state with redux states
 //try and catch where are good places.
 //should i delete images based on index or value?
 //when adding and deleting images should i return the whole image list ////from backend? or splice it.
@@ -34,6 +33,11 @@ import "./index.css";
 //pagination stuck on how to start, frontend or backend pagination
 //the jquery issue, 2 versions??
 //time complexity and space complexity
+//bootstrap modal windows
+//elements static to the page with css
+//development - diff errors
+//production -
+
 class Home extends Component {
   render() {
     console.log(this.props.images.data);

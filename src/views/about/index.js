@@ -1,19 +1,22 @@
-import React, { Component } from 'react';
-import about from '../../images/about.jpg';
-import service1 from '../../images/service1.jpg';
+import React, { Component } from "react";
+import about from "../../images/about.jpg";
+import service1 from "../../images/service1.jpg";
 //logo imports
-import logo1 from '../../images/logos/logo1.png';
-import logo2 from '../../images/logos/logo2.png';
-import logo3 from '../../images/logos/logo3.png';
-import logo4 from '../../images/logos/logo4.png';
-import logo5 from '../../images/logos/logo5.png';
-import logo6 from '../../images/logos/logo6.png';
+import logo1 from "../../images/logos/logo1.png";
+import logo2 from "../../images/logos/logo2.png";
+import logo3 from "../../images/logos/logo3.png";
+import logo4 from "../../images/logos/logo4.png";
+import logo5 from "../../images/logos/logo5.png";
+import logo6 from "../../images/logos/logo6.png";
 
 class About extends Component {
   render() {
-    return(
+    return (
       <div>
-        <section class="section section-page-title" style={{backgroundImage: `url(${about})` }}>
+        <section
+          class="section section-page-title"
+          style={{ backgroundImage: `url(${about})` }}
+        >
           <div class="overlay">
             <h1>About Me</h1>
           </div>
@@ -23,16 +26,45 @@ class About extends Component {
         <section class="section section-about">
           <div class="container">
             <div class="row">
-              <div class="col-lg-6 col-md-6 col-sm-4 col-xs-12"><img src={service1} alt="" /> </div>
+              <div class="col-lg-6 col-md-6 col-sm-4 col-xs-12">
+                <img src={service1} alt="" />{" "}
+              </div>
               <div class="col-lg-6 col-md-6 col-sm-8 col-xs-12 pt-30">
-                <h1>About <span>me</span></h1>
-                <p>Nulla interdum elit a nunc fermentum, quis sodales nibh pulvinar. Etiam rhoncus dui eget nisl laoreet, id scelerisque odio eleifend. Quisque accumsan porta lacinia. Etiam tristique mattis rutrum. Sed vitae laoreet lectus. Donec sed elit felis. Fusce laoreet nec ante sit amet interdum. </p>
+                <h1>
+                  About <span>me</span>
+                </h1>
+                <p>
+                  Nulla interdum elit a nunc fermentum, quis sodales nibh
+                  pulvinar. Etiam rhoncus dui eget nisl laoreet, id scelerisque
+                  odio eleifend. Quisque accumsan porta lacinia. Etiam tristique
+                  mattis rutrum. Sed vitae laoreet lectus. Donec sed elit felis.
+                  Fusce laoreet nec ante sit amet interdum.{" "}
+                </p>
                 <blockquote>
-                  <p>Lorem ipsum dolor sit amet consectetuer adipiscing elit sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat ut wisi enim ad minim .</p>
+                  <p>
+                    Lorem ipsum dolor sit amet consectetuer adipiscing elit sed
+                    diam nonummy nibh euismod tincidunt ut laoreet dolore magna
+                    aliquam erat volutpat ut wisi enim ad minim .
+                  </p>
                 </blockquote>
-                <p>Nulla interdum elit a nunc fermentum, quis sodales nibh pulvinar. Etiam rhoncus dui eget nisl laoreet, id scelerisque odio eleifend. Quisque accumsan porta lacinia. Etiam tristique mattis rutrum. Sed vitae laoreet lectus. Donec sed elit felis. Fusce laoreet nec ante sit amet interdum. </p>
-                <p>Nulla interdum elit a nunc fermentum, quis sodales nibh pulvinar. Etiam rhoncus dui eget nisl laoreet, id scelerisque odio eleifend. Quisque accumsan porta lacinia. Etiam tristique mattis rutrum. Sed vitae laoreet lectus. Donec sed elit felis. Fusce laoreet nec ante sit amet interdum. </p>
-                <a href="about.html" class="btn btn-primary">View Portfolio</a> </div>
+                <p>
+                  Nulla interdum elit a nunc fermentum, quis sodales nibh
+                  pulvinar. Etiam rhoncus dui eget nisl laoreet, id scelerisque
+                  odio eleifend. Quisque accumsan porta lacinia. Etiam tristique
+                  mattis rutrum. Sed vitae laoreet lectus. Donec sed elit felis.
+                  Fusce laoreet nec ante sit amet interdum.{" "}
+                </p>
+                <p>
+                  Nulla interdum elit a nunc fermentum, quis sodales nibh
+                  pulvinar. Etiam rhoncus dui eget nisl laoreet, id scelerisque
+                  odio eleifend. Quisque accumsan porta lacinia. Etiam tristique
+                  mattis rutrum. Sed vitae laoreet lectus. Donec sed elit felis.
+                  Fusce laoreet nec ante sit amet interdum.{" "}
+                </p>
+                <a href="/portfolio" class="btn btn-primary">
+                  View Portfolio
+                </a>{" "}
+              </div>
             </div>
           </div>
         </section>
@@ -41,8 +73,15 @@ class About extends Component {
           <div class="overlay">
             <div class="container">
               <h1 class="pb-20">Offering Makeup and Hair Stylist Services</h1>
-              <p class="max-500 intro pb-20">Japanese nail art design is a trend that increases its popularity every year. It plays a major role in trend-setting fashion, and is the top choice in nail art competitions. </p>
-              <a class="btn btn-primary btn-rounded btn-pink" href="#">Book Now!</a> </div>
+              <p class="max-500 intro pb-20">
+                Japanese nail art design is a trend that increases its
+                popularity every year. It plays a major role in trend-setting
+                fashion, and is the top choice in nail art competitions.{" "}
+              </p>
+              <a class="btn btn-primary btn-rounded btn-pink" href="#">
+                Book Now!
+              </a>{" "}
+            </div>
             {/* container*/}
           </div>
           {/* overlay*/}
@@ -57,38 +96,55 @@ class About extends Component {
           <div class="container">
             <div class="row">
               <div class="col-lg-2 col-md-2 col-sm-4 col-xs-6 text-center">
-                <div class="cleint-logo"> <img src={logo1} alt="" /></div>
+                <div class="cleint-logo">
+                  {" "}
+                  <img src={logo1} alt="" />
+                </div>
               </div>
               {/* end col*/}
               <div class="col-lg-2 col-md-2 col-sm-4 col-xs-6 text-center">
-                <div class="cleint-logo"> <img src={logo2} alt="" /> </div>
+                <div class="cleint-logo">
+                  {" "}
+                  <img src={logo2} alt="" />{" "}
+                </div>
               </div>
               {/* end col*/}
               <div class="col-lg-2 col-md-2 col-sm-4 col-xs-6 text-center">
-                <div class="cleint-logo"> <img src={logo3} alt="" /> </div>
+                <div class="cleint-logo">
+                  {" "}
+                  <img src={logo3} alt="" />{" "}
+                </div>
               </div>
               {/* end col*/}
               <div class="col-lg-2 col-md-2 col-sm-4 col-xs-6 text-center">
-                <div class="cleint-logo"> <img src={logo4} alt="" /> </div>
+                <div class="cleint-logo">
+                  {" "}
+                  <img src={logo4} alt="" />{" "}
+                </div>
               </div>
               {/* end col*/}
               <div class="col-lg-2 col-md-2 col-sm-4 col-xs-6 text-center">
-                <div class="cleint-logo"> <img src={logo5} alt="" /> </div>
+                <div class="cleint-logo">
+                  {" "}
+                  <img src={logo5} alt="" />{" "}
+                </div>
               </div>
               {/* end col*/}
               <div class="col-lg-2 col-md-2 col-sm-4 col-xs-6 text-center">
-                <div class="cleint-logo"> <img src={logo6} alt="" /> </div>
+                <div class="cleint-logo">
+                  {" "}
+                  <img src={logo6} alt="" />{" "}
+                </div>
               </div>
               {/* end col*/}
             </div>
             {/* row*/}
           </div>
-           {/* container*/}
+          {/* container*/}
         </section>
       </div>
-    )
+    );
   }
 }
-
 
 export default About;
