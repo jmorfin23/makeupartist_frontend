@@ -15,7 +15,6 @@ export const fetchBlogPosts = () => {
 };
 
 export const addBlogPost = blogPostInfo => {
-  console.log("inside of blog post action");
   return function(dispatch) {
     fetch("http://127.0.0.1:5000/api/add-blogpost", {
       method: "POST",

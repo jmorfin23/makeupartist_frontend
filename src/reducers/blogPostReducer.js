@@ -6,7 +6,6 @@ const initialState = {
 };
 
 const blogPostReducer = (state = initialState, action) => {
-  console.log("blog post reducer");
   switch (action.type) {
     case FETCH_BLOG_POSTS:
       return {
@@ -14,8 +13,6 @@ const blogPostReducer = (state = initialState, action) => {
         items: action.payload
       };
     case ADD_BLOG_POST:
-      console.log("inside add blog post reducer hit");
-      console.log(action.payload);
       return {
         ...state,
         item: action.payload

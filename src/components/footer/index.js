@@ -3,7 +3,6 @@ import { useSelector } from "react-redux";
 
 const Footer = () => {
   const [input, setInput] = useState(null);
-  console.log("footer");
 
   const newsletterSignUp = async e => {
     e.preventDefault();

@@ -7,10 +7,8 @@ const initialState = {
 };
 
 const userReducer = (state = initialState, action) => {
-  console.log("inside user reducer");
   switch (action.type) {
     case LOGIN_ADMIN:
-      console.log("admin login hit");
       return {
         ...state,
         items: action.payload,

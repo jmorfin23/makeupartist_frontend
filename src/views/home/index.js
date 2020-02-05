@@ -1,6 +1,5 @@
 import React, { Component } from "react";
-import Header from "../../components/header";
-import Featured from "../../components/featured";
+import "./index.css";
 import { useSelector, connect } from "react-redux";
 // ========= Image imports =========
 import placeholder from "../../images/blog/placeholder.jpg";
@@ -9,14 +8,11 @@ import slide2 from "../../images/slide2.jpg";
 import service1 from "../../images/service1.jpg";
 import clientPhoto from "../../images/client.jpg";
 // ========= Component imports =========
-// import PortfolioImage from "../../components/portfolioImage";
+import Header from "../../components/header";
+import Featured from "../../components/featured";
 import BlogPosts from "../../components/blogPosts";
 import PortfolioImage from "../../components/portfolioImage";
 import * as $ from "jquery";
-import "./index.css";
-
-// import 'bootstrap';
-//import jQuery from 'jquery';
 
 //Questions:
 //============================================
@@ -31,12 +27,13 @@ import "./index.css";
 //pagination
 // issues:
 //pagination stuck on how to start, frontend or backend pagination
-//the jquery issue, 2 versions??
 //time complexity and space complexity
 //bootstrap modal windows
 //elements static to the page with css
-//development - diff errors
-//production -
+//make application into production mode, same with portfolio.
+//connect to stylesheet
+//connect to mailchimp
+//put proptypes in app.js
 
 class Home extends Component {
   render() {
@@ -165,7 +162,7 @@ class Home extends Component {
                       <span className="decor-text">starts from</span>
                       <strong>$156.00</strong>
                     </p>
-                    <a className="btn btn-primary" href="#">
+                    <a className="btn btn-primary" href="/services">
                       Read More
                       <i
                         className="fa fa-angle-double-right"
@@ -195,7 +192,7 @@ class Home extends Component {
                       <span className="decor-text">starts from</span>
                       <strong>$156.00</strong>
                     </p>
-                    <a className="btn btn-primary" href="#">
+                    <a className="btn btn-primary" href="/services">
                       Read More
                       <i
                         className="fa fa-angle-double-right"
@@ -225,7 +222,7 @@ class Home extends Component {
                       <span className="decor-text">starts from</span>
                       <strong>$156.00</strong>
                     </p>
-                    <a className="btn btn-primary" href="#">
+                    <a className="btn btn-primary" href="/services">
                       Read More
                       <i
                         className="fa fa-angle-double-right"

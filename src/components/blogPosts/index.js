@@ -1,5 +1,6 @@
 import React from "react";
 import "./index.css";
+import { useSelector } from "react-redux";
 // What i did before HAHA.
 // posts.data.map((post, index) => {
 //   if (index > 2) {
@@ -9,12 +10,10 @@ import "./index.css";
 //   console.log('testing content: ' + post.content);
 // })
 
-import { useSelector } from "react-redux";
-
 const BlogPosts = props => {
   const posts = useSelector(state => state.blogposts.items);
 
-  //if post length >= 2 display only those: FOR HOMEPAGE
+  //if post length >= 2 display only those: FOR HOMEPAGE//take look at this again.
   if (posts.data && props.items) {
     posts.data.splice(3);
   }
@@ -37,7 +36,7 @@ const BlogPosts = props => {
             <div className="post-entry">
               <div className="post-thumbnail">
                 <img src="http://placehold.it/400x400" alt="" />
-                <a href="#">
+                <a href="">
                   <i className="fa fa-link"></i>
                 </a>
               </div>
@@ -52,7 +51,7 @@ const BlogPosts = props => {
                 </li>
                 <li>
                   <i className="fa fa-comments"></i>
-                  <a href="#">7 Comments</a>
+                  <a href="">7 Comments</a>
                 </li>
               </ul>
               <p>{post.content.slice(0, 350) + "..."}</p>
