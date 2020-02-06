@@ -5,153 +5,155 @@ import ad from "../../images/ad.jpg";
 import { connect } from "react-redux";
 
 class Blog extends Component {
-  // constructor(props) {
-  //   super(props);
+  constructor(props) {
+    super(props);
 
-  //   this.state = {
-  //     currentPage: 1,
-  //     pages: 0,
-  //   };
-  // }
+    this.state = {
+      currentPage: 1,
+      pages: 0
+    };
+  }
 
-  // componentDidUpdate() {
-  //   console.log('inside component did update');
-  //   console.log('blogPosts: ' + this.props.blogposts.data);
+  componentDidUpdate(prevProps, prevState) {
+    console.log("inside component did update");
+  }
 
-  //   if (this.props.blogposts.data) {
-  //     this.totalPosts = this.props.blogposts.data.length;
-  //   }
-  //   this.postsPerPage =  4;
-  //   this.pageNeighbours = 0;
+  componentDidMount() {
+    console.log("inside component did mount");
 
-  //   this.totalPages = Math.ceil(this.totalPosts / this.postsPerPage);
+    //goes to page 1 upon loading page
+    // this.gotoPage(1);
+  }
 
-  //   console.log('current page: ' + this.state.currentPage);
+  gotoPage = page => {
+    const { onPageChanged = f => f } = this.props;
+    console.log(onPageChanged("this is a test"));
+    console.log("inside go to page");
+    console.log(onPageChanged);
+    const currentPage = Math.max(0, Math.min(page, this.totalPages));
+    console.log(currentPage);
+    const paginationData = {
+      currentPage,
+      totalPages: this.totalPages,
+      pageLimit: this.postsPerPage,
+      totalRecords: this.totalPosts
+    };
 
-  // }
+    this.setState({ currentPage }, () => onPageChanged(paginationData));
+  };
 
-  // componentDidMount() {
-  //   console.log('inside component did mount');
+  handleClick = page => e => {
+    e.preventDefault();
+    this.gotoPage(page);
+  };
 
-  //   //goes to page 1 upon loading page
-  //   this.gotoPage(1);
-  // }
+  handleMoveLeft = e => {
+    e.preventDefault();
+    console.log("**");
+    console.log("**");
 
-  // gotoPage = page => {
-  //   const { onPageChanged = f => f } = this.props;
+    console.log("**");
+    console.log("**");
+    this.gotoPage(this.state.currentPage - this.pageNeighbours * 2 - 1);
+  };
 
-  //   const currentPage = Math.max(0, Math.min(page, this.totalPages));
-  //   console.log('curren page inside go to page: ' + currentPage);
-  //   const paginationData = {
-  //     currentPage,
-  //     totalPages: this.totalPages,
-  //     pageLimit: this.postsPerPage,
-  //     totalRecords: this.totalPosts
-  //   };
+  handleMoveRight = e => {
+    e.preventDefault();
+    console.log("**");
+    console.log("**");
 
-  //   this.setState({ currentPage }, () => onPageChanged(paginationData));
-  // }
+    console.log("**");
+    console.log("**");
+    this.gotoPage(this.state.currentPage + this.pageNeighbours * 2 + 1);
+  };
 
-  // handleClick = page => evt => {
-  //   evt.preventDefault();
-  //   this.gotoPage(page);
-  // }
+  range = (from, to, step = 1) => {
+    let i = from;
+    const range = [];
 
-  // handleMoveLeft = evt => {
-  //   evt.preventDefault();
-  //   this.gotoPage(this.state.currentPage - (this.pageNeighbours * 2) - 1);
-  // }
+    while (i <= to) {
+      range.push(i);
+      i += step;
+    }
 
-  // handleMoveRight = evt => {
-  //   evt.preventDefault();
-  //   this.gotoPage(this.state.currentPage + (this.pageNeighbours * 2) + 1);
-  // }
+    return range;
+  };
 
-  // range = (from, to, step = 1) => {
-  //   let i = from;
-  //   const range = [];
+  fetchPageNumbers = () => {
+    const LEFT_PAGE = "LEFT";
+    const RIGHT_PAGE = "RIGHT";
 
-  //   while (i <= to) {
-  //     range.push(i);
-  //     i += step;
-  //   }
+    const totalPages = this.totalPages;
+    const currentPage = this.state.currentPage;
+    const pageNeighbours = this.pageNeighbours;
+    console.log("test for fetch page nums: ");
+    console.log(totalPages, currentPage, pageNeighbours);
+    /**
+     * totalNumbers: the total page numbers to show on the control
+     * totalBlocks: totalNumbers + 2 to cover for the left(<) and right(>) controls
+     */
 
-  //   return range;
-  // }
+    const totalNumbers = this.pageNeighbours * 2 + 3;
+    const totalBlocks = totalNumbers + 2;
 
-  // fetchPageNumbers = () => {
+    if (totalPages > totalBlocks) {
+      const startPage = Math.max(2, currentPage - pageNeighbours);
+      const endPage = Math.min(totalPages - 1, currentPage + pageNeighbours);
 
-  //   const LEFT_PAGE = 'LEFT';
-  //   const RIGHT_PAGE = 'RIGHT';
+      let pages = this.range(startPage, endPage);
 
-  //   const totalPages = this.totalPages;
-  //   const currentPage = this.state.currentPage;
-  //   const pageNeighbours = this.pageNeighbours;
+      /**
+       * hasLeftSpill: has hidden pages to the left
+       * hasRightSpill: has hidden pages to the right
+       * spillOffset: number of hidden pages either to the left or to the right
+       */
+      const hasLeftSpill = startPage > 2;
+      const hasRightSpill = totalPages - endPage > 1;
+      const spillOffset = totalNumbers - (pages.length + 1);
 
-  //   /**
-  //    * totalNumbers: the total page numbers to show on the control
-  //    * totalBlocks: totalNumbers + 2 to cover for the left(<) and right(>) controls
-  //    */
+      switch (true) {
+        // handle: (1) < {5 6} [7] {8 9} (10)
+        case hasLeftSpill && !hasRightSpill: {
+          const extraPages = this.range(startPage - spillOffset, startPage - 1);
+          pages = [LEFT_PAGE, ...extraPages, ...pages];
+          break;
+        }
 
-  //   const totalNumbers = (this.pageNeighbours * 2) + 3;
-  //   const totalBlocks = totalNumbers + 2;
+        // handle: (1) {2 3} [4] {5 6} > (10)
+        case !hasLeftSpill && hasRightSpill: {
+          const extraPages = this.range(endPage + 1, endPage + spillOffset);
+          pages = [...pages, ...extraPages, RIGHT_PAGE];
+          break;
+        }
 
-  //   if (totalPages > totalBlocks) {
+        // handle: (1) < {4 5} [6] {7 8} > (10)
+        case hasLeftSpill && hasRightSpill:
+        default: {
+          pages = [LEFT_PAGE, ...pages, RIGHT_PAGE];
+          break;
+        }
+      }
 
-  //     const startPage = Math.max(2, currentPage - pageNeighbours);
-  //     const endPage = Math.min(totalPages - 1, currentPage + pageNeighbours);
+      return [1, ...pages, totalPages];
+    }
 
-  //     let pages = this.range(startPage, endPage);
-
-  //     /**
-  //      * hasLeftSpill: has hidden pages to the left
-  //      * hasRightSpill: has hidden pages to the right
-  //      * spillOffset: number of hidden pages either to the left or to the right
-  //      */
-  //     const hasLeftSpill = startPage > 2;
-  //     const hasRightSpill = (totalPages - endPage) > 1;
-  //     const spillOffset = totalNumbers - (pages.length + 1);
-
-  //     switch (true) {
-  //       // handle: (1) < {5 6} [7] {8 9} (10)
-  //       case (hasLeftSpill && !hasRightSpill): {
-  //         const extraPages = this.range(startPage - spillOffset, startPage - 1);
-  //         pages = [LEFT_PAGE, ...extraPages, ...pages];
-  //         break;
-  //       }
-
-  //       // handle: (1) {2 3} [4] {5 6} > (10)
-  //       case (!hasLeftSpill && hasRightSpill): {
-  //         const extraPages = this.range(endPage + 1, endPage + spillOffset);
-  //         pages = [...pages, ...extraPages, RIGHT_PAGE];
-  //         break;
-  //       }
-
-  //       // handle: (1) < {4 5} [6] {7 8} > (10)
-  //       case (hasLeftSpill && hasRightSpill):
-  //       default: {
-  //         pages = [LEFT_PAGE, ...pages, RIGHT_PAGE];
-  //         break;
-  //       }
-  //     }
-
-  //     return [1, ...pages, totalPages];
-
-  //   }
-
-  //   return this.range(1, totalPages);
-
-  // }
+    return this.range(1, totalPages);
+  };
   render() {
-    // console.log('inside render: ');
+    console.log("inside render: ");
+    console.log(this.state.currentPage);
+    this.postsPerPage = 4;
+    this.pageNeighbours = 0;
+    if (this.props.blogposts.data) {
+      this.totalPosts = 57;
+      this.totalPages = Math.ceil(this.totalPosts / this.postsPerPage);
+      // console.log(`totalposts: ${this.totalPosts}`);
+      // console.log(`total pages ${this.totalPages}`);
+    }
 
-    // console.log('total posts: ' + this.totalPosts);
-    // console.log('total pages: ' + this.totalPages);
-    // // if (!this.totalPosts || this.totalPages === 1) return null;
-    // // console.log('current page: ' + this.state.currentPage);
-    // const pages = this.fetchPageNumbers();
-    // console.log('pages: ' + this.state.pages);
-
+    // console.log('current page: ' + this.state.currentPage);
+    const pages = this.fetchPageNumbers();
+    console.log("pages: " + pages);
     return (
       <div className="blog">
         <section className="section section-page-title">
@@ -386,25 +388,56 @@ class Blog extends Component {
                 </div>
                 {/*post-loop*/}
                 <div className="pagination clearfix">
-                  <ul className="page-numbers">
-                    <li>
-                      <span className="page-numbers current">1</span>
-                    </li>
-                    <li>
-                      <a className="page-numbers" href="#">
-                        2
-                      </a>
-                    </li>
-                    <li>
-                      <a className="page-numbers" href="#">
-                        3
-                      </a>
-                    </li>
-                    <li>
-                      <a className="next page-numbers" href="#">
-                        <i className="fa fa-long-arrow-right"></i>
-                      </a>
-                    </li>
+                  <ul class="page-numbers">
+                    {pages &&
+                      pages.map((page, index) => {
+                        if (page === "LEFT")
+                          return (
+                            <li key={index} className="page-item">
+                              <a
+                                className="page-link"
+                                href="#"
+                                aria-label="Previous"
+                                onClick={e => this.handleMoveLeft(e)}
+                              >
+                                <span aria-hidden="true">&laquo;</span>
+                                <span className="sr-only">Previous</span>
+                              </a>
+                            </li>
+                          );
+
+                        if (page === "RIGHT")
+                          return (
+                            <li key={index} className="page-item">
+                              <a
+                                className="page-link"
+                                href="#"
+                                aria-label="Next"
+                                onClick={e => this.handleMoveRight(e)}
+                              >
+                                <span aria-hidden="true">&raquo;</span>
+                                <span className="sr-only">Next</span>
+                              </a>
+                            </li>
+                          );
+
+                        return (
+                          <li
+                            key={index}
+                            className={`page-item${
+                              this.state.currentPage === page ? " active" : ""
+                            }`}
+                          >
+                            <a
+                              className="page-link"
+                              href="#"
+                              onClick={this.handleClick(page)}
+                            >
+                              {page}
+                            </a>
+                          </li>
+                        );
+                      })}
                   </ul>
                 </div>
                 {/*pagination*/}
