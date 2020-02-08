@@ -3,6 +3,8 @@ import girl from "../../images/girl.jpg";
 import placeholder from "../../images/blog/placeholder.jpg";
 import ad from "../../images/ad.jpg";
 import { connect } from "react-redux";
+import { getSinglePost } from "../../actions/blogActions.js";
+import { Redirect } from "react-router-dom";
 
 class Blog extends Component {
   constructor(props) {
@@ -10,7 +12,9 @@ class Blog extends Component {
 
     this.state = {
       currentPage: 1,
-      pages: 0
+      pages: 0,
+      currentPosts: [],
+      redirect: null
     };
   }
 
@@ -18,20 +22,42 @@ class Blog extends Component {
     console.log("inside component did update");
   }
 
+  static getDerivedStateFromProps(props, state) {
+    console.log("inside get derived state.");
+
+    if (props.blogposts.data) {
+      const upperBound = state.currentPage * 4;
+      const lowerBound = upperBound - 4;
+      const newDisplayedPosts = props.blogposts.data.slice(
+        lowerBound,
+        upperBound
+      );
+      return { currentPosts: newDisplayedPosts };
+    }
+  }
   componentDidMount() {
     console.log("inside component did mount");
-
     //goes to page 1 upon loading page
     // this.gotoPage(1);
   }
 
+  getSinglePost = (id, e) => {
+    e.preventDefault();
+    console.log("inside get single post");
+
+    //call method to get single post
+    this.props.getSinglePost(id);
+    console.log("test1");
+
+    this.setState({ redirect: "/post1" });
+
+    console.log("test2");
+  };
   gotoPage = page => {
     const { onPageChanged = f => f } = this.props;
-    console.log(onPageChanged("this is a test"));
-    console.log("inside go to page");
-    console.log(onPageChanged);
+
     const currentPage = Math.max(0, Math.min(page, this.totalPages));
-    console.log(currentPage);
+
     const paginationData = {
       currentPage,
       totalPages: this.totalPages,
@@ -45,25 +71,16 @@ class Blog extends Component {
   handleClick = page => e => {
     e.preventDefault();
     this.gotoPage(page);
+    window.scrollTo(0, 0);
   };
 
   handleMoveLeft = e => {
     e.preventDefault();
-    console.log("**");
-    console.log("**");
-
-    console.log("**");
-    console.log("**");
     this.gotoPage(this.state.currentPage - this.pageNeighbours * 2 - 1);
   };
 
   handleMoveRight = e => {
     e.preventDefault();
-    console.log("**");
-    console.log("**");
-
-    console.log("**");
-    console.log("**");
     this.gotoPage(this.state.currentPage + this.pageNeighbours * 2 + 1);
   };
 
@@ -141,19 +158,19 @@ class Blog extends Component {
   };
   render() {
     console.log("inside render: ");
-    console.log(this.state.currentPage);
+    if (this.state.redirect) {
+      return <Redirect to="/post" />;
+    }
     this.postsPerPage = 4;
     this.pageNeighbours = 0;
+
     if (this.props.blogposts.data) {
-      this.totalPosts = 57;
+      this.totalPosts = this.props.blogposts.data.length;
       this.totalPages = Math.ceil(this.totalPosts / this.postsPerPage);
-      // console.log(`totalposts: ${this.totalPosts}`);
-      // console.log(`total pages ${this.totalPages}`);
     }
 
-    // console.log('current page: ' + this.state.currentPage);
     const pages = this.fetchPageNumbers();
-    console.log("pages: " + pages);
+
     return (
       <div className="blog">
         <section className="section section-page-title">
@@ -167,228 +184,64 @@ class Blog extends Component {
           <div className="container">
             <div className="row">
               <div className="col-md-8 col-sm-8">
-                <div className="post-loop clearfix">
-                  <div className="post-thumbnail">
-                    <img src={placeholder} alt="" />
-                    <a href="post.html">
-                      <i className="fa fa-link"></i>
-                    </a>
-                  </div>
-                  <div className="post-loop-info clearfix">
-                    <h1>
-                      <a href="">Top rated nature photography images list</a>
-                    </h1>
-                    <ul className="entry-meta">
-                      <li>
-                        <i className="fa fa-calendar"></i>07 June 2014{" "}
-                      </li>
-                      <li>
-                        <i className="fa fa-comments"></i>
-                        <a href="#">7 Comments</a>
-                      </li>
-                    </ul>
-                    <p>
-                      Morbi accumsan ipsum velit. Nam nec tellus a odio
-                      tincidunt auctor a ornare odio. Sed non elit visitae eriat
-                      consequat auctor eu in elit. className aptent taciti
-                      sociosqu ad litora torquent per conubia Igor nostra, per
-                      inceptos himenaeos. Mauris in erat justo. Nullam ac urna
-                      euro felis dapibus condimentum sit amet a auguexed elit.{" "}
-                    </p>
-                  </div>
-                  {/*post-loop-info*/}
-                  <div className="post-footer clearfix">
-                    {" "}
-                    <a href="post.html">
-                      read more <i className="fa fa-long-arrow-right"></i>
-                    </a>
-                    <ul className="social-share-buttons clearfix">
-                      <li>
-                        <a href="#" target="_blank">
-                          <i className="fa fa-facebook"></i>
+                {this.state.currentPosts &&
+                  this.state.currentPosts.map(post => (
+                    <div key={post.id} className="post-loop clearfix">
+                      <div className="post-thumbnail">
+                        <img src="https://placehold.it/750x500" alt="" />
+                        <a href="post.html">
+                          <i className="fa fa-link"></i>
                         </a>
-                      </li>
-                      <li>
-                        <a href="#" target="_blank">
-                          <i className="fa fa-twitter"></i>
+                      </div>
+                      <div className="post-loop-info clearfix">
+                        <h1>
+                          <a
+                            onClick={e => this.getSinglePost(post.id, e)}
+                            href=""
+                          >
+                            {post.title}
+                          </a>
+                        </h1>
+                        <ul className="entry-meta">
+                          <li>
+                            <i className="fa fa-calendar"></i>
+                            {post.date_posted}
+                          </li>
+                          <li>
+                            <i className="fa fa-comments"></i>
+                            <a href="#">7 Comments</a>
+                          </li>
+                        </ul>
+                        <p>{post.content.slice(0, 350) + "..."}</p>
+                      </div>
+                      {/*post-loop-info*/}
+                      <div className="post-footer clearfix">
+                        <a href="post.html">
+                          read more <i className="fa fa-long-arrow-right"></i>
                         </a>
-                      </li>
-                      <li>
-                        <a href="#" target="_blank">
-                          <i className="fa fa-linkedin"></i>
-                        </a>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-                {/*post-loop*/}
-                <div className="post-loop clearfix">
-                  <div className="post-thumbnail">
-                    <img src={placeholder} alt="" />
-                    <a href="post.html">
-                      <i className="fa fa-link"></i>
-                    </a>
-                  </div>
-                  <div className="post-loop-info clearfix">
-                    <h1>
-                      <a href="#">Clear viewed wild photography images list</a>
-                    </h1>
-                    <ul className="entry-meta">
-                      <li>
-                        <i className="fa fa-calendar"></i>07 June 2014{" "}
-                      </li>
-                      <li>
-                        <i className="fa fa-comments"></i>
-                        <a href="#">7 Comments</a>
-                      </li>
-                    </ul>
-                    <p>
-                      Morbi accumsan ipsum velit. Nam nec tellus a odio
-                      tincidunt auctor a ornare odio. Sed non elit visitae eriat
-                      consequat auctor eu in elit. className aptent taciti
-                      sociosqu ad litora torquent per conubia Igor nostra, per
-                      inceptos himenaeos. Mauris in erat justo. Nullam ac urna
-                      euro felis dapibus condimentum sit amet a auguexed elit.{" "}
-                    </p>
-                  </div>
-                  {/*post-loop-info*/}
-                  <div className="post-footer clearfix">
-                    {" "}
-                    <a href="post.html">
-                      read more <i className="fa fa-long-arrow-right"></i>
-                    </a>
-                    <ul className="social-share-buttons clearfix">
-                      <li>
-                        <a href="#" target="_blank">
-                          <i className="fa fa-facebook"></i>
-                        </a>
-                      </li>
-                      <li>
-                        <a href="#" target="_blank">
-                          <i className="fa fa-twitter"></i>
-                        </a>
-                      </li>
-                      <li>
-                        <a href="#" target="_blank">
-                          <i className="fa fa-linkedin"></i>
-                        </a>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-                {/*post-loop*/}
-                <div className="post-loop clearfix">
-                  <div className="post-thumbnail">
-                    <img src={placeholder} alt="" />
-                    <a href="post.html">
-                      <i className="fa fa-link"></i>
-                    </a>
-                  </div>
-                  <div className="post-loop-info clearfix">
-                    <h1>
-                      <a href="#">Viewed building photography images list</a>
-                    </h1>
-                    <ul className="entry-meta">
-                      <li>
-                        <i className="fa fa-calendar"></i>07 June 2014{" "}
-                      </li>
-                      <li>
-                        <i className="fa fa-comments"></i>
-                        <a href="#">7 Comments</a>
-                      </li>
-                    </ul>
-                    <p>
-                      Morbi accumsan ipsum velit. Nam nec tellus a odio
-                      tincidunt auctor a ornare odio. Sed non elit visitae eriat
-                      consequat auctor eu in elit. className aptent taciti
-                      sociosqu ad litora torquent per conubia Igor nostra, per
-                      inceptos himenaeos. Mauris in erat justo. Nullam ac urna
-                      euro felis dapibus condimentum sit amet a auguexed elit.{" "}
-                    </p>
-                  </div>
-                  {/*post-loop-info*/}
-                  <div className="post-footer clearfix">
-                    {" "}
-                    <a href="post.html">
-                      read more <i className="fa fa-long-arrow-right"></i>
-                    </a>
-                    <ul className="social-share-buttons clearfix">
-                      <li>
-                        <a href="#" target="_blank">
-                          <i className="fa fa-facebook"></i>
-                        </a>
-                      </li>
-                      <li>
-                        <a href="#" target="_blank">
-                          <i className="fa fa-twitter"></i>
-                        </a>
-                      </li>
-                      <li>
-                        <a href="#" target="_blank">
-                          <i className="fa fa-linkedin"></i>
-                        </a>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-                {/*post-loop*/}
-                <div className="post-loop clearfix">
-                  <div className="post-thumbnail">
-                    <img src={placeholder} alt="" />
-                    <a href="post.html">
-                      <i className="fa fa-link"></i>
-                    </a>
-                  </div>
-                  <div className="post-loop-info clearfix">
-                    <h1>
-                      <a href="#">Viewed building photography images list</a>
-                    </h1>
-                    <ul className="entry-meta">
-                      <li>
-                        <i className="fa fa-calendar"></i>07 June 2014{" "}
-                      </li>
-                      <li>
-                        <i className="fa fa-comments"></i>
-                        <a href="#">7 Comments</a>
-                      </li>
-                    </ul>
-                    <p>
-                      Morbi accumsan ipsum velit. Nam nec tellus a odio
-                      tincidunt auctor a ornare odio. Sed non elit visitae eriat
-                      consequat auctor eu in elit. className aptent taciti
-                      sociosqu ad litora torquent per conubia Igor nostra, per
-                      inceptos himenaeos. Mauris in erat justo. Nullam ac urna
-                      euro felis dapibus condimentum sit amet a auguexed elit.{" "}
-                    </p>
-                  </div>
-                  {/*post-loop-info*/}
-                  <div className="post-footer clearfix">
-                    {" "}
-                    <a href="post.html">
-                      read more <i className="fa fa-long-arrow-right"></i>
-                    </a>
-                    <ul className="social-share-buttons clearfix">
-                      <li>
-                        <a href="#" target="_blank">
-                          <i className="fa fa-facebook"></i>
-                        </a>
-                      </li>
-                      <li>
-                        <a href="#" target="_blank">
-                          <i className="fa fa-twitter"></i>
-                        </a>
-                      </li>
-                      <li>
-                        <a href="#" target="_blank">
-                          <i className="fa fa-linkedin"></i>
-                        </a>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
+                        <ul className="social-share-buttons clearfix">
+                          <li>
+                            <a href="#" target="_blank">
+                              <i className="fa fa-facebook"></i>
+                            </a>
+                          </li>
+                          <li>
+                            <a href="#" target="_blank">
+                              <i className="fa fa-twitter"></i>
+                            </a>
+                          </li>
+                          <li>
+                            <a href="#" target="_blank">
+                              <i className="fa fa-linkedin"></i>
+                            </a>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  ))}
                 {/*post-loop*/}
                 <div className="pagination clearfix">
-                  <ul class="page-numbers">
+                  <ul className="page-numbers">
                     {pages &&
                       pages.map((page, index) => {
                         if (page === "LEFT")
@@ -425,7 +278,7 @@ class Blog extends Component {
                           <li
                             key={index}
                             className={`page-item${
-                              this.state.currentPage === page ? " active" : ""
+                              this.state.currentPage === page ? " tag" : ""
                             }`}
                           >
                             <a
@@ -596,4 +449,4 @@ const mapStateToProps = state => ({
   blogposts: state.blogposts.items
 });
 
-export default connect(mapStateToProps)(Blog);
+export default connect(mapStateToProps, { getSinglePost })(Blog);

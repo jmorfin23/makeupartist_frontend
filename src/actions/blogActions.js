@@ -1,4 +1,9 @@
-import { FETCH_BLOG_POSTS, ADD_BLOG_POST, DELETE_BLOG_POST } from "./types.js";
+import {
+  FETCH_BLOG_POSTS,
+  ADD_BLOG_POST,
+  DELETE_BLOG_POST,
+  GET_SINGLE_BLOGPOST
+} from "./types.js";
 
 export const fetchBlogPosts = () => {
   return function(dispatch) {
@@ -35,4 +40,24 @@ export const addBlogPost = blogPostInfo => {
 
 export const deleteBlogPost = () => {
   console.log("inside delete blog post");
+};
+
+export const getSinglePost = id => {
+  return function(dispatch) {
+    console.log("inside get single post action");
+    fetch("http://127.0.0.1:5000/api/single-post", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        id: id
+      }
+    })
+      .then(res => res.json())
+      .then(data =>
+        dispatch({
+          type: GET_SINGLE_BLOGPOST,
+          payload: data
+        })
+      );
+  };
 };

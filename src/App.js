@@ -37,7 +37,11 @@ class App extends Component {
           <Route exact path={"/portfolio"} render={() => <Portfolio />} />
           <Route exact path={"/blog"} render={() => <Blog />} />
           <Route exact path={"/contact"} render={() => <Contact />} />
-          <Route exact path={"/post1"} render={() => <Post1 />} />
+          <Route
+            exact
+            path={"/post:id"}
+            render={data => <Post1 data={data} />}
+          />
           <Route exact path={"/leftsidebar"} render={() => <LeftSideBar />} />
         </Switch>
         {/* footer goes below here */}

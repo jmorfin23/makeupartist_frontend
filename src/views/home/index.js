@@ -34,6 +34,9 @@ import * as $ from "jquery";
 //connect to stylesheet
 //connect to mailchimp
 //put proptypes in app.js
+//should i fetch 3 for my home page then on blogpost page fetch the ones needed?
+//still a bytestring error on admin page.
+//add a scroll bar to pages.
 
 class Home extends Component {
   render() {

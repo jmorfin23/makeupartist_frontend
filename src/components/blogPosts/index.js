@@ -31,7 +31,7 @@ const BlogPosts = props => {
   return (
     <div className="row">
       {posts.data &&
-        posts.data.map((post, index) => (
+        posts.data.map(post => (
           <div key={post.id} className="col-lg-4 col-md-4 col-sm-6 col-xs-12">
             <div className="post-entry">
               <div className="post-thumbnail">
