@@ -1,9 +1,11 @@
 import React, { Component } from "react";
+import "./index.css";
 import girl from "../../../images/girl.jpg";
 import placeholder from "../../../images/blog/placeholder.jpg";
 import ad from "../../../images/ad.jpg";
 import { connect } from "react-redux";
-import { Redirect } from "react-router-dom";
+import { withRouter } from "react-router-dom";
+import { getSinglePost } from "../../../actions/blogActions.js";
 
 class Post1 extends Component {
   constructor(props) {
@@ -11,16 +13,72 @@ class Post1 extends Component {
   }
 
   render() {
-    console.log("render of post1");
-
-    const post = this.props.blogposts.singlePost.success;
-    if (!post) {
-      return (
-        <div>
-          <h3>I'm sorry there is an issue with this page.</h3>
-        </div>
-      );
+    let post = [];
+    //grab data from header and parse through list of blogposts
+    if (this.props.blogposts.items.data) {
+      const blog = this.props.blogposts.items.data;
+      for (let i = 0; i < blog.length; i++) {
+        if (blog[i]["id"] == this.props.match.params.post) {
+          post = {
+            title: blog[i]["title"],
+            author: blog[i]["author"],
+            id: blog[i]["id"],
+            content: blog[i]["content"],
+            date_posted: blog[i]["date_posted"],
+            url: blog[i]["url"]
+          };
+        }
+      }
     }
+    //logic for other blogpost to display
+    let nextPosts = [];
+    if (post.id) {
+      const test = this.props.blogposts.items.data;
+      for (let i = 0; i < test.length; i++) {
+        if (post.id - 3 === test[i]["id"]) {
+          nextPosts.push({
+            id: test[i - 2]["id"],
+            title: test[i - 2]["title"],
+            url: test[i - 2]["url"],
+            date: test[i - 2]["date_posted"]
+          });
+          nextPosts.push({
+            id: test[i - 1]["id"],
+            title: test[i - 1]["title"],
+            url: test[i - 1]["url"],
+            date: test[i - 1]["date_posted"]
+          });
+          nextPosts.push({
+            id: test[i]["id"],
+            title: test[i]["title"],
+            url: test[i]["url"],
+            date: test[i]["date_posted"]
+          });
+        }
+        if (post.id + 3 === test[i]["id"]) {
+          nextPosts.push({
+            id: test[i + 2]["id"],
+            title: test[i + 2]["title"],
+            url: test[i + 2]["url"],
+            date: test[i + 2]["date_posted"]
+          });
+          nextPosts.push({
+            id: test[i + 1]["id"],
+            title: test[i + 1]["title"],
+            url: test[i + 1]["url"],
+            date: test[i + 1]["date_posted"]
+          });
+          nextPosts.push({
+            id: test[i]["id"],
+            title: test[i]["title"],
+            url: test[i]["url"],
+            date: test[i]["date_posted"]
+          });
+        }
+      }
+    }
+
+    console.log(nextPosts);
     return (
       <div className="post1">
         <section className="section section-page-title">
@@ -59,84 +117,35 @@ class Post1 extends Component {
                 {/*padd-white-box*/}
                 <div className="related-post-box">
                   <div className="row">
-                    <div className="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-                      <div className="post-entry post-entry-related">
-                        <div className="post-thumbnial">
-                          {" "}
-                          <a href="post.html">
-                            {" "}
-                            <img src={placeholder} alt="" />{" "}
-                          </a>{" "}
+                    {nextPosts &&
+                      nextPosts.map(post => (
+                        <div className="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                          <div
+                            key={post.id}
+                            className="post-entry post-entry-related"
+                          >
+                            <div className="post-thumbnial">
+                              <a href="post.html">
+                                <img src={placeholder} alt="" />
+                              </a>
+                            </div>
+                            {/*post-thumbnial*/}
+                            <div className="post-entry-related-contents">
+                              <h1>
+                                <a href="post.html">{post.title}</a>
+                              </h1>
+                              <ul className="entry-meta">
+                                <li>
+                                  <i className="fa fa-calendar"></i>
+                                  {post.date}
+                                </li>
+                              </ul>
+                            </div>
+                            {/*post-entry-related-contents*/}
+                          </div>
+                          {/*post-entry*/}
                         </div>
-                        {/*post-thumbnial*/}
-                        <div className="post-entry-related-contents">
-                          <h1>
-                            <a href="post.html">
-                              After the Shoot: Forgotten Post ipsum ...
-                            </a>
-                          </h1>
-                          <ul className="entry-meta">
-                            <li>
-                              <i className="fa fa-calendar"></i>07 June 2014{" "}
-                            </li>
-                          </ul>
-                        </div>
-                        {/*post-entry-related-contents*/}
-                      </div>
-                      {/*post-entry*/}
-                    </div>
-                    {/*end col*/}
-                    <div className="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-                      <div className="post-entry post-entry-related">
-                        <div className="post-thumbnial">
-                          {" "}
-                          <a href="post.html">
-                            {" "}
-                            <img src={placeholder} alt="" />{" "}
-                          </a>{" "}
-                        </div>
-                        {/*post-thumbnial*/}
-                        <div className="post-entry-related-contents">
-                          <h1>
-                            <a href="post.html">The most common mistakes...</a>
-                          </h1>
-                          <ul className="entry-meta">
-                            <li>
-                              <i className="fa fa-calendar"></i>07 June 2014{" "}
-                            </li>
-                          </ul>
-                        </div>
-                        {/*post-entry-related-contents*/}
-                      </div>
-                      {/*post-entry*/}
-                    </div>
-                    {/*end col*/}
-                    <div className="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-                      <div className="post-entry post-entry-related blue-bg">
-                        <div className="post-thumbnial">
-                          {" "}
-                          <a href="post.html">
-                            {" "}
-                            <img src={placeholder} alt="" />{" "}
-                          </a>{" "}
-                        </div>
-                        {/*post-thumbnial*/}
-                        <div className="post-entry-related-contents">
-                          <h1>
-                            <a href="post.html">
-                              Recession is a good opportunity to...
-                            </a>
-                          </h1>
-                          <ul className="entry-meta">
-                            <li>
-                              <i className="fa fa-calendar"></i>07 June 2014{" "}
-                            </li>
-                          </ul>
-                        </div>
-                        {/*post-entry-related-contents*/}
-                      </div>
-                      {/*post-entry*/}
-                    </div>
+                      ))}
                     {/*end col*/}
                   </div>
                   {/*row*/}
@@ -157,22 +166,21 @@ class Post1 extends Component {
                     elementum suscipit, felis leo eleifend tortor.
                   </p>
                   <div className="social-icons">
-                    {" "}
                     <a href="#" target="_blank">
                       <i className="fa fa-facebook"></i>
-                    </a>{" "}
+                    </a>
                     <a href="#" target="_blank">
                       <i className="fa fa-twitter"></i>
-                    </a>{" "}
+                    </a>
                     <a href="#" target="_blank">
                       <i className="fa fa-linkedin"></i>
-                    </a>{" "}
+                    </a>
                     <a href="#" target="_blank">
                       <i className="fa fa-instagram"></i>
-                    </a>{" "}
+                    </a>
                     <a href="#" target="_blank">
                       <i className="fa fa-google-plus"></i>
-                    </a>{" "}
+                    </a>
                   </div>
                 </div>
                 {/*sidebar-box*/}
@@ -216,39 +224,38 @@ class Post1 extends Component {
                 </div>
                 {/*sidebar-box*/}
                 <div className="sidebar-box clearfix no-padding">
-                  {" "}
-                  <img src={ad} alt="" />{" "}
+                  <img src={ad} alt="" />
                 </div>
                 {/*sidebar-box*/}
                 <div className="sidebar-box clearfix">
                   <h3 className="widget-title">Tags Cloud</h3>
                   <a href="#" className="tag-link">
                     beautiful
-                  </a>{" "}
+                  </a>
                   <a href="#" className="tag-link">
                     photography
-                  </a>{" "}
+                  </a>
                   <a href="#" className="tag-link">
                     wedding
-                  </a>{" "}
+                  </a>
                   <a href="#" className="tag-link">
                     travel
-                  </a>{" "}
+                  </a>
                   <a href="#" className="tag-link">
                     discover
-                  </a>{" "}
+                  </a>
                   <a href="#" className="tag-link">
                     food
-                  </a>{" "}
+                  </a>
                   <a href="#" className="tag-link">
                     woman
-                  </a>{" "}
+                  </a>
                   <a href="#" className="tag-link">
                     photography
-                  </a>{" "}
+                  </a>
                   <a href="#" className="tag-link">
                     style
-                  </a>{" "}
+                  </a>
                 </div>
                 {/*sidebar-box*/}
                 <div className="sidebar-box clearfix">
@@ -296,4 +303,5 @@ class Post1 extends Component {
 const mapStateToProps = state => ({
   blogposts: state.blogposts
 });
-export default connect(mapStateToProps)(Post1);
+
+export default connect(mapStateToProps, { getSinglePost })(withRouter(Post1));

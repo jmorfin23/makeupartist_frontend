@@ -13,6 +13,8 @@ const initialState = {
 const blogPostReducer = (state = initialState, action) => {
   switch (action.type) {
     case FETCH_BLOG_POSTS:
+      console.log("BLOGPOST REDUCER");
+      console.log(action.payload);
       return {
         ...state,
         items: action.payload

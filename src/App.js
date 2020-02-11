@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "./App.css";
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route, Router } from "react-router-dom";
 import Home from "./views/home";
 import Header from "./components/header";
 import About from "./views/about";
@@ -23,6 +23,16 @@ class App extends Component {
     //retrieve blog posts from backend
     this.props.fetchBlogPosts();
   }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    //add this to prevent updating when i aleady have all of the blogposts anyways.
+    // console.log('inside main should compoennt UPDATE');
+    // console.log(this.props.blogposts);
+    // console.log(this.props.images);
+    // // if (this.props.blogposts) {
+    // // }
+    return true;
+  }
   render() {
     return (
       <div className="App">
@@ -37,11 +47,7 @@ class App extends Component {
           <Route exact path={"/portfolio"} render={() => <Portfolio />} />
           <Route exact path={"/blog"} render={() => <Blog />} />
           <Route exact path={"/contact"} render={() => <Contact />} />
-          <Route
-            exact
-            path={"/post:id"}
-            render={data => <Post1 data={data} />}
-          />
+          <Route path={"/:post"} render={() => <Post1 />} />
           <Route exact path={"/leftsidebar"} render={() => <LeftSideBar />} />
         </Switch>
         {/* footer goes below here */}
@@ -55,7 +61,7 @@ class App extends Component {
 //using this to map to props
 const mapStateToProps = state => ({
   images: state.images.items,
-  blogposts: state.blogposts.items,
+  blogposts: state.blogposts,
   user: state.user.items
 });
 

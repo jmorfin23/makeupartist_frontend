@@ -37,6 +37,7 @@ import * as $ from "jquery";
 //should i fetch 3 for my home page then on blogpost page fetch the ones needed?
 //still a bytestring error on admin page.
 //add a scroll bar to pages.
+//my method of grabbing blogposts.
 
 class Home extends Component {
   render() {

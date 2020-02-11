@@ -4,7 +4,8 @@ import placeholder from "../../images/blog/placeholder.jpg";
 import ad from "../../images/ad.jpg";
 import { connect } from "react-redux";
 import { getSinglePost } from "../../actions/blogActions.js";
-import { Redirect } from "react-router-dom";
+import { Redirect, Router, Route } from "react-router-dom";
+import Post1 from "./post1";
 
 class Blog extends Component {
   constructor(props) {
@@ -23,8 +24,6 @@ class Blog extends Component {
   }
 
   static getDerivedStateFromProps(props, state) {
-    console.log("inside get derived state.");
-
     if (props.blogposts.data) {
       const upperBound = state.currentPage * 4;
       const lowerBound = upperBound - 4;
@@ -48,8 +47,7 @@ class Blog extends Component {
     //call method to get single post
     this.props.getSinglePost(id);
     console.log("test1");
-
-    this.setState({ redirect: "/post1" });
+    this.props.this.setState({ redirect: "/post:" });
 
     console.log("test2");
   };
@@ -103,8 +101,7 @@ class Blog extends Component {
     const totalPages = this.totalPages;
     const currentPage = this.state.currentPage;
     const pageNeighbours = this.pageNeighbours;
-    console.log("test for fetch page nums: ");
-    console.log(totalPages, currentPage, pageNeighbours);
+
     /**
      * totalNumbers: the total page numbers to show on the control
      * totalBlocks: totalNumbers + 2 to cover for the left(<) and right(>) controls
@@ -189,18 +186,13 @@ class Blog extends Component {
                     <div key={post.id} className="post-loop clearfix">
                       <div className="post-thumbnail">
                         <img src="https://placehold.it/750x500" alt="" />
-                        <a href="post.html">
+                        <a href="/">
                           <i className="fa fa-link"></i>
                         </a>
                       </div>
                       <div className="post-loop-info clearfix">
                         <h1>
-                          <a
-                            onClick={e => this.getSinglePost(post.id, e)}
-                            href=""
-                          >
-                            {post.title}
-                          </a>
+                          <a href={`/${post.id}`}>{post.title}</a>
                         </h1>
                         <ul className="entry-meta">
                           <li>
