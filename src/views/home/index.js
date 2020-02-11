@@ -24,24 +24,21 @@ import * as $ from "jquery";
 //should i use tokens?
 
 //https://developers.redhat.com/blog/2016/01/07/react-js-with-isotope-and-flux/
-//pagination
-// issues:
-//pagination stuck on how to start, frontend or backend pagination
 //time complexity and space complexity
-//bootstrap modal windows
-//elements static to the page with css
+//bootstrap modal windows - 2 versions of bootsrap
 //make application into production mode, same with portfolio.
 //connect to stylesheet
 //connect to mailchimp
 //put proptypes in app.js
 //should i fetch 3 for my home page then on blogpost page fetch the ones needed?
 //still a bytestring error on admin page.
+//should update for app.js
 //add a scroll bar to pages.
 //my method of grabbing blogposts.
+//delete blogpost section of admin page
 
 class Home extends Component {
   render() {
-    console.log(this.props.images.data);
     return (
       <div className="homepage">
         <div className="preloader">

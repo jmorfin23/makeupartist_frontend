@@ -36,7 +36,7 @@ const BlogPosts = props => {
             <div className="post-entry">
               <div className="post-thumbnail">
                 <img src="http://placehold.it/400x400" alt="" />
-                <a href="">
+                <a href={`/${post.id}`}>
                   <i className="fa fa-link"></i>
                 </a>
               </div>
@@ -55,7 +55,7 @@ const BlogPosts = props => {
                 </li>
               </ul>
               <p>{post.content.slice(0, 350) + "..."}</p>
-              <a className="btn btn-primary" href="post.html">
+              <a className="btn btn-primary" href={`/${post.id}`}>
                 Read More
               </a>
             </div>

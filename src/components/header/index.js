@@ -15,8 +15,7 @@ const Header = () => {
             data-toggle="collapse"
             data-target="#navbar-menu"
           >
-            {" "}
-            <i className="fa fa-bars"></i>{" "}
+            <i className="fa fa-bars"></i>
           </button>
           <a className="navbar-brand" href="/home">
             <img src={companylogo} className="logo" alt="" />
@@ -42,23 +41,8 @@ const Header = () => {
             <li>
               <a href="/portfolio">Portfolio</a>
             </li>
-            <li className="dropdown">
-              {" "}
-              <a
-                href="/blog"
-                className="dropdown-toggle"
-                data-toggle="dropdown"
-              >
-                Blog
-              </a>
-              <ul className="dropdown-menu">
-                <li>
-                  <a href="leftsidebar">Left Sidebar</a>
-                </li>
-                <li>
-                  <a href="/post1">Single Post</a>
-                </li>
-              </ul>
+            <li>
+              <a href="/blog">Blog</a>
             </li>
             <li>
               <a href="/contact">Contact Us</a>

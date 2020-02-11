@@ -6,7 +6,7 @@ import { loginAdmin } from "../../actions/adminActions.js";
 import { addImage, deleteImage } from "../../actions/imageActions.js";
 import { addBlogPost } from "../../actions/blogActions.js";
 import PropTypes from "prop-types";
-
+import ModalWindow from "../../components/modal";
 //CLOUDINARY URL & PRESET
 const CLOUDINARY_URL = "https://api.cloudinary.com/v1_1/dozvqlete/upload";
 const CLOUDINARY_UPLOAD_PRESET = "zzmnc51n";
@@ -25,7 +25,8 @@ class Admin extends Component {
       imageList: [],
       error: null,
       addedStatus: false,
-      saveFlag: false
+      saveFlag: false,
+      showModal: false
     };
   }
 
@@ -266,6 +267,10 @@ class Admin extends Component {
     window.location.reload(false);
   };
 
+  toggleModal = () => {
+    this.setState({ showModal: false });
+  };
+
   render() {
     if (this.state.isLogged) {
       return (
@@ -342,7 +347,7 @@ class Admin extends Component {
                         style={{ backgroundImage: `url(` + image.url + `)` }}
                       ></div>
                       <a
-                        onClick={() => this.deleteImage(image.url, index)}
+                        onClick={() => this.setState({ showModal: true })}
                         className="mfp-image"
                       ></a>
                     </div>
@@ -350,6 +355,31 @@ class Admin extends Component {
               </div>
               <br />
             </div>
+            {/* Modal */}
+            {/* <div className="modal fade" id="deleteImageModal" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div className="modal-dialog" role="document">
+              <div className="modal-content">
+                <div className="modal-header">
+                  <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                  <h3 className="modal-title">Delete Image:</h3>
+                </div>
+                <div className="modal-body">
+                  Are you sure you want to delete this image? 
+                </div>
+                <div className="modal-footer center">
+                  <button type="button" className="btn btn-primary" data-dismiss="modal">No</button>
+                  <button type="button" className="btn btn-primary" onClick={() => this.deleteImage(image.url, index)}>Yes</button>
+                </div>
+              </div>
+            </div>
+          </div> */}
+            <ModalWindow
+              animation={false}
+              show={this.state.showModal}
+              onHide={() => this.toggleModal()}
+            />
           </div>
 
           <div className="blog-post">
@@ -398,7 +428,7 @@ class Admin extends Component {
                 onClick={() => this.saveMywork()}
                 type="checkbox"
                 name="save"
-              />{" "}
+              />
               Save post and exit
               <br />
               <br />
