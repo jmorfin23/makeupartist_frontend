@@ -2,25 +2,41 @@ import React from "react";
 import { Modal } from "react-bootstrap";
 
 const ModalWindow = props => {
-  console.log("SHOW MODAL IS CALLED!");
   return (
     <Modal
       {...props}
-      size="lg"
+      className="center"
+      size="md"
       aria-labelledby="contained-modal-title-vcenter"
       centered
     >
       <Modal.Header closeButton>
         <Modal.Title id="contained-modal-title-vcenter">
-          Modal heading
+          <h3>Delete Image</h3>
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <h4>Centered Modal</h4>
-        <p>this is a test</p>
+        <h4>Are you sure you want to delete this image?</h4>
+        <div>
+          <img
+            style={{ maxWidth: "100%", height: "300px" }}
+            src={props.image}
+          ></img>
+        </div>
       </Modal.Body>
       <Modal.Footer>
-        <button onClick={() => props.onHide()}>Close</button>
+        <button
+          className="btn btn-primary center"
+          onClick={() => props.onHide()}
+        >
+          Close
+        </button>
+        <button
+          className="btn btn-primary center"
+          onClick={() => props.deleteimage()}
+        >
+          Yes
+        </button>
       </Modal.Footer>
     </Modal>
   );

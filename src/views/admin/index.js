@@ -26,7 +26,9 @@ class Admin extends Component {
       error: null,
       addedStatus: false,
       saveFlag: false,
-      showModal: false
+      showModal: false,
+      imageToDelete: null,
+      indexToDelete: null
     };
   }
 
@@ -238,10 +240,8 @@ class Admin extends Component {
     //if there are two of the same in portfolio, deleting occurs on the ///first one in the array
     //after deleting something and then adding a new image to portfolio,
 
-    let p = prompt("Are you sure you want to delete this image?");
-    if (p != "yes") return;
     //call action to delete image
-    this.props.deleteImage(imageURL);
+    // this.props.deleteImage(imageURL);
   };
 
   saveMywork = () => {
@@ -347,7 +347,12 @@ class Admin extends Component {
                         style={{ backgroundImage: `url(` + image.url + `)` }}
                       ></div>
                       <a
-                        onClick={() => this.setState({ showModal: true })}
+                        onClick={() =>
+                          this.setState({
+                            showModal: true,
+                            imageToDelete: image.url
+                          })
+                        }
                         className="mfp-image"
                       ></a>
                     </div>
@@ -376,9 +381,11 @@ class Admin extends Component {
             </div>
           </div> */}
             <ModalWindow
+              image={this.state.imageToDelete}
               animation={false}
               show={this.state.showModal}
               onHide={() => this.toggleModal()}
+              deleteimage={() => this.deleteImage()}
             />
           </div>
 
