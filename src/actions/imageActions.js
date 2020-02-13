@@ -37,14 +37,14 @@ export const addImage = imageInfo => {
 };
 
 //deleting image when called called
-export const deleteImage = imageURL => {
+export const deleteImage = id => {
   return function(dispatch) {
     console.log("inside delete image action");
     fetch("http://127.0.0.1:5000/api/image-delete", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        imageURL: imageURL
+        id: id
       }
     })
       .then(res => res.json())

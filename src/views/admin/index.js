@@ -28,7 +28,7 @@ class Admin extends Component {
       saveFlag: false,
       showModal: false,
       imageToDelete: null,
-      indexToDelete: null
+      imageIdToDelete: null
     };
   }
 
@@ -66,8 +66,10 @@ class Admin extends Component {
     }
 
     //alert error if image error
-    if (this.props.image.error != prevState.error) {
+    //Problem: redux store stays the same doesnt alert user if another image needs deleting
+    if (this.props.image.error != this.state.error) {
       alert(this.props.image.error);
+      this.setState({ error: this.props.image.error });
     }
 
     //add uploaded image to state image list
@@ -108,14 +110,6 @@ class Admin extends Component {
       //force a reload
       window.location.reload(false);
     }
-  }
-
-  componentDidMount() {
-    console.log("component did mount");
-  }
-  shouldComponentUpdate() {
-    console.log("inside should component update");
-    return true;
   }
 
   //has access to this
@@ -172,7 +166,7 @@ class Admin extends Component {
 
       //call method to upload to cloudinary get back the URL
       let cloudURL =
-        "https://res.cloudinary.com/dozvqlete/image/upload/v1580181632/nsu0ssrlityveg94celu.jpg"; //await this.uploadToCloud();
+        "https://res.cloudinary.com/dozvqlete/image/upload/v1580235101/xju5oeyzpily9ok9jdde.png"; //await this.uploadToCloud();
 
       let imageInfo = {
         cloudURL: cloudURL,
@@ -234,14 +228,12 @@ class Admin extends Component {
     console.log("after blog post is sent");
   };
 
-  deleteImage = (imageURL, index) => {
-    console.log("inside delete image");
-    //perhaps delete based on index, would need to reverse the array
-    //if there are two of the same in portfolio, deleting occurs on the ///first one in the array
-    //after deleting something and then adding a new image to portfolio,
+  deleteImage = () => {
+    //remove modal from view
+    this.toggleModal();
 
-    //call action to delete image
-    // this.props.deleteImage(imageURL);
+    //call redux action to delete image
+    this.props.deleteImage(this.state.imageIdToDelete);
   };
 
   saveMywork = () => {
@@ -268,7 +260,8 @@ class Admin extends Component {
   };
 
   toggleModal = () => {
-    this.setState({ showModal: false });
+    //toggles modal window on and off
+    this.setState({ showModal: !this.state.showModal });
   };
 
   render() {
@@ -333,9 +326,9 @@ class Admin extends Component {
             <div className="delete-img-2">
               <div className="portfolio-items row">
                 {this.state.imageList &&
-                  this.state.imageList.map((image, index) => (
+                  this.state.imageList.map(image => (
                     <div
-                      key={index}
+                      key={image.id}
                       className={
                         `portfolio-item item ` +
                         image.type +
@@ -350,7 +343,8 @@ class Admin extends Component {
                         onClick={() =>
                           this.setState({
                             showModal: true,
-                            imageToDelete: image.url
+                            imageToDelete: image.url,
+                            imageIdToDelete: image.id
                           })
                         }
                         className="mfp-image"

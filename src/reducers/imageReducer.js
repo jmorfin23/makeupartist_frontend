@@ -6,7 +6,8 @@ const initialState = {
   item: {},
   deletedImage: null,
   deletedStatus: false,
-  addedStatus: false
+  addedStatus: false,
+  error: {}
 };
 
 const imageReducer = (state = initialState, action) => {
@@ -27,7 +28,8 @@ const imageReducer = (state = initialState, action) => {
         ...state,
         item: action.payload,
         deletedImage: action.payload.deletedImage,
-        deletedStatus: action.payload.status
+        deletedStatus: action.payload.status,
+        error: action.payload.error
       };
     default:
       return state;

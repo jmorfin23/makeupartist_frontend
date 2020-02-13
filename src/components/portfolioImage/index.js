@@ -29,7 +29,7 @@ const PortfolioImage = () => {
     // Add the "show" class (display:block) to the filtered elements, and remove the "show" class from the elements that are not selected
     for (i = 0; i < x.length; i++) {
       w3RemoveClass(x[i], "hide");
-      console.log(x[i].className.indexOf(c) > -1);
+
       if (x[i].className.indexOf(c) > -1) {
         continue;
       } else {

@@ -14,28 +14,25 @@ import BlogPosts from "../../components/blogPosts";
 import PortfolioImage from "../../components/portfolioImage";
 import * as $ from "jquery";
 
-//Questions:
+//Changes to the application: ?
 //============================================
-//putting my api requests in app.js, that gets called everytime i click
-//on a  new page.
-//try and catch where are good places.
-//should i delete images based on index or value?
-//when adding and deleting images should i return the whole image list ////from backend? or splice it.
-//should i use tokens?
 
-//https://developers.redhat.com/blog/2016/01/07/react-js-with-isotope-and-flux/
-//time complexity and space complexity
-//bootstrap modal windows - 2 versions of bootsrap
 //make application into production mode, same with portfolio.
 //connect to stylesheet
 //connect to mailchimp
-//put proptypes in app.js
-//should i fetch 3 for my home page then on blogpost page fetch the ones needed?
+//put proptypes in app.js ? or individual components as well
+//should I fetch 3 for my home page then on blogpost page fetch the ones needed?
 //still a bytestring error on admin page.
-//should update for app.js
-//add a scroll bar to pages.
-//my method of grabbing blogposts.
+//shouldupdate() for app.js ?
+//add a scroll bar to pages
+//my method of grabbing blogposts
 //delete blogpost section of admin page
+//transform images with cloudinary to change image sizes.
+//change how I did the pagination
+//how to make components more generic and reusable.
+//need a more efficient method of deleting and displaying errors to user
+//url links for blogposts
+//============================================
 
 class Home extends Component {
   render() {
