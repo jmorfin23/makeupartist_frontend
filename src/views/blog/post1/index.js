@@ -13,6 +13,7 @@ class Post1 extends Component {
   }
 
   render() {
+    console.log(this.props.match);
     let post = [];
     //grab data from header and parse through list of blogposts
     if (this.props.blogposts.items.data) {

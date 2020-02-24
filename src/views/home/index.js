@@ -20,18 +20,23 @@ import * as $ from "jquery";
 //make application into production mode, same with portfolio.
 //connect to stylesheet
 //connect to mailchimp
+
 //put proptypes in app.js ? or individual components as well
 //should I fetch 3 for my home page then on blogpost page fetch the ones needed?
 //still a bytestring error on admin page.
 //shouldupdate() for app.js ?
-//add a scroll bar to pages
 //my method of grabbing blogposts
 //delete blogpost section of admin page
 //transform images with cloudinary to change image sizes.
-//change how I did the pagination
+//change how I did the pagination, when clicking on a new page,
+//then call api to grab next posts, logic would have to be in the backend
 //how to make components more generic and reusable.
 //need a more efficient method of deleting and displaying errors to user
 //url links for blogposts
+//securing information and data.
+//links to images are to cloudinary how to change this.
+//RSS for updating blogposts with mailchimp ** need paid software for this /GHOST
+
 //============================================
 
 class Home extends Component {

@@ -42,14 +42,9 @@ class Blog extends Component {
 
   getSinglePost = (id, e) => {
     e.preventDefault();
-    console.log("inside get single post");
-
+    console.log("** inside get single post!!!!");
     //call method to get single post
     this.props.getSinglePost(id);
-    console.log("test1");
-    this.props.this.setState({ redirect: "/post:" });
-
-    console.log("test2");
   };
   gotoPage = page => {
     const { onPageChanged = f => f } = this.props;
@@ -155,9 +150,10 @@ class Blog extends Component {
   };
   render() {
     console.log("inside render: ");
-    if (this.state.redirect) {
-      return <Redirect to="/post" />;
-    }
+    // if (this.props.singlePost) {
+    //   return <Redirect to="/post" stuff={this.props.singlePost} />;
+    // }
+
     this.postsPerPage = 4;
     this.pageNeighbours = 0;
 
@@ -167,7 +163,6 @@ class Blog extends Component {
     }
 
     const pages = this.fetchPageNumbers();
-
     return (
       <div className="blog">
         <section className="section section-page-title">
@@ -192,7 +187,7 @@ class Blog extends Component {
                       </div>
                       <div className="post-loop-info clearfix">
                         <h1>
-                          <a href={`/${post.id}`}>{post.title}</a>
+                          <a href={`/${post.title}`}>{post.title}</a>
                         </h1>
                         <ul className="entry-meta">
                           <li>
@@ -201,14 +196,14 @@ class Blog extends Component {
                           </li>
                           <li>
                             <i className="fa fa-comments"></i>
-                            <a href="#">7 Comments</a>
+                            Comments
                           </li>
                         </ul>
                         <p>{post.content.slice(0, 350) + "..."}</p>
                       </div>
                       {/*post-loop-info*/}
                       <div className="post-footer clearfix">
-                        <a href="post.html">
+                        <a onClick={e => this.getSinglePost(post.id, e)}>
                           read more <i className="fa fa-long-arrow-right"></i>
                         </a>
                         <ul className="social-share-buttons clearfix">
@@ -438,7 +433,8 @@ class Blog extends Component {
 }
 
 const mapStateToProps = state => ({
-  blogposts: state.blogposts.items
+  blogposts: state.blogposts.items,
+  singlePost: state.blogposts.singlePost
 });
 
 export default connect(mapStateToProps, { getSinglePost })(Blog);

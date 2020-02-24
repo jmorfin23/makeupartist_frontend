@@ -59,10 +59,13 @@ class Admin extends Component {
     //add images to DOM // may need to change this later
     if (this.props.images.data != prevState.imageList) {
       this.setState({ imageList: this.props.images.data });
+      //call action to clear image section of store
+      //this.props.clearImages();
     }
     //if user login error alert error
     if (this.props.user.items.error) {
       alert(this.props.user.items.error);
+      //clears ^
     }
 
     //alert error if image error

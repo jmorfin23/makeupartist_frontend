@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "./App.css";
-import { Switch, Route, Router } from "react-router-dom";
+import { Switch, Route } from "react-router-dom";
 import Home from "./views/home";
 import Header from "./components/header";
 import About from "./views/about";
@@ -20,6 +20,7 @@ class App extends Component {
   componentDidMount() {
     //retrieve portfolio images from backend
     this.props.fetchImages();
+
     //retrieve blog posts from backend
     this.props.fetchBlogPosts();
   }
@@ -36,9 +37,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        {/* Header goes below here */}
         <Header />
-        {/* Header goes above */}
         <Switch>
           <Route exact path={"/admin"} render={() => <Admin />} />
           <Route exact path={["/", "/home"]} render={() => <Home />} />
@@ -50,9 +49,7 @@ class App extends Component {
           <Route path={"/:post"} render={() => <Post1 />} />
           <Route exact path={"/leftsidebar"} render={() => <LeftSideBar />} />
         </Switch>
-        {/* footer goes below here */}
         <Footer />
-        {/* footer goes below here */}
       </div>
     );
   }

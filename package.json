@@ -7,6 +7,7 @@
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
     "bootstrap": "^4.4.1",
+    "i": "^0.3.6",
     "jquery": "^3.4.1",
     "prop-types": "^15.7.2",
     "react": "^16.12.0",
@@ -46,7 +47,8 @@
   "devDependencies": {
     "husky": "^4.0.10",
     "prettier": "1.19.1",
-    "pretty-quick": "^2.0.1"
+    "pretty-quick": "^2.0.1",
+    "webpack-cli": "^3.3.11"
   },
   "husky": {
     "hooks": {
