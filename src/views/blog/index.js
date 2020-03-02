@@ -46,6 +46,7 @@ class Blog extends Component {
     //call method to get single post
     this.props.getSinglePost(id);
   };
+
   gotoPage = page => {
     const { onPageChanged = f => f } = this.props;
 

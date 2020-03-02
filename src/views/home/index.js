@@ -36,7 +36,7 @@ import * as $ from "jquery";
 //securing information and data.
 //links to images are to cloudinary how to change this.
 //RSS for updating blogposts with mailchimp ** need paid software for this /GHOST
-
+//changed deletedImage prop from null to {}, this may cause error in future.
 //============================================
 
 class Home extends Component {

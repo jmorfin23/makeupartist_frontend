@@ -481,7 +481,16 @@ class Admin extends Component {
 //set propTypes TODO
 Admin.propTypes = {
   loginAdmin: PropTypes.func.isRequired,
-  user: PropTypes.object.isRequired
+  addImage: PropTypes.func.isRequired,
+  deleteImage: PropTypes.func.isRequired,
+  addBlogPost: PropTypes.func.isRequired,
+  user: PropTypes.object,
+  deletedStatus: PropTypes.bool,
+  addedStatus: PropTypes.bool,
+  deletedImage: PropTypes.object,
+  images: PropTypes.array,
+  image: PropTypes.object,
+  blogposts: PropTypes.object
 };
 
 //consolodate this l8r
