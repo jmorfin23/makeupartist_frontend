@@ -38,10 +38,27 @@ export const addBlogPost = blogPostInfo => {
   };
 };
 
-export const deleteBlogPost = () => {
+export const deleteBlogPost = id => {
   console.log("inside delete blog post");
+  return function(dispatch) {
+    fetch("http://127.0.0.1:5000/api/delete-blog-post", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        id: id
+      }
+    })
+      .then(res => res.json())
+      .then(data =>
+        dispatch({
+          type: DELETE_BLOG_POST,
+          payload: data
+        })
+      );
+  };
 };
 
+//this may not need to be used **addressing this with derek.
 export const getSinglePost = id => {
   return function(dispatch) {
     console.log("inside get single post action");

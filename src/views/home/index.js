@@ -37,7 +37,12 @@ import * as $ from "jquery";
 //links to images are to cloudinary how to change this.
 //RSS for updating blogposts with mailchimp ** need paid software for this /GHOST
 //changed deletedImage prop from null to {}, this may cause error in future.
+//add an alert state and update the state change whenever redux props change
 //============================================
+
+//2 main questions for derek:
+//the deleting and alerting the user situation
+//the blogposts
 
 class Home extends Component {
   render() {

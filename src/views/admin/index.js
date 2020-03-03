@@ -4,7 +4,7 @@ import PortfolioImage from "../../components/portfolioImage";
 import { connect } from "react-redux";
 import { loginAdmin } from "../../actions/adminActions.js";
 import { addImage, deleteImage } from "../../actions/imageActions.js";
-import { addBlogPost } from "../../actions/blogActions.js";
+import { addBlogPost, deleteBlogPost } from "../../actions/blogActions.js";
 import PropTypes from "prop-types";
 import ModalWindow from "../../components/modal";
 //CLOUDINARY URL & PRESET
@@ -23,12 +23,14 @@ class Admin extends Component {
       blogTitle: "",
       isLogged: false,
       imageList: [],
+      blogPostsList: [],
       error: null,
       addedStatus: false,
       saveFlag: false,
       showModal: false,
       imageToDelete: null,
-      imageIdToDelete: null
+      imageIdToDelete: null,
+      myAlert: null
     };
   }
 
@@ -61,6 +63,11 @@ class Admin extends Component {
       this.setState({ imageList: this.props.images.data });
       //call action to clear image section of store
       //this.props.clearImages();
+    }
+
+    //add blogposts to DOM table
+    if (this.props.blogposts.items.data != prevState.blogPostsList) {
+      this.setState({ blogPostsList: this.props.blogposts.items.data });
     }
     //if user login error alert error
     if (this.props.user.items.error) {
@@ -112,6 +119,21 @@ class Admin extends Component {
       alert(this.props.blogposts.item.success.message);
       //force a reload
       window.location.reload(false);
+    }
+
+    //address this.
+    if (this.props.blogisDeleted != prevProps.blogisDeleted) {
+      alert(this.props.blogisDeleted.success);
+
+      console.log(this.props.blogisDeleted.id);
+      console.log(this.props.blogposts.items.data);
+      //delete based on id of blogpost that was deleted
+
+      let alist = this.state.blogPostsList;
+      let index = this.indexToDelete(alist, "id", this.props.blogisDeleted.id);
+      alist.splice(index, 1);
+
+      this.setState({ blogPostsList: alist });
     }
   }
 
@@ -267,7 +289,17 @@ class Admin extends Component {
     this.setState({ showModal: !this.state.showModal });
   };
 
+  deleteBlogPost = (e, id) => {
+    e.preventDefault();
+    console.log(id);
+    console.log("inside delete blogpost");
+
+    //call action to delete blogpost
+    this.props.deleteBlogPost(id);
+  };
+
   render() {
+    console.log(this.props.blogisDeleted);
     if (this.state.isLogged) {
       return (
         <div className="make-centered">
@@ -457,14 +489,19 @@ class Admin extends Component {
                   </tr>
                 </thead>
                 <tbody className="delete-table-body">
-                  {this.props.blogposts.items.data &&
-                    this.props.blogposts.items.data.map(post => (
+                  {this.state.blogPostsList &&
+                    this.state.blogPostsList.map(post => (
                       <tr key={post.id}>
                         <td>{post.id}</td>
                         <td>{post.title}</td>
                         <td>{post.date_posted}</td>
                         <td>
-                          <button className="delete-button">X</button>
+                          <button
+                            onClick={e => this.deleteBlogPost(e, post.id)}
+                            className="delete-button"
+                          >
+                            X
+                          </button>
                         </td>
                       </tr>
                     ))}
@@ -533,12 +570,14 @@ const mapStateToProps = state => ({
   deletedImage: state.images.deletedImage,
   deletedStatus: state.images.deletedStatus,
   addedStatus: state.images.addedStatus,
-  blogposts: state.blogposts
+  blogposts: state.blogposts,
+  blogisDeleted: state.blogposts.deletedStatus
 });
 
 export default connect(mapStateToProps, {
   loginAdmin,
   addImage,
   deleteImage,
-  addBlogPost
+  addBlogPost,
+  deleteBlogPost
 })(Admin);
