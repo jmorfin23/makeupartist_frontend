@@ -119,6 +119,35 @@ h3 {
 /* ==================================*/
 
 /* ==================================*/
+/* ====== ADD BLOG POST SECTION ======*/
+/* ==================================*/
+
+.delete-blogPost {
+  display: block;
+  text-align: center;
+}
+.delete-blogPost-2 {
+  margin: 0 45px 45px;
+  padding: 25px 0;
+}
+.delete-button {
+  background-color: #ff0000;
+  color: #ffffff;
+  border-radius: 8px;
+  padding: 8px 15px 8px 15px;
+}
+.delete-button:hover {
+  color: #000000;
+}
+
+.delete-table-head {
+  text-align: center;
+}
+.delete-table-body {
+  text-align: center;
+}
+
+/* ==================================*/
 /* ========== Modal Window ==========*/
 /* ==================================*/
 

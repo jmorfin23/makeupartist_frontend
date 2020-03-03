@@ -441,6 +441,37 @@ class Admin extends Component {
               </button>
             </form>
           </div>
+          <br />
+          <br />
+          <div className="delete-blogPost">
+            <h2>Delete a BlogPost: </h2>
+            <div className="delete-blogPost-2">
+              {/* display blogposts */}
+              <table className="table">
+                <thead>
+                  <tr className="delete-table-head">
+                    <th>ID</th>
+                    <th>Title</th>
+                    <th>Date Posted</th>
+                    <th>Delete</th>
+                  </tr>
+                </thead>
+                <tbody className="delete-table-body">
+                  {this.props.blogposts.items.data &&
+                    this.props.blogposts.items.data.map(post => (
+                      <tr key={post.id}>
+                        <td>{post.id}</td>
+                        <td>{post.title}</td>
+                        <td>{post.date_posted}</td>
+                        <td>
+                          <button className="delete-button">X</button>
+                        </td>
+                      </tr>
+                    ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
         </div>
       );
     } else {

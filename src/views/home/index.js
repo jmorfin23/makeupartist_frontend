@@ -21,7 +21,7 @@ import * as $ from "jquery";
 //connect to stylesheet
 //connect to mailchimp
 
-//put proptypes in app.js ? or individual components as well
+//proptypes
 //should I fetch 3 for my home page then on blogpost page fetch the ones needed?
 //still a bytestring error on admin page.
 //shouldupdate() for app.js ?

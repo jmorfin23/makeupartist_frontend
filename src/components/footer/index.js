@@ -101,7 +101,7 @@ const Footer = () => {
                 <a href="/admin">Admin</a>
               </li>
             </ul>
-            <p>2020 Jerlicia Jordan. All Rights reserved.</p>
+            <p>Jerlicia Jordan © 2020, All Rights Reserved.</p>
           </div>
           {/* container*/}
         </section>
