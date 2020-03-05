@@ -58,15 +58,14 @@ export const deleteBlogPost = id => {
   };
 };
 
-//this may not need to be used **addressing this with derek.
-export const getSinglePost = id => {
+export const getSinglePost = link => {
   return function(dispatch) {
     console.log("inside get single post action");
     fetch("http://127.0.0.1:5000/api/single-post", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        id: id
+        link: link
       }
     })
       .then(res => res.json())

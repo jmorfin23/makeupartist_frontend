@@ -12,8 +12,17 @@ class Post1 extends Component {
     super(props);
   }
 
+  componentDidUpdate() {
+    console.log("inside component did update");
+    console.log(window.history);
+    console.log(this.props);
+    //call action to query database with link
+    // this.props.getSinglePost(this.props.match.params.post);
+  }
+  //options:
+  //1: query database with the specific post param, update state
+
   render() {
-    console.log(this.props.match);
     let post = [];
     //grab data from header and parse through list of blogposts
     if (this.props.blogposts.items.data) {

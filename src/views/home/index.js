@@ -39,10 +39,14 @@ import * as $ from "jquery";
 //changed deletedImage prop from null to {}, this may cause error in future.
 //add an alert state and update the state change whenever redux props change
 //============================================
+//create a register page
 
+// ask about setting so
 //2 main questions for derek:
 //the deleting and alerting the user situation
-//the blogposts
+//the blogposts - slugify() *
+
+//rss feed - mailchimp *
 
 class Home extends Component {
   render() {

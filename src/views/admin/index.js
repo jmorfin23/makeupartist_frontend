@@ -66,6 +66,14 @@ class Admin extends Component {
     }
 
     //add blogposts to DOM table
+    if (
+      this.props.blogposts.items.data != [] &&
+      this.props.blogposts.items.type
+    ) {
+      console.log("this is working!!");
+    }
+
+    //check if new blogpost are equal to old blogposts
     if (this.props.blogposts.items.data != prevState.blogPostsList) {
       this.setState({ blogPostsList: this.props.blogposts.items.data });
     }
@@ -83,7 +91,7 @@ class Admin extends Component {
     }
 
     //add uploaded image to state image list
-    if (this.props.image.newLength == prevState.imageList.length + 1) {
+    if (this.props.newLength == prevState.imageList.length + 1) {
       alert(this.props.image.success);
 
       let newList = prevState.imageList;
@@ -92,9 +100,8 @@ class Admin extends Component {
     }
 
     //alert if delete image successful and take out of imageList
-    if (this.props.image.newLength == this.state.imageList.length - 1) {
+    if (this.props.newLength == this.state.imageList.length - 1) {
       alert("Deleted Image");
-
       let newList = this.state.imageList;
       let index = this.indexToDelete(newList, "url", this.props.deletedImage);
       newList.splice(index, 1);
@@ -113,7 +120,7 @@ class Admin extends Component {
 
       this.setState({ blogTitle: title, text: text });
     }
-    console.log(this.props);
+
     //if blog post successful alert the user
     if (this.props.blogposts.item.success != prevProps.blogposts.item.success) {
       alert(this.props.blogposts.item.success.message);
@@ -125,10 +132,7 @@ class Admin extends Component {
     if (this.props.blogisDeleted != prevProps.blogisDeleted) {
       alert(this.props.blogisDeleted.success);
 
-      console.log(this.props.blogisDeleted.id);
-      console.log(this.props.blogposts.items.data);
       //delete based on id of blogpost that was deleted
-
       let alist = this.state.blogPostsList;
       let index = this.indexToDelete(alist, "id", this.props.blogisDeleted.id);
       alist.splice(index, 1);
@@ -567,6 +571,7 @@ const mapStateToProps = state => ({
   user: state.user,
   images: state.images.items,
   image: state.images.item,
+  newLength: state.images.newLength,
   deletedImage: state.images.deletedImage,
   deletedStatus: state.images.deletedStatus,
   addedStatus: state.images.addedStatus,

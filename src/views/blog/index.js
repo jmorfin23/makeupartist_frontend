@@ -7,15 +7,17 @@ import { getSinglePost } from "../../actions/blogActions.js";
 import { Redirect, Router, Route } from "react-router-dom";
 import Post1 from "./post1";
 
+// use local storage to hold blogpost id use that to query the database
 class Blog extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
       currentPage: 1,
+      postsPerPage: 4,
+      pageNeighbours: 0,
       pages: 0,
-      currentPosts: [],
-      redirect: null
+      currentPosts: []
     };
   }
 
@@ -55,7 +57,7 @@ class Blog extends Component {
     const paginationData = {
       currentPage,
       totalPages: this.totalPages,
-      pageLimit: this.postsPerPage,
+      pageLimit: this.state.postsPerPage,
       totalRecords: this.totalPosts
     };
 
@@ -70,12 +72,12 @@ class Blog extends Component {
 
   handleMoveLeft = e => {
     e.preventDefault();
-    this.gotoPage(this.state.currentPage - this.pageNeighbours * 2 - 1);
+    this.gotoPage(this.state.currentPage - this.state.pageNeighbours * 2 - 1);
   };
 
   handleMoveRight = e => {
     e.preventDefault();
-    this.gotoPage(this.state.currentPage + this.pageNeighbours * 2 + 1);
+    this.gotoPage(this.state.currentPage + this.state.pageNeighbours * 2 + 1);
   };
 
   range = (from, to, step = 1) => {
@@ -96,14 +98,14 @@ class Blog extends Component {
 
     const totalPages = this.totalPages;
     const currentPage = this.state.currentPage;
-    const pageNeighbours = this.pageNeighbours;
+    const pageNeighbours = this.state.pageNeighbours;
 
     /**
      * totalNumbers: the total page numbers to show on the control
      * totalBlocks: totalNumbers + 2 to cover for the left(<) and right(>) controls
      */
 
-    const totalNumbers = this.pageNeighbours * 2 + 3;
+    const totalNumbers = this.state.pageNeighbours * 2 + 3;
     const totalBlocks = totalNumbers + 2;
 
     if (totalPages > totalBlocks) {
@@ -150,17 +152,9 @@ class Blog extends Component {
     return this.range(1, totalPages);
   };
   render() {
-    console.log("inside render: ");
-    // if (this.props.singlePost) {
-    //   return <Redirect to="/post" stuff={this.props.singlePost} />;
-    // }
-
-    this.postsPerPage = 4;
-    this.pageNeighbours = 0;
-
     if (this.props.blogposts.data) {
       this.totalPosts = this.props.blogposts.data.length;
-      this.totalPages = Math.ceil(this.totalPosts / this.postsPerPage);
+      this.totalPages = Math.ceil(this.totalPosts / this.state.postsPerPage);
     }
 
     const pages = this.fetchPageNumbers();
@@ -188,7 +182,7 @@ class Blog extends Component {
                       </div>
                       <div className="post-loop-info clearfix">
                         <h1>
-                          <a href={`/${post.title}`}>{post.title}</a>
+                          <a href={`/${post.link}`}>{post.title}</a>
                         </h1>
                         <ul className="entry-meta">
                           <li>
