@@ -182,7 +182,7 @@ class Blog extends Component {
                       </div>
                       <div className="post-loop-info clearfix">
                         <h1>
-                          <a href={`/${post.link}`}>{post.title}</a>
+                          <a href={`/${post.path}`}>{post.title}</a>
                         </h1>
                         <ul className="entry-meta">
                           <li>

@@ -48,6 +48,9 @@ import * as $ from "jquery";
 
 //rss feed - mailchimp *
 
+//make an action that pull the 3 most recent posts
+// set up blogposts page for paths
+
 class Home extends Component {
   render() {
     return (

@@ -58,14 +58,13 @@ export const deleteBlogPost = id => {
   };
 };
 
-export const getSinglePost = link => {
+export const getSinglePost = path => {
   return function(dispatch) {
-    console.log("inside get single post action");
     fetch("http://127.0.0.1:5000/api/single-post", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        link: link
+        path: path
       }
     })
       .then(res => res.json())

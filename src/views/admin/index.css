@@ -1,4 +1,16 @@
 /* ==================================*/
+/* ======== LOGIN SECTION =======*/
+/* ==================================*/
+.forgot-pass {
+  text-align: center;
+}
+
+.forgot-pass:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+/* ==================================*/
 /* ======== ADD IMAGE SECTION =======*/
 /* ==================================*/
 .admin {

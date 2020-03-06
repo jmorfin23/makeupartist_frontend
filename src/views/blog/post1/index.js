@@ -10,90 +10,49 @@ import { getSinglePost } from "../../../actions/blogActions.js";
 class Post1 extends Component {
   constructor(props) {
     super(props);
+
+    this.state = {
+      id: null,
+      title: null,
+      author: null,
+      date: null,
+      content: null,
+      comments: [],
+      url: null,
+      nextPosts: []
+    };
   }
 
-  componentDidUpdate() {
-    console.log("inside component did update");
-    console.log(window.history);
-    console.log(this.props);
-    //call action to query database with link
-    // this.props.getSinglePost(this.props.match.params.post);
+  componentDidMount() {
+    //call action to query database with path
+    this.props.getSinglePost(this.props.match.params.post);
   }
-  //options:
-  //1: query database with the specific post param, update state
+
+  static getDerivedStateFromProps(nextProps, prevState) {
+    console.log(nextProps);
+    if (nextProps.singlePost.success && nextProps.singlePost.nextPosts) {
+      console.log("this is hit?");
+      let post = nextProps.singlePost.success;
+      console.log(post);
+      return {
+        post: post.id,
+        title: post.title,
+        author: post.author,
+        date: post.date,
+        content: post.content,
+        comments: post.comments,
+        url: post.url,
+        nextPosts: nextProps.singlePost.nextPosts
+      };
+    }
+  }
 
   render() {
-    let post = [];
-    //grab data from header and parse through list of blogposts
-    if (this.props.blogposts.items.data) {
-      const blog = this.props.blogposts.items.data;
-      for (let i = 0; i < blog.length; i++) {
-        if (blog[i]["id"] == this.props.match.params.post) {
-          post = {
-            title: blog[i]["title"],
-            author: blog[i]["author"],
-            id: blog[i]["id"],
-            content: blog[i]["content"],
-            date_posted: blog[i]["date_posted"],
-            url: blog[i]["url"]
-          };
-        }
-      }
-    }
-    //logic for other blogpost to display
-    let nextPosts = [];
-    if (post.id) {
-      const test = this.props.blogposts.items.data;
-      for (let i = 0; i < test.length; i++) {
-        if (post.id - 3 === test[i]["id"]) {
-          nextPosts.push({
-            id: test[i - 2]["id"],
-            title: test[i - 2]["title"],
-            url: test[i - 2]["url"],
-            date: test[i - 2]["date_posted"]
-          });
-          nextPosts.push({
-            id: test[i - 1]["id"],
-            title: test[i - 1]["title"],
-            url: test[i - 1]["url"],
-            date: test[i - 1]["date_posted"]
-          });
-          nextPosts.push({
-            id: test[i]["id"],
-            title: test[i]["title"],
-            url: test[i]["url"],
-            date: test[i]["date_posted"]
-          });
-        }
-        if (post.id + 3 === test[i]["id"]) {
-          nextPosts.push({
-            id: test[i + 2]["id"],
-            title: test[i + 2]["title"],
-            url: test[i + 2]["url"],
-            date: test[i + 2]["date_posted"]
-          });
-          nextPosts.push({
-            id: test[i + 1]["id"],
-            title: test[i + 1]["title"],
-            url: test[i + 1]["url"],
-            date: test[i + 1]["date_posted"]
-          });
-          nextPosts.push({
-            id: test[i]["id"],
-            title: test[i]["title"],
-            url: test[i]["url"],
-            date: test[i]["date_posted"]
-          });
-        }
-      }
-    }
-
-    console.log(nextPosts);
     return (
       <div className="post1">
         <section className="section section-page-title">
           <div className="overlay">
-            <h1>{post.title}</h1>
+            <h1>{this.state.title}</h1>
           </div>
           {/*overlay*/}
         </section>
@@ -108,41 +67,41 @@ class Post1 extends Component {
                       <img src="http://placehold.it/750x500" alt="" />
                     </a>
                   </div>
-                  <h1 className="single-post-title">{post.title}</h1>
+                  <h1 className="single-post-title">{this.state.title}</h1>
                   <ul className="entry-meta">
                     <li>
                       <i className="fa fa-calendar"></i>
-                      {post.date}
+                      {this.state.date}
                     </li>
                     <li>
                       <i className="fa fa-comments"></i>
-                      <a href="#">{post.comments}</a>
+                      <a href="#">{this.state.comments.length + " Comments"}</a>
                     </li>
                   </ul>
                   <div className="entry clearfix">
-                    <p>{post.content}</p>
+                    <p>{this.state.content}</p>
                   </div>
                   {/*entry*/}
                 </div>
                 {/*padd-white-box*/}
                 <div className="related-post-box">
                   <div className="row">
-                    {nextPosts &&
-                      nextPosts.map(post => (
-                        <div className="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-                          <div
-                            key={post.id}
-                            className="post-entry post-entry-related"
-                          >
+                    {this.state.nextPosts &&
+                      this.state.nextPosts.map(post => (
+                        <div
+                          key={post.id}
+                          className="col-lg-4 col-md-4 col-sm-6 col-xs-12"
+                        >
+                          <div className="post-entry post-entry-related">
                             <div className="post-thumbnial">
-                              <a href="post.html">
+                              <a href={`/${post.path}`}>
                                 <img src={placeholder} alt="" />
                               </a>
                             </div>
                             {/*post-thumbnial*/}
                             <div className="post-entry-related-contents">
                               <h1>
-                                <a href="post.html">{post.title}</a>
+                                <a href={`/${post.path}`}>{post.title}</a>
                               </h1>
                               <ul className="entry-meta">
                                 <li>
@@ -311,7 +270,7 @@ class Post1 extends Component {
 }
 
 const mapStateToProps = state => ({
-  blogposts: state.blogposts
+  singlePost: state.blogposts.singlePost
 });
 
 export default connect(mapStateToProps, { getSinglePost })(withRouter(Post1));

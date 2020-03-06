@@ -1,4 +1,4 @@
-import React, { Component, useState } from "react";
+import React, { Component } from "react";
 import "./index.css";
 import PortfolioImage from "../../components/portfolioImage";
 import { connect } from "react-redux";
@@ -21,6 +21,7 @@ class Admin extends Component {
       admin: null,
       text: "",
       blogTitle: "",
+      blogDate: "",
       isLogged: false,
       imageList: [],
       blogPostsList: [],
@@ -247,6 +248,7 @@ class Admin extends Component {
 
     blogPostInfo = {
       title: this.state.blogTitle,
+      date: this.state.blogDate,
       url: cloudURL,
       text: this.state.text
     };
@@ -439,6 +441,18 @@ class Admin extends Component {
                 />
               </div>
               <div className="form-group">
+                <label>Date</label>
+                <input
+                  onChange={e => this.setState({ blogDate: e.target.value })}
+                  name="date"
+                  type="text"
+                  className="form-control"
+                  required="required"
+                  placeholder="dd mmm yyyy"
+                  value={this.state.blogDate}
+                />
+              </div>
+              <div className="form-group">
                 <label htmlFor="file-input">Image</label>
                 <input
                   id="blogImage"
@@ -486,9 +500,9 @@ class Admin extends Component {
               <table className="table">
                 <thead>
                   <tr className="delete-table-head">
-                    <th>ID</th>
+                    <th>Date</th>
                     <th>Title</th>
-                    <th>Date Posted</th>
+                    <th>URL</th>
                     <th>Delete</th>
                   </tr>
                 </thead>
@@ -496,9 +510,9 @@ class Admin extends Component {
                   {this.state.blogPostsList &&
                     this.state.blogPostsList.map(post => (
                       <tr key={post.id}>
-                        <td>{post.id}</td>
-                        <td>{post.title}</td>
                         <td>{post.date_posted}</td>
+                        <td>{post.title}</td>
+                        <td>{post.url}</td>
                         <td>
                           <button
                             onClick={e => this.deleteBlogPost(e, post.id)}
@@ -540,9 +554,18 @@ class Admin extends Component {
                 placeholder="Password"
               />
             </div>
-            <button type="submit" className="btn btn-primary">
-              Submit
-            </button>
+            <div className="forgot-pass">
+              <p>
+                <a onClick={() => console.log("forgot account?")}>
+                  Forgot account?
+                </a>
+              </p>
+            </div>
+            <div className="center">
+              <button type="submit" className="btn btn-primary">
+                Submit
+              </button>
+            </div>
           </form>
         </div>
       );
