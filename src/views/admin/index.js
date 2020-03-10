@@ -1,12 +1,13 @@
 import React, { Component } from "react";
 import "./index.css";
 import PortfolioImage from "../../components/portfolioImage";
+import PropTypes from "prop-types";
+import ModalWindow from "../../components/modal";
 import { connect } from "react-redux";
 import { loginAdmin } from "../../actions/adminActions.js";
 import { addImage, deleteImage } from "../../actions/imageActions.js";
 import { addBlogPost, deleteBlogPost } from "../../actions/blogActions.js";
-import PropTypes from "prop-types";
-import ModalWindow from "../../components/modal";
+
 //CLOUDINARY URL & PRESET
 const CLOUDINARY_URL = "https://api.cloudinary.com/v1_1/dozvqlete/upload";
 const CLOUDINARY_UPLOAD_PRESET = "zzmnc51n";
@@ -535,13 +536,13 @@ class Admin extends Component {
           <h2>Admin Login</h2>
           <form onSubmit={e => this.submitLoginForm(e)}>
             <div className="form-group">
-              <label>Username</label>
+              <label>Email</label>
               <input
                 name="username"
                 type="username"
                 className="form-control"
                 required="required"
-                placeholder="Username"
+                placeholder="Email"
               />
             </div>
             <div className="form-group">
@@ -556,9 +557,7 @@ class Admin extends Component {
             </div>
             <div className="forgot-pass">
               <p>
-                <a onClick={() => console.log("forgot account?")}>
-                  Forgot account?
-                </a>
+                <a href="/reset">Forgot account?</a>
               </p>
             </div>
             <div className="center">

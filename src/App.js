@@ -15,6 +15,7 @@ import Admin from "./views/admin";
 import { connect } from "react-redux";
 import { fetchImages } from "./actions/imageActions.js";
 import { fetchBlogPosts } from "./actions/blogActions.js";
+import Reset from "./views/reset";
 
 class App extends Component {
   componentDidMount() {
@@ -46,8 +47,8 @@ class App extends Component {
           <Route exact path={"/portfolio"} render={() => <Portfolio />} />
           <Route exact path={"/blog"} render={() => <Blog />} />
           <Route exact path={"/contact"} render={() => <Contact />} />
+          <Route exact path={"/reset"} render={() => <Reset />} />
           <Route path={"/:post"} render={() => <Post1 />} />
-          <Route exact path={"/leftsidebar"} render={() => <LeftSideBar />} />
         </Switch>
         <Footer />
       </div>
