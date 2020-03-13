@@ -1,7 +1,7 @@
 // =========== LOGIN ================
 export const LOGIN_ADMIN = "LOGIN_ADMIN";
 export const REGISTER_ADMIN = "REGISTER_ADMIN";
-export const RESET_PASSWORD = "RESET_PASSWORD";
+export const CHECK_USER = "CHECK_USER";
 export const UPDATE_PASSWORD = "RESET_PASSWORD";
 // =========== IMAGES ===============
 export const FETCH_IMAGES = "FETCH_IMAGES";

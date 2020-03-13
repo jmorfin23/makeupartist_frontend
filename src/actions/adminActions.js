@@ -1,7 +1,7 @@
 import {
   LOGIN_ADMIN,
   REGISTER_ADMIN,
-  RESET_PASSWORD,
+  CHECK_USER,
   UPDATE_PASSWORD
 } from "./types.js";
 
@@ -59,7 +59,7 @@ export const resetPassword = email => {
       .then(res => res.json())
       .then(data =>
         dispatch({
-          type: RESET_PASSWORD,
+          type: CHECK_USER,
           payload: data
         })
       );

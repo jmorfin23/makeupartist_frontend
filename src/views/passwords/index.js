@@ -22,6 +22,7 @@ class Passwords extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
+    console.log("test");
     if (this.state.info != prevState.info) {
       alert(this.state.info);
 

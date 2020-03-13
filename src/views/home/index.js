@@ -53,7 +53,7 @@ import * as $ from "jquery";
 
 //×TypeError: Cannot read property 'length' of undefined when loading admin page sometimes
 
-//create a fallback page when user tries to look up a blogpost but there is no blogpost of that name.
+//create a 404 page
 
 class Home extends Component {
   render() {

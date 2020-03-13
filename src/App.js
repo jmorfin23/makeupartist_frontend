@@ -27,6 +27,10 @@ class App extends Component {
     this.props.fetchBlogPosts();
   }
 
+  NoMatchPage = () => {
+    return <h3>404 - Not found</h3>;
+  };
+
   shouldComponentUpdate(nextProps, nextState) {
     //add this to prevent updating when i aleady have all of the blogposts anyways.
     // console.log('inside main should compoennt UPDATE');
