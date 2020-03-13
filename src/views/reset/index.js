@@ -1,14 +1,16 @@
 import React, { Component } from "react";
 import "./index.css";
+import { connect } from "react-redux";
+import { resetPassword } from "../../actions/adminActions.js";
 
 class Reset extends Component {
-  constructor(props) {
-    super(props);
-  }
-
-  submitResetForm = () => {
+  submitResetForm = e => {
+    e.preventDefault();
     console.log("submit login form");
+
+    this.props.resetPassword(e.target.username.value);
   };
+
   render() {
     return (
       <div className="reset">
@@ -35,4 +37,5 @@ class Reset extends Component {
   }
 }
 
-export default Reset;
+const mapStateToProps = state => ({});
+export default connect(mapStateToProps, { resetPassword })(Reset);

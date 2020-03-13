@@ -51,6 +51,10 @@ import * as $ from "jquery";
 //make an action that pull the 3 most recent posts
 // set up blogposts page for paths
 
+//×TypeError: Cannot read property 'length' of undefined when loading admin page sometimes
+
+//create a fallback page when user tries to look up a blogpost but there is no blogpost of that name.
+
 class Home extends Component {
   render() {
     return (

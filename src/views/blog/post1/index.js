@@ -26,14 +26,12 @@ class Post1 extends Component {
   componentDidMount() {
     //call action to query database with path
     this.props.getSinglePost(this.props.match.params.post);
+    console.log(this.props);
   }
 
   static getDerivedStateFromProps(nextProps, prevState) {
-    console.log(nextProps);
     if (nextProps.singlePost.success && nextProps.singlePost.nextPosts) {
-      console.log("this is hit?");
       let post = nextProps.singlePost.success;
-      console.log(post);
       return {
         post: post.id,
         title: post.title,

@@ -16,6 +16,7 @@ import { connect } from "react-redux";
 import { fetchImages } from "./actions/imageActions.js";
 import { fetchBlogPosts } from "./actions/blogActions.js";
 import Reset from "./views/reset";
+import Passwords from "./views/passwords";
 
 class App extends Component {
   componentDidMount() {
@@ -48,6 +49,10 @@ class App extends Component {
           <Route exact path={"/blog"} render={() => <Blog />} />
           <Route exact path={"/contact"} render={() => <Contact />} />
           <Route exact path={"/reset"} render={() => <Reset />} />
+          <Route
+            path={"/reset_password=:token"}
+            render={({ match }) => <Passwords info={match} />}
+          />
           <Route path={"/:post"} render={() => <Post1 />} />
         </Switch>
         <Footer />

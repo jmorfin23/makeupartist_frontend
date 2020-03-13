@@ -21,9 +21,9 @@ class Blog extends Component {
     };
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    console.log("inside component did update");
-  }
+  // componentDidUpdate(prevProps, prevState) {
+  //   console.log("inside component did update");
+  // }
 
   static getDerivedStateFromProps(props, state) {
     if (props.blogposts.data) {
@@ -36,11 +36,11 @@ class Blog extends Component {
       return { currentPosts: newDisplayedPosts };
     }
   }
-  componentDidMount() {
-    console.log("inside component did mount");
-    //goes to page 1 upon loading page
-    // this.gotoPage(1);
-  }
+  // componentDidMount() {
+  //   console.log("inside component did mount");
+  //   //goes to page 1 upon loading page
+  //   // this.gotoPage(1);
+  // }
 
   getSinglePost = (id, e) => {
     e.preventDefault();

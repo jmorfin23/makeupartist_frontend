@@ -1,4 +1,9 @@
-import { LOGIN_ADMIN, REGISTER_ADMIN, RESET_PASSWORD } from "./types.js";
+import {
+  LOGIN_ADMIN,
+  REGISTER_ADMIN,
+  RESET_PASSWORD,
+  UPDATE_PASSWORD
+} from "./types.js";
 
 export const loginAdmin = userData => {
   return function(dispatch) {
@@ -41,21 +46,43 @@ export const registerAdmin = userData => {
 };
 
 //TODO: create password reset functionality
-export const resetPassword = userData => {
+export const resetPassword = email => {
   return function(dispatch) {
     console.log("inside reset admin password");
     fetch("http://127.0.0.1:5000/api/reset-password", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        data: JSON.stringify(userData)
+        email: email
       }
     })
       .then(res => res.json())
-      .then(user =>
+      .then(data =>
         dispatch({
-          type: REGISTER_ADMIN,
-          payload: user
+          type: RESET_PASSWORD,
+          payload: data
+        })
+      );
+  };
+};
+
+//TODO: updating password
+export const updatePassword = (new_pass, token) => {
+  console.log("inside update passsword");
+  return function(dispatch) {
+    fetch("http://127.0.0.1:5000/api/change_password", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        password: new_pass,
+        token: token
+      }
+    })
+      .then(res => res.json())
+      .then(data =>
+        dispatch({
+          type: UPDATE_PASSWORD,
+          payload: data
         })
       );
   };
