@@ -36,13 +36,13 @@ const BlogPosts = props => {
             <div className="post-entry">
               <div className="post-thumbnail">
                 <img src="http://placehold.it/400x400" alt="" />
-                <a href={`/${post.id}`}>
+                <a href={`/${post.path}`}>
                   <i className="fa fa-link"></i>
                 </a>
               </div>
               {/* post-thumbnail*/}
               <h2>
-                <a href="#">{post.title}</a>
+                <a href={`/${post.path}`}>{post.title}</a>
               </h2>
               <ul className="entry-meta">
                 <li>
@@ -51,11 +51,11 @@ const BlogPosts = props => {
                 </li>
                 <li>
                   <i className="fa fa-comments"></i>
-                  <a href="">7 Comments</a>
+                  <a href="">0 Comments</a>
                 </li>
               </ul>
               <p>{post.content.slice(0, 350) + "..."}</p>
-              <a className="btn btn-primary" href={`/${post.id}`}>
+              <a className="btn btn-primary" href={`/${post.path}`}>
                 Read More
               </a>
             </div>

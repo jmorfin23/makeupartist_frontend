@@ -31,6 +31,7 @@ const imageReducer = (state = initialState, action) => {
         item: action.payload,
         deletedImage: action.payload.deletedImage,
         deletedStatus: action.payload.status,
+        newLength: action.payload.newLength,
         error: action.payload.error
       };
     default:

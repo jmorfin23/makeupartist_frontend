@@ -1,4 +1,5 @@
 import React from "react";
+import "./index.css";
 import { Modal } from "react-bootstrap";
 
 const ModalWindow = props => {

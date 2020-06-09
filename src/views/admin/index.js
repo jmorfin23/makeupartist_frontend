@@ -59,7 +59,7 @@ class Admin extends Component {
 
   componentDidUpdate(prevProps, prevState, snapshot) {
     console.log("inside component did update");
-
+    console.log(this.props);
     //add images to DOM // may need to change this later
     if (this.props.images.data != prevState.imageList) {
       this.setState({ imageList: this.props.images.data });
@@ -197,7 +197,7 @@ class Admin extends Component {
 
       //call method to upload to cloudinary get back the URL
       let cloudURL =
-        "https://res.cloudinary.com/dozvqlete/image/upload/v1580235101/xju5oeyzpily9ok9jdde.png"; //await this.uploadToCloud();
+        "https://res.cloudinary.com/dozvqlete/image/upload/v1579206825/dc27yvlcfix5vlttbo3w.png"; //await this.uploadToCloud();
 
       let imageInfo = {
         cloudURL: cloudURL,
@@ -263,7 +263,9 @@ class Admin extends Component {
   deleteImage = () => {
     //remove modal from view
     this.toggleModal();
-
+    console.log("TEST");
+    console.log(this.state.imageIdToDelete);
+    console.log("TEST");
     //call redux action to delete image
     this.props.deleteImage(this.state.imageIdToDelete);
   };
