@@ -6,6 +6,7 @@ import ad from "../../../images/ad.jpg";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { getSinglePost } from "../../../actions/blogActions.js";
+import FouroFour_page from "../../../components/404_Page";
 
 class Post1 extends Component {
   constructor(props) {
@@ -19,17 +20,21 @@ class Post1 extends Component {
       content: null,
       comments: [],
       url: null,
-      nextPosts: []
+      nextPosts: [],
+      error: null
     };
   }
 
   componentDidMount() {
+    console.log("component did mount");
     //call action to query database with path
     this.props.getSinglePost(this.props.match.params.post);
     console.log(this.props);
   }
 
   static getDerivedStateFromProps(nextProps, prevState) {
+    console.log("props::  ");
+    console.log(nextProps);
     if (nextProps.singlePost.success && nextProps.singlePost.nextPosts) {
       let post = nextProps.singlePost.success;
       return {
@@ -43,9 +48,21 @@ class Post1 extends Component {
         nextPosts: nextProps.singlePost.nextPosts
       };
     }
+    if (nextProps.singlePost.error) {
+      return {
+        error: true
+      };
+    }
+  }
+
+  componentDidUpdate() {
+    console.log(`component did update`);
   }
 
   render() {
+    if (this.state.error == true) {
+      return <FouroFour_page />;
+    }
     return (
       <div className="post1">
         <section className="section section-page-title">

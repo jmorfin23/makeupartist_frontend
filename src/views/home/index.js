@@ -20,22 +20,22 @@ import * as $ from "jquery";
 //make application into production mode, same with portfolio.
 //connect to stylesheet
 //connect to mailchimp
-
+//404 page
+//secure infomation
+//efficient method of displaying errors to user on admin page
 //proptypes
-//should I fetch 3 for my home page then on blogpost page fetch the ones needed?
+//links to images are cloudinary
+//RSS for updating blogposts - difficult to figure out.
+//blogposts - retrieved all blogposts, I could just query 4 blogposts at a time - and add a method
+//to query the first 3 blogposts for home page - this would improve time complexity.
+//need to make database in POSTGres write all the SQL code for the tables.
+
+//Working on today:
+//404 Page
+//Links to image in a modular window
+
 //still a bytestring error on admin page.
 //shouldupdate() for app.js ?
-//my method of grabbing blogposts
-//delete blogpost section of admin page
-//transform images with cloudinary to change image sizes.
-//change how I did the pagination, when clicking on a new page,
-//then call api to grab next posts, logic would have to be in the backend
-//how to make components more generic and reusable.
-//need a more efficient method of deleting and displaying errors to user
-//url links for blogposts
-//securing information and data.
-//links to images are to cloudinary how to change this.
-//RSS for updating blogposts with mailchimp ** need paid software for this /GHOST
 //changed deletedImage prop from null to {}, this may cause error in future.
 //add an alert state and update the state change whenever redux props change
 //============================================
@@ -52,8 +52,6 @@ import * as $ from "jquery";
 // set up blogposts page for paths
 
 //×TypeError: Cannot read property 'length' of undefined when loading admin page sometimes
-
-//create a 404 page
 
 class Home extends Component {
   render() {

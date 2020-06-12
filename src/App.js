@@ -17,6 +17,7 @@ import { fetchImages } from "./actions/imageActions.js";
 import { fetchBlogPosts } from "./actions/blogActions.js";
 import Reset from "./views/reset";
 import Passwords from "./views/passwords";
+import FouroFour_page from "./components/404_Page";
 
 class App extends Component {
   componentDidMount() {
@@ -26,10 +27,6 @@ class App extends Component {
     //retrieve blog posts from backend
     this.props.fetchBlogPosts();
   }
-
-  NoMatchPage = () => {
-    return <h3>404 - Not found</h3>;
-  };
 
   shouldComponentUpdate(nextProps, nextState) {
     //add this to prevent updating when i aleady have all of the blogposts anyways.
@@ -64,6 +61,8 @@ class App extends Component {
     );
   }
 }
+
+//<Route path={'*'} render={() => <FouroFour_page /> } />
 
 //using this to map to props
 const mapStateToProps = state => ({

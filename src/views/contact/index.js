@@ -171,6 +171,7 @@ class Contact extends Component {
                           className="form-control"
                           id="subject"
                           name="subject"
+                          required="required"
                           placeholder="subject"
                           type="text"
                         />
