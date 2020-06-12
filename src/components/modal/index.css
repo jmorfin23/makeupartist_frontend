@@ -1,6 +1,9 @@
 .centered {
   text-align: center;
 }
+h3 {
+  margin: 0;
+}
 /* .modal-image img {
     max-width: 100%; 
     height: 400px; 

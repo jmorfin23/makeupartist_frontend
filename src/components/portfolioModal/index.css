@@ -1,0 +1,33 @@
+.modal-window {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  padding: 1rem;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 9999;
+  opacity: 1;
+  overflow-x: hidden;
+  overflow-y: auto;
+  animation: show 0.5s ease;
+}
+
+.modal-content {
+  width: 100%;
+  background-color: #fff;
+}
+/* put close button to the top right corner of page */
+.modal-close-button {
+  position: fixed;
+  top: 0;
+  right: 0;
+  cursor: pointer;
+  background: #fff;
+  padding: 0;
+  border: 0;
+  outline: 0;
+}

@@ -1,11 +1,21 @@
 import React, { Component } from "react";
 import work from "../../images/work.jpg";
 import PortfolioImage from "../../components/portfolioImage";
+import PortfolioModal from "../../components/portfolioModal";
 
 class Portfolio extends Component {
   constructor(props) {
     super(props);
+
+    this.state = {
+      modalToggle: false
+    };
   }
+
+  toggleModal = () => {
+    console.log("toggleModal");
+    this.setState({ modalToggle: !this.state.modalToggle });
+  };
   render() {
     return (
       <div>
@@ -31,6 +41,11 @@ class Portfolio extends Component {
           </div>
           {/*container*/}
         </section>
+        <button onClick={() => this.toggleModal()}>Press me</button>
+        <PortfolioModal
+          show={this.state.modalToggle}
+          toggleModal={() => this.toggleModal()}
+        />
       </div>
     );
   }

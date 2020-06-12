@@ -20,18 +20,16 @@ import * as $ from "jquery";
 //make application into production mode, same with portfolio.
 //connect to stylesheet
 //connect to mailchimp
-//404 page
 //secure infomation
 //efficient method of displaying errors to user on admin page
 //proptypes
 //links to images are cloudinary
 //RSS for updating blogposts - difficult to figure out.
-//blogposts - retrieved all blogposts, I could just query 4 blogposts at a time - and add a method
+//blogposts - retrieved all blogposts, I could just query 4 blogposts at a time depending on page number - and add a method
 //to query the first 3 blogposts for home page - this would improve time complexity.
 //need to make database in POSTGres write all the SQL code for the tables.
 
 //Working on today:
-//404 Page
 //Links to image in a modular window
 
 //still a bytestring error on admin page.
