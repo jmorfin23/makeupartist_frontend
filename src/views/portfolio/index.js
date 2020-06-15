@@ -45,6 +45,9 @@ class Portfolio extends Component {
         <PortfolioModal
           show={this.state.modalToggle}
           toggleModal={() => this.toggleModal()}
+          children={
+            "https://res.cloudinary.com/dozvqlete/image/upload/v1580264807/hk0jyszxywgvtoc8gxa4.png"
+          }
         />
       </div>
     );

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import "./index.css";
+import X_picture from "../../images/cursor.png";
 
 class PortfolioModal extends Component {
   constructor(props) {
@@ -15,12 +16,12 @@ class PortfolioModal extends Component {
     }
     return (
       <div className="modal-window">
-        <div className="modal-content">
-          <p>{this.props.children}</p>
+        <div className="my-modal-content">
+          <img src={`${this.props.children}`}></img>
         </div>
         <div className="action">
           <button className="modal-close-button" onClick={e => this.onClose(e)}>
-            Close
+            <img src={X_picture}></img>
           </button>
         </div>
       </div>
