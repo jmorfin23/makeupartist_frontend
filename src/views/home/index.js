@@ -23,14 +23,15 @@ import * as $ from "jquery";
 //secure infomation
 //efficient method of displaying errors to user on admin page
 //proptypes
-//links to images are cloudinary
 //RSS for updating blogposts - difficult to figure out.
 //blogposts - retrieved all blogposts, I could just query 4 blogposts at a time depending on page number - and add a method
 //to query the first 3 blogposts for home page - this would improve time complexity.
 //need to make database in POSTGres write all the SQL code for the tables.
+//add esc keyup and clicks w/ js to port pages
 
 //Working on today:
-//Links to image in a modular window
+//image resizing issues
+//proptypes learn more and make efficient
 
 //still a bytestring error on admin page.
 //shouldupdate() for app.js ?
@@ -48,8 +49,6 @@ import * as $ from "jquery";
 
 //make an action that pull the 3 most recent posts
 // set up blogposts page for paths
-
-//×TypeError: Cannot read property 'length' of undefined when loading admin page sometimes
 
 class Home extends Component {
   render() {

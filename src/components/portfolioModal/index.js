@@ -6,26 +6,7 @@ class PortfolioModal extends Component {
   constructor(props) {
     super(props);
   }
-  // componentDidMount() {
-  //   console.log('component did mount in modal');
-  //   window.addEventListener('keyup', this.handleKeyUp, false);
-  //   document.addEventListener('click', this.handleOutsideClick, false);
-  // }
-  // handleOutsideClick = e => {
-  //   console.log('handle outside click');
-  // }
-  // handleKeyUp = e => {
-  //   console.log('inside handle key up.');
-  //   const keys = {
-  //     27: () => {
-  //       e.preventDefault();
-  //       window.removeEventListener('keyup', this.handleKeyUp, false);
-  //     },
-  //   };
-  //   console.log(keys);
-  //   console.log(keys[e.keyCode]);
-  //   if (keys[e.keyCode]) { keys[e.keyCode](); }
-  // }
+
   onClose = e => {
     this.props.toggleModal();
   };
