@@ -1,0 +1,19 @@
+.portfolio-item .a-img {
+  animation-name: portfolio;
+  animation-duration: 1s;
+  animation-fill-mode: both;
+  transition: all 1s ease 0s;
+}
+
+@keyframes portfolio {
+  0% {
+    top: -50px;
+    opacity: 0.1;
+    z-index: 0;
+  }
+  100% {
+    top: 0px;
+    opacity: 1;
+    z-index: 1;
+  }
+}

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import PortfolioModal from "../../components/portfolioModal";
+import "./index.css";
 
 class PortfolioImage extends Component {
   constructor(props) {
