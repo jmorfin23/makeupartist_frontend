@@ -14,22 +14,22 @@ class About extends Component {
     return (
       <div>
         <section
-          class="section section-page-title"
+          className="section section-page-title"
           style={{ backgroundImage: `url(${about})` }}
         >
-          <div class="overlay">
+          <div className="overlay">
             <h1>About Me</h1>
           </div>
           {/* overlay*/}
         </section>
         {/* ============== end section page banner ==============*/}
-        <section class="section section-about">
-          <div class="container">
-            <div class="row">
-              <div class="col-lg-6 col-md-6 col-sm-4 col-xs-12">
+        <section className="section section-about">
+          <div className="container">
+            <div className="row">
+              <div className="col-lg-6 col-md-6 col-sm-4 col-xs-12">
                 <img src={service1} alt="" />{" "}
               </div>
-              <div class="col-lg-6 col-md-6 col-sm-8 col-xs-12 pt-30">
+              <div className="col-lg-6 col-md-6 col-sm-8 col-xs-12 pt-30">
                 <h1>
                   About <span>me</span>
                 </h1>
@@ -61,7 +61,7 @@ class About extends Component {
                   mattis rutrum. Sed vitae laoreet lectus. Donec sed elit felis.
                   Fusce laoreet nec ante sit amet interdum.{" "}
                 </p>
-                <a href="/portfolio" class="btn btn-primary">
+                <a href="/portfolio" className="btn btn-primary">
                   View Portfolio
                 </a>{" "}
               </div>
@@ -69,16 +69,18 @@ class About extends Component {
           </div>
         </section>
         {/* section_about*/}
-        <section class="section parallax">
-          <div class="overlay">
-            <div class="container">
-              <h1 class="pb-20">Offering Makeup and Hair Stylist Services</h1>
-              <p class="max-500 intro pb-20">
+        <section className="section parallax">
+          <div className="overlay">
+            <div className="container">
+              <h1 className="pb-20">
+                Offering Makeup and Hair Stylist Services
+              </h1>
+              <p className="max-500 intro pb-20">
                 Japanese nail art design is a trend that increases its
                 popularity every year. It plays a major role in trend-setting
                 fashion, and is the top choice in nail art competitions.{" "}
               </p>
-              <a class="btn btn-primary btn-rounded btn-pink" href="#">
+              <a className="btn btn-primary btn-rounded btn-pink" href="#">
                 Book Now!
               </a>{" "}
             </div>
@@ -87,51 +89,51 @@ class About extends Component {
           {/* overlay*/}
         </section>
         {/* section-paralax */}
-        <section class="section section-logos">
+        <section className="section section-logos">
           {/*  section-title */}
-          <div class="section-title text-center">
+          <div className="section-title text-center">
             <h1>Featured on</h1>
           </div>
           {/*  end section-title */}
-          <div class="container">
-            <div class="row">
-              <div class="col-lg-2 col-md-2 col-sm-4 col-xs-6 text-center">
-                <div class="cleint-logo">
+          <div className="container">
+            <div className="row">
+              <div className="col-lg-2 col-md-2 col-sm-4 col-xs-6 text-center">
+                <div className="cleint-logo">
                   {" "}
                   <img src={logo1} alt="" />
                 </div>
               </div>
               {/* end col*/}
-              <div class="col-lg-2 col-md-2 col-sm-4 col-xs-6 text-center">
-                <div class="cleint-logo">
+              <div className="col-lg-2 col-md-2 col-sm-4 col-xs-6 text-center">
+                <div className="cleint-logo">
                   {" "}
                   <img src={logo2} alt="" />{" "}
                 </div>
               </div>
               {/* end col*/}
-              <div class="col-lg-2 col-md-2 col-sm-4 col-xs-6 text-center">
-                <div class="cleint-logo">
+              <div className="col-lg-2 col-md-2 col-sm-4 col-xs-6 text-center">
+                <div className="cleint-logo">
                   {" "}
                   <img src={logo3} alt="" />{" "}
                 </div>
               </div>
               {/* end col*/}
-              <div class="col-lg-2 col-md-2 col-sm-4 col-xs-6 text-center">
-                <div class="cleint-logo">
+              <div className="col-lg-2 col-md-2 col-sm-4 col-xs-6 text-center">
+                <div className="cleint-logo">
                   {" "}
                   <img src={logo4} alt="" />{" "}
                 </div>
               </div>
               {/* end col*/}
-              <div class="col-lg-2 col-md-2 col-sm-4 col-xs-6 text-center">
-                <div class="cleint-logo">
+              <div className="col-lg-2 col-md-2 col-sm-4 col-xs-6 text-center">
+                <div className="cleint-logo">
                   {" "}
                   <img src={logo5} alt="" />{" "}
                 </div>
               </div>
               {/* end col*/}
-              <div class="col-lg-2 col-md-2 col-sm-4 col-xs-6 text-center">
-                <div class="cleint-logo">
+              <div className="col-lg-2 col-md-2 col-sm-4 col-xs-6 text-center">
+                <div className="cleint-logo">
                   {" "}
                   <img src={logo6} alt="" />{" "}
                 </div>

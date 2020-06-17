@@ -12,6 +12,7 @@ import Header from "../../components/header";
 import Featured from "../../components/featured";
 import BlogPosts from "../../components/blogPosts";
 import PortfolioImage from "../../components/portfolioImage";
+import PropTypes from "prop-types";
 import * as $ from "jquery";
 
 //Changes to the application: ?
@@ -21,34 +22,16 @@ import * as $ from "jquery";
 //connect to stylesheet
 //connect to mailchimp
 //secure infomation
+//slugify
 //efficient method of displaying errors to user on admin page
 //proptypes
 //RSS for updating blogposts - difficult to figure out.
 //blogposts - retrieved all blogposts, I could just query 4 blogposts at a time depending on page number - and add a method
 //to query the first 3 blogposts for home page - this would improve time complexity.
 //need to make database in POSTGres write all the SQL code for the tables.
-//add esc keyup and clicks w/ js to port pages
-
+//length error
 //Working on today:
-//image resizing issues
 //proptypes learn more and make efficient
-
-//still a bytestring error on admin page.
-//shouldupdate() for app.js ?
-//changed deletedImage prop from null to {}, this may cause error in future.
-//add an alert state and update the state change whenever redux props change
-//============================================
-//create a register page
-
-// ask about setting so
-//2 main questions for derek:
-//the deleting and alerting the user situation
-//the blogposts - slugify() *
-
-//rss feed - mailchimp *
-
-//make an action that pull the 3 most recent posts
-// set up blogposts page for paths
 
 class Home extends Component {
   render() {
@@ -374,7 +357,8 @@ class Home extends Component {
 
 //map state to props
 const mapStateToProps = state => ({
-  images: state.images.items
+  images: state.images.items,
+  blogposts: state.blogposts.items
 });
 
 export default connect(mapStateToProps)(Home);

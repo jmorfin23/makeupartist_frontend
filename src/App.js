@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import "./App.css";
+import PropTypes from "prop-types";
 import { Switch, Route } from "react-router-dom";
 import Home from "./views/home";
 import Header from "./components/header";
@@ -27,16 +28,6 @@ class App extends Component {
     //retrieve blog posts from backend
     this.props.fetchBlogPosts();
   }
-
-  shouldComponentUpdate(nextProps, nextState) {
-    //add this to prevent updating when i aleady have all of the blogposts anyways.
-    // console.log('inside main should compoennt UPDATE');
-    // console.log(this.props.blogposts);
-    // console.log(this.props.images);
-    // // if (this.props.blogposts) {
-    // // }
-    return true;
-  }
   render() {
     return (
       <div className="App">
@@ -62,7 +53,15 @@ class App extends Component {
   }
 }
 
-//<Route path={'*'} render={() => <FouroFour_page /> } />
+//Proptypes
+App.propTypes = {
+  images: PropTypes.shape({
+    data: PropTypes.array
+  }),
+  blogposts: PropTypes.shape({
+    data: PropTypes.array
+  })
+};
 
 //using this to map to props
 const mapStateToProps = state => ({

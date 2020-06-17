@@ -6,7 +6,7 @@ import {
 } from "../actions/types.js";
 
 const initialState = {
-  items: [],
+  items: { data: [] },
   item: {},
   singlePost: {},
   deletedStatus: {}

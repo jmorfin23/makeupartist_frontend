@@ -18,7 +18,7 @@ const BlogPosts = props => {
     posts.data.splice(3);
   }
 
-  //if there are no posts return a message
+  //if there are no posts return a message * change this not efficient
   if (posts.data == "") {
     return (
       <div className="row">

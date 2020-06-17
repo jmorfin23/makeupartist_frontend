@@ -197,7 +197,7 @@ class Admin extends Component {
 
       //call method to upload to cloudinary get back the URL
       let cloudURL =
-        "https://res.cloudinary.com/dozvqlete/image/upload/v1579206825/dc27yvlcfix5vlttbo3w.png"; //await this.uploadToCloud();
+        "https://res.cloudinary.com/dozvqlete/image/upload/v1580233158/cshygzfpiamg2zdzimxr.png"; //await this.uploadToCloud();
 
       let imageInfo = {
         cloudURL: cloudURL,
@@ -308,7 +308,8 @@ class Admin extends Component {
   };
 
   render() {
-    console.log(this.props.blogisDeleted);
+    console.log("blogposts::: ");
+    console.log(this.props.blogposts);
     if (this.state.isLogged) {
       return (
         <div className="make-centered">
@@ -574,22 +575,20 @@ class Admin extends Component {
   }
 }
 
-//set propTypes TODO
-Admin.propTypes = {
-  loginAdmin: PropTypes.func.isRequired,
-  addImage: PropTypes.func.isRequired,
-  deleteImage: PropTypes.func.isRequired,
-  addBlogPost: PropTypes.func.isRequired,
-  user: PropTypes.object,
-  deletedStatus: PropTypes.bool,
-  addedStatus: PropTypes.bool,
-  deletedImage: PropTypes.object,
-  images: PropTypes.array,
-  image: PropTypes.object,
-  blogposts: PropTypes.object
+Admin.defaultProps = {
+  newLength: 0
 };
 
-//consolodate this l8r
+Admin.propTypes = {
+  images: PropTypes.shape({
+    data: PropTypes.array
+  }),
+  blogposts: PropTypes.shape({
+    data: PropTypes.array
+  }),
+  newLength: PropTypes.number.isRequired
+};
+
 //map state to props
 const mapStateToProps = state => ({
   user: state.user,
