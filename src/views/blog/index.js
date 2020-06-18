@@ -160,7 +160,7 @@ class Blog extends Component {
     const pages = this.fetchPageNumbers();
     return (
       <div className="blog">
-        <section className="section section-page-title">
+        <section className="section section-page-title blog-img">
           <div className="overlay">
             <h1>Blog/News</h1>
           </div>

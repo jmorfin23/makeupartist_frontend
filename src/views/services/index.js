@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import service from "../../images/service.jpg";
+import service from "../../images/makeup.jpg";
 import service1 from "../../images/service1.jpg";
 import bridal from "../../images/bridal.jpg";
 import "./index.css";

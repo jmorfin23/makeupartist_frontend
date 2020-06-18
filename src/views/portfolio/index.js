@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import work from "../../images/work.jpg";
+import work from "../../images/port-art.png";
 import PortfolioImage from "../../components/portfolioImage";
 
 class Portfolio extends Component {

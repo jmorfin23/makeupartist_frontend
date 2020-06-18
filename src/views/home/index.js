@@ -3,9 +3,11 @@ import "./index.css";
 import { useSelector, connect } from "react-redux";
 // ========= Image imports =========
 import placeholder from "../../images/blog/placeholder.jpg";
-import slide1 from "../../images/slide1.jpg";
-import slide2 from "../../images/slide2.jpg";
-import service1 from "../../images/service1.jpg";
+import slide1 from "../../images/portrait.jpg";
+import slide2 from "../../images/slide-img2.jpg";
+import service1 from "../../images/bride-img.jpg";
+import service2 from "../../images/tvmakeup-img.jpg";
+import service3 from "../../images/specialoc-img.jpg";
 import clientPhoto from "../../images/client.jpg";
 // ========= Component imports =========
 import Header from "../../components/header";
@@ -23,8 +25,6 @@ import * as $ from "jquery";
 //connect to mailchimp
 //secure infomation
 //slugify
-//efficient method of displaying errors to user on admin page
-//proptypes
 //RSS for updating blogposts - difficult to figure out.
 //blogposts - retrieved all blogposts, I could just query 4 blogposts at a time depending on page number - and add a method
 //to query the first 3 blogposts for home page - this would improve time complexity.
@@ -175,7 +175,7 @@ class Home extends Component {
               <div className="col-md-4 col-sm-6">
                 <div className="service-box service-color-two">
                   <div className="service-img">
-                    <img src={service1} alt="" />
+                    <img src={service2} alt="" />
                   </div>
                   <div className="service-contents">
                     <h1>tv film commercial</h1>
@@ -205,7 +205,7 @@ class Home extends Component {
               <div className="col-md-4 col-sm-6">
                 <div className="service-box service-color-three">
                   <div className="service-img">
-                    <img src={service1} alt="" />
+                    <img src={service3} alt="" />
                   </div>
                   <div className="service-contents">
                     <h1>Special occasions</h1>

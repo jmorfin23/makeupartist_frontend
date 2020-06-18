@@ -1,6 +1,7 @@
 import React, { Component } from "react";
-import about from "../../images/about.jpg";
-import service1 from "../../images/service1.jpg";
+import about from "../../images/dogs.jpg";
+import makeup from "../../images/makeup.jpg";
+import portrait from "../../images/about-portrait.jpg";
 //logo imports
 import logo1 from "../../images/logos/logo1.png";
 import logo2 from "../../images/logos/logo2.png";
@@ -27,7 +28,7 @@ class About extends Component {
           <div className="container">
             <div className="row">
               <div className="col-lg-6 col-md-6 col-sm-4 col-xs-12">
-                <img src={service1} alt="" />{" "}
+                <img src={portrait} alt="" />
               </div>
               <div className="col-lg-6 col-md-6 col-sm-8 col-xs-12 pt-30">
                 <h1>
@@ -38,7 +39,7 @@ class About extends Component {
                   pulvinar. Etiam rhoncus dui eget nisl laoreet, id scelerisque
                   odio eleifend. Quisque accumsan porta lacinia. Etiam tristique
                   mattis rutrum. Sed vitae laoreet lectus. Donec sed elit felis.
-                  Fusce laoreet nec ante sit amet interdum.{" "}
+                  Fusce laoreet nec ante sit amet interdum.
                 </p>
                 <blockquote>
                   <p>
@@ -52,18 +53,18 @@ class About extends Component {
                   pulvinar. Etiam rhoncus dui eget nisl laoreet, id scelerisque
                   odio eleifend. Quisque accumsan porta lacinia. Etiam tristique
                   mattis rutrum. Sed vitae laoreet lectus. Donec sed elit felis.
-                  Fusce laoreet nec ante sit amet interdum.{" "}
+                  Fusce laoreet nec ante sit amet interdum.
                 </p>
                 <p>
                   Nulla interdum elit a nunc fermentum, quis sodales nibh
                   pulvinar. Etiam rhoncus dui eget nisl laoreet, id scelerisque
                   odio eleifend. Quisque accumsan porta lacinia. Etiam tristique
                   mattis rutrum. Sed vitae laoreet lectus. Donec sed elit felis.
-                  Fusce laoreet nec ante sit amet interdum.{" "}
+                  Fusce laoreet nec ante sit amet interdum.
                 </p>
                 <a href="/portfolio" className="btn btn-primary">
                   View Portfolio
-                </a>{" "}
+                </a>
               </div>
             </div>
           </div>
@@ -78,11 +79,11 @@ class About extends Component {
               <p className="max-500 intro pb-20">
                 Japanese nail art design is a trend that increases its
                 popularity every year. It plays a major role in trend-setting
-                fashion, and is the top choice in nail art competitions.{" "}
+                fashion, and is the top choice in nail art competitions.
               </p>
               <a className="btn btn-primary btn-rounded btn-pink" href="#">
                 Book Now!
-              </a>{" "}
+              </a>
             </div>
             {/* container*/}
           </div>
@@ -99,43 +100,37 @@ class About extends Component {
             <div className="row">
               <div className="col-lg-2 col-md-2 col-sm-4 col-xs-6 text-center">
                 <div className="cleint-logo">
-                  {" "}
                   <img src={logo1} alt="" />
                 </div>
               </div>
               {/* end col*/}
               <div className="col-lg-2 col-md-2 col-sm-4 col-xs-6 text-center">
                 <div className="cleint-logo">
-                  {" "}
-                  <img src={logo2} alt="" />{" "}
+                  <img src={logo2} alt="" />
                 </div>
               </div>
               {/* end col*/}
               <div className="col-lg-2 col-md-2 col-sm-4 col-xs-6 text-center">
                 <div className="cleint-logo">
-                  {" "}
-                  <img src={logo3} alt="" />{" "}
+                  <img src={logo3} alt="" />
                 </div>
               </div>
               {/* end col*/}
               <div className="col-lg-2 col-md-2 col-sm-4 col-xs-6 text-center">
                 <div className="cleint-logo">
-                  {" "}
-                  <img src={logo4} alt="" />{" "}
+                  <img src={logo4} alt="" />
                 </div>
               </div>
               {/* end col*/}
               <div className="col-lg-2 col-md-2 col-sm-4 col-xs-6 text-center">
                 <div className="cleint-logo">
-                  {" "}
-                  <img src={logo5} alt="" />{" "}
+                  <img src={logo5} alt="" />
                 </div>
               </div>
               {/* end col*/}
               <div className="col-lg-2 col-md-2 col-sm-4 col-xs-6 text-center">
                 <div className="cleint-logo">
-                  {" "}
-                  <img src={logo6} alt="" />{" "}
+                  <img src={logo6} alt="" />
                 </div>
               </div>
               {/* end col*/}

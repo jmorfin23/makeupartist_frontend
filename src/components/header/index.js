@@ -1,6 +1,6 @@
 import React from "react";
 import "./index.css";
-import companylogo from "../../images/logo.png";
+import companylogo from "../../images/main-logo2.png";
 import { useSelector } from "react-redux";
 
 const Header = () => {
@@ -18,7 +18,7 @@ const Header = () => {
             <i className="fa fa-bars"></i>
           </button>
           <a className="navbar-brand" href="/home">
-            <img src={companylogo} className="logo" alt="" />
+            <img src={companylogo} className="logo1" alt="" />
           </a>
         </div>
         {/*  End Header Navigation */}
