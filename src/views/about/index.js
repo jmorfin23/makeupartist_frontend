@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import about from "../../images/dogs.jpg";
 import makeup from "../../images/makeup.jpg";
-import portrait from "../../images/about-portrait.jpg";
+import portrait from "../../images/portrait.jpg";
 //logo imports
 import logo1 from "../../images/logos/logo1.png";
 import logo2 from "../../images/logos/logo2.png";
@@ -12,13 +12,22 @@ import logo6 from "../../images/logos/logo6.png";
 
 class About extends Component {
   render() {
+    const styles = {
+      header: {
+        backgroundImage: `url(` + about + `)`,
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+        backgroundSize: "cover",
+        backgroundAttachment: "fixed"
+      },
+      content: {
+        backgroundColor: "rgba(0, 0, 0, 0.3)"
+      }
+    };
     return (
       <div>
-        <section
-          className="section section-page-title"
-          style={{ backgroundImage: `url(${about})` }}
-        >
-          <div className="overlay">
+        <section className="section section-page-title" style={styles.header}>
+          <div className="overlay" style={styles.content}>
             <h1>About Me</h1>
           </div>
           {/* overlay*/}

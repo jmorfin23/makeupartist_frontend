@@ -103,6 +103,9 @@ class Admin extends Component {
 
     //alert if delete image successful and take out of imageList
     if (this.props.newLength == this.state.imageList.length - 1) {
+      if (this.props.newLength == 0) {
+        return;
+      }
       alert("Deleted Image");
       let newList = this.state.imageList;
       let index = this.indexToDelete(newList, "url", this.props.deletedImage);
@@ -196,15 +199,15 @@ class Admin extends Component {
       //if this.state.image type is a string skip uploading to cloud
 
       //call method to upload to cloudinary get back the URL
-      let cloudURL =
-        "https://res.cloudinary.com/dozvqlete/image/upload/v1580233158/cshygzfpiamg2zdzimxr.png"; //await this.uploadToCloud();
-
-      let imageInfo = {
-        cloudURL: cloudURL,
+      // const image = this.uploadToCloud();
+      const image = await this.uploadToCloud();
+      const imageInfo = {
+        cloudURL: image,
         admin: this.state.admin,
         uploadType: this.state.uploadType
       };
-
+      console.log("imageinfo");
+      console.log(imageInfo);
       //set state to false for added status
       // this.setState({ addedStatus: false });
 
@@ -370,6 +373,9 @@ class Admin extends Component {
             <h2>Delete an Image: </h2>
             <div className="delete-img-2">
               <div className="portfolio-items row">
+                {!this.state.imageList.length
+                  ? "You have no images posted."
+                  : null}
                 {this.state.imageList &&
                   this.state.imageList.map(image => (
                     <div

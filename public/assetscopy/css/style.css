@@ -112,7 +112,7 @@ ol {
 }
 
 .parallax {
-  background: rgba(0, 0, 0, 0) url(../images/parallax.jpg) no-repeat fixed 0 0 /
+  background: rgba(0, 0, 0, 0) url(../images/makeup.jpg) no-repeat fixed 0 0 /
     cover;
   position: relative;
   padding: 0px !important;
@@ -156,7 +156,8 @@ ol {
   background-size: cover;
   background-position: 50%;
 }
-
+/* url(../images/camera.jpeg) no-repeat */
+/* fixed; */
 .section-page-title .overlay {
   padding: 120px 15px;
   background: rgba(0, 0, 0, 0.5);

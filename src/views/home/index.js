@@ -5,11 +5,13 @@ import { useSelector, connect } from "react-redux";
 import placeholder from "../../images/blog/placeholder.jpg";
 import slide1 from "../../images/portrait.jpg";
 import slide2 from "../../images/slide-img2.jpg";
-import service1 from "../../images/bride-img.jpg";
-import service2 from "../../images/tvmakeup-img.jpg";
-import service3 from "../../images/specialoc-img.jpg";
-import clientPhoto from "../../images/client.jpg";
-// ========= Component imports =========
+import service1 from "../../images/bride-01.jpg";
+import service2 from "../../images/model-02.jpg";
+import service3 from "../../images/model-03.jpg";
+import testimonialOne from "../../images/testimonial_woman-01.jpg";
+import testimonialTwo from "../../images/testimonial_woman-02.jpg";
+import testimonialThree from "../../images/testimonial_woman-03.jpg";
+// ========= Component imports ========= //
 import Header from "../../components/header";
 import Featured from "../../components/featured";
 import BlogPosts from "../../components/blogPosts";
@@ -30,8 +32,18 @@ import * as $ from "jquery";
 //to query the first 3 blogposts for home page - this would improve time complexity.
 //need to make database in POSTGres write all the SQL code for the tables.
 //length error
-//Working on today:
-//proptypes learn more and make efficient
+
+//Need to accomplish:
+//add writing to all pages
+//make emailing better
+//port photos animation change
+//blogposts
+//secure information
+//mailchimp / RSS
+//admin panel length deleting issue with 0 posts.
+//remove unecessary photos and data
+//.gitignore
+//host
 
 class Home extends Component {
   render() {
@@ -66,14 +78,14 @@ class Home extends Component {
                     <div className="row">
                       <div className="col-md-5 col-md-offset-7">
                         <h1>
-                          Professional
+                          Kathryn
                           <br />
-                          Makeup Artist
+                          Stevens
                         </h1>
                         <p>
-                          Whatever the occasion is, be sure that my
-                          <strong>professional makeup</strong> work and products
-                          will make you <strong>shine</strong> and stand out!
+                          No matter the occasion, you will{" "}
+                          <strong>look great </strong>
+                          and <strong>feel great!</strong>
                         </p>
                       </div>
                     </div>
@@ -97,10 +109,9 @@ class Home extends Component {
                           Makeup Artist
                         </h1>
                         <p>
-                          Whatever the occasion is, be sure that
-                          <strong>my professional</strong> makeup work and
-                          products will make you <strong>shine </strong>and
-                          stand out!
+                          There is no doubt that my{" "}
+                          <strong>professional</strong> services will make you{" "}
+                          <strong>shine</strong> on your special occasion.
                         </p>
                       </div>
                     </div>
@@ -150,14 +161,13 @@ class Home extends Component {
                   <div className="service-contents">
                     <h1>Bridal Makeup</h1>
                     <p>
-                      Considering just how important the makeup arts are for
-                      these industries, the quality of my work was required to
-                      match the className. After hundreds of sessions it seems
-                      it did!
+                      To ensure you look your best is my primary focus. I ensure
+                      the quality of my work is unmatched, and will make you to
+                      feel stunning on your big day.
                     </p>
                     <p className="service-price pb-10">
                       <span className="decor-text">starts from</span>
-                      <strong>$156.00</strong>
+                      <strong>$146.00</strong>
                     </p>
                     <a className="btn btn-primary" href="/services">
                       Read More
@@ -180,14 +190,13 @@ class Home extends Component {
                   <div className="service-contents">
                     <h1>tv film commercial</h1>
                     <p>
-                      Considering just how important the makeup arts are for
-                      these industries, the quality of my work was required to
-                      match the className. After hundreds of sessions it seems
-                      it did!
+                      The capacity of my work meets the most demanding
+                      challenges. Through hundreds of sessions of work, I've
+                      gained the skillset to meet any and every need.
                     </p>
                     <p className="service-price pb-10">
                       <span className="decor-text">starts from</span>
-                      <strong>$156.00</strong>
+                      <strong>$146.00</strong>
                     </p>
                     <a className="btn btn-primary" href="/services">
                       Read More
@@ -210,14 +219,13 @@ class Home extends Component {
                   <div className="service-contents">
                     <h1>Special occasions</h1>
                     <p>
-                      Considering just how important the makeup arts are for
-                      these industries, the quality of my work was required to
-                      match the className. After hundreds of sessions it seems
-                      it did!
+                      Each occasion has the possibilty to be great. No matter
+                      the day, I want you to look your best. Feel great and be
+                      great.
                     </p>
                     <p className="service-price pb-10">
                       <span className="decor-text">starts from</span>
-                      <strong>$156.00</strong>
+                      <strong>$146.00</strong>
                     </p>
                     <a className="btn btn-primary" href="/services">
                       Read More
@@ -242,7 +250,7 @@ class Home extends Component {
           {/*  section-title */}
           <div className="section-title text-center">
             <h1 className="text-center decor">
-              My Awesome <span>Portfolio</span>
+              My <span>Portfolio</span>
             </h1>
           </div>
           {/*  end section-title */}
@@ -271,55 +279,55 @@ class Home extends Component {
                 >
                   <div className="testimonial-item">
                     <div className="client-img text-center">
-                      <img src={clientPhoto} alt="" className="img-circle" />
+                      <img src={testimonialOne} alt="" className="img-circle" />
                     </div>
                     <div className="quote-icons">
                       <i className="fa fa-quote-left" aria-hidden="true"></i>
                     </div>
                     <p className="text-center">
-                      Finding the shampoo that is both healthy and nice for your
-                      hair is not easy for any woman… So when I found how many
-                      hair care products are offered here I was hooked once and
-                      for all!
+                      Kathryn's work is unbelievable! Her work is truly
+                      professional, which allowed me to feel great on my wedding
+                      day.
                     </p>
                     <div className="client-title text-center">
-                      <strong>Amanda Pool</strong>
+                      <strong>Amanda S.</strong>
                     </div>
                   </div>
                   {/* testmonial-item 1*/}
                   <div className="testimonial-item">
                     <div className="client-img text-center">
-                      <img src={clientPhoto} alt="" className="img-circle" />
+                      <img src={testimonialTwo} alt="" className="img-circle" />
                     </div>
                     <div className="quote-icons">
                       <i className="fa fa-quote-left" aria-hidden="true"></i>
                     </div>
                     <p className="text-center">
-                      Finding the shampoo that is both healthy and nice for your
-                      hair is not easy for any woman… So when I found how many
-                      hair care products are offered here I was hooked once and
-                      for all!
+                      We hired Kathryn for a special event, she was fantastic,
+                      very professional, and a great person to work alongside.
                     </p>
                     <div className="client-title text-center">
-                      <strong>Amanda Pool</strong>
+                      <strong>Jennifer B.</strong>
                     </div>
                   </div>
                   {/* testmonial-item 2*/}
                   <div className="testimonial-item">
                     <div className="client-img text-center">
-                      <img src={clientPhoto} alt="" className="img-circle" />
+                      <img
+                        src={testimonialThree}
+                        alt=""
+                        className="img-circle"
+                      />
                     </div>
                     <div className="quote-icons">
                       <i className="fa fa-quote-left" aria-hidden="true"></i>
                     </div>
                     <p className="text-center">
-                      Finding the shampoo that is both healthy and nice for your
-                      hair is not easy for any woman… So when I found how many
-                      hair care products are offered here I was hooked once and
-                      for all!
+                      Kathry did makeup for a large-scale photoshoot, and
+                      everyone looked unbelievable. We will definitely be hiring
+                      her again.
                     </p>
                     <div className="client-title text-center">
-                      <strong>Amanda Pool</strong>
+                      <strong>Miranda D. </strong>
                     </div>
                   </div>
                   {/* testmonial-item 3*/}
@@ -347,7 +355,7 @@ class Home extends Component {
           {/* container*/}
         </section>
         {/* section-blog*/}
-        <Featured />
+        {/* <Featured /> */}
         {/* section-logo*/}
         {/* footer is here  */}
       </div>

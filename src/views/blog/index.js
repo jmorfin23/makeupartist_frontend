@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import girl from "../../images/girl.jpg";
-import placeholder from "../../images/blog/placeholder.jpg";
+import portrait from "../../images/portrait.jpg";
 import ad from "../../images/ad.jpg";
+import blog from "../../images/blog_img.jpg";
 import { connect } from "react-redux";
 import { getSinglePost } from "../../actions/blogActions.js";
 import { Redirect, Router, Route } from "react-router-dom";
@@ -156,12 +157,24 @@ class Blog extends Component {
       this.totalPosts = this.props.blogposts.data.length;
       this.totalPages = Math.ceil(this.totalPosts / this.state.postsPerPage);
     }
+    const styles = {
+      header: {
+        backgroundImage: `url(` + blog + `)`,
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+        backgroundSize: "cover",
+        backgroundAttachment: "fixed"
+      },
+      content: {
+        backgroundColor: "rgba(0, 0, 0, 0.3)"
+      }
+    };
 
     const pages = this.fetchPageNumbers();
     return (
       <div className="blog">
-        <section className="section section-page-title blog-img">
-          <div className="overlay">
+        <section className="section section-page-title" style={styles.header}>
+          <div className="overlay" style={styles.content}>
             <h1>Blog/News</h1>
           </div>
           {/*overlay*/}
@@ -283,7 +296,7 @@ class Blog extends Component {
                 <div className="sidebar-box clearfix">
                   <h3 className="widget-title">About me</h3>
                   <p>
-                    <img src={girl} alt="" />
+                    <img src={portrait} alt="" />
                   </p>
                   <p>
                     Vivamus porta ante eget sem rutrum egestas. Etiam sit amet

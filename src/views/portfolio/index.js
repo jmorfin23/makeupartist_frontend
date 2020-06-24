@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import work from "../../images/port-art.png";
+import camera from "../../images/camera.jpg";
 import PortfolioImage from "../../components/portfolioImage";
 
 class Portfolio extends Component {
@@ -8,13 +8,22 @@ class Portfolio extends Component {
   }
 
   render() {
+    const styles = {
+      header: {
+        backgroundImage: `url(` + camera + `)`,
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+        backgroundSize: "cover",
+        backgroundAttachment: "fixed"
+      },
+      content: {
+        backgroundColor: "rgba(0, 0, 0, 0.3)"
+      }
+    };
     return (
       <div>
-        <section
-          className="section section-page-title"
-          style={{ backgroundImage: `url(` + work + `)` }}
-        >
-          <div className="overlay">
+        <section className="section section-page-title" style={styles.header}>
+          <div className="overlay" style={styles.content}>
             <h1>Portfolio</h1>
           </div>
           {/*overlay*/}

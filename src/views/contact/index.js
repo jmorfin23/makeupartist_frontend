@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import contact from "../../images/contact_me.jpg";
 import Recaptcha from "react-recaptcha";
 
 class Contact extends Component {
@@ -31,10 +32,22 @@ class Contact extends Component {
   };
 
   render() {
+    const styles = {
+      header: {
+        backgroundImage: `url(` + contact + `)`,
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+        backgroundSize: "cover",
+        backgroundAttachment: "fixed"
+      },
+      content: {
+        backgroundColor: "rgba(0, 0, 0, 0.3)"
+      }
+    };
     return (
       <div className="contact">
-        <section className="section section-page-title">
-          <div className="overlay">
+        <section className="section section-page-title" style={styles.header}>
+          <div className="overlay" style={styles.content}>
             <h1>Get in Touch </h1>
           </div>
           {/*overlay*/}
@@ -44,9 +57,8 @@ class Contact extends Component {
           <div className="section-title text-center">
             <h1 className="text-center">Get in Touch </h1>
             <p className="intro max-500">
-              If you have a question regarding my makeup services or would like
-              to schedule a consultation, feel free to contact me using the form
-              below.
+              If you would like to contact me regarding my services, please use
+              the form below.
             </p>
           </div>
           {/* end section-title */}
@@ -54,38 +66,28 @@ class Contact extends Component {
             <div className="row">
               <div className="col-lg-4 col-md-4">
                 <div className="contact-detail">
-                  {" "}
                   <i className="fa fa-map-marker"></i>
                   <p>
-                    {" "}
                     <strong>Location:</strong> <br />
-                    5896 BellFast Lane, Howard St. <br />
-                    Florida, USA 33002{" "}
+                    Chicago IL, USA 60613
                   </p>
                 </div>
                 <div className="contact-detail">
-                  {" "}
                   <i className="fa fa-phone"></i>
                   <p>
-                    {" "}
                     <strong>Call me:</strong> <br />
-                    Phone: +01 234 567 8900 <br />
-                    Mobile: +(01) 987 654 3210{" "}
+                    Phone: +01 773 567 8900 <br />
                   </p>
                 </div>
                 <div className="contact-detail">
-                  {" "}
                   <i className="fa fa-comments"></i>
                   <p>
-                    {" "}
                     <strong>Email:</strong> <br />
-                    <a href="mailto:info@yourdomain.net">
-                      info@yourdomain.net
-                    </a>{" "}
+                    <a href="mailto:info@yourdomain.net">info@ksmakeup.com</a>
                     <br />
                     <a href="mailto:info@yourdomain.net">
-                      customer@yourdomain.net
-                    </a>{" "}
+                      customer@ksmakeup.com
+                    </a>
                   </p>
                 </div>
               </div>
@@ -102,10 +104,9 @@ class Contact extends Component {
                     data-dismiss="alert"
                     aria-label="Close"
                   >
-                    {" "}
-                    <span aria-hidden="true">&times;</span>{" "}
+                    <span aria-hidden="true">&times;</span>
                   </button>
-                  Your message has been sent. We will contact you asap!{" "}
+                  Your message has been sent. We will contact you asap!
                 </div>
                 <div
                   className="alert alert-danger alert-danger-contact"
@@ -118,10 +119,9 @@ class Contact extends Component {
                     data-dismiss="alert"
                     aria-label="Close"
                   >
-                    {" "}
-                    <span aria-hidden="true">&times;</span>{" "}
+                    <span aria-hidden="true">&times;</span>
                   </button>
-                  Opps! There was problem sending email. Please try Again!{" "}
+                  Opps! There was problem sending email. Please try Again!
                 </div>
                 <form
                   className="contactform"
@@ -195,8 +195,8 @@ class Contact extends Component {
                           className="btn btn-primary"
                           id="submit-contact-form"
                         >
-                          Send Message{" "}
-                          <i className="fa fa-angle-double-right"></i>{" "}
+                          Send Message
+                          <i className="fa fa-angle-double-right"></i>
                         </button>
                       </div>
                     </div>

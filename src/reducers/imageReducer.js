@@ -4,7 +4,7 @@ import { FETCH_IMAGES, ADD_IMAGE, DELETE_IMAGE } from "../actions/types.js";
 const initialState = {
   items: { data: [] },
   item: {},
-  newLength: 0,
+  newLength: null,
   deletedImage: {},
   deletedStatus: false,
   addedStatus: false,

@@ -1,7 +1,12 @@
 import React, { Component } from "react";
 import service from "../../images/makeup.jpg";
 import service1 from "../../images/service1.jpg";
-import bridal from "../../images/bridal.jpg";
+import bridal from "../../images/bridal-makeup2.jpg";
+import special from "../../images/specialo.jpg";
+import tv from "../../images/tv-film.jpg";
+import model from "../../images/model-photo-shoot.jpg";
+import engagement from "../../images/engagement.jpg";
+import airbrush from "../../images/airbrush-makeup.jpg";
 import "./index.css";
 
 class Services extends Component {
@@ -10,13 +15,22 @@ class Services extends Component {
     this.state = { displaySection: "Bridal" };
   }
   render() {
+    const styles = {
+      header: {
+        backgroundImage: `url( ` + service + `)`,
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+        backgroundSize: "cover",
+        backgroundAttachment: "fixed"
+      },
+      content: {
+        backgroundColor: "rgba(0, 0, 0, 0.3)"
+      }
+    };
     return (
       <div className="services">
-        <section
-          className="section section-page-title"
-          style={{ backgroundImage: `url( ${service})` }}
-        >
-          <div className="overlay">
+        <section className="section section-page-title" style={styles.header}>
+          <div className="overlay" style={styles.content}>
             <h1>Services</h1>
           </div>
           {/*overlay*/}
@@ -36,7 +50,7 @@ class Services extends Component {
                     tempor. Etiam et porta quam. Aliquam erat volutpat. Sed ut
                     odio quis magna fringilla sodales a sed quam. Maecenas
                     sollicitudin volutpat egestas. Nam quis purus ac purus
-                    tempus.{" "}
+                    tempus.
                   </p>
                   <h3>Bridal Makeup</h3>
                   <p>
@@ -48,7 +62,7 @@ class Services extends Component {
                     pulvinar cursus, urna lectus aliquam nunc, a viverra turpis
                     ipsum rhoncus mauris. Sed a massa consequat, mattis tortor
                     sed, tincidunt nunc. Pellentesque aliquet sem iaculis,
-                    ultrices dolor eget, consequat mauris.{" "}
+                    ultrices dolor eget, consequat mauris.
                   </p>
                   <h3>Perfect Wedding Make Up</h3>
                   <p>
@@ -57,14 +71,14 @@ class Services extends Component {
                     tempor. Etiam et porta quam. Aliquam erat volutpat. Sed ut
                     odio quis magna fringilla sodales a sed quam. Maecenas
                     sollicitudin volutpat egestas. Nam quis purus ac purus
-                    tempus iaculis.{" "}
+                    tempus iaculis.
                   </p>
                 </div>
               )}
               {this.state.displaySection == "TV" && (
                 <div className="col-md-8 col-sm-8 pull-right">
                   <p>
-                    <img src={bridal} alt="" />
+                    <img src={tv} alt="" />
                   </p>
                   <h3>TV Film Commercial</h3>
                   <p>
@@ -73,7 +87,7 @@ class Services extends Component {
                     tempor. Etiam et porta quam. Aliquam erat volutpat. Sed ut
                     odio quis magna fringilla sodales a sed quam. Maecenas
                     sollicitudin volutpat egestas. Nam quis purus ac purus
-                    tempus.{" "}
+                    tempus.
                   </p>
                   <h3>Bridal Makeup</h3>
                   <p>
@@ -85,7 +99,7 @@ class Services extends Component {
                     pulvinar cursus, urna lectus aliquam nunc, a viverra turpis
                     ipsum rhoncus mauris. Sed a massa consequat, mattis tortor
                     sed, tincidunt nunc. Pellentesque aliquet sem iaculis,
-                    ultrices dolor eget, consequat mauris.{" "}
+                    ultrices dolor eget, consequat mauris.
                   </p>
                   <h3>Perfect Wedding Make Up</h3>
                   <p>
@@ -94,14 +108,14 @@ class Services extends Component {
                     tempor. Etiam et porta quam. Aliquam erat volutpat. Sed ut
                     odio quis magna fringilla sodales a sed quam. Maecenas
                     sollicitudin volutpat egestas. Nam quis purus ac purus
-                    tempus iaculis.{" "}
+                    tempus iaculis.
                   </p>
                 </div>
               )}
               {this.state.displaySection == "Special" && (
                 <div className="col-md-8 col-sm-8 pull-right">
                   <p>
-                    <img src={bridal} alt="" />
+                    <img src={special} alt="" />
                   </p>
                   <h3>Special occasions</h3>
                   <p>
@@ -110,7 +124,7 @@ class Services extends Component {
                     tempor. Etiam et porta quam. Aliquam erat volutpat. Sed ut
                     odio quis magna fringilla sodales a sed quam. Maecenas
                     sollicitudin volutpat egestas. Nam quis purus ac purus
-                    tempus.{" "}
+                    tempus.
                   </p>
                   <h3>Bridal Makeup</h3>
                   <p>
@@ -122,7 +136,7 @@ class Services extends Component {
                     pulvinar cursus, urna lectus aliquam nunc, a viverra turpis
                     ipsum rhoncus mauris. Sed a massa consequat, mattis tortor
                     sed, tincidunt nunc. Pellentesque aliquet sem iaculis,
-                    ultrices dolor eget, consequat mauris.{" "}
+                    ultrices dolor eget, consequat mauris.
                   </p>
                   <h3>Perfect Wedding Make Up</h3>
                   <p>
@@ -131,14 +145,14 @@ class Services extends Component {
                     tempor. Etiam et porta quam. Aliquam erat volutpat. Sed ut
                     odio quis magna fringilla sodales a sed quam. Maecenas
                     sollicitudin volutpat egestas. Nam quis purus ac purus
-                    tempus iaculis.{" "}
+                    tempus iaculis.
                   </p>
                 </div>
               )}
               {this.state.displaySection == "Model" && (
                 <div className="col-md-8 col-sm-8 pull-right">
                   <p>
-                    <img src={bridal} alt="" />
+                    <img src={model} alt="" />
                   </p>
                   <h3>Model Photo Shoots</h3>
                   <p>
@@ -147,7 +161,7 @@ class Services extends Component {
                     tempor. Etiam et porta quam. Aliquam erat volutpat. Sed ut
                     odio quis magna fringilla sodales a sed quam. Maecenas
                     sollicitudin volutpat egestas. Nam quis purus ac purus
-                    tempus.{" "}
+                    tempus.
                   </p>
                   <h3>Bridal Makeup</h3>
                   <p>
@@ -159,7 +173,7 @@ class Services extends Component {
                     pulvinar cursus, urna lectus aliquam nunc, a viverra turpis
                     ipsum rhoncus mauris. Sed a massa consequat, mattis tortor
                     sed, tincidunt nunc. Pellentesque aliquet sem iaculis,
-                    ultrices dolor eget, consequat mauris.{" "}
+                    ultrices dolor eget, consequat mauris.
                   </p>
                   <h3>Perfect Wedding Make Up</h3>
                   <p>
@@ -168,14 +182,14 @@ class Services extends Component {
                     tempor. Etiam et porta quam. Aliquam erat volutpat. Sed ut
                     odio quis magna fringilla sodales a sed quam. Maecenas
                     sollicitudin volutpat egestas. Nam quis purus ac purus
-                    tempus iaculis.{" "}
+                    tempus iaculis.
                   </p>
                 </div>
               )}
               {this.state.displaySection == "Engagement" && (
                 <div className="col-md-8 col-sm-8 pull-right">
                   <p>
-                    <img src={bridal} alt="" />
+                    <img src={engagement} alt="" />
                   </p>
                   <h3>Engagement</h3>
                   <p>
@@ -184,7 +198,7 @@ class Services extends Component {
                     tempor. Etiam et porta quam. Aliquam erat volutpat. Sed ut
                     odio quis magna fringilla sodales a sed quam. Maecenas
                     sollicitudin volutpat egestas. Nam quis purus ac purus
-                    tempus.{" "}
+                    tempus.
                   </p>
                   <h3>Bridal Makeup</h3>
                   <p>
@@ -196,7 +210,7 @@ class Services extends Component {
                     pulvinar cursus, urna lectus aliquam nunc, a viverra turpis
                     ipsum rhoncus mauris. Sed a massa consequat, mattis tortor
                     sed, tincidunt nunc. Pellentesque aliquet sem iaculis,
-                    ultrices dolor eget, consequat mauris.{" "}
+                    ultrices dolor eget, consequat mauris.
                   </p>
                   <h3>Perfect Wedding Make Up</h3>
                   <p>
@@ -205,14 +219,14 @@ class Services extends Component {
                     tempor. Etiam et porta quam. Aliquam erat volutpat. Sed ut
                     odio quis magna fringilla sodales a sed quam. Maecenas
                     sollicitudin volutpat egestas. Nam quis purus ac purus
-                    tempus iaculis.{" "}
+                    tempus iaculis.
                   </p>
                 </div>
               )}
               {this.state.displaySection == "Airbrush" && (
                 <div className="col-md-8 col-sm-8 pull-right">
                   <p>
-                    <img src={bridal} alt="" />
+                    <img src={airbrush} alt="" />
                   </p>
                   <h3>Airbrush Makeup</h3>
                   <p>
@@ -221,7 +235,7 @@ class Services extends Component {
                     tempor. Etiam et porta quam. Aliquam erat volutpat. Sed ut
                     odio quis magna fringilla sodales a sed quam. Maecenas
                     sollicitudin volutpat egestas. Nam quis purus ac purus
-                    tempus.{" "}
+                    tempus.
                   </p>
                   <h3>Bridal Makeup</h3>
                   <p>
@@ -233,7 +247,7 @@ class Services extends Component {
                     pulvinar cursus, urna lectus aliquam nunc, a viverra turpis
                     ipsum rhoncus mauris. Sed a massa consequat, mattis tortor
                     sed, tincidunt nunc. Pellentesque aliquet sem iaculis,
-                    ultrices dolor eget, consequat mauris.{" "}
+                    ultrices dolor eget, consequat mauris.
                   </p>
                   <h3>Perfect Wedding Make Up</h3>
                   <p>
@@ -242,7 +256,7 @@ class Services extends Component {
                     tempor. Etiam et porta quam. Aliquam erat volutpat. Sed ut
                     odio quis magna fringilla sodales a sed quam. Maecenas
                     sollicitudin volutpat egestas. Nam quis purus ac purus
-                    tempus iaculis.{" "}
+                    tempus iaculis.
                   </p>
                 </div>
               )}
