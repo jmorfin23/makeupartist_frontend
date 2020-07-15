@@ -1,4 +1,8 @@
-.holdit {
+.sticky-bar {
   position: sticky;
   top: 70px;
+}
+
+.services-sec ul {
+  list-style: disc !important;
 }
