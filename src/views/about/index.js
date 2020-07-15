@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import "./index.css";
 import about from "../../images/dogs.jpg";
 import makeup from "../../images/makeup.jpg";
 import portrait from "../../images/portrait.jpg";
@@ -44,32 +45,28 @@ class About extends Component {
                   About <span>me</span>
                 </h1>
                 <p>
-                  Nulla interdum elit a nunc fermentum, quis sodales nibh
-                  pulvinar. Etiam rhoncus dui eget nisl laoreet, id scelerisque
-                  odio eleifend. Quisque accumsan porta lacinia. Etiam tristique
-                  mattis rutrum. Sed vitae laoreet lectus. Donec sed elit felis.
-                  Fusce laoreet nec ante sit amet interdum.
+                  Hi everyone! My name is Kathryn Stevens. If your reading this
+                  then you must be interested in who I am and what I do. I've
+                  been a professional makeup artist for the past 6 years and
+                  love every minute of it. I am originally from Seattle, but
+                  moved to Chicago for my studies and have been here ever since!
+                  In 2013, my mentor told me:
                 </p>
                 <blockquote>
                   <p>
-                    Lorem ipsum dolor sit amet consectetuer adipiscing elit sed
-                    diam nonummy nibh euismod tincidunt ut laoreet dolore magna
-                    aliquam erat volutpat ut wisi enim ad minim .
+                    Take care of your clients, everything else will work itself
+                    out.
                   </p>
                 </blockquote>
                 <p>
-                  Nulla interdum elit a nunc fermentum, quis sodales nibh
-                  pulvinar. Etiam rhoncus dui eget nisl laoreet, id scelerisque
-                  odio eleifend. Quisque accumsan porta lacinia. Etiam tristique
-                  mattis rutrum. Sed vitae laoreet lectus. Donec sed elit felis.
-                  Fusce laoreet nec ante sit amet interdum.
-                </p>
-                <p>
-                  Nulla interdum elit a nunc fermentum, quis sodales nibh
-                  pulvinar. Etiam rhoncus dui eget nisl laoreet, id scelerisque
-                  odio eleifend. Quisque accumsan porta lacinia. Etiam tristique
-                  mattis rutrum. Sed vitae laoreet lectus. Donec sed elit felis.
-                  Fusce laoreet nec ante sit amet interdum.
+                  Since then I've done my best to manage each and every client
+                  to the fullest. From weddings to special events, tv &#38;
+                  film, I handle all your makeup needs. If you would like to
+                  schedule a consultation or set up a call, you can contact me{" "}
+                  <a className="about-contact-link" href="/contact">
+                    here
+                  </a>
+                  .
                 </p>
                 <a href="/portfolio" className="btn btn-primary">
                   View Portfolio
@@ -86,11 +83,13 @@ class About extends Component {
                 Offering Makeup and Hair Stylist Services
               </h1>
               <p className="max-500 intro pb-20">
-                Japanese nail art design is a trend that increases its
-                popularity every year. It plays a major role in trend-setting
-                fashion, and is the top choice in nail art competitions.
+                If you would like to book a consultation or contact me regarding
+                my services click the link below!
               </p>
-              <a className="btn btn-primary btn-rounded btn-pink" href="#">
+              <a
+                className="btn btn-primary btn-rounded btn-pink"
+                href="/contact"
+              >
                 Book Now!
               </a>
             </div>

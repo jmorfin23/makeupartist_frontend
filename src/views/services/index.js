@@ -327,11 +327,13 @@ class Services extends Component {
                 Offering Makeup and Hair Stylist Services
               </h1>
               <p className="max-500 intro pb-20">
-                Japanese nail art design is a trend that increases its
-                popularity every year. It plays a major role in trend-setting
-                fashion, and is the top choice in nail art competitions.
+                If you would like to book a consultation or contact me regarding
+                my services click the link below!
               </p>
-              <a className="btn btn-primary btn-rounded btn-pink" href="#">
+              <a
+                className="btn btn-primary btn-rounded btn-pink"
+                href="/contact"
+              >
                 Book Now!
               </a>
             </div>

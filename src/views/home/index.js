@@ -23,15 +23,16 @@ import * as $ from "jquery";
 //============================================
 
 //make application into production mode, same with portfolio.
-//connect to stylesheet
-//connect to mailchimp
+//connect to styleseat - later
+//connect to mailchimp - soon
 //secure infomation
 //slugify
 //RSS for updating blogposts - difficult to figure out.
 //blogposts - retrieved all blogposts, I could just query 4 blogposts at a time depending on page number - and add a method
 //to query the first 3 blogposts for home page - this would improve time complexity.
 //need to make database in POSTGres write all the SQL code for the tables.
-//length error
+//length error - believe this is fixed
+//services book section
 
 //Need to accomplish:
 //add writing to all pages

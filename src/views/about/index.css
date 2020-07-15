@@ -1,0 +1,8 @@
+.about-contact-link {
+  color: #e26091;
+  cursor: pointer;
+}
+
+.about-contact-link:hover {
+  text-decoration: underline;
+}
