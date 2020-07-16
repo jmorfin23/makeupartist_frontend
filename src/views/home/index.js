@@ -84,9 +84,15 @@ class Home extends Component {
                           Stevens
                         </h1>
                         <p>
-                          No matter the occasion, you will{" "}
-                          <strong>look great </strong>
-                          and <strong>feel great!</strong>
+                          <span className="color-white">
+                            No matter the occasion
+                          </span>
+                          , you will
+                          <strong> look great </strong>
+                          and{" "}
+                          <strong>
+                            feel <span className="color-white">great!</span>
+                          </strong>
                         </p>
                       </div>
                     </div>
@@ -162,9 +168,9 @@ class Home extends Component {
                   <div className="service-contents">
                     <h1>Bridal Makeup</h1>
                     <p>
-                      To ensure you look your best is my primary focus. I ensure
-                      the quality of my work is unmatched, and will make you to
-                      feel stunning on your big day.
+                      My primary focus is to ensure you look your best. I
+                      guarentee the quality of my work is unmatched, and will
+                      make you feel stunning on your big day.
                     </p>
                     <p className="service-price pb-10">
                       <span className="decor-text">starts from</span>
@@ -356,7 +362,9 @@ class Home extends Component {
           {/* container*/}
         </section>
         {/* section-blog*/}
-        {/* <Featured /> */}
+        <section className="section section-logos pt-zero">
+          <Featured />
+        </section>
         {/* section-logo*/}
         {/* footer is here  */}
       </div>

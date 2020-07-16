@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import girl from "../../images/girl.jpg";
 import portrait from "../../images/portrait.jpg";
-import ad from "../../images/ad.jpg";
+import ad from "../../images/girl-forest.jpg";
 import blog from "../../images/blog_img.jpg";
 import { connect } from "react-redux";
 import { getSinglePost } from "../../actions/blogActions.js";
@@ -299,9 +299,10 @@ class Blog extends Component {
                     <img src={portrait} alt="" />
                   </p>
                   <p>
-                    Vivamus porta ante eget sem rutrum egestas. Etiam sit amet
-                    ex ullamcorper ante mattis sodales. Duis dapibus, quam ac
-                    elementum suscipit, felis leo eleifend tortor.
+                    Welcome to my blog! My name is Kathryn, a creative makeup
+                    artist who loves life! Here I write about the experiences
+                    and challenges I've faced. If you like what you read, please
+                    consider signing up for my newsletter.
                   </p>
                   <div className="social-icons">
                     {" "}
@@ -326,9 +327,9 @@ class Blog extends Component {
                 <div className="sidebar-box clearfix">
                   <h3 className="widget-title">Sign up Newsletter</h3>
                   <p>
-                    Vivamus porta ante eget sem rutrum egestas. Etiam sit amet
-                    ex ullamcorper ante mattis sodales. Duis dapibus, quam ac
-                    elementum suscipit, felis leo eleifend tortor.
+                    This is a weekly newsletter designed to reach everyone
+                    interested in my life as a makeup artist. Sign up if you
+                    like my content!
                   </p>
                   <form
                     className="b-form-contacts ui-form"
