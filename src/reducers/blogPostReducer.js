@@ -2,14 +2,16 @@ import {
   FETCH_BLOG_POSTS,
   ADD_BLOG_POST,
   GET_SINGLE_BLOGPOST,
-  DELETE_BLOG_POST
+  DELETE_BLOG_POST,
+  GET_REQUESTED_NUM_BLOGPOST
 } from "../actions/types.js";
 
 const initialState = {
   items: { data: [] },
   item: {},
   singlePost: {},
-  deletedStatus: {}
+  deletedStatus: {},
+  home_posts: { data: [] }
 };
 
 const blogPostReducer = (state = initialState, action) => {
@@ -33,6 +35,11 @@ const blogPostReducer = (state = initialState, action) => {
       return {
         ...state,
         deletedStatus: action.payload
+      };
+    case GET_REQUESTED_NUM_BLOGPOST:
+      return {
+        ...state,
+        home_posts: action.payload
       };
     default:
       return state;

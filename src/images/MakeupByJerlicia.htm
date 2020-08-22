@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<!-- saved from url=(0025)http://localhost:3000/hom -->
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+    <link rel="icon" href="http://localhost:3000/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta
+      name="description"
+      content="Web site created using create-react-app"
+    />
+    <link rel="apple-touch-icon" href="http://localhost:3000/logo192.png" />
+
+    <link rel="manifest" href="http://localhost:3000/manifest.json" />
+
+    <!-- * added * -->
+    <link rel="stylesheet" href="./MakeupByJerlicia_files/css" />
+    <link
+      rel="stylesheet"
+      href="./MakeupByJerlicia_files/bootstrap.min.css"
+      type="text/css"
+    />
+    <link
+      rel="stylesheet"
+      href="./MakeupByJerlicia_files/animate.min.css"
+      type="text/css"
+    />
+    <link
+      rel="stylesheet"
+      href="./MakeupByJerlicia_files/font-awesome.min.css"
+      type="text/css"
+    />
+    <link
+      rel="stylesheet"
+      href="./MakeupByJerlicia_files/magnific-popup.css"
+      type="text/css"
+    />
+    <link
+      rel="stylesheet"
+      href="./MakeupByJerlicia_files/bootsnav.css"
+      type="text/css"
+    />
+    <link
+      rel="stylesheet"
+      href="./MakeupByJerlicia_files/owl.carousel.min.css"
+      type="text/css"
+    />
+    <link
+      rel="stylesheet"
+      href="./MakeupByJerlicia_files/style.css"
+      type="text/css"
+    />
+    <link
+      rel="stylesheet"
+      href="./MakeupByJerlicia_files/responsive.css"
+      type="text/css"
+    />
+
+    <!-- Bootstrap CSS -->
+    <!-- <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"> -->
+
+    <!-- fontawesome  -->
+    <!-- <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous"> -->
+
+    <!--
+      Notice the use of  in the tags above.
+      It will be replaced with the URL of the `public` folder during the build.
+      Only files inside the `public` folder can be referenced from the HTML.
+
+      Unlike "/favicon.ico" or "favicon.ico", "/favicon.ico" will
+      work correctly both with client-side routing and a non-root public URL.
+      Learn how to configure a non-root public URL by running `npm run build`.
+    -->
+    <title>MakeupByJerlicia</title>
+    <style></style>
+    <style></style>
+    <style>
+      .hide {
+        display: None !important;
+      }
+      .color-white {
+        color: #ffffff;
+      }
+    </style>
+    <style>
+      .logo1 {
+        object-fit: contain;
+        height: 40px;
+        width: 100px;
+      }
+    </style>
+    <style>
+      .no-blog-posts {
+        text-align: center;
+      }
+    </style>
+    <style>
+      .modal-window {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: fixed;
+        top: 0;
+        right: 0;
+        left: 0;
+        bottom: 0;
+        padding: 5rem;
+        background-color: rgba(0, 0, 0, 0.7);
+        z-index: 9999;
+        opacity: 1;
+        overflow-x: hidden;
+        overflow-y: hidden;
+        animation: show 0.5s ease;
+      }
+
+      .my-modal-content {
+        background-color: #000;
+        width: 50vw;
+        height: 70vh;
+        margin: 0 auto;
+      }
+
+      .my-modal-content img {
+        display: block;
+        max-width: 100%;
+        height: 100%;
+        margin: 0 auto;
+        object-fit: contain;
+      }
+      /* put close button to the top right corner of page */
+      .modal-close-button {
+        position: fixed;
+        top: 0;
+        right: 0;
+        font-size: 1em;
+        background-color: transparent;
+        cursor: pointer;
+        padding: 0;
+        border: 0;
+        outline: 0;
+      }
+
+      @media screen and (max-width: 700px) {
+        .my-modal-content {
+          width: 80vw;
+          height: 80vh;
+        }
+      }
+
+      @media screen and (min-width: 700px) and (max-width: 1000px) {
+        .my-modal-content {
+          width: 60vw;
+          height: 70vh;
+        }
+      }
+    </style>
+    <style>
+      .portfolio-item .a-img {
+        animation-name: portfolio;
+        animation-duration: 1s;
+        animation-fill-mode: both;
+        transition: all 1s ease 0s;
+      }
+
+      @keyframes portfolio {
+        0% {
+          top: -50px;
+          opacity: 0.1;
+          z-index: 0;
+        }
+        100% {
+          top: 0px;
+          opacity: 1;
+          z-index: 1;
+        }
+      }
+    </style>
+    <style>
+      .about-contact-link {
+        color: #e26091;
+        cursor: pointer;
+      }
+
+      .about-contact-link:hover {
+        text-decoration: underline;
+      }
+    </style>
+    <style>
+      .sticky-bar {
+        position: -webkit-sticky;
+        position: sticky;
+        top: 70px;
+      }
+
+      .services-sec ul {
+        list-style: disc !important;
+      }
+    </style>
+    <style>
+      .centered {
+        margin: auto;
+        display: block;
+        text-align: center;
+      }
+    </style>
+    <style>
+      .error-message {
+        text-align: center;
+        margin: 60px;
+      }
+      .error-code {
+        color: #c5d2d9;
+        margin: 5px;
+        opacity: 0.75;
+        font-size: 125px;
+      }
+
+      .error-description {
+        color: #738a94;
+        font-size: 25px;
+      }
+
+      .error-link {
+        color: #e26091;
+      }
+
+      .error-link:hover {
+        text-decoration: underline;
+      }
+    </style>
+    <style>
+      /* ==================================*/
+      /* ======== LOGIN SECTION =======*/
+      /* ==================================*/
+      .forgot-pass {
+        text-align: center;
+      }
+
+      .forgot-pass:hover {
+        text-decoration: underline;
+        cursor: pointer;
+      }
+
+      /* ==================================*/
+      /* ======== ADD IMAGE SECTION =======*/
+      /* ==================================*/
+      .admin {
+        text-align: center;
+        display: block;
+      }
+      .admin form {
+        display: inline-block;
+        text-align: left;
+        margin: 15px auto;
+      }
+
+      .make-centered > h1,
+      h2,
+      h3 {
+        font-family: "Quattrocento", serif;
+      }
+
+      .make-centered h2 {
+        text-decoration: underline;
+      }
+      .type-container {
+        list-style-type: none;
+        text-align: center;
+        margin-top: 40px;
+      }
+
+      .type-container li {
+        font-size: 25px;
+        display: inline-block;
+        color: black;
+        padding: 15px 32px;
+        font-weight: bold;
+        border: 1px solid black;
+        margin: 4px 4px;
+        cursor: pointer;
+      }
+
+      .type-container li:hover {
+        color: white;
+      }
+
+      .make-darker {
+        background-color: black;
+      }
+
+      .type-container .type-1 {
+        background-color: red;
+      }
+      .type-container .type-2 {
+        background-color: lightblue;
+      }
+      .type-container .type-3 {
+        background-color: green;
+      }
+      .type-container .type-4 {
+        background-color: pink;
+      }
+
+      .input-container {
+        display: inline-block;
+      }
+
+      .input-container > .input-2 {
+        /* margin: auto; */
+      }
+      /* ==================================*/
+      /* ============= END ================*/
+      /* ==================================*/
+
+      /* ==================================*/
+      /* ====== DELETE IMAGE SECTION ======*/
+      /* ==================================*/
+
+      .delete-img {
+        text-align: center;
+        display: block;
+      }
+
+      .delete-img-2 {
+        margin: 0 45px 45px;
+        border-top: 1px solid lightgrey;
+        border-bottom: 1px solid lightgrey;
+        padding: 25px 0;
+      }
+
+      .delete-img h2 {
+        font-family: "Quattrocento", serif;
+        margin: 55px auto;
+      }
+
+      .add-tint {
+        opacity: 0.5;
+      }
+
+      /* ==================================*/
+      /* ============= END ================*/
+      /* ==================================*/
+
+      /* ==================================*/
+      /* ====== ADD BLOG POST SECTION ======*/
+      /* ==================================*/
+
+      .blog-post {
+        display: block;
+        text-align: center;
+      }
+
+      .blog-post form {
+        display: inline-block;
+        text-align: left;
+        margin: 15px auto;
+        width: 700px;
+      }
+
+      /* ==================================*/
+      /* ============= END ================*/
+      /* ==================================*/
+
+      /* ==================================*/
+      /* ====== ADD BLOG POST SECTION ======*/
+      /* ==================================*/
+
+      .delete-blogPost {
+        display: block;
+        text-align: center;
+      }
+      .delete-blogPost-2 {
+        margin: 0 45px 45px;
+        padding: 25px 0;
+      }
+      .delete-button {
+        background-color: #ff0000;
+        color: #ffffff;
+        border-radius: 8px;
+        padding: 8px 15px 8px 15px;
+      }
+      .delete-button:hover {
+        background-color: #150101;
+      }
+
+      .delete-table-head {
+        text-align: center;
+      }
+      .delete-table-body {
+        text-align: center;
+      }
+
+      /* ==================================*/
+      /* ========== Modal Window ==========*/
+      /* ==================================*/
+
+      .center {
+        text-align: center;
+      }
+
+      /* ==================================*/
+      /* ========== MEDIA TAGS ============*/
+      /* ==================================*/
+
+      @media only screen and (min-width: 1000px) {
+        .admin form {
+          width: 400px;
+        }
+      }
+
+      @media only screen and (min-width: 600px) and (max-width: 1000px) {
+        .admin form {
+          width: 450px;
+        }
+      }
+
+      @media only screen and (max-width: 600px) {
+        .admin form {
+          width: 450px;
+        }
+      }
+    </style>
+    <style>
+      .centered {
+        text-align: center;
+      }
+      h3 {
+        margin: 0;
+      }
+      /* .modal-image img {
+    max-width: 100%; 
+    height: 400px; 
+} */
+    </style>
+    <style>
+      .reset {
+        text-align: center;
+        display: block;
+      }
+
+      .reset form {
+        display: inline-block;
+        text-align: left;
+        margin: 25px auto;
+      }
+      .reset h3 {
+        font-family: "Quattrocento", serif;
+        margin: 15px auto;
+      }
+
+      /* ==================================*/
+      /* ========== MEDIA TAGS ============*/
+      /* ==================================*/
+
+      @media only screen and (min-width: 1000px) {
+        .reset form {
+          width: 400px;
+        }
+      }
+
+      @media only screen and (min-width: 600px) and (max-width: 1000px) {
+        .reset form {
+          width: 450px;
+        }
+      }
+
+      @media only screen and (max-width: 600px) {
+        .reset form {
+          width: 450px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrapper">
+      <div id="root">
+        <div class="App">
+          <nav class="navbar navbar-default bootsnav on no-full">
+            <div class="container">
+              <div class="navbar-header">
+                <button
+                  type="button"
+                  class="navbar-toggle"
+                  data-toggle="collapse"
+                  data-target="#navbar-menu"
+                >
+                  <i class="fa fa-bars"></i></button
+                ><a class="navbar-brand" href="http://localhost:3000/home"
+                  ><img
+                    src="./MakeupByJerlicia_files/main-logo2.4bc16681.png"
+                    class="logo1"
+                    alt=""
+                /></a>
+              </div>
+              <div class="collapse navbar-collapse" id="navbar-menu">
+                <ul
+                  class="nav navbar-nav navbar-right"
+                  data-in="fadeInUp"
+                  data-out="fadeOutDown"
+                >
+                  <li><a href="http://localhost:3000/home">Home</a></li>
+                  <li><a href="http://localhost:3000/about">About</a></li>
+                  <li><a href="http://localhost:3000/services">Services</a></li>
+                  <li>
+                    <a href="http://localhost:3000/portfolio">Portfolio</a>
+                  </li>
+                  <li><a href="http://localhost:3000/blog">Blog</a></li>
+                  <li>
+                    <a href="http://localhost:3000/contact">Contact Us</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </nav>
+          <section class="error-message">
+            <h1 class="error-code">404</h1>
+            <p class="error-description">Page not found</p>
+            <a href="http://localhost:3000/home" class="error-link"
+              >Go to homepage</a
+            >
+          </section>
+          <div>
+            <footer>
+              <section class="section footer-primary">
+                <div class="container">
+                  <div class="row">
+                    <div class="col-md-6 col-md-offset-3 text-center">
+                      <h3>Newsletter Signup</h3>
+                      <p class="pb-20">
+                        Get Our special offers and the ultimate hair care tips
+                        &amp; tricks!
+                      </p>
+                      <form class="pb-40">
+                        <div class="input-group">
+                          <input
+                            type="email"
+                            class="form-control"
+                            required=""
+                            name="nemail"
+                            id="nemail"
+                            placeholder="Email address"
+                          />
+                          <div class="input-group-btn">
+                            <button type="submit" class="btn btn-primary">
+                              Subscribe
+                            </button>
+                          </div>
+                        </div>
+                      </form>
+                      <h3 class="pb-10">Let's Stay Connected</h3>
+                      <div class="footer-social-icons">
+                        <a href="http://localhost:3000/hom#" target="_blank"
+                          ><i class="fa fa-facebook"></i
+                        ></a>
+                        <a href="http://localhost:3000/hom#" target="_blank"
+                          ><i class="fa fa-twitter"></i
+                        ></a>
+                        <a href="http://localhost:3000/hom#" target="_blank"
+                          ><i class="fa fa-linkedin"></i
+                        ></a>
+                        <a href="http://localhost:3000/hom#" target="_blank"
+                          ><i class="fa fa-instagram"></i
+                        ></a>
+                        <a href="http://localhost:3000/hom#" target="_blank"
+                          ><i class="fa fa-google-plus"></i
+                        ></a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+              <section class="section footer-copyright">
+                <div class="container">
+                  <ul class="footer-nav">
+                    <li><a href="http://localhost:3000/home">Home</a></li>
+                    <li><a href="http://localhost:3000/about">About</a></li>
+                    <li>
+                      <a href="http://localhost:3000/services">Services</a>
+                    </li>
+                    <li>
+                      <a href="http://localhost:3000/portfolio">Portfolio</a>
+                    </li>
+                    <li>
+                      <a href="http://localhost:3000/contact">Contact Us</a>
+                    </li>
+                    <li><a href="http://localhost:3000/admin">Admin</a></li>
+                  </ul>
+                  <p>Jerlicia Jordan © 2020, All Rights Reserved.</p>
+                </div>
+              </section>
+            </footer>
+            <a class="goto-top"
+              ><i class="fa fa-angle-double-up" aria-hidden="true"></i
+            ></a>
+          </div>
+        </div>
+      </div>
+
+      <!-- jquery scripts -->
+      <script
+        type="text/javascript"
+        async=""
+        src="./MakeupByJerlicia_files/recaptcha__en.js"
+      ></script>
+      <script
+        src="./MakeupByJerlicia_files/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"
+      ></script>
+      <script
+        src="./MakeupByJerlicia_files/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"
+      ></script>
+      <script
+        src="./MakeupByJerlicia_files/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"
+      ></script>
+
+      <!-- recaptcha script -->
+      <script src="./MakeupByJerlicia_files/api.js" async="" defer=""></script>
+
+      <!-- added scripts -->
+      <script src="./MakeupByJerlicia_files/jquery.min.js"></script>
+      <script src="./MakeupByJerlicia_files/bootstrap.min(1).js"></script>
+      <script src="./MakeupByJerlicia_files/bootsnav.js"></script>
+      <script src="./MakeupByJerlicia_files/plugins.js"></script>
+      <script src="./MakeupByJerlicia_files/script.js"></script>
+      <script src="./MakeupByJerlicia_files/bundle.js"></script>
+      <script src="./MakeupByJerlicia_files/1.chunk.js"></script>
+      <script src="./MakeupByJerlicia_files/main.chunk.js"></script>
+      <script src="./MakeupByJerlicia_files/main.1b440f560c55398cceb6.hot-update.js"></script>
+    </div>
+  </body>
+</html>

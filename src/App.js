@@ -18,7 +18,7 @@ import { fetchImages } from "./actions/imageActions.js";
 import { fetchBlogPosts } from "./actions/blogActions.js";
 import Reset from "./views/reset";
 import Passwords from "./views/passwords";
-import FouroFour_page from "./components/404_Page";
+import ErrorNotification from "./components/errorNotification";
 
 class App extends Component {
   componentDidMount() {
@@ -31,6 +31,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
+        <ErrorNotification />
         <Header />
         <Switch>
           <Route exact path={"/admin"} render={() => <Admin />} />
@@ -65,6 +66,7 @@ App.propTypes = {
 
 //using this to map to props
 const mapStateToProps = state => ({
+  error: state.error,
   images: state.images.items,
   blogposts: state.blogposts,
   user: state.user.items

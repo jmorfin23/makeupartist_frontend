@@ -1,3 +1,6 @@
+// ============= ERROR ==============
+export const APP_ERROR = "APP_ERROR";
+export const HIDE_ERROR = "HIDE_ERROR";
 // =========== LOGIN ================
 export const LOGIN_ADMIN = "LOGIN_ADMIN";
 export const REGISTER_ADMIN = "REGISTER_ADMIN";
@@ -12,4 +15,5 @@ export const FETCH_BLOG_POSTS = "FETCH_BLOGPOSTS";
 export const ADD_BLOG_POST = "ADD_BLOGPOST";
 export const DELETE_BLOG_POST = "DELET_BLOGPOST";
 export const GET_SINGLE_BLOGPOST = "GET_SINGLE_BLOGPOST";
+export const GET_REQUESTED_NUM_BLOGPOST = "GET_REQUESTED_NUM_BLOGPOST";
 // ==================================

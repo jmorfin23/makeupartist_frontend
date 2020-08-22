@@ -11,15 +11,10 @@ import { useSelector } from "react-redux";
 // })
 
 const BlogPosts = props => {
-  const posts = useSelector(state => state.blogposts.items);
-
-  //if post length >= 2 display only those: FOR HOMEPAGE//take look at this again.
-  if (posts.data && props.items) {
-    posts.data.splice(3);
-  }
+  const posts = useSelector(state => state.blogposts.home_posts);
 
   //if there are no posts return a message * change this not efficient
-  if (posts.data == "") {
+  if (!posts.data) {
     return (
       <div className="row">
         <div className="no-blog-posts">
@@ -28,6 +23,11 @@ const BlogPosts = props => {
       </div>
     );
   }
+
+  if (props.items && typeof props.items == "number") {
+    posts.data.splice(props.items);
+  }
+
   return (
     <div className="row">
       {posts.data &&

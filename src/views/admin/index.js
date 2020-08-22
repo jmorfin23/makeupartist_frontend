@@ -103,9 +103,9 @@ class Admin extends Component {
 
     //alert if delete image successful and take out of imageList
     if (this.props.newLength == this.state.imageList.length - 1) {
-      if (this.props.newLength == 0) {
-        return;
-      }
+      // if (this.props.newLength == 0) {
+      //   return;
+      // }
       alert("Deleted Image");
       let newList = this.state.imageList;
       let index = this.indexToDelete(newList, "url", this.props.deletedImage);
@@ -200,7 +200,9 @@ class Admin extends Component {
 
       //call method to upload to cloudinary get back the URL
       // const image = this.uploadToCloud();
-      const image = await this.uploadToCloud();
+      // const image = await this.uploadToCloud();
+      const image =
+        "https://res.cloudinary.com/dozvqlete/image/upload/v1592863443/l2rw1yroij6ciidlyxhp.jpg";
       const imageInfo = {
         cloudURL: image,
         admin: this.state.admin,

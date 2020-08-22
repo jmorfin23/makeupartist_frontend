@@ -149,7 +149,7 @@ h3 {
   padding: 8px 15px 8px 15px;
 }
 .delete-button:hover {
-  color: #000000;
+  background-color: #150101;
 }
 
 .delete-table-head {

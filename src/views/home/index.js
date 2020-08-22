@@ -27,7 +27,7 @@ import * as $ from "jquery";
 //connect to mailchimp - soon
 //secure infomation
 //slugify
-//RSS for updating blogposts - difficult to figure out.
+//RSS for updating blogposts - difficult to figure out - pay.
 //blogposts - retrieved all blogposts, I could just query 4 blogposts at a time depending on page number - and add a method
 //to query the first 3 blogposts for home page - this would improve time complexity.
 //need to make database in POSTGres write all the SQL code for the tables.
@@ -36,7 +36,7 @@ import * as $ from "jquery";
 
 //Need to accomplish:
 //add writing to all pages
-//make emailing better
+//make emailing better - learn more about this
 //port photos animation change
 //blogposts
 //secure information
@@ -44,7 +44,8 @@ import * as $ from "jquery";
 //admin panel length deleting issue with 0 posts.
 //remove unecessary photos and data
 //.gitignore
-//host
+//host with heroku paid ?
+//look into hosting static files with aws
 
 class Home extends Component {
   render() {
@@ -116,9 +117,9 @@ class Home extends Component {
                           Makeup Artist
                         </h1>
                         <p>
-                          There is no doubt that my{" "}
-                          <strong>professional</strong> services will make you{" "}
-                          <strong>shine</strong> on your special occasion.
+                          <strong>Specialized</strong> services that will make
+                          you
+                          <strong> shine</strong> on your special occasion.
                         </p>
                       </div>
                     </div>
@@ -169,8 +170,8 @@ class Home extends Component {
                     <h1>Bridal Makeup</h1>
                     <p>
                       My primary focus is to ensure you look your best. I
-                      guarentee the quality of my work is unmatched, and will
-                      make you feel stunning on your big day.
+                      guarantee the quality of my work is unmatched, and will
+                      make you feel stunning.
                     </p>
                     <p className="service-price pb-10">
                       <span className="decor-text">starts from</span>
@@ -198,8 +199,8 @@ class Home extends Component {
                     <h1>tv film commercial</h1>
                     <p>
                       The capacity of my work meets the most demanding
-                      challenges. Through hundreds of sessions of work, I've
-                      gained the skillset to meet any and every need.
+                      challenges. Through hundreds of sessions of performance,
+                      I've gained the skillset to meet any and every need.
                     </p>
                     <p className="service-price pb-10">
                       <span className="decor-text">starts from</span>
@@ -357,7 +358,7 @@ class Home extends Component {
           </div>
           {/*  end section-title */}
           <div className="container">
-            <BlogPosts items={2} />
+            <BlogPosts items={3} />
           </div>
           {/* container*/}
         </section>

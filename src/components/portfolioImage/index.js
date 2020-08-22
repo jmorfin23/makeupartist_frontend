@@ -77,6 +77,15 @@ class PortfolioImage extends Component {
   };
 
   render() {
+    let images = this.props.images.data;
+
+    if (!images.length) {
+      return (
+        <div className="empty-image-list text center">
+          <p>There are currently no images in the portfolio.</p>
+        </div>
+      );
+    }
     return (
       <div className="portfolio-images">
         <ul
