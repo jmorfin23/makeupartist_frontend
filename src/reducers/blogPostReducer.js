@@ -7,11 +7,11 @@ import {
 } from "../actions/types.js";
 
 const initialState = {
-  items: { data: [] },
+  items: { data: [] }, //dont need this but will cause error if deleted in admin view
   item: {},
-  singlePost: {},
+  singlePost: { post: {}, nextPosts: [] },
   deletedStatus: {},
-  home_posts: { data: [] }
+  home_posts: []
 };
 
 const blogPostReducer = (state = initialState, action) => {

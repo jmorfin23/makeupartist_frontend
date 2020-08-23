@@ -1,12 +1,17 @@
-import { APP_ERROR, HIDE_ERROR } from "../actions/types.js";
+import { APP_ERROR, HIDE_ERROR, POST_ERROR } from "../actions/types.js";
 
 const initialState = {
   error: null,
+  post_error: null,
   isOpen: false
 };
 
 const errorReducer = (state = initialState, action) => {
   switch (action.type) {
+    case POST_ERROR:
+      return {
+        post_error: action.payload
+      };
     case APP_ERROR:
       return {
         error: action.payload,

@@ -23,10 +23,10 @@ import ErrorNotification from "./components/errorNotification";
 class App extends Component {
   componentDidMount() {
     //retrieve portfolio images from backend
-    this.props.fetchImages();
-
+    // this.props.fetchImages();
+    console.log(this.props);
     //retrieve blog posts from backend
-    this.props.fetchBlogPosts();
+    // this.props.fetchBlogPosts();
   }
   render() {
     return (

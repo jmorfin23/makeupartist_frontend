@@ -29,14 +29,20 @@ class Post1 extends Component {
     console.log("component did mount");
     //call action to query database with path
     this.props.getSinglePost(this.props.match.params.post);
-    console.log(this.props);
   }
 
   static getDerivedStateFromProps(nextProps, prevState) {
-    console.log("props::  ");
-    console.log(nextProps);
-    if (nextProps.singlePost.success && nextProps.singlePost.nextPosts) {
-      let post = nextProps.singlePost.success;
+    if (nextProps.error.post_error) {
+      return {
+        error: true
+      };
+    }
+
+    if (
+      nextProps.singlePost.post != "" &&
+      nextProps.singlePost.nextPosts != ""
+    ) {
+      const post = nextProps.singlePost.post;
       return {
         post: post.id,
         title: post.title,
@@ -48,15 +54,6 @@ class Post1 extends Component {
         nextPosts: nextProps.singlePost.nextPosts
       };
     }
-    if (nextProps.singlePost.error) {
-      return {
-        error: true
-      };
-    }
-  }
-
-  componentDidUpdate() {
-    console.log(`component did update`);
   }
 
   render() {
@@ -285,7 +282,8 @@ class Post1 extends Component {
 }
 
 const mapStateToProps = state => ({
-  singlePost: state.blogposts.singlePost
+  singlePost: state.blogposts.singlePost,
+  error: state.error
 });
 
 export default connect(mapStateToProps, { getSinglePost })(withRouter(Post1));

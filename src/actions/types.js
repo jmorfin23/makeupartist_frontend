@@ -1,6 +1,7 @@
 // ============= ERROR ==============
 export const APP_ERROR = "APP_ERROR";
 export const HIDE_ERROR = "HIDE_ERROR";
+export const POST_ERROR = "POST_ERROR";
 // =========== LOGIN ================
 export const LOGIN_ADMIN = "LOGIN_ADMIN";
 export const REGISTER_ADMIN = "REGISTER_ADMIN";

@@ -4,7 +4,8 @@ import {
   DELETE_BLOG_POST,
   GET_SINGLE_BLOGPOST,
   GET_REQUESTED_NUM_BLOGPOST,
-  APP_ERROR
+  APP_ERROR,
+  POST_ERROR
 } from "./types.js";
 
 // Retrieves all blogposts from db
@@ -59,16 +60,36 @@ export const fetchBlogPosts = () => {
 
 // Retrieves specified number of blogposts
 export const getRequestedNumBlogPost = num => {
-  return function(dispatch) {
+  return async function(dispatch) {
     console.log("inside getRequestedNumBlogPost");
-    fetch("http://127.0.0.1:5000/api/get-requested-number-blogpost")
+    await fetch("http://127.0.0.1:5000/api/get-requested-number-blogpost", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        number: num
+      }
+    })
       .then(response => response.json())
-      .then(posts =>
-        dispatch({
-          type: GET_REQUESTED_NUM_BLOGPOST,
-          payload: posts
-        })
-      );
+      .then(res => {
+        try {
+          if (res.status == "ok") {
+            dispatch({
+              type: GET_REQUESTED_NUM_BLOGPOST,
+              payload: res.data
+            });
+          } else {
+            dispatch({
+              type: APP_ERROR,
+              payload: res.error
+            });
+          }
+        } catch (error) {
+          dispatch({
+            type: APP_ERROR,
+            payload: error
+          });
+        }
+      });
   };
 };
 
@@ -123,12 +144,26 @@ export const getSinglePost = path => {
         path: path
       }
     })
-      .then(res => res.json())
-      .then(data =>
-        dispatch({
-          type: GET_SINGLE_BLOGPOST,
-          payload: data
-        })
-      );
+      .then(response => response.json())
+      .then(res => {
+        try {
+          if (res.status == "ok") {
+            dispatch({
+              type: GET_SINGLE_BLOGPOST,
+              payload: res.data
+            });
+          } else {
+            dispatch({
+              type: POST_ERROR,
+              payload: res.error
+            });
+          }
+        } catch (error) {
+          dispatch({
+            type: APP_ERROR,
+            payload: error
+          });
+        }
+      });
   };
 };

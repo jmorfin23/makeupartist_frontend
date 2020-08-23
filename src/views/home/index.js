@@ -16,6 +16,7 @@ import Header from "../../components/header";
 import Featured from "../../components/featured";
 import BlogPosts from "../../components/blogPosts";
 import PortfolioImage from "../../components/portfolioImage";
+import { getRequestedNumBlogPost } from "../../actions/blogActions";
 import PropTypes from "prop-types";
 import * as $ from "jquery";
 
@@ -48,6 +49,10 @@ import * as $ from "jquery";
 //look into hosting static files with aws
 
 class Home extends Component {
+  componentDidMount() {
+    // Call first 3 blogposts
+    this.props.getRequestedNumBlogPost(3);
+  }
   render() {
     return (
       <div className="homepage">
@@ -376,7 +381,7 @@ class Home extends Component {
 //map state to props
 const mapStateToProps = state => ({
   images: state.images.items,
-  blogposts: state.blogposts.items
+  blogposts: state.blogposts.home_posts
 });
 
-export default connect(mapStateToProps)(Home);
+export default connect(mapStateToProps, { getRequestedNumBlogPost })(Home);

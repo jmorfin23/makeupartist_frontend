@@ -1,20 +1,11 @@
 import React from "react";
 import "./index.css";
 import { useSelector } from "react-redux";
-// What i did before HAHA.
-// posts.data.map((post, index) => {
-//   if (index > 2) {
-//     posts.data.splice(index, 1);
-//   }
-//
-//   console.log('testing content: ' + post.content);
-// })
 
 const BlogPosts = props => {
   const posts = useSelector(state => state.blogposts.home_posts);
 
-  //if there are no posts return a message * change this not efficient
-  if (!posts.data) {
+  if (!posts || !posts.length) {
     return (
       <div className="row">
         <div className="no-blog-posts">
@@ -24,14 +15,14 @@ const BlogPosts = props => {
     );
   }
 
-  if (props.items && typeof props.items == "number") {
-    posts.data.splice(props.items);
-  }
+  // if (props.items && typeof props.items == "number") {
+  //   posts.data.splice(props.items);
+  // }
 
   return (
     <div className="row">
-      {posts.data &&
-        posts.data.map(post => (
+      {posts &&
+        posts.map(post => (
           <div key={post.id} className="col-lg-4 col-md-4 col-sm-6 col-xs-12">
             <div className="post-entry">
               <div className="post-thumbnail">

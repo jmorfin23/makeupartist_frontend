@@ -6,12 +6,10 @@ import { HIDE_ERROR } from "../../actions/types.js";
 const ErrorNotification = () => {
   const isOpen = useSelector(state => state.error.isOpen);
   const error = useSelector(state => state.error.error);
-  console.log(isOpen);
-  console.log(error);
+
   const dispatch = useDispatch();
 
   const handleClose = () => {
-    console.log("inside handle close");
     dispatch({ type: HIDE_ERROR });
   };
   return (
