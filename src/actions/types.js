@@ -7,6 +7,8 @@ export const LOGIN_ADMIN = "LOGIN_ADMIN";
 export const REGISTER_ADMIN = "REGISTER_ADMIN";
 export const CHECK_USER = "CHECK_USER";
 export const UPDATE_PASSWORD = "RESET_PASSWORD";
+export const ADMIN_AUTH = "ADMIN_AUTH";
+export const LOGOUT_ADMIN = "LOGOUT_ADMIN";
 // =========== IMAGES ===============
 export const FETCH_IMAGES = "FETCH_IMAGES";
 export const ADD_IMAGE = "NEW_IMAGE";

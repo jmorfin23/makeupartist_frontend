@@ -7,11 +7,13 @@ import {
 } from "../actions/types.js";
 
 const initialState = {
-  items: { data: [] }, //dont need this but will cause error if deleted in admin view
+  items: [], //dont need this but will cause error if deleted in admin view
   item: {},
   singlePost: { post: {}, nextPosts: [] },
-  deletedStatus: {},
-  home_posts: []
+  deleted: false,
+  added: {},
+  home_posts: [],
+  message: ""
 };
 
 const blogPostReducer = (state = initialState, action) => {
@@ -24,7 +26,7 @@ const blogPostReducer = (state = initialState, action) => {
     case ADD_BLOG_POST:
       return {
         ...state,
-        item: action.payload
+        message: action.message
       };
     case GET_SINGLE_BLOGPOST:
       return {
@@ -34,7 +36,8 @@ const blogPostReducer = (state = initialState, action) => {
     case DELETE_BLOG_POST:
       return {
         ...state,
-        deletedStatus: action.payload
+        deleted: action.payload,
+        message: action.message
       };
     case GET_REQUESTED_NUM_BLOGPOST:
       return {
@@ -45,5 +48,4 @@ const blogPostReducer = (state = initialState, action) => {
       return state;
   }
 };
-
 export default blogPostReducer;

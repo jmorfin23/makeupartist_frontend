@@ -1,17 +1,29 @@
-import { FETCH_IMAGES, ADD_IMAGE, DELETE_IMAGE } from "./types.js";
+import { FETCH_IMAGES, ADD_IMAGE, DELETE_IMAGE, APP_ERROR } from "./types.js";
 
 //retrieve images from database
 export const fetchImages = () => {
-  return function(dispatch) {
+  return async function(dispatch) {
     console.log("fetching images");
-    fetch("http://127.0.0.1:5000/api/retrieve-images")
-      .then(response => response.json())
-      .then(images =>
+    const response = await fetch("http://127.0.0.1:5000/api/retrieve-images");
+    const res = await response.json();
+    try {
+      if (res.status === "ok") {
         dispatch({
           type: FETCH_IMAGES,
-          payload: images
-        })
-      );
+          payload: res.data
+        });
+      } else {
+        dispatch({
+          type: APP_ERROR,
+          payload: res.error
+        });
+      }
+    } catch (error) {
+      dispatch({
+        type: APP_ERROR,
+        error: error
+      });
+    }
   };
 };
 

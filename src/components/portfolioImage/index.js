@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import PortfolioModal from "../../components/portfolioModal";
 import "./index.css";
+import { fetchImages } from "../../actions/imageActions";
 
 class PortfolioImage extends Component {
   constructor(props) {
@@ -12,7 +13,10 @@ class PortfolioImage extends Component {
       image: null
     };
   }
-
+  componentDidMount() {
+    // Get images
+    this.props.fetchImages();
+  }
   toggleModal = () => {
     this.setState({ modalToggle: !this.state.modalToggle });
   };
@@ -77,8 +81,9 @@ class PortfolioImage extends Component {
   };
 
   render() {
-    let images = this.props.images.data;
-
+    const images = this.props.images;
+    console.log("*****8");
+    console.log(images);
     if (!images.length) {
       return (
         <div className="empty-image-list text center">
@@ -135,8 +140,8 @@ class PortfolioImage extends Component {
           </li>
         </ul>
         <div className="portfolio-items row">
-          {this.props.images.data &&
-            this.props.images.data.map((image, index) => (
+          {this.props.images &&
+            this.props.images.map((image, index) => (
               <div
                 key={index}
                 className={
@@ -174,7 +179,7 @@ class PortfolioImage extends Component {
 }
 
 const mapStateToProps = state => ({
-  images: state.images.items
+  images: state.images.images
 });
 
-export default connect(mapStateToProps)(PortfolioImage);
+export default connect(mapStateToProps, { fetchImages })(PortfolioImage);

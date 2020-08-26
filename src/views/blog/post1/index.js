@@ -21,17 +21,19 @@ class Post1 extends Component {
       comments: [],
       url: null,
       nextPosts: [],
-      error: null
+      error: false
     };
   }
 
   componentDidMount() {
     console.log("component did mount");
+    console.log("testing");
     //call action to query database with path
     this.props.getSinglePost(this.props.match.params.post);
   }
 
   static getDerivedStateFromProps(nextProps, prevState) {
+    console.log(nextProps);
     if (nextProps.error.post_error) {
       return {
         error: true
@@ -106,14 +108,14 @@ class Post1 extends Component {
                         >
                           <div className="post-entry post-entry-related">
                             <div className="post-thumbnial">
-                              <a href={`/${post.path}`}>
+                              <a href={`/blog/${post.path}/`}>
                                 <img src={placeholder} alt="" />
                               </a>
                             </div>
                             {/*post-thumbnial*/}
                             <div className="post-entry-related-contents">
                               <h1>
-                                <a href={`/${post.path}`}>{post.title}</a>
+                                <a href={`/blog/${post.path}/`}>{post.title}</a>
                               </h1>
                               <ul className="entry-meta">
                                 <li>

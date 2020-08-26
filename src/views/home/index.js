@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import "./index.css";
-import { useSelector, connect } from "react-redux";
+import { connect } from "react-redux";
 // ========= Image imports =========
-import placeholder from "../../images/blog/placeholder.jpg";
+// import placeholder from "../../images/blog/placeholder.jpg";
 import slide1 from "../../images/portrait.jpg";
 import slide2 from "../../images/slide-img2.jpg";
 import service1 from "../../images/bride-01.jpg";
@@ -12,13 +12,12 @@ import testimonialOne from "../../images/testimonial_woman-01.jpg";
 import testimonialTwo from "../../images/testimonial_woman-02.jpg";
 import testimonialThree from "../../images/testimonial_woman-03.jpg";
 // ========= Component imports ========= //
-import Header from "../../components/header";
 import Featured from "../../components/featured";
 import BlogPosts from "../../components/blogPosts";
 import PortfolioImage from "../../components/portfolioImage";
 import { getRequestedNumBlogPost } from "../../actions/blogActions";
-import PropTypes from "prop-types";
-import * as $ from "jquery";
+// import PropTypes from "prop-types";
+// import * as $ from "jquery";
 
 //Changes to the application: ?
 //============================================
@@ -35,12 +34,20 @@ import * as $ from "jquery";
 //length error - believe this is fixed
 //services book section
 
-//Need to accomplish:
+//Need to accomplish today:
+//add jwt to check if user is signed in and when making user changes
+// add backend route to check if user is signed in based on existing token in localstorage on refresh,
+//this will allow for user to stay logged in on frontend and adds security.
+//if user tries to access admin/home and is not logged in reroute to login page
+//try not using local state as much, causes too many uncessecary rerenders
+
+//redux-logger issue
+//error during catch action dispatching
 //add writing to all pages
 //make emailing better - learn more about this
 //port photos animation change
 //blogposts
-//secure information
+//secure information **
 //mailchimp / RSS
 //admin panel length deleting issue with 0 posts.
 //remove unecessary photos and data
@@ -78,7 +85,7 @@ class Home extends Component {
           {/*  Wrapper for slides */}
           <div className="carousel-inner" role="listbox">
             <div className="item">
-              <img src={slide1} alt="First Image" />
+              <img src={slide1} alt="heading" />
               <div className="carousel-caption">
                 <div className="carousel-caption-inner">
                   <div className="container">

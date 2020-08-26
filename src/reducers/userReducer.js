@@ -1,4 +1,11 @@
-import { LOGIN_ADMIN, CHECK_USER, UPDATE_PASSWORD } from "../actions/types.js";
+import {
+  LOGIN_ADMIN,
+  CHECK_USER,
+  UPDATE_PASSWORD,
+  REGISTER_ADMIN,
+  ADMIN_AUTH,
+  LOGOUT_ADMIN
+} from "../actions/types.js";
 
 const initialState = {
   items: [],
@@ -8,13 +15,28 @@ const initialState = {
   password_reset: {}
 };
 
+//can consolodate this
 const userReducer = (state = initialState, action) => {
   switch (action.type) {
+    case ADMIN_AUTH:
+      return {
+        ...state,
+        isLogged: action.payload
+      };
+    case LOGOUT_ADMIN:
+      return {
+        ...state,
+        isLogged: action.payload
+      };
     case LOGIN_ADMIN:
       return {
         ...state,
-        items: action.payload,
-        isLogged: action.payload.data.status
+        isLogged: action.payload
+      };
+    case REGISTER_ADMIN:
+      return {
+        ...state,
+        isLogged: action.payload
       };
     case UPDATE_PASSWORD:
       return {

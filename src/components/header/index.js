@@ -1,9 +1,15 @@
 import React from "react";
 import "./index.css";
 import companylogo from "../../images/main-logo2.png";
-import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
-const Header = () => {
+const Header = props => {
+  console.log("header component");
+
+  const logoutAdmin = () => {
+    console.log("inside logout admin");
+  };
+
   return (
     <nav className="navbar navbar-default bootsnav">
       <div className="container">
@@ -17,9 +23,9 @@ const Header = () => {
           >
             <i className="fa fa-bars"></i>
           </button>
-          <a className="navbar-brand" href="/home">
+          <Link className="navbar-brand" to="/home">
             <img src={companylogo} className="logo1" alt="" />
-          </a>
+          </Link>
         </div>
         {/*  End Header Navigation */}
         {/*  Collect the nav links, forms, and other content for toggling */}
@@ -30,23 +36,28 @@ const Header = () => {
             data-out="fadeOutDown"
           >
             <li>
-              <a href="/home">Home</a>
+              <Link to="/home">Home</Link>
             </li>
             <li>
-              <a href="/about">About</a>
+              <Link to="/about">About</Link>
             </li>
             <li>
-              <a href="/services">Services</a>
+              <Link to="/services">Services</Link>
             </li>
             <li>
-              <a href="/portfolio">Portfolio</a>
+              <Link to="/portfolio">Portfolio</Link>
             </li>
             <li>
-              <a href="/blog">Blog</a>
+              <Link to="/blog">Blog</Link>
             </li>
             <li>
-              <a href="/contact">Contact Us</a>
+              <Link to="/contact">Contact Us</Link>
             </li>
+            {props.page === "/admin/home" ? (
+              <li>
+                <a onClick={() => logoutAdmin()}>Logout</a>
+              </li>
+            ) : null}
           </ul>
         </div>
         {/*  /.navbar-collapse */}

@@ -7,13 +7,11 @@
 
 @keyframes portfolio {
   0% {
-    top: -50px;
-    opacity: 0.1;
-    z-index: 0;
+    opacity: 0;
+    transform: translate3d(0, -10%, 0);
   }
   100% {
-    top: 0px;
     opacity: 1;
-    z-index: 1;
+    transform: none;
   }
 }

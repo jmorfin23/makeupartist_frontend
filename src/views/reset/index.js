@@ -15,7 +15,7 @@ class Reset extends Component {
   submitResetForm = e => {
     e.preventDefault();
     console.log("submit login form");
-    if (this.state.sent == e.target.username.value) {
+    if (this.state.sent === e.target.username.value) {
       alert("You have aleady submitted that email.");
       return;
     }
@@ -35,7 +35,7 @@ class Reset extends Component {
 
   componentDidUpdate(prevProps, prevState) {
     console.log("testing?");
-    if (this.state.info != prevState.info) {
+    if (this.state.info !== prevState.info) {
       alert(this.state.info);
     }
   }

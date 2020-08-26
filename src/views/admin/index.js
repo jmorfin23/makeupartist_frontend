@@ -4,10 +4,15 @@ import PortfolioImage from "../../components/portfolioImage";
 import PropTypes from "prop-types";
 import ModalWindow from "../../components/modal";
 import { connect } from "react-redux";
-import { loginAdmin } from "../../actions/adminActions.js";
 import { addImage, deleteImage } from "../../actions/imageActions.js";
-import { addBlogPost, deleteBlogPost } from "../../actions/blogActions.js";
-
+import {
+  addBlogPost,
+  deleteBlogPost,
+  fetchBlogPosts
+} from "../../actions/blogActions.js";
+import { DELETE_BLOG_POST } from "../../actions/types";
+import { authenticateAdmin } from "../../actions/adminActions";
+import { withRouter } from "react-router-dom";
 //CLOUDINARY URL & PRESET
 const CLOUDINARY_URL = "https://api.cloudinary.com/v1_1/dozvqlete/upload";
 const CLOUDINARY_UPLOAD_PRESET = "zzmnc51n";
@@ -32,22 +37,10 @@ class Admin extends Component {
       showModal: false,
       imageToDelete: null,
       imageIdToDelete: null,
-      myAlert: null
+      myAlert: null,
+      blogId: null
     };
   }
-
-  submitLoginForm = e => {
-    e.preventDefault();
-
-    //set user info
-    const login = {
-      username: e.target.username.value,
-      password: e.target.password.value
-    };
-    console.log("inside submit login form");
-    //call login action with login info
-    this.props.loginAdmin(login);
-  };
 
   //find index of images object list to be deleted
   indexToDelete = (arr, attr, value) => {
@@ -56,17 +49,54 @@ class Admin extends Component {
     }
     return -1;
   };
+  // 3 things i need to do:
+  // call authentification - this calls a rerender - but should call this only if user tries to access admin
+  // check if user is logged in when accessing admin
+  // if user is logged in call api methods to get
+
+  // check if token is valid on frontend by checking expired time so i dont have to make requests to backend
+  // this could be at the top level component -
+  // then add a nested route so when user tries to access admin page - reroute to login page if token is expired
+  // push to admin panel if token is valid
+  // call api in admin page
+  // just doesnt make sense to check if token is valid inside of admin page - too many api calls
+
+  componentDidMount() {
+    console.log("inside component did mount admin page");
+    window.scrollTo(0, 0);
+    // if (!this.state.isLogged) {
+    //   this.props.history.push('/admin/login');
+    // }
+    //check localstorage for token
+    //for now this is fine// checking auth each time admin page is loaded
+
+    //else {
+    //   //push to login page if there is no token
+    //   this.props.history.push('/admin/login');
+    //}
+    // if (this.props.user.isLogged) {
+    //   console.log('user is now logged in');
+    // } else {
+    //   console.log('user is not logged in ');
+    // }
+  }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
     console.log("inside component did update");
     console.log(this.props);
+    //push to login page if user auth fails //this doesnt work because on the first componet update it reroutes page
+    // if (this.props.user.isLogged === false) {
+    //   this.props.history.push('/admin/login');
+    // }
+
     //add images to DOM // may need to change this later
-    if (this.props.images.data != prevState.imageList) {
-      this.setState({ imageList: this.props.images.data });
+    if (this.props.images != prevState.imageList) {
+      this.setState({ imageList: this.props.images });
       //call action to clear image section of store
       //this.props.clearImages();
     }
 
+    //review this
     //add blogposts to DOM table
     if (
       this.props.blogposts.items.data != [] &&
@@ -76,9 +106,10 @@ class Admin extends Component {
     }
 
     //check if new blogpost are equal to old blogposts
-    if (this.props.blogposts.items.data != prevState.blogPostsList) {
-      this.setState({ blogPostsList: this.props.blogposts.items.data });
+    if (this.props.blogposts.items != prevState.blogPostsList) {
+      this.setState({ blogPostsList: this.props.blogposts.items });
     }
+
     //if user login error alert error
     if (this.props.user.items.error) {
       alert(this.props.user.items.error);
@@ -126,58 +157,46 @@ class Admin extends Component {
       this.setState({ blogTitle: title, text: text });
     }
 
-    //if blog post successful alert the user
-    if (this.props.blogposts.item.success != prevProps.blogposts.item.success) {
-      alert(this.props.blogposts.item.success.message);
-      //force a reload
-      window.location.reload(false);
-    }
+    //if blog post successful alert the user //
+    // if (this.props.blogposts.message != prevProps.blogposts.message) {
+    //   alert(this.props.blogposts.message);
+    //   //force a reload
+    //   window.location.reload(false);
+    // }
 
+    //possibly create a notification reducer and add type to that for specific user action, then user
+    //getderived to jsut check for redux state changes // cons? updating 2 compoennts
     //address this.
-    if (this.props.blogisDeleted != prevProps.blogisDeleted) {
-      alert(this.props.blogisDeleted.success);
+    if (this.props.blogisDeleted == true && this.props.blogposts.message) {
+      console.log("ran");
+
+      alert(this.props.blogposts.message);
 
       //delete based on id of blogpost that was deleted
-      let alist = this.state.blogPostsList;
-      let index = this.indexToDelete(alist, "id", this.props.blogisDeleted.id);
-      alist.splice(index, 1);
+      let posts = this.state.blogPostsList;
+      const index = this.indexToDelete(posts, "id", this.state.blogId);
+      posts.splice(index, 1);
 
-      this.setState({ blogPostsList: alist });
+      this.setState({ blogPostsList: posts });
+
+      // Clear store
+      this.props.dispatch({
+        type: DELETE_BLOG_POST,
+        deleted: false,
+        message: ""
+      });
     }
   }
 
   //has access to this
   getSnapshotBeforeUpdate(prevProps, prevState) {
-    console.log("get snapshot before updating");
+    // console.log("get snapshot before updating");
 
     return null;
   }
 
   //used for updating state
   static getDerivedStateFromProps(nextProps, prevState) {
-    console.log("inside get derived state from props");
-    console.log(nextProps);
-    console.log(prevState);
-
-    //alert and set state if login successful
-    if (nextProps.user.isLogged != prevState.isLogged) {
-      alert("You have logged in");
-      return {
-        isLogged: nextProps.user.isLogged,
-        admin: nextProps.user.items.data.username
-      };
-    }
-
-    //check if local storage has blogPostInfo
-    //  if (localStorage.getItem('blogTitle') && localStorage.getItem('blogText') && prevState.saveFlag != nextProps.saveFlag) {
-    //   console.log('there is blogpost in the local storage!!!');
-    //   let title = localStorage.blogTitle;
-    //   let text = localStorage.blogText;
-
-    //   localStorage.clear();
-    //   //save to state
-    //   return { blogTitle: title, text: text };
-    // }
     return null;
   }
 
@@ -304,316 +323,260 @@ class Admin extends Component {
   };
 
   deleteBlogPost = (e, id) => {
-    e.preventDefault();
-    console.log(id);
-    console.log("inside delete blogpost");
-
-    //call action to delete blogpost
+    //add id to state
+    this.setState({ blogId: id });
+    //consolodate this inline l8r
     this.props.deleteBlogPost(id);
   };
 
   render() {
-    console.log("blogposts::: ");
-    console.log(this.props.blogposts);
-    if (this.state.isLogged) {
-      return (
-        <div className="make-centered">
-          <div className="type-container">
-            <h2>Upload an Image</h2>
-            {this.state.uploadType ? null : <p>Please select a type.</p>}
+    console.log("render admin page");
+    //added animation preloader
+    return (
+      <div className="make-centered">
+        <div className="type-container">
+          <h2>Upload an Image</h2>
+          {this.state.uploadType ? null : <p>Please select a type.</p>}
 
-            <ul className="type-list">
-              <li
-                id="1"
-                onClick={() => this.setState({ uploadType: "Wedding" })}
-                className="type type-1"
-              >
-                Wedding
-              </li>
-              <li
-                onClick={() => this.setState({ uploadType: "HairStyle" })}
-                className="type type-2"
-              >
-                Hairstyle
-              </li>
-              <li
-                onClick={() => this.setState({ uploadType: "Commercial" })}
-                className="type type-3"
-              >
-                Commercial
-              </li>
-              <li
-                onClick={() => this.setState({ uploadType: "Studio" })}
-                className="type type-4"
-              >
-                Studio
-              </li>
-            </ul>
-            <h3>
-              {this.state.uploadType
-                ? "Add image to: " + this.state.uploadType
-                : "Type has not been selected."}
-            </h3>
-            <div className="input-container">
-              <div className="input-2">
-                <form onSubmit={e => this.uploadImage(e)}>
-                  <label htmlFor="file-input"></label>
-                  <input
-                    onChange={e => this.setState({ image: e.target.files[0] })}
-                    type="file"
-                  ></input>
-                  <br />
-                  <button type="submit" className="btn btn-primary">
-                    Submit
-                  </button>
-                </form>
-              </div>
-            </div>
-          </div>
-
-          <div className="delete-img">
-            <h2>Delete an Image: </h2>
-            <div className="delete-img-2">
-              <div className="portfolio-items row">
-                {!this.state.imageList.length
-                  ? "You have no images posted."
-                  : null}
-                {this.state.imageList &&
-                  this.state.imageList.map(image => (
-                    <div
-                      key={image.id}
-                      className={
-                        `portfolio-item item ` +
-                        image.type +
-                        ` col-xs-12 col-sm-6 col-md-4`
-                      }
-                    >
-                      <div
-                        className="a-img"
-                        style={{ backgroundImage: `url(` + image.url + `)` }}
-                      ></div>
-                      <a
-                        onClick={() =>
-                          this.setState({
-                            showModal: true,
-                            imageToDelete: image.url,
-                            imageIdToDelete: image.id
-                          })
-                        }
-                        className="mfp-image"
-                      ></a>
-                    </div>
-                  ))}
-              </div>
-              <br />
-            </div>
-            {/* Modal */}
-            {/* <div className="modal fade" id="deleteImageModal" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div className="modal-dialog" role="document">
-              <div className="modal-content">
-                <div className="modal-header">
-                  <button type="button" className="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                  <h3 className="modal-title">Delete Image:</h3>
-                </div>
-                <div className="modal-body">
-                  Are you sure you want to delete this image? 
-                </div>
-                <div className="modal-footer center">
-                  <button type="button" className="btn btn-primary" data-dismiss="modal">No</button>
-                  <button type="button" className="btn btn-primary" onClick={() => this.deleteImage(image.url, index)}>Yes</button>
-                </div>
-              </div>
-            </div>
-          </div> */}
-            <ModalWindow
-              image={this.state.imageToDelete}
-              animation={false}
-              show={this.state.showModal}
-              onHide={() => this.toggleModal()}
-              deleteimage={() => this.deleteImage()}
-            />
-          </div>
-
-          <div className="blog-post">
-            <h2>Add a Blog Post: </h2>
-            <form onSubmit={e => this.addBlogPost(e)}>
-              <div className="form-group">
-                <label>Title</label>
+          <ul className="type-list">
+            <li
+              id="1"
+              onClick={() => this.setState({ uploadType: "Wedding" })}
+              className="type type-1"
+            >
+              Wedding
+            </li>
+            <li
+              onClick={() => this.setState({ uploadType: "HairStyle" })}
+              className="type type-2"
+            >
+              Hairstyle
+            </li>
+            <li
+              onClick={() => this.setState({ uploadType: "Commercial" })}
+              className="type type-3"
+            >
+              Commercial
+            </li>
+            <li
+              onClick={() => this.setState({ uploadType: "Studio" })}
+              className="type type-4"
+            >
+              Studio
+            </li>
+          </ul>
+          <h3>
+            {this.state.uploadType
+              ? "Add image to: " + this.state.uploadType
+              : "Type has not been selected."}
+          </h3>
+          <div className="input-container">
+            <div className="input-2">
+              <form onSubmit={e => this.uploadImage(e)}>
+                <label htmlFor="file-input"></label>
                 <input
-                  id="blogTitle"
-                  onChange={e => this.setState({ blogTitle: e.target.value })}
-                  name="title"
-                  type="text"
-                  className="form-control"
-                  required="required"
-                  placeholder="Title"
-                  value={this.state.blogTitle}
-                />
-              </div>
-              <div className="form-group">
-                <label>Date</label>
-                <input
-                  onChange={e => this.setState({ blogDate: e.target.value })}
-                  name="date"
-                  type="text"
-                  className="form-control"
-                  required="required"
-                  placeholder="dd mmm yyyy"
-                  value={this.state.blogDate}
-                />
-              </div>
-              <div className="form-group">
-                <label htmlFor="file-input">Image</label>
-                <input
-                  id="blogImage"
                   onChange={e => this.setState({ image: e.target.files[0] })}
-                  name="image"
                   type="file"
-                  className="form-control"
-                />
-              </div>
-              <div className="form-group">
-                <label>Text</label>
-                <textarea
-                  id="blogText"
-                  onChange={e => this.setState({ text: e.target.value })}
-                  cols="50"
-                  rows="20"
-                  type="text"
-                  name="text"
-                  className="form-control"
-                  required="required"
-                  placeholder="Text"
-                  value={this.state.text}
-                />
-              </div>
-              <input
-                id="checkbox"
-                onClick={() => this.saveMywork()}
-                type="checkbox"
-                name="save"
-              />
-              Save post and exit
-              <br />
-              <br />
-              <button type="submit" className="btn btn-primary">
-                Submit
-              </button>
-            </form>
-          </div>
-          <br />
-          <br />
-          <div className="delete-blogPost">
-            <h2>Delete a BlogPost: </h2>
-            <div className="delete-blogPost-2">
-              {/* display blogposts */}
-              <table className="table">
-                <thead>
-                  <tr className="delete-table-head">
-                    <th>Date</th>
-                    <th>Title</th>
-                    <th>URL</th>
-                    <th>Delete</th>
-                  </tr>
-                </thead>
-                <tbody className="delete-table-body">
-                  {this.state.blogPostsList &&
-                    this.state.blogPostsList.map(post => (
-                      <tr key={post.id}>
-                        <td>{post.date_posted}</td>
-                        <td>{post.title}</td>
-                        <td>{post.url}</td>
-                        <td>
-                          <button
-                            onClick={e => this.deleteBlogPost(e, post.id)}
-                            className="delete-button"
-                          >
-                            X
-                          </button>
-                        </td>
-                      </tr>
-                    ))}
-                </tbody>
-              </table>
+                ></input>
+                <br />
+                <button type="submit" className="btn btn-primary">
+                  Submit
+                </button>
+              </form>
             </div>
           </div>
         </div>
-      );
-    } else {
-      return (
-        <div className="admin">
-          <h2>Admin Login</h2>
-          <form onSubmit={e => this.submitLoginForm(e)}>
+
+        <div className="delete-img">
+          <h2>Delete an Image: </h2>
+          <div className="delete-img-2">
+            <div className="portfolio-items row">
+              {!this.state.imageList.length
+                ? "You have no images posted."
+                : null}
+              {this.state.imageList &&
+                this.state.imageList.map(image => (
+                  <div
+                    key={image.id}
+                    className={
+                      `portfolio-item item ` +
+                      image.type +
+                      ` col-xs-12 col-sm-6 col-md-4`
+                    }
+                  >
+                    <div
+                      className="a-img"
+                      style={{ backgroundImage: `url(` + image.url + `)` }}
+                    ></div>
+                    <a
+                      onClick={() =>
+                        this.setState({
+                          showModal: true,
+                          imageToDelete: image.url,
+                          imageIdToDelete: image.id
+                        })
+                      }
+                      className="mfp-image"
+                    ></a>
+                  </div>
+                ))}
+            </div>
+            <br />
+          </div>
+          <ModalWindow
+            image={this.state.imageToDelete}
+            animation={false}
+            show={this.state.showModal}
+            onHide={() => this.toggleModal()}
+            deleteimage={() => this.deleteImage()}
+          />
+        </div>
+
+        <div className="blog-post">
+          <h2>Add a Blog Post: </h2>
+          <form onSubmit={e => this.addBlogPost(e)}>
             <div className="form-group">
-              <label>Email</label>
+              <label>Title</label>
               <input
-                name="username"
-                type="username"
+                id="blogTitle"
+                onChange={e => this.setState({ blogTitle: e.target.value })}
+                name="title"
+                type="text"
                 className="form-control"
                 required="required"
-                placeholder="Email"
+                placeholder="Title"
+                value={this.state.blogTitle}
               />
             </div>
             <div className="form-group">
-              <label>Password</label>
+              <label>Date</label>
               <input
-                name="password"
-                type="password"
-                required="required"
+                onChange={e => this.setState({ blogDate: e.target.value })}
+                name="date"
+                type="text"
                 className="form-control"
-                placeholder="Password"
+                required="required"
+                placeholder="dd mmm yyyy"
+                value={this.state.blogDate}
               />
             </div>
-            <div className="forgot-pass">
-              <p>
-                <a href="/reset">Forgot account?</a>
-              </p>
+            <div className="form-group">
+              <label htmlFor="file-input">Image</label>
+              <input
+                id="blogImage"
+                onChange={e => this.setState({ image: e.target.files[0] })}
+                name="image"
+                type="file"
+                className="form-control"
+              />
             </div>
-            <div className="center">
-              <button type="submit" className="btn btn-primary">
-                Submit
-              </button>
+            <div className="form-group">
+              <label>Text</label>
+              <textarea
+                id="blogText"
+                onChange={e => this.setState({ text: e.target.value })}
+                cols="50"
+                rows="20"
+                type="text"
+                name="text"
+                className="form-control"
+                required="required"
+                placeholder="Text"
+                value={this.state.text}
+              />
             </div>
+            <input
+              id="checkbox"
+              onClick={() => this.saveMywork()}
+              type="checkbox"
+              name="save"
+            />
+            Save post and exit
+            <br />
+            <br />
+            <button type="submit" className="btn btn-primary">
+              Submit
+            </button>
           </form>
         </div>
-      );
-    }
+        <br />
+        <br />
+        <div className="delete-blogPost">
+          <h2>Delete a BlogPost: </h2>
+          <div className="delete-blogPost-2">
+            {/* display blogposts */}
+            <table className="table">
+              <thead>
+                <tr className="delete-table-head">
+                  <th>Date</th>
+                  <th>Title</th>
+                  <th>URL</th>
+                  <th>Delete</th>
+                </tr>
+              </thead>
+              <tbody className="delete-table-body">
+                {this.state.blogPostsList &&
+                  this.state.blogPostsList.map(post => (
+                    <tr key={post.id}>
+                      <td>{post.date_posted}</td>
+                      <td>{post.title}</td>
+                      <td>{post.url}</td>
+                      <td>
+                        <button
+                          onClick={e => this.deleteBlogPost(e, post.id)}
+                          className="delete-button"
+                        >
+                          X
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    );
   }
 }
 
-Admin.defaultProps = {
-  newLength: 0
-};
+// Admin.defaultProps = {
+//   newLength: 0
+// };
 
-Admin.propTypes = {
-  images: PropTypes.shape({
-    data: PropTypes.array
-  }),
-  blogposts: PropTypes.shape({
-    data: PropTypes.array
-  }),
-  newLength: PropTypes.number.isRequired
-};
+// Admin.propTypes = {
+//   images: PropTypes.shape({
+//     data: PropTypes.array
+//   }),
+//   blogposts: PropTypes.shape({
+//     data: PropTypes.array
+//   }),
+//   newLength: PropTypes.number.isRequired
+// };
 
 //map state to props
 const mapStateToProps = state => ({
   user: state.user,
-  images: state.images.items,
+  images: state.images.images,
   image: state.images.item,
   newLength: state.images.newLength,
   deletedImage: state.images.deletedImage,
   deletedStatus: state.images.deletedStatus,
   addedStatus: state.images.addedStatus,
   blogposts: state.blogposts,
-  blogisDeleted: state.blogposts.deletedStatus
+  blogisDeleted: state.blogposts.deleted
 });
 
-export default connect(mapStateToProps, {
-  loginAdmin,
-  addImage,
-  deleteImage,
-  addBlogPost,
-  deleteBlogPost
-})(Admin);
+const mapDispatchToProps = dispatch => {
+  return {
+    addImage: info => dispatch(addImage(info)),
+    deleteImage: info => dispatch(deleteImage(info)),
+    addBlogPost: info => dispatch(addBlogPost(info)),
+    deleteBlogPost: id => dispatch(deleteBlogPost(id)),
+    fetchBlogPosts: () => dispatch(fetchBlogPosts()),
+    authenticateAdmin: token => dispatch(authenticateAdmin(token)),
+    dispatch
+  };
+};
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Admin));

@@ -46,6 +46,7 @@ class Passwords extends Component {
   };
 
   render() {
+    console.log(this.props);
     return (
       <div className="reset">
         <h3>New Password</h3>

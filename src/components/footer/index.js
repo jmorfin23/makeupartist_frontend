@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   const [input, setInput] = useState(null);
@@ -7,7 +7,7 @@ const Footer = () => {
   const newsletterSignUp = async e => {
     e.preventDefault();
 
-    let response = await fetch("http://127.0.0.1:5000/api/sub-newsletter", {
+    const response = await fetch("http://127.0.0.1:5000/api/sub-newsletter", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -15,7 +15,7 @@ const Footer = () => {
       }
     });
 
-    let data = await response.json();
+    const data = await response.json();
 
     data.success ? alert(data.success.message) : alert(data.error.message);
   };
@@ -54,22 +54,21 @@ const Footer = () => {
                 </form>
                 <h3 className="pb-10">Let's Stay Connected</h3>
                 <div className="footer-social-icons">
-                  {" "}
-                  <a href="#" target="_blank">
+                  <a href="/" target="_blank">
                     <i className="fa fa-facebook"></i>
-                  </a>{" "}
-                  <a href="#" target="_blank">
+                  </a>
+                  <a href="/" target="_blank">
                     <i className="fa fa-twitter"></i>
-                  </a>{" "}
-                  <a href="#" target="_blank">
+                  </a>
+                  <a href="/" target="_blank">
                     <i className="fa fa-linkedin"></i>
-                  </a>{" "}
-                  <a href="#" target="_blank">
+                  </a>
+                  <a href="/" target="_blank">
                     <i className="fa fa-instagram"></i>
-                  </a>{" "}
-                  <a href="#" target="_blank">
+                  </a>
+                  <a href="/" target="_blank">
                     <i className="fa fa-google-plus"></i>
-                  </a>{" "}
+                  </a>
                 </div>
               </div>
               {/* col*/}
@@ -83,22 +82,22 @@ const Footer = () => {
           <div className="container">
             <ul className="footer-nav">
               <li>
-                <a href="/home">Home</a>
+                <Link to="/home">Home</Link>
               </li>
               <li>
-                <a href="/about">About</a>
+                <Link to="/about">About</Link>
               </li>
               <li>
-                <a href="/services">Services</a>
+                <Link to="/services">Services</Link>
               </li>
               <li>
-                <a href="/portfolio">Portfolio</a>
+                <Link to="/portfolio">Portfolio</Link>
               </li>
               <li>
-                <a href="/contact">Contact Us</a>
+                <Link to="/contact">Contact Us</Link>
               </li>
               <li>
-                <a href="/admin">Admin</a>
+                <Link to="/admin/home">Admin</Link>
               </li>
             </ul>
             <p>Jerlicia Jordan © 2020, All Rights Reserved.</p>

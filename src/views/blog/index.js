@@ -1,12 +1,9 @@
 import React, { Component } from "react";
-import girl from "../../images/girl.jpg";
 import portrait from "../../images/portrait.jpg";
 import ad from "../../images/girl-forest.jpg";
 import blog from "../../images/blog_img.jpg";
 import { connect } from "react-redux";
 import { getSinglePost } from "../../actions/blogActions.js";
-import { Redirect, Router, Route } from "react-router-dom";
-import Post1 from "./post1";
 
 // use local storage to hold blogpost id use that to query the database
 class Blog extends Component {
@@ -171,6 +168,7 @@ class Blog extends Component {
     };
 
     const pages = this.fetchPageNumbers();
+    console.log(this.props);
     return (
       <div className="blog">
         <section className="section section-page-title" style={styles.header}>
@@ -195,7 +193,7 @@ class Blog extends Component {
                       </div>
                       <div className="post-loop-info clearfix">
                         <h1>
-                          <a href={`/${post.path}`}>{post.title}</a>
+                          <a href={`/blog/${post.path}`}>{post.title}</a>
                         </h1>
                         <ul className="entry-meta">
                           <li>

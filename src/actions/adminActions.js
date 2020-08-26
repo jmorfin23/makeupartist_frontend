@@ -2,46 +2,123 @@ import {
   LOGIN_ADMIN,
   REGISTER_ADMIN,
   CHECK_USER,
-  UPDATE_PASSWORD
+  UPDATE_PASSWORD,
+  APP_ERROR,
+  ADMIN_AUTH,
+  LOGOUT_ADMIN
 } from "./types.js";
 
-export const loginAdmin = userData => {
-  return function(dispatch) {
-    console.log("inside login admin");
-    fetch("http://127.0.0.1:5000/api/admin-login", {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        data: JSON.stringify(userData)
-      }
-    })
-      .then(res => res.json())
-      .then(user =>
+export const authenticateAdmin = token => {
+  console.log("authenticate admin");
+  return async function(dispatch) {
+    try {
+      const response = await fetch("http://127.0.0.1:5000/api/admin-auth", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          token: token
+        }
+      });
+
+      const res = await response.json();
+
+      if (res.status === "ok") {
+        console.log("authentication success");
         dispatch({
-          type: LOGIN_ADMIN,
-          payload: user
-        })
-      );
+          type: ADMIN_AUTH,
+          payload: true
+        });
+      } else if (res.status === "expired") {
+        console.log("auth expired");
+        dispatch({
+          type: LOGOUT_ADMIN,
+          payload: res.data
+        });
+      } else {
+        console.log("auth failed");
+        dispatch({
+          type: APP_ERROR,
+          payload: res.error
+        });
+      }
+    } catch (error) {
+      // ** issue with this **s
+      dispatch({
+        type: APP_ERROR,
+        payload: "failed to fetch in authenticating user" // add error to payload to replicate
+      });
+    }
   };
 };
 
-export const registerAdmin = userData => {
-  return function(dispatch) {
-    console.log("inside register admin");
-    fetch("http://127.0.0.1:5000/api/admin-register", {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        data: JSON.stringify(userData)
+export const loginAdmin = token => {
+  console.log("inside login admin");
+  return async function(dispatch) {
+    try {
+      const response = await fetch("http://127.0.0.1:5000/api/admin-login", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          token: token
+        }
+      });
+      const res = await response.json();
+
+      if (res.status === "ok") {
+        // add token to local storage
+        console.log("success user can be logged in.");
+        localStorage.setItem("token", res.data);
+        dispatch({
+          type: LOGIN_ADMIN,
+          payload: true
+        });
+      } else {
+        dispatch({
+          type: APP_ERROR,
+          payload: res.error
+        });
       }
-    })
-      .then(res => res.json())
-      .then(user =>
+    } catch (error) {
+      dispatch({
+        type: APP_ERROR,
+        payload: error
+      });
+    }
+  };
+};
+
+export const registerAdmin = token => {
+  return async function(dispatch) {
+    console.log("inside register admin");
+    try {
+      const response = await fetch("http://127.0.0.1:5000/api/admin-register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          token: token
+        }
+      });
+      const res = await response.json();
+
+      if (res.status === "ok") {
+        // ADD token to local storage
+        localStorage.setItem("token", res.data);
         dispatch({
           type: REGISTER_ADMIN,
-          payload: user
-        })
-      );
+          payload: true
+        });
+      } else {
+        dispatch({
+          type: APP_ERROR,
+          payload: res.error
+        });
+      }
+    } catch (error) {
+      dispatch({
+        type: APP_ERROR,
+        payload: error
+      });
+    }
   };
 };
 
