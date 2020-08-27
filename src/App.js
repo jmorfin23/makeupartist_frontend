@@ -19,6 +19,8 @@ import { fetchBlogPosts } from "./actions/blogActions.js";
 import Reset from "./views/reset";
 import Passwords from "./views/passwords";
 import ErrorNotification from "./components/errorNotification";
+import Four04 from "./components/404_Page";
+import { animateScroll as scroll } from "react-scroll";
 
 class App extends Component {
   componentDidMount() {
@@ -40,11 +42,15 @@ class App extends Component {
     // console.log(this.props);
   }
 
-  //ROUTE ISSUE DISPLAYING ADMIN PAGE AND LOGIN PAGES
-  //route causes a redux state refresh - need to prevent this
+  //ROUTE ISSUE DISPLAYING ADMIN PAGE AND LOGIN PAGES // DONE
+  //route causes a redux state refresh - need to prevent this // * USED LINKS PREVENTS A PAGE REFRESH *
   render() {
     console.log("inside app render ");
-    console.log(this.props);
+
+    //ADD A LISTENER FOR SCROLLING ON ROUTES
+    this.props.history.listen((location, action) => {
+      scroll.scrollToTop();
+    });
     return (
       <div className="App">
         <ErrorNotification />
@@ -63,13 +69,14 @@ class App extends Component {
           <Route exact path={"/services"} render={() => <Services />} />
           <Route exact path={"/portfolio"} render={() => <Portfolio />} />
           <Route exact path={"/blog"} render={() => <Blog />} />
+          <Route path={"/blog/:post"} render={() => <Post1 />} />
           <Route exact path={"/contact"} render={() => <Contact />} />
           <Route exact path={"/reset"} render={() => <Reset />} />
           <Route
             path={"/reset_password=:token"}
             render={({ match }) => <Passwords info={match} />}
           />
-          <Route path={"/blog/:post"} render={() => <Post1 />} />
+          <Route path={"/:notamatch"} render={() => <Four04 />} />
         </Switch>
         <Footer />
       </div>

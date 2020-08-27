@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import contact from "../../images/contact_me.jpg";
 import Recaptcha from "react-recaptcha";
+import Loader from "../../components/loading";
 
 class Contact extends Component {
   constructor(props) {

@@ -6,7 +6,7 @@ import ad from "../../../images/ad.jpg";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { getSinglePost } from "../../../actions/blogActions.js";
-import FouroFour_page from "../../../components/404_Page";
+import Four04 from "../../../components/404_Page";
 
 class Post1 extends Component {
   constructor(props) {
@@ -60,7 +60,7 @@ class Post1 extends Component {
 
   render() {
     if (this.state.error == true) {
-      return <FouroFour_page />;
+      return <Four04 />;
     }
     return (
       <div className="post1">

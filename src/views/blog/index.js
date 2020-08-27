@@ -33,6 +33,7 @@ class Blog extends Component {
       );
       return { currentPosts: newDisplayedPosts };
     }
+    return null;
   }
   // componentDidMount() {
   //   console.log("inside component did mount");
@@ -40,9 +41,8 @@ class Blog extends Component {
   //   // this.gotoPage(1);
   // }
 
-  getSinglePost = (id, e) => {
+  getSinglePost = (e, id) => {
     e.preventDefault();
-    console.log("** inside get single post!!!!");
     //call method to get single post
     this.props.getSinglePost(id);
   };
@@ -209,22 +209,22 @@ class Blog extends Component {
                       </div>
                       {/*post-loop-info*/}
                       <div className="post-footer clearfix">
-                        <a onClick={e => this.getSinglePost(post.id, e)}>
+                        <a onClick={e => this.getSinglePost(e, post.id)}>
                           read more <i className="fa fa-long-arrow-right"></i>
                         </a>
                         <ul className="social-share-buttons clearfix">
                           <li>
-                            <a href="#" target="_blank">
+                            <a href="/" target="_blank">
                               <i className="fa fa-facebook"></i>
                             </a>
                           </li>
                           <li>
-                            <a href="#" target="_blank">
+                            <a href="/" target="_blank">
                               <i className="fa fa-twitter"></i>
                             </a>
                           </li>
                           <li>
-                            <a href="#" target="_blank">
+                            <a href="/" target="_blank">
                               <i className="fa fa-linkedin"></i>
                             </a>
                           </li>
@@ -304,19 +304,19 @@ class Blog extends Component {
                   </p>
                   <div className="social-icons">
                     {" "}
-                    <a href="#" target="_blank">
+                    <a href="/" target="_blank">
                       <i className="fa fa-facebook"></i>
                     </a>{" "}
-                    <a href="#" target="_blank">
+                    <a href="/" target="_blank">
                       <i className="fa fa-twitter"></i>
                     </a>{" "}
-                    <a href="#" target="_blank">
+                    <a href="/" target="_blank">
                       <i className="fa fa-linkedin"></i>
                     </a>{" "}
-                    <a href="#" target="_blank">
+                    <a href="/" target="_blank">
                       <i className="fa fa-instagram"></i>
                     </a>{" "}
-                    <a href="#" target="_blank">
+                    <a href="/" target="_blank">
                       <i className="fa fa-google-plus"></i>
                     </a>{" "}
                   </div>
@@ -368,31 +368,31 @@ class Blog extends Component {
                 {/*sidebar-box*/}
                 <div className="sidebar-box clearfix">
                   <h3 className="widget-title">Tags Cloud</h3>
-                  <a href="#" className="tag-link">
+                  <a href="/" className="tag-link">
                     beautiful
                   </a>{" "}
-                  <a href="#" className="tag-link">
+                  <a href="/" className="tag-link">
                     photography
                   </a>{" "}
-                  <a href="#" className="tag-link">
+                  <a href="/" className="tag-link">
                     wedding
                   </a>{" "}
-                  <a href="#" className="tag-link">
+                  <a href="/" className="tag-link">
                     travel
                   </a>{" "}
-                  <a href="#" className="tag-link">
+                  <a href="/" className="tag-link">
                     discover
                   </a>{" "}
-                  <a href="#" className="tag-link">
+                  <a href="/" className="tag-link">
                     food
                   </a>{" "}
-                  <a href="#" className="tag-link">
+                  <a href="/" className="tag-link">
                     woman
                   </a>{" "}
-                  <a href="#" className="tag-link">
+                  <a href="/" className="tag-link">
                     photography
                   </a>{" "}
-                  <a href="#" className="tag-link">
+                  <a href="/" className="tag-link">
                     style
                   </a>{" "}
                 </div>
@@ -401,27 +401,27 @@ class Blog extends Component {
                   <h3 className="widget-title">Categories</h3>
                   <ul className="widget-categories">
                     <li>
-                      <a href="#" title="Nature Photography">
+                      <a href="/" title="Nature Photography">
                         Nature Photography
                       </a>
                     </li>
                     <li>
-                      <a href="#" title="Wild Photography">
+                      <a href="/" title="Wild Photography">
                         Wild Photography
                       </a>
                     </li>
                     <li>
-                      <a href="#" title="Building Photography">
+                      <a href="/" title="Building Photography">
                         Building Photography
                       </a>
                     </li>
                     <li>
-                      <a href="#" title="Photography Designing">
+                      <a href="/" title="Photography Designing">
                         Photography Designing
                       </a>
                     </li>
                     <li>
-                      <a href="#" title="Pricig Table">
+                      <a href="/" title="Pricig Table">
                         Pricing Table
                       </a>
                     </li>

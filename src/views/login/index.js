@@ -3,7 +3,7 @@ import { loginAdmin, registerAdmin } from "../../actions/adminActions";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import SECRET_KEY from "../../config.js";
-import { animateScroll as scroll } from "react-scroll";
+
 let jwt = require("jsonwebtoken");
 
 class Login extends Component {
@@ -16,9 +16,7 @@ class Login extends Component {
     };
   }
 
-  componentDidMount() {
-    scroll.scrollToTop();
-  }
+  componentDidMount() {}
 
   submitLoginForm = e => {
     e.preventDefault();

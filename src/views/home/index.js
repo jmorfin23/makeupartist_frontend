@@ -16,6 +16,8 @@ import Featured from "../../components/featured";
 import BlogPosts from "../../components/blogPosts";
 import PortfolioImage from "../../components/portfolioImage";
 import { getRequestedNumBlogPost } from "../../actions/blogActions";
+import Loader from "../../components/loading";
+
 // import PropTypes from "prop-types";
 // import * as $ from "jquery";
 
@@ -41,6 +43,8 @@ import { getRequestedNumBlogPost } from "../../actions/blogActions";
 //if user tries to access admin/home and is not logged in reroute to login page
 //try not using local state as much, causes too many uncessecary rerenders
 
+//carousel not display when switching tabs - might be a loading page issue
+//implement an isloading
 //redux-logger issue
 //error during catch action dispatching
 //add writing to all pages
@@ -58,14 +62,17 @@ import { getRequestedNumBlogPost } from "../../actions/blogActions";
 class Home extends Component {
   componentDidMount() {
     // Call first 3 blogposts
+    // setTimeout(() => {
     this.props.getRequestedNumBlogPost(3);
+    // }, 1200);
   }
   render() {
     return (
       <div className="homepage">
-        <div className="preloader">
-          <div className="animation circle"></div>
-        </div>
+        {this.props.isLoading ? <Loader /> : null}
+        {/* <div className="preloader">
+              <div className="animation circle"></div>
+            </div> */}
         {/* ============== end preloader ============== */}
 
         <div
@@ -388,7 +395,8 @@ class Home extends Component {
 //map state to props
 const mapStateToProps = state => ({
   images: state.images.items,
-  blogposts: state.blogposts.home_posts
+  blogposts: state.blogposts.home_posts,
+  isLoading: state.loading.isLoading
 });
 
 export default connect(mapStateToProps, { getRequestedNumBlogPost })(Home);

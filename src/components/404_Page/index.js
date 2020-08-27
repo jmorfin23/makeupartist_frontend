@@ -1,7 +1,7 @@
 import React from "react";
 import "./index.css";
 
-const FouroFour_page = () => {
+const Four04 = () => {
   return (
     <section className="error-message">
       <h1 className="error-code">404</h1>
@@ -13,4 +13,4 @@ const FouroFour_page = () => {
   );
 };
 
-export default FouroFour_page;
+export default Four04;

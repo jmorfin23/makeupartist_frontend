@@ -5,7 +5,9 @@ import {
   GET_SINGLE_BLOGPOST,
   GET_REQUESTED_NUM_BLOGPOST,
   APP_ERROR,
-  POST_ERROR
+  POST_ERROR,
+  LOADING_DATA,
+  LOADING_FINISHED
 } from "./types.js";
 
 // Retrieves all blogposts from db
@@ -56,6 +58,8 @@ export const fetchBlogPosts = () => {
 export const getRequestedNumBlogPost = num => {
   return async function(dispatch) {
     console.log("inside getRequestedNumBlogPost");
+    //call loading dispatch
+    dispatch({ type: LOADING_DATA });
     await fetch("http://127.0.0.1:5000/api/get-requested-number-blogpost", {
       method: "GET",
       headers: {
@@ -71,6 +75,7 @@ export const getRequestedNumBlogPost = num => {
               type: GET_REQUESTED_NUM_BLOGPOST,
               payload: res.data
             });
+            dispatch({ type: LOADING_FINISHED });
           } else {
             dispatch({
               type: APP_ERROR,

@@ -15,7 +15,7 @@ class PortfolioImage extends Component {
   }
   componentDidMount() {
     // Get images
-    this.props.fetchImages();
+    // this.props.fetchImages();
   }
   toggleModal = () => {
     this.setState({ modalToggle: !this.state.modalToggle });

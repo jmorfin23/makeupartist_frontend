@@ -1,8 +1,16 @@
-import { FETCH_IMAGES, ADD_IMAGE, DELETE_IMAGE, APP_ERROR } from "./types.js";
+import {
+  FETCH_IMAGES,
+  ADD_IMAGE,
+  DELETE_IMAGE,
+  APP_ERROR,
+  LOADING_DATA,
+  LOADING_FINISHED
+} from "./types.js";
 
 //retrieve images from database
 export const fetchImages = () => {
   return async function(dispatch) {
+    dispatch({ type: LOADING_DATA });
     console.log("fetching images");
     const response = await fetch("http://127.0.0.1:5000/api/retrieve-images");
     const res = await response.json();
@@ -12,6 +20,7 @@ export const fetchImages = () => {
           type: FETCH_IMAGES,
           payload: res.data
         });
+        dispatch({ type: LOADING_FINISHED });
       } else {
         dispatch({
           type: APP_ERROR,

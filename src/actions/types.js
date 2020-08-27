@@ -1,3 +1,5 @@
+export const LOADING_DATA = "LOADING_DATA";
+export const LOADING_FINISHED = "LOADING_FINISHED";
 // ============= ERROR ==============
 export const APP_ERROR = "APP_ERROR";
 export const HIDE_ERROR = "HIDE_ERROR";
