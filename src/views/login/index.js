@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { loginAdmin, registerAdmin } from "../../actions/adminActions";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
-import SECRET_KEY from "../../config.js";
+import { SECRET_KEY } from "../../config.js";
 
 let jwt = require("jsonwebtoken");
 
@@ -15,8 +15,6 @@ class Login extends Component {
       password: ""
     };
   }
-
-  componentDidMount() {}
 
   submitLoginForm = e => {
     e.preventDefault();
@@ -32,19 +30,13 @@ class Login extends Component {
 
   componentDidUpdate() {
     // check if login successful
-    console.log("component did update in login page");
-    console.log("user is logged:");
-    console.log(this.props.user.isLogged);
-
-    if (this.props.user.isLogged) {
-      console.log(this.props);
-      console.log("this is running");
-      //push to admin home page
-      this.props.history.push("/admin/home"); //this isnt running
-      console.log("this should be last?");
-    }
+    console.log("COMPONENT DID UPDATE LOGIN PAGE!!! ");
   }
   render() {
+    console.log("INSIDE LOGIN PAGE RENDER");
+    if (this.props.user.isLogged) {
+      this.props.history.push("/admin/home");
+    }
     return (
       <div className="admin">
         <h2>Admin Login</h2>

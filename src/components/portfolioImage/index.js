@@ -14,8 +14,11 @@ class PortfolioImage extends Component {
     };
   }
   componentDidMount() {
-    // Get images
-    // this.props.fetchImages();
+    // dont grab images if images are in state
+    if (!this.props.images.length) {
+      console.log("we dont have images lets grab them");
+      this.props.fetchImages();
+    }
   }
   toggleModal = () => {
     this.setState({ modalToggle: !this.state.modalToggle });
@@ -82,8 +85,6 @@ class PortfolioImage extends Component {
 
   render() {
     const images = this.props.images;
-    console.log("*****8");
-    console.log(images);
     if (!images.length) {
       return (
         <div className="empty-image-list text center">

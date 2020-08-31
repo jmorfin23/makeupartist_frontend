@@ -21,6 +21,7 @@ import Passwords from "./views/passwords";
 import ErrorNotification from "./components/errorNotification";
 import Four04 from "./components/404_Page";
 import { animateScroll as scroll } from "react-scroll";
+import Loader from "./components/loading";
 
 class App extends Component {
   componentDidMount() {
@@ -39,20 +40,31 @@ class App extends Component {
   // }
   componentDidUpdate(prevProps, prevState) {
     console.log("app component did update");
+
     // console.log(this.props);
+  }
+  componentWillUnmount() {
+    console.log("app component will unmount");
+  }
+  shouldComponentUpdate() {
+    console.log("app should component update");
+    return true;
   }
 
   //ROUTE ISSUE DISPLAYING ADMIN PAGE AND LOGIN PAGES // DONE
   //route causes a redux state refresh - need to prevent this // * USED LINKS PREVENTS A PAGE REFRESH *
   render() {
-    console.log("inside app render ");
-
+    console.log("INSIDE APP RENDER");
+    console.log("IS LOADING");
+    console.log(this.props.isLoading);
     //ADD A LISTENER FOR SCROLLING ON ROUTES
     this.props.history.listen((location, action) => {
       scroll.scrollToTop();
     });
+
     return (
       <div className="App">
+        {this.props.isLoading ? <Loader /> : null}
         <ErrorNotification />
         <Header page={this.props.location.pathname} />
         <Switch>
@@ -63,7 +75,7 @@ class App extends Component {
               <Redirect to="/admin/login" />
             )}
           </Route>
-          <Route exact path={"/admin/login"} render={() => <Login />} />
+          <Route exact path={"/admin/login"} component={() => <Login />} />
           <Route exact path={["/", "/home"]} render={() => <Home />} />
           <Route exact path={"/about"} render={() => <About />} />
           <Route exact path={"/services"} render={() => <Services />} />
@@ -76,7 +88,7 @@ class App extends Component {
             path={"/reset_password=:token"}
             render={({ match }) => <Passwords info={match} />}
           />
-          <Route path={"/:notamatch"} render={() => <Four04 />} />
+          <Route render={() => <Four04 />} />
         </Switch>
         <Footer />
       </div>
@@ -99,7 +111,8 @@ const mapStateToProps = state => ({
   error: state.error,
   images: state.images.items,
   blogposts: state.blogposts,
-  user: state.user
+  user: state.user,
+  isLoading: state.loading.isLoading
 });
 
 export default withRouter(

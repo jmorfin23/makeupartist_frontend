@@ -1,13 +1,20 @@
 import React from "react";
 import "./index.css";
 import companylogo from "../../images/main-logo2.png";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { LOGOUT_ADMIN } from "../../actions/types";
 
 const Header = props => {
   console.log("header component");
-
+  const dispatch = useDispatch();
   const logoutAdmin = () => {
     console.log("inside logout admin");
+    //logout admin
+    dispatch({ type: LOGOUT_ADMIN, payload: false });
+
+    //remove token from localstorage
+    localStorage.removeItem("token");
   };
 
   return (
@@ -36,7 +43,7 @@ const Header = props => {
             data-out="fadeOutDown"
           >
             <li>
-              <Link to="/home">Home</Link>
+              <a href="/home">Home</a>
             </li>
             <li>
               <Link to="/about">About</Link>
@@ -55,7 +62,9 @@ const Header = props => {
             </li>
             {props.page === "/admin/home" ? (
               <li>
-                <a onClick={() => logoutAdmin()}>Logout</a>
+                <a style={{ cursor: "pointer" }} onClick={() => logoutAdmin()}>
+                  Logout
+                </a>
               </li>
             ) : null}
           </ul>

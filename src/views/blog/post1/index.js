@@ -7,6 +7,7 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { getSinglePost } from "../../../actions/blogActions.js";
 import Four04 from "../../../components/404_Page";
+import Loader from "../../../components/loading";
 
 class Post1 extends Component {
   constructor(props) {
@@ -26,47 +27,37 @@ class Post1 extends Component {
   }
 
   componentDidMount() {
-    console.log("component did mount");
-    console.log("testing");
+    console.log("post component did mount");
     //call action to query database with path
     this.props.getSinglePost(this.props.match.params.post);
   }
-
-  static getDerivedStateFromProps(nextProps, prevState) {
-    console.log(nextProps);
-    if (nextProps.error.post_error) {
-      return {
-        error: true
-      };
-    }
-
+  shouldComponentUpdate() {
+    console.log("post should component update");
     if (
-      nextProps.singlePost.post != "" &&
-      nextProps.singlePost.nextPosts != ""
+      !this.props.singlePost.post ||
+      !this.props.singlePost.nextPosts.length
     ) {
-      const post = nextProps.singlePost.post;
-      return {
-        post: post.id,
-        title: post.title,
-        author: post.author,
-        date: post.date,
-        content: post.content,
-        comments: post.comments,
-        url: post.url,
-        nextPosts: nextProps.singlePost.nextPosts
-      };
+      console.log("not updating because we dont have post or nextposts yet");
+      return false;
     }
+    return true;
   }
 
   render() {
-    if (this.state.error == true) {
+    console.log("INSIDE OF POST RENDER");
+    if (this.props.error.status == true) {
       return <Four04 />;
     }
+    // if (this.props.isLoading) {
+    //   return <Loader />
+    // };
+    const { post, nextPosts } = this.props.singlePost;
+    console.log(post.comments);
     return (
       <div className="post1">
         <section className="section section-page-title">
           <div className="overlay">
-            <h1>{this.state.title}</h1>
+            <h1>{post.title}</h1>
           </div>
           {/*overlay*/}
         </section>
@@ -81,27 +72,27 @@ class Post1 extends Component {
                       <img src="http://placehold.it/750x500" alt="" />
                     </a>
                   </div>
-                  <h1 className="single-post-title">{this.state.title}</h1>
+                  <h1 className="single-post-title">{post.title}</h1>
                   <ul className="entry-meta">
                     <li>
                       <i className="fa fa-calendar"></i>
-                      {this.state.date}
+                      {post.date}
                     </li>
                     <li>
                       <i className="fa fa-comments"></i>
-                      <a href="#">{this.state.comments.length + " Comments"}</a>
+                      <a href="#">{`${post.comments.length} Comments`}</a>
                     </li>
                   </ul>
                   <div className="entry clearfix">
-                    <p>{this.state.content}</p>
+                    <p>{post.content}</p>
                   </div>
                   {/*entry*/}
                 </div>
                 {/*padd-white-box*/}
                 <div className="related-post-box">
                   <div className="row">
-                    {this.state.nextPosts &&
-                      this.state.nextPosts.map(post => (
+                    {nextPosts &&
+                      nextPosts.map(post => (
                         <div
                           key={post.id}
                           className="col-lg-4 col-md-4 col-sm-6 col-xs-12"
@@ -149,19 +140,19 @@ class Post1 extends Component {
                     elementum suscipit, felis leo eleifend tortor.
                   </p>
                   <div className="social-icons">
-                    <a href="#" target="_blank">
+                    <a href="/" target="_blank">
                       <i className="fa fa-facebook"></i>
                     </a>
-                    <a href="#" target="_blank">
+                    <a href="/" target="_blank">
                       <i className="fa fa-twitter"></i>
                     </a>
-                    <a href="#" target="_blank">
+                    <a href="/" target="_blank">
                       <i className="fa fa-linkedin"></i>
                     </a>
-                    <a href="#" target="_blank">
+                    <a href="/" target="_blank">
                       <i className="fa fa-instagram"></i>
                     </a>
-                    <a href="#" target="_blank">
+                    <a href="/" target="_blank">
                       <i className="fa fa-google-plus"></i>
                     </a>
                   </div>
@@ -212,31 +203,31 @@ class Post1 extends Component {
                 {/*sidebar-box*/}
                 <div className="sidebar-box clearfix">
                   <h3 className="widget-title">Tags Cloud</h3>
-                  <a href="#" className="tag-link">
+                  <a href="/" className="tag-link">
                     beautiful
                   </a>
-                  <a href="#" className="tag-link">
+                  <a href="/" className="tag-link">
                     photography
                   </a>
-                  <a href="#" className="tag-link">
+                  <a href="/" className="tag-link">
                     wedding
                   </a>
-                  <a href="#" className="tag-link">
+                  <a href="/" className="tag-link">
                     travel
                   </a>
-                  <a href="#" className="tag-link">
+                  <a href="/" className="tag-link">
                     discover
                   </a>
-                  <a href="#" className="tag-link">
+                  <a href="/" className="tag-link">
                     food
                   </a>
-                  <a href="#" className="tag-link">
+                  <a href="/" className="tag-link">
                     woman
                   </a>
-                  <a href="#" className="tag-link">
+                  <a href="/" className="tag-link">
                     photography
                   </a>
-                  <a href="#" className="tag-link">
+                  <a href="/" className="tag-link">
                     style
                   </a>
                 </div>
@@ -245,27 +236,27 @@ class Post1 extends Component {
                   <h3 className="widget-title">Categories</h3>
                   <ul className="widget-categories">
                     <li>
-                      <a href="#" title="Nature Photography">
+                      <a href="/" title="Nature Photography">
                         Nature Photography
                       </a>
                     </li>
                     <li>
-                      <a href="#" title="Wild Photography">
+                      <a href="/" title="Wild Photography">
                         Wild Photography
                       </a>
                     </li>
                     <li>
-                      <a href="#" title="Building Photography">
+                      <a href="/" title="Building Photography">
                         Building Photography
                       </a>
                     </li>
                     <li>
-                      <a href="#" title="Photography Designing">
+                      <a href="/" title="Photography Designing">
                         Photography Designing
                       </a>
                     </li>
                     <li>
-                      <a href="#" title="Pricig Table">
+                      <a href="/" title="Pricig Table">
                         Pricing Table
                       </a>
                     </li>
@@ -285,7 +276,8 @@ class Post1 extends Component {
 
 const mapStateToProps = state => ({
   singlePost: state.blogposts.singlePost,
-  error: state.error
+  error: state.error.post_error,
+  isLoading: state.loading.isLoading
 });
 
-export default connect(mapStateToProps, { getSinglePost })(withRouter(Post1));
+export default withRouter(connect(mapStateToProps, { getSinglePost })(Post1));

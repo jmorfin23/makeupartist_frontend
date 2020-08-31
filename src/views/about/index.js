@@ -6,7 +6,14 @@ import portrait from "../../images/portrait.jpg";
 import Featured from "../../components/featured";
 
 class About extends Component {
+  componentDidMount() {
+    console.log("inside about component did mount");
+  }
+  componentWillUnmount() {
+    console.log("inside about component will un mount");
+  }
   render() {
+    console.log("inside about component render");
     const styles = {
       header: {
         backgroundImage: `url(` + about + `)`,

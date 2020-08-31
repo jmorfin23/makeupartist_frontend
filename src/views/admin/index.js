@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import "./index.css";
 import PortfolioImage from "../../components/portfolioImage";
 import PropTypes from "prop-types";
-import ModalWindow from "../../components/modal";
+import ModalWindow from "../../components/adminmodal";
 import { connect } from "react-redux";
 import { addImage, deleteImage } from "../../actions/imageActions.js";
 import {
@@ -14,8 +14,7 @@ import { DELETE_BLOG_POST } from "../../actions/types";
 import { authenticateAdmin } from "../../actions/adminActions";
 import { withRouter } from "react-router-dom";
 //CLOUDINARY URL & PRESET
-const CLOUDINARY_URL = "https://api.cloudinary.com/v1_1/dozvqlete/upload";
-const CLOUDINARY_UPLOAD_PRESET = "zzmnc51n";
+import { CLOUDINARY_UPLOAD_PRESET, CLOUDINARY_URL } from "../../config";
 
 class Admin extends Component {
   constructor(props) {
@@ -63,22 +62,6 @@ class Admin extends Component {
 
   componentDidMount() {
     console.log("inside component did mount admin page");
-    window.scrollTo(0, 0);
-    // if (!this.state.isLogged) {
-    //   this.props.history.push('/admin/login');
-    // }
-    //check localstorage for token
-    //for now this is fine// checking auth each time admin page is loaded
-
-    //else {
-    //   //push to login page if there is no token
-    //   this.props.history.push('/admin/login');
-    //}
-    // if (this.props.user.isLogged) {
-    //   console.log('user is now logged in');
-    // } else {
-    //   console.log('user is not logged in ');
-    // }
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {

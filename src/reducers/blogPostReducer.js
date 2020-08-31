@@ -3,17 +3,30 @@ import {
   ADD_BLOG_POST,
   GET_SINGLE_BLOGPOST,
   DELETE_BLOG_POST,
-  GET_REQUESTED_NUM_BLOGPOST
+  GET_REQUESTED_NUM_BLOGPOST,
+  FETCH_NEXT_POSTS
 } from "../actions/types.js";
 
 const initialState = {
-  items: [], //dont need this but will cause error if deleted in admin view
+  items: [], //holds all posts for admin page
+  posts_by_page: { posts: [], info: {} }, //holds posts by page number in blog page
   item: {},
-  singlePost: { post: {}, nextPosts: [] },
+  singlePost: {
+    post: {
+      author: null,
+      comments: [],
+      content: null,
+      data: null,
+      id: null,
+      path: null,
+      url: null
+    },
+    nextPosts: []
+  },
   deleted: false,
   added: {},
   home_posts: [],
-  message: ""
+  message: null
 };
 
 const blogPostReducer = (state = initialState, action) => {
@@ -43,6 +56,14 @@ const blogPostReducer = (state = initialState, action) => {
       return {
         ...state,
         home_posts: action.payload
+      };
+    case FETCH_NEXT_POSTS:
+      return {
+        ...state,
+        posts_by_page: {
+          posts: action.payload.posts,
+          info: action.payload.info
+        }
       };
     default:
       return state;

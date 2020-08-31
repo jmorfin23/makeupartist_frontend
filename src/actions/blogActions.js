@@ -7,7 +7,8 @@ import {
   APP_ERROR,
   POST_ERROR,
   LOADING_DATA,
-  LOADING_FINISHED
+  LOADING_FINISHED,
+  FETCH_NEXT_POSTS
 } from "./types.js";
 
 // Retrieves all blogposts from db
@@ -75,7 +76,6 @@ export const getRequestedNumBlogPost = num => {
               type: GET_REQUESTED_NUM_BLOGPOST,
               payload: res.data
             });
-            dispatch({ type: LOADING_FINISHED });
           } else {
             dispatch({
               type: APP_ERROR,
@@ -88,7 +88,8 @@ export const getRequestedNumBlogPost = num => {
             payload: error
           });
         }
-      });
+      })
+      .then(dispatch({ type: LOADING_FINISHED }));
   };
 };
 
@@ -168,8 +169,8 @@ export const deleteBlogPost = id => {
 
 // Retrieves blogpost based on path
 export const getSinglePost = path => {
-  console.log("inside get single post");
   return async function(dispatch) {
+    dispatch({ type: LOADING_DATA });
     await fetch("http://127.0.0.1:5000/api/single-post", {
       method: "GET",
       headers: {
@@ -198,5 +199,45 @@ export const getSinglePost = path => {
           });
         }
       });
+    dispatch({ type: LOADING_FINISHED });
+  };
+};
+
+// Retrieves blogposts by page num
+export const fetchNextPosts = page => {
+  return async function(dispatch) {
+    try {
+      console.log("**** FETCH NEXT POSTS *****");
+      console.log(page);
+      dispatch({ type: LOADING_DATA });
+      await fetch("http://127.0.0.1:5000/api/get-next-posts", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          page_num: page,
+          posts_per_page: 4 //posts per page
+        }
+      })
+        .then(response => response.json())
+        .then(res => {
+          if (res.status == "ok") {
+            dispatch({
+              type: FETCH_NEXT_POSTS,
+              payload: res.data
+            });
+          } else {
+            dispatch({
+              type: APP_ERROR,
+              payload: res.error
+            });
+          }
+        });
+    } catch (error) {
+      dispatch({
+        type: APP_ERROR,
+        payload: "HTTP error"
+      });
+    }
+    dispatch({ type: LOADING_FINISHED });
   };
 };

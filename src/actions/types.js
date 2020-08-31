@@ -21,4 +21,5 @@ export const ADD_BLOG_POST = "ADD_BLOGPOST";
 export const DELETE_BLOG_POST = "DELET_BLOGPOST";
 export const GET_SINGLE_BLOGPOST = "GET_SINGLE_BLOGPOST";
 export const GET_REQUESTED_NUM_BLOGPOST = "GET_REQUESTED_NUM_BLOGPOST";
+export const FETCH_NEXT_POSTS = "FETCH_NEXT_POSTS";
 // ==================================
