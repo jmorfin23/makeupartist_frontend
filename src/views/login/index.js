@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { loginAdmin, registerAdmin } from "../../actions/adminActions";
-import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { SECRET_KEY } from "../../config.js";
 
@@ -19,24 +18,16 @@ class Login extends Component {
   submitLoginForm = e => {
     e.preventDefault();
 
-    let token = jwt.sign(
+    const token = jwt.sign(
       { username: this.state.username, password: this.state.password },
       SECRET_KEY,
-      { expiresIn: "1h" } // expires in 1 hour
+      { expiresIn: "1h" }
     );
 
-    this.props.dispatch(loginAdmin(token));
+    this.props.dispatch(registerAdmin(token));
   };
 
-  componentDidUpdate() {
-    // check if login successful
-    console.log("COMPONENT DID UPDATE LOGIN PAGE!!! ");
-  }
   render() {
-    console.log("INSIDE LOGIN PAGE RENDER");
-    if (this.props.user.isLogged) {
-      this.props.history.push("/admin/home");
-    }
     return (
       <div className="admin">
         <h2>Admin Login</h2>
@@ -67,7 +58,7 @@ class Login extends Component {
           </div>
           <div className="forgot-pass">
             <p>
-              <a href="/reset">Forgot account?</a>
+              <a href="/reset">Forgot password?</a>
             </p>
           </div>
           <div className="center">
@@ -84,4 +75,4 @@ class Login extends Component {
 const mapStateToProps = state => ({
   user: state.user
 });
-export default withRouter(connect(mapStateToProps)(Login));
+export default connect(mapStateToProps)(Login);

@@ -1,4 +1,5 @@
 import React from "react";
+import "./index.css";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchNextPosts } from "../../actions/blogActions";
 
@@ -6,15 +7,12 @@ const MainBlogSection = props => {
   const { posts, info } = useSelector(state => state.blogposts.posts_by_page);
   const dispatch = useDispatch();
   return (
-    <div className="col-md-8 col-sm-8">
-      {posts &&
+    <>
+      {posts !== undefined && posts.length ? (
         posts.map(post => (
           <div key={post.id} className="post-loop clearfix">
             <div className="post-thumbnail">
-              <img src="https://placehold.it/750x500" alt="" />
-              {/* <a href="/">
-                          <i className="fa fa-link"></i></a> 
-                        */}
+              <img src={post.url} alt="" />
             </div>
             <div className="post-loop-info clearfix">
               <h1>
@@ -39,90 +37,90 @@ const MainBlogSection = props => {
               </a>
               <ul className="social-share-buttons clearfix">
                 <li>
-                  <a href="/" target="_blank">
+                  <a href="#/" target="_blank">
                     <i className="fa fa-facebook"></i>
                   </a>
                 </li>
                 <li>
-                  <a href="/" target="_blank">
+                  <a href="#/" target="_blank">
                     <i className="fa fa-twitter"></i>
                   </a>
                 </li>
                 <li>
-                  <a href="/" target="_blank">
+                  <a href="#/" target="_blank">
                     <i className="fa fa-linkedin"></i>
                   </a>
                 </li>
               </ul>
             </div>
           </div>
-        ))}
+        ))
+      ) : (
+        <p className="no-blogposts-message">There are no blogposts.</p>
+      )}
       {/*post-loop*/}
-      <div className="pagination clearfix">
-        <ul className="page-numbers">
-          {info.has_prev ? (
-            <>
-              <li className="page-item">
-                <a
-                  className="page-link"
-                  href="#"
-                  aria-label="Previous"
-                  onClick={() => dispatch(fetchNextPosts(info.prev_num))}
-                >
-                  <span aria-hidden="true">&laquo;</span>
-                  <span className="sr-only">Previous</span>
-                </a>
-              </li>
-              <li className="page-item">
-                <a
-                  className="page-link"
-                  href="#"
-                  aria-label="Next"
-                  onClick={() => dispatch(fetchNextPosts(info.prev_num))}
-                >
-                  {info.prev_num}
-                </a>
-              </li>
-            </>
-          ) : null}
-          <li className={`page-item`}>
-            <a
-              className="page-link current"
-              href="#"
-              onClick={() => dispatch(fetchNextPosts(info.currentPage))}
-            >
-              {info.currentPage}
-            </a>
-          </li>
-          {info.has_next ? (
-            <>
-              <li className="page-item">
-                <a
-                  className="page-link"
-                  href="#"
-                  aria-label="Next"
-                  onClick={() => dispatch(fetchNextPosts(info.next_num))}
-                >
-                  {info.next_num}
-                </a>
-              </li>
-              <li className="page-item change-hover-color">
-                <a
-                  className="page-link"
-                  href="#"
-                  aria-label="Next"
-                  onClick={() => dispatch(fetchNextPosts(info.next_num))}
-                >
-                  <span aria-hidden="true">&raquo;</span>
-                  <span className="sr-only">Next</span>
-                </a>
-              </li>
-            </>
-          ) : null}
-        </ul>
-      </div>
+      {info !== undefined && Object.keys(info).length > 0 && (
+        <div className="pagination clearfix">
+          <ul className="page-numbers">
+            {info.has_prev ? (
+              <>
+                <li className="page-item">
+                  <a
+                    className="page-link"
+                    aria-label="Previous"
+                    onClick={() => dispatch(fetchNextPosts(info.prev_num))}
+                  >
+                    <span aria-hidden="true">&laquo;</span>
+                    <span className="sr-only">Previous</span>
+                  </a>
+                </li>
+                <li className="page-item">
+                  <a
+                    className="page-link"
+                    aria-label="Next"
+                    onClick={() => dispatch(fetchNextPosts(info.prev_num))}
+                  >
+                    {info.prev_num}
+                  </a>
+                </li>
+              </>
+            ) : null}
+            <li className={`page-item`}>
+              <a
+                className="page-link current"
+                onClick={() => dispatch(fetchNextPosts(info.currentPage))}
+              >
+                {info.currentPage}
+              </a>
+            </li>
+            {info.has_next ? (
+              <>
+                <li className="page-item">
+                  <a
+                    className="page-link"
+                    aria-label="Next"
+                    onClick={() => dispatch(fetchNextPosts(info.next_num))}
+                  >
+                    {info.next_num}
+                  </a>
+                </li>
+                <li className="page-item change-hover-color">
+                  <a
+                    className="page-link"
+                    aria-label="Next"
+                    onClick={() => dispatch(fetchNextPosts(info.next_num))}
+                  >
+                    <span aria-hidden="true">&raquo;</span>
+                    <span className="sr-only">Next</span>
+                  </a>
+                </li>
+              </>
+            ) : null}
+          </ul>
+        </div>
+      )}
       {/*pagination*/}
-    </div>
+    </>
   );
 };
 

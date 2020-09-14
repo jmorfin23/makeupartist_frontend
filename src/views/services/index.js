@@ -1,13 +1,14 @@
 import React, { Component } from "react";
-import service from "../../images/makeup.jpg";
-import service1 from "../../images/service1.jpg";
+import "./index.css";
+import "../../App.css";
+// Images
 import bridal from "../../images/bridal-makeup2.jpg";
 import special from "../../images/specialo.jpg";
 import tv from "../../images/tv-film.jpg";
 import model from "../../images/model-photo-shoot.jpg";
 import engagement from "../../images/engagement.jpg";
 import airbrush from "../../images/airbrush-makeup.jpg";
-import "./index.css";
+import MyServices from "../../components/my-services";
 
 class Services extends Component {
   constructor(props) {
@@ -15,22 +16,10 @@ class Services extends Component {
     this.state = { displaySection: "Bridal" };
   }
   render() {
-    const styles = {
-      header: {
-        backgroundImage: `url( ` + service + `)`,
-        backgroundPosition: "center",
-        backgroundRepeat: "no-repeat",
-        backgroundSize: "cover",
-        backgroundAttachment: "fixed"
-      },
-      content: {
-        backgroundColor: "rgba(0, 0, 0, 0.3)"
-      }
-    };
     return (
       <div className="services">
-        <section className="section section-page-title" style={styles.header}>
-          <div className="overlay" style={styles.content}>
+        <section className="section section-page-title services-heading my-header">
+          <div className="overlay">
             <h1>Services</h1>
           </div>
           {/*overlay*/}
@@ -38,7 +27,7 @@ class Services extends Component {
         <section className="section">
           <div className="container">
             <div className="row services-sec">
-              {this.state.displaySection == "Bridal" && (
+              {this.state.displaySection === "Bridal" && (
                 <div className="col-md-8 col-sm-8 pull-right">
                   <p>
                     <img src={bridal} alt="" />
@@ -62,7 +51,7 @@ class Services extends Component {
                   </ul>
                 </div>
               )}
-              {this.state.displaySection == "TV" && (
+              {this.state.displaySection === "TV" && (
                 <div className="col-md-8 col-sm-8 pull-right">
                   <p>
                     <img src={tv} alt="" />
@@ -79,7 +68,7 @@ class Services extends Component {
                   </ul>
                 </div>
               )}
-              {this.state.displaySection == "Special" && (
+              {this.state.displaySection === "Special" && (
                 <div className="col-md-8 col-sm-8 pull-right">
                   <p>
                     <img src={special} alt="" />
@@ -94,7 +83,7 @@ class Services extends Component {
                   </ul>
                 </div>
               )}
-              {this.state.displaySection == "Model" && (
+              {this.state.displaySection === "Model" && (
                 <div className="col-md-8 col-sm-8 pull-right">
                   <p>
                     <img src={model} alt="" />
@@ -110,7 +99,7 @@ class Services extends Component {
                   </ul>
                 </div>
               )}
-              {this.state.displaySection == "Engagement" && (
+              {this.state.displaySection === "Engagement" && (
                 <div className="col-md-8 col-sm-8 pull-right">
                   <p>
                     <img src={engagement} alt="" />
@@ -122,7 +111,7 @@ class Services extends Component {
                   <li>Skin care package</li>
                 </div>
               )}
-              {this.state.displaySection == "Airbrush" && (
+              {this.state.displaySection === "Airbrush" && (
                 <div className="col-md-8 col-sm-8 pull-right">
                   <p>
                     <img src={airbrush} alt="" />
@@ -139,6 +128,7 @@ class Services extends Component {
                 <ul className="service-list-group">
                   <li>
                     <a
+                      href="#/"
                       onClick={() =>
                         this.setState({ displaySection: "Bridal" })
                       }
@@ -147,12 +137,16 @@ class Services extends Component {
                     </a>
                   </li>
                   <li>
-                    <a onClick={() => this.setState({ displaySection: "TV" })}>
+                    <a
+                      href="#/"
+                      onClick={() => this.setState({ displaySection: "TV" })}
+                    >
                       tv film commercial
                     </a>
                   </li>
                   <li>
                     <a
+                      href="#/"
                       onClick={() =>
                         this.setState({ displaySection: "Special" })
                       }
@@ -162,6 +156,7 @@ class Services extends Component {
                   </li>
                   <li>
                     <a
+                      href="#/"
                       onClick={() => this.setState({ displaySection: "Model" })}
                     >
                       Model Photo Shoots
@@ -169,6 +164,7 @@ class Services extends Component {
                   </li>
                   <li>
                     <a
+                      href="#/"
                       onClick={() =>
                         this.setState({ displaySection: "Engagement" })
                       }
@@ -178,6 +174,7 @@ class Services extends Component {
                   </li>
                   <li>
                     <a
+                      href="#/"
                       onClick={() =>
                         this.setState({ displaySection: "Airbrush" })
                       }
@@ -193,25 +190,8 @@ class Services extends Component {
           {/* container*/}
         </section>
         {/*section-services*/}
-        <section className="section parallax">
-          <div className="overlay">
-            <div className="container">
-              <h1 className="pb-20">
-                Offering Makeup and Hair Stylist Services
-              </h1>
-              <p className="max-500 intro pb-20">
-                If you would like to book a consultation or contact me regarding
-                my services click the link below!
-              </p>
-              <a
-                className="btn btn-primary btn-rounded btn-pink"
-                href="/contact"
-              >
-                Book Now!
-              </a>
-            </div>
-            {/*container*/}
-          </div>
+        <section className="section parallax services-image my-header">
+          <MyServices />
           {/*overlay*/}
         </section>
         {/*section-paralax*/}
@@ -238,7 +218,9 @@ class Services extends Component {
                       <li>Veil Placement</li>
                     </ul>
                     <div className="pricing-button-box">
-                      <a className="btn btn-primary">Get it now!</a>
+                      <a href="/contact" className="btn btn-primary">
+                        Get it now!
+                      </a>
                     </div>
                     {/*pricing-button-box*/}
                   </div>
@@ -262,7 +244,9 @@ class Services extends Component {
                       <li>Veil Placement</li>
                     </ul>
                     <div className="pricing-button-box">
-                      <a className="btn btn-primary">Get it now!</a>
+                      <a href="/contact" className="btn btn-primary">
+                        Get it now!
+                      </a>
                     </div>
                     {/*pricing-button-box*/}
                   </div>
@@ -286,7 +270,9 @@ class Services extends Component {
                       <li>Veil Placement</li>
                     </ul>
                     <div className="pricing-button-box">
-                      <a className="btn btn-primary">Get it now!</a>
+                      <a href="/contact" className="btn btn-primary">
+                        Get it now!
+                      </a>
                     </div>
                     {/*pricing-button-box*/}
                   </div>
@@ -310,7 +296,9 @@ class Services extends Component {
                       <li>Veil Placement</li>
                     </ul>
                     <div className="pricing-button-box">
-                      <a className="btn btn-primary">Get it now!</a>
+                      <a href="/contact" className="btn btn-primary">
+                        Get it now!
+                      </a>
                     </div>
                     {/*pricing-button-box*/}
                   </div>

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import blog from "../../images/blog_img.jpg";
+import "./index.css";
+import "../../App.css";
 import { connect } from "react-redux";
 import { fetchNextPosts } from "../../actions/blogActions.js";
 import BlogSidebar from "../../components/blogsidebar";
@@ -13,30 +14,15 @@ class Blog extends Component {
     };
   }
   componentDidMount() {
-    console.log("inside component did mount");
-    //goes to page 1 upon loading page
-    this.props.fetchNextPosts(this.state.currentPage);
+    //load page 1
+    this.props.dispatch(fetchNextPosts(this.state.currentPage));
   }
 
   render() {
-    const { posts, info } = this.props.blogposts;
-    const styles = {
-      header: {
-        backgroundImage: `url(` + blog + `)`,
-        backgroundPosition: "center",
-        backgroundRepeat: "no-repeat",
-        backgroundSize: "cover",
-        backgroundAttachment: "fixed"
-      },
-      content: {
-        backgroundColor: "rgba(0, 0, 0, 0.3)"
-      }
-    };
-
     return (
       <div className="blog">
-        <section className="section section-page-title" style={styles.header}>
-          <div className="overlay" style={styles.content}>
+        <section className="section section-page-title blog-heading my-header">
+          <div className="overlay">
             <h1>Blog/News</h1>
           </div>
           {/*overlay*/}
@@ -45,10 +31,13 @@ class Blog extends Component {
         <section className="section main-section">
           <div className="container">
             <div className="row">
-              <MainBlogSection />
+              <div className="col-md-8 col-sm-8">
+                <MainBlogSection />
+              </div>
               {/*col-md-8*/}
-              {/*sidebar*/}
-              <BlogSidebar />
+              <div className="col-md-4 col-sm-4" id="sidebar">
+                <BlogSidebar />
+              </div>
               {/*col-md-3*/}
             </div>
             {/*row*/}
@@ -59,9 +48,4 @@ class Blog extends Component {
   }
 }
 
-const mapStateToProps = state => ({
-  blogposts: state.blogposts.posts_by_page,
-  singlePost: state.blogposts.singlePost
-});
-
-export default connect(mapStateToProps, { fetchNextPosts })(Blog);
+export default connect()(Blog);

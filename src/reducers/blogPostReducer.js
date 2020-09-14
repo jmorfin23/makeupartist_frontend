@@ -8,25 +8,16 @@ import {
 } from "../actions/types.js";
 
 const initialState = {
-  items: [], //holds all posts for admin page
-  posts_by_page: { posts: [], info: {} }, //holds posts by page number in blog page
-  item: {},
+  adminPosts: [],
+  posts_by_page: {
+    posts: [],
+    info: {}
+  },
   singlePost: {
-    post: {
-      author: null,
-      comments: [],
-      content: null,
-      data: null,
-      id: null,
-      path: null,
-      url: null
-    },
+    post: {},
     nextPosts: []
   },
-  deleted: false,
-  added: {},
-  home_posts: [],
-  message: null
+  home_posts: []
 };
 
 const blogPostReducer = (state = initialState, action) => {
@@ -34,12 +25,15 @@ const blogPostReducer = (state = initialState, action) => {
     case FETCH_BLOG_POSTS:
       return {
         ...state,
-        items: action.payload
+        adminPosts: action.payload
       };
     case ADD_BLOG_POST:
       return {
         ...state,
-        message: action.message
+        adminPosts: [action.payload.data, ...state.adminPosts],
+        posts_by_page: {
+          posts: [action.payload.data, ...state.posts_by_page.posts]
+        }
       };
     case GET_SINGLE_BLOGPOST:
       return {
@@ -49,8 +43,9 @@ const blogPostReducer = (state = initialState, action) => {
     case DELETE_BLOG_POST:
       return {
         ...state,
-        deleted: action.payload,
-        message: action.message
+        adminPosts: [
+          ...state.adminPosts.filter(value => value.id !== action.payload.data)
+        ]
       };
     case GET_REQUESTED_NUM_BLOGPOST:
       return {

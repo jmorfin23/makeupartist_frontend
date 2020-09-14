@@ -1,55 +1,77 @@
 import React, { Component } from "react";
-import contact from "../../images/contact_me.jpg";
+import "./index.css";
+import "../../App.css";
 import Recaptcha from "react-recaptcha";
-import Loader from "../../components/loading";
+import { MESSAGE_SENT, APP_ERROR } from "../../actions/types";
+import { connect } from "react-redux";
 
 class Contact extends Component {
   constructor(props) {
     super(props);
-  }
 
+    this.state = {
+      isVerified: false,
+      name: "",
+      email: "",
+      phone: "",
+      subject: "",
+      message: ""
+    };
+    // recaptcha ref
+    this.recaptchaRef = React.createRef();
+  }
+  //allows loading of recaptcha
+  captchaCallback = () => {
+    console.log("recaptcha is loaded!");
+  };
   submitMessage = async e => {
-    console.log("inside submit message");
+    e.preventDefault();
+
+    const { name, email, subject, phone, message, isVerified } = this.state;
+
+    if (!isVerified)
+      return this.props.dispatch({
+        type: APP_ERROR,
+        payload: "Please check the reCAPTCHA."
+      });
 
     const URL = "http://127.0.0.1:5000/api/contact";
 
-    let response = await fetch(URL, {
+    const response = await fetch(URL, {
       method: "POST",
       headers: {
         "Contact-Type": "application/json",
-        name: e.target.cname.value,
-        email: e.target.cemailaddress.value,
-        subject: e.target.subject.value,
-        phone: e.target.cphone.value,
-        message: e.target.cmessage.value
+        name: name,
+        email: email,
+        subject: subject,
+        phone: phone,
+        message: message
       }
     });
 
-    let data = await response.json();
+    const data = await response.json();
 
-    if (data.Success) {
-      console.log("message sent successfully");
+    if (data.status === "ok") {
+      this.props.dispatch({ type: MESSAGE_SENT, payload: data });
+
+      //reset form
+      this.setState({
+        name: "",
+        email: "",
+        phone: "",
+        subject: "",
+        message: ""
+      });
+      //reset recaptcha
+      this.recaptchaRef.reset();
     }
   };
-
   render() {
-    const styles = {
-      header: {
-        backgroundImage: `url(` + contact + `)`,
-        backgroundPosition: "center",
-        backgroundRepeat: "no-repeat",
-        backgroundSize: "cover",
-        backgroundAttachment: "fixed"
-      },
-      content: {
-        backgroundColor: "rgba(0, 0, 0, 0.3)"
-      }
-    };
     return (
       <div className="contact">
-        <section className="section section-page-title" style={styles.header}>
-          <div className="overlay" style={styles.content}>
-            <h1>Get in Touch </h1>
+        <section className="section section-page-title my-header contact-heading">
+          <div className="overlay">
+            <h1>Contact</h1>
           </div>
           {/*overlay*/}
         </section>
@@ -84,9 +106,9 @@ class Contact extends Component {
                   <i className="fa fa-comments"></i>
                   <p>
                     <strong>Email:</strong> <br />
-                    <a href="mailto:info@yourdomain.net">info@ksmakeup.com</a>
+                    <a href="mailto:info@ksmakeup.com">info@ksmakeup.com</a>
                     <br />
-                    <a href="mailto:info@yourdomain.net">
+                    <a href="mailto:customer@ksmakeup.com">
                       customer@ksmakeup.com
                     </a>
                   </p>
@@ -94,36 +116,6 @@ class Contact extends Component {
               </div>
               {/*col-6*/}
               <div className="col-lg-8 col-md-8">
-                <div
-                  className="alert alert-success alert-success-contact"
-                  role="alert"
-                  style={{ display: "none" }}
-                >
-                  <button
-                    type="button"
-                    className="close"
-                    data-dismiss="alert"
-                    aria-label="Close"
-                  >
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                  Your message has been sent. We will contact you asap!
-                </div>
-                <div
-                  className="alert alert-danger alert-danger-contact"
-                  role="alert"
-                  style={{ display: "none" }}
-                >
-                  <button
-                    type="button"
-                    className="close"
-                    data-dismiss="alert"
-                    aria-label="Close"
-                  >
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                  Opps! There was problem sending email. Please try Again!
-                </div>
                 <form
                   className="contactform"
                   id="contactform"
@@ -134,6 +126,10 @@ class Contact extends Component {
                       <p>
                         <input
                           className="form-control"
+                          onChange={e =>
+                            this.setState({ name: e.target.value })
+                          }
+                          value={this.state.name}
                           id="cname"
                           name="cname"
                           placeholder="your name"
@@ -146,6 +142,10 @@ class Contact extends Component {
                       <p>
                         <input
                           className="form-control"
+                          onChange={e =>
+                            this.setState({ email: e.target.value })
+                          }
+                          value={this.state.email}
                           id="cemailaddress"
                           name="cemailaddress"
                           placeholder="email address"
@@ -158,6 +158,10 @@ class Contact extends Component {
                       <p>
                         <input
                           className="form-control"
+                          onChange={e =>
+                            this.setState({ phone: e.target.value })
+                          }
+                          value={this.state.phone}
                           id="cphone"
                           name="cphone"
                           placeholder="phone no."
@@ -170,6 +174,10 @@ class Contact extends Component {
                       <p>
                         <input
                           className="form-control"
+                          onChange={e =>
+                            this.setState({ subject: e.target.value })
+                          }
+                          value={this.state.subject}
                           id="subject"
                           name="subject"
                           required="required"
@@ -184,6 +192,10 @@ class Contact extends Component {
                       <p>
                         <textarea
                           className="form-control"
+                          onChange={e =>
+                            this.setState({ message: e.target.value })
+                          }
+                          value={this.state.message}
                           id="cmessage"
                           name="cmessage"
                           rows="4"
@@ -192,6 +204,17 @@ class Contact extends Component {
                         ></textarea>
                       </p>
                       <div className="text-right">
+                        <Recaptcha
+                          ref={e => (this.recaptchaRef = e)}
+                          className="recaptcha-styling"
+                          sitekey="6LcDR8oZAAAAACFELDflcK8Me3Bk52opXFBebqYb"
+                          render="explicit"
+                          onloadCallback={() => this.captchaCallback()}
+                          verifyCallback={() =>
+                            this.setState({ isVerified: true })
+                          }
+                        />
+                        ,
                         <button
                           className="btn btn-primary"
                           id="submit-contact-form"
@@ -208,9 +231,9 @@ class Contact extends Component {
             </div>
           </div>
         </section>
-      </div> //end of contact div
+      </div>
     );
   }
 }
 
-export default Contact;
+export default connect()(Contact);

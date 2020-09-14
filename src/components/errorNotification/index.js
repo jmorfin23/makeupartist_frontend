@@ -4,9 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { HIDE_ERROR } from "../../actions/types.js";
 
 const ErrorNotification = () => {
-  const isOpen = useSelector(state => state.error.isOpen);
-  const error = useSelector(state => state.error.error);
-
+  const { isOpen, error } = useSelector(state => state.error);
   const dispatch = useDispatch();
 
   const handleClose = () => {

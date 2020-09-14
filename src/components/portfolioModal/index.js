@@ -3,10 +3,6 @@ import "./index.css";
 import X_picture from "../../images/cursor.png";
 
 class PortfolioModal extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   onClose = e => {
     this.props.toggleModal();
   };
@@ -18,11 +14,11 @@ class PortfolioModal extends Component {
     return (
       <div className="modal-window">
         <div className="my-modal-content">
-          <img src={`${this.props.children}`}></img>
+          <img src={`${this.props.children}`} alt="modal"></img>
         </div>
         <div className="action">
           <button className="modal-close-button" onClick={e => this.onClose(e)}>
-            <img src={X_picture}></img>
+            <img src={X_picture} alt="X"></img>
           </button>
         </div>
       </div>

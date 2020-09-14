@@ -1,0 +1,11 @@
+.no-blogposts-message {
+  font-weight: bold;
+  text-align: center;
+}
+
+.pag-styling {
+  cursor: pointer;
+  border: none;
+  background-color: inherit;
+  padding: 0;
+}

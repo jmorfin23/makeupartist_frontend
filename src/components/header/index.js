@@ -1,16 +1,15 @@
 import React from "react";
 import "./index.css";
 import companylogo from "../../images/main-logo2.png";
-import { Link, NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { LOGOUT_ADMIN } from "../../actions/types";
 
 const Header = props => {
-  console.log("header component");
   const dispatch = useDispatch();
+
   const logoutAdmin = () => {
-    console.log("inside logout admin");
-    //logout admin
+    //logout admin in store
     dispatch({ type: LOGOUT_ADMIN, payload: false });
 
     //remove token from localstorage
@@ -60,11 +59,11 @@ const Header = props => {
             <li>
               <Link to="/contact">Contact Us</Link>
             </li>
-            {props.page === "/admin/home" ? (
+            {props.path === "/admin/home" ? (
               <li>
-                <a style={{ cursor: "pointer" }} onClick={() => logoutAdmin()}>
+                <Link to="/admin/login" onClick={() => logoutAdmin()}>
                   Logout
-                </a>
+                </Link>
               </li>
             ) : null}
           </ul>

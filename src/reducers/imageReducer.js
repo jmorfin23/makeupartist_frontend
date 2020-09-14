@@ -2,13 +2,7 @@
 import { FETCH_IMAGES, ADD_IMAGE, DELETE_IMAGE } from "../actions/types.js";
 
 const initialState = {
-  images: [],
-  item: {},
-  newLength: null,
-  deletedImage: {},
-  deletedStatus: false,
-  addedStatus: false,
-  error: {}
+  images: []
 };
 
 const imageReducer = (state = initialState, action) => {
@@ -21,18 +15,14 @@ const imageReducer = (state = initialState, action) => {
     case ADD_IMAGE:
       return {
         ...state,
-        item: action.payload,
-        newLength: action.payload.newLength,
-        addedStatus: action.payload.status
+        images: [action.payload.data, ...state.images]
       };
     case DELETE_IMAGE:
       return {
         ...state,
-        item: action.payload,
-        deletedImage: action.payload.deletedImage,
-        deletedStatus: action.payload.status,
-        newLength: action.payload.newLength,
-        error: action.payload.error
+        images: [
+          ...state.images.filter(value => value.id !== action.payload.data.id)
+        ]
       };
     default:
       return state;

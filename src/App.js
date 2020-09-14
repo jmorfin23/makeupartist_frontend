@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import "./App.css";
-import PropTypes from "prop-types";
 import { Switch, Route, withRouter, Redirect } from "react-router-dom";
 import Home from "./views/home";
 import Header from "./components/header";
@@ -22,60 +21,35 @@ import ErrorNotification from "./components/errorNotification";
 import Four04 from "./components/404_Page";
 import { animateScroll as scroll } from "react-scroll";
 import Loader from "./components/loading";
+import Notification from "./components/notification";
 
 class App extends Component {
-  componentDidMount() {
-    // check local storage for token
-    console.log("app component did mount");
-    // console.log(this.props);
-    //retrieve portfolio images from backend
-    // this.props.fetchImages();
-    // console.log(this.props);
-    //retrieve blog posts from backend
-    // this.props.fetchBlogPosts();
-  }
-  // shouldComponentUpdate(nextProps, nextState) {
-  //   console.log('should component update');
-  //   return false
-  // }
-  componentDidUpdate(prevProps, prevState) {
-    console.log("app component did update");
-
-    // console.log(this.props);
-  }
-  componentWillUnmount() {
-    console.log("app component will unmount");
-  }
-  shouldComponentUpdate() {
-    console.log("app should component update");
-    return true;
-  }
-
-  //ROUTE ISSUE DISPLAYING ADMIN PAGE AND LOGIN PAGES // DONE
-  //route causes a redux state refresh - need to prevent this // * USED LINKS PREVENTS A PAGE REFRESH *
   render() {
-    console.log("INSIDE APP RENDER");
-    console.log("IS LOADING");
-    console.log(this.props.isLoading);
-    //ADD A LISTENER FOR SCROLLING ON ROUTES
+    // scroll to top //
     this.props.history.listen((location, action) => {
       scroll.scrollToTop();
     });
-
     return (
       <div className="App">
         {this.props.isLoading ? <Loader /> : null}
         <ErrorNotification />
-        <Header page={this.props.location.pathname} />
+        <Notification />
+        <Header path={this.props.location.pathname} />
         <Switch>
-          <Route exact path="/admin/home">
+          <Route exact path={"/admin/home"}>
             {this.props.user.isLogged ? (
               <Admin />
             ) : (
               <Redirect to="/admin/login" />
             )}
           </Route>
-          <Route exact path={"/admin/login"} component={() => <Login />} />
+          <Route exact path={"/admin/login"}>
+            {this.props.user.isLogged ? (
+              <Redirect to="/admin/home" />
+            ) : (
+              <Login />
+            )}
+          </Route>
           <Route exact path={["/", "/home"]} render={() => <Home />} />
           <Route exact path={"/about"} render={() => <About />} />
           <Route exact path={"/services"} render={() => <Services />} />
@@ -84,10 +58,8 @@ class App extends Component {
           <Route path={"/blog/:post"} render={() => <Post1 />} />
           <Route exact path={"/contact"} render={() => <Contact />} />
           <Route exact path={"/reset"} render={() => <Reset />} />
-          <Route
-            path={"/reset_password=:token"}
-            render={({ match }) => <Passwords info={match} />}
-          />
+          <Route path={"/reset_password/:token"} render={() => <Passwords />} />
+          {/* No match -> Return 404 */}
           <Route render={() => <Four04 />} />
         </Switch>
         <Footer />
@@ -96,21 +68,8 @@ class App extends Component {
   }
 }
 
-//Proptypes
-App.propTypes = {
-  images: PropTypes.shape({
-    data: PropTypes.array
-  }),
-  blogposts: PropTypes.shape({
-    data: PropTypes.array
-  })
-};
-
 //using this to map to props
 const mapStateToProps = state => ({
-  error: state.error,
-  images: state.images.items,
-  blogposts: state.blogposts,
   user: state.user,
   isLoading: state.loading.isLoading
 });

@@ -98,23 +98,23 @@ $(document).ready(function() {
   /*==========================================
   contact form
  ===========================================*/
-  $("#contactform").validate({
-    submitHandler: function(form) {
-      $.ajax({
-        type: "POST",
-        url: "email.php",
-        data: $("#contactform").serialize(),
-        success: function(msg) {
-          if (msg == "success") {
-            $(".alert-success-contact").show("fast");
-            $("#contactform")[0].reset();
-          } else {
-            $(".alert-danger-contact").show("fast");
-          }
-        }
-      });
-    }
-  });
+  // $("#contactform").validate({
+  //   submitHandler: function(form) {
+  //     $.ajax({
+  //       type: "POST",
+  //       url: "email.php",
+  //       data: $("#contactform").serialize(),
+  //       success: function(msg) {
+  //         if (msg == "success") {
+  //           $(".alert-success-contact").show("fast");
+  //           $("#contactform")[0].reset();
+  //         } else {
+  //           $(".alert-danger-contact").show("fast");
+  //         }
+  //       }
+  //     });
+  //   }
+  // });
 
   //back to top start
   var $top = $(".goto-top");

@@ -16,7 +16,6 @@ class PortfolioImage extends Component {
   componentDidMount() {
     // dont grab images if images are in state
     if (!this.props.images.length) {
-      console.log("we dont have images lets grab them");
       this.props.fetchImages();
     }
   }
@@ -45,7 +44,7 @@ class PortfolioImage extends Component {
   filterSelection = c => {
     var x, i;
     x = document.getElementsByClassName("portfolio-item");
-    if (c == "all") c = "";
+    if (c === "all") c = "";
     // Add the "show" class (display:block) to the filtered elements, and remove the "show" class from the elements that are not selected
     for (i = 0; i < x.length; i++) {
       this.w3RemoveClass(x[i], "hide");
@@ -64,7 +63,7 @@ class PortfolioImage extends Component {
     arr1 = element.className.split(" ");
     arr2 = name.split(" ");
     for (i = 0; i < arr2.length; i++) {
-      if (arr1.indexOf(arr2[i]) == -1) {
+      if (arr1.indexOf(arr2[i]) === -1) {
         element.className += " " + arr2[i];
       }
     }
@@ -85,7 +84,7 @@ class PortfolioImage extends Component {
 
   render() {
     const images = this.props.images;
-    if (!images.length) {
+    if (images === undefined || !images.length) {
       return (
         <div className="empty-image-list text center">
           <p>There are currently no images in the portfolio.</p>
@@ -99,13 +98,13 @@ class PortfolioImage extends Component {
           className="portfolio-filter list-inline text-center"
         >
           <li className="filter-buttons current">
-            <a href="" data-filter="*" onClick={e => this.filterMe("all", e)}>
+            <a href="#/" data-filter="*" onClick={e => this.filterMe("all", e)}>
               All Works
             </a>
           </li>
           <li className="filter-buttons">
             <a
-              href=""
+              href="#/"
               data-filter=".wedding"
               onClick={e => this.filterMe("wedding", e)}
             >
@@ -114,7 +113,7 @@ class PortfolioImage extends Component {
           </li>
           <li className="filter-buttons">
             <a
-              href=""
+              href="#/"
               data-filter=".fashion"
               onClick={e => this.filterMe("hairstyle", e)}
             >
@@ -123,7 +122,7 @@ class PortfolioImage extends Component {
           </li>
           <li className="filter-buttons">
             <a
-              href=""
+              href="#/"
               data-filter=".nature"
               onClick={e => this.filterMe("commercial", e)}
             >
@@ -132,7 +131,7 @@ class PortfolioImage extends Component {
           </li>
           <li className="filter-buttons">
             <a
-              href=""
+              href="#/"
               data-filter=".studio"
               onClick={e => this.filterMe("studio", e)}
             >
@@ -141,8 +140,8 @@ class PortfolioImage extends Component {
           </li>
         </ul>
         <div className="portfolio-items row">
-          {this.props.images &&
-            this.props.images.map((image, index) => (
+          {images &&
+            images.map((image, index) => (
               <div
                 key={index}
                 className={

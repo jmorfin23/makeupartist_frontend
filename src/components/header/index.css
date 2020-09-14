@@ -3,3 +3,9 @@
   height: 40px;
   width: 100px;
 }
+
+.button-change-style {
+  border: none;
+  background-color: inherit;
+  padding: inherit;
+}

@@ -4,7 +4,7 @@ import ad from "../../images/girl-forest.jpg";
 
 const BlogSidebar = () => {
   return (
-    <div className="col-md-4 col-sm-4" id="sidebar">
+    <>
       <div className="sidebar-box clearfix">
         <h3 className="widget-title">About me</h3>
         <p>
@@ -139,7 +139,7 @@ const BlogSidebar = () => {
         </ul>
       </div>
       {/*sidebar-box*/}
-    </div>
+    </>
   );
 };
 

@@ -1,0 +1,41 @@
+.user-notification-container {
+  /* display: block; */
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  padding: 5rem;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 9999;
+  opacity: 1;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  animation: show 0.5s ease;
+}
+
+.user-notification-content {
+  /* display: flex; */
+  padding: 20px;
+  border: 5px solid #07b807;
+  background-color: #ffffff;
+  width: 50vw;
+  /* height: 30vh; this results in child elements to to outside of div*/
+  margin: 0 auto;
+  font-family: "Raleway", sans-serif;
+  text-align: center;
+  overflow-x: auto;
+}
+
+.user-heading {
+  padding: 5px;
+}
+
+.user-message-content {
+  padding: 5px;
+}
+.user-notification-close {
+  margin: 0 auto;
+}

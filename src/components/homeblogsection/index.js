@@ -38,7 +38,7 @@ const HomeBlogSection = props => {
                   </li>
                   <li>
                     <i className="fa fa-comments"></i>
-                    <a href="">0 Comments</a>
+                    <a href="#/">0 Comments</a>
                   </li>
                 </ul>
                 <p>{post.content.slice(0, 350) + "..."}</p>

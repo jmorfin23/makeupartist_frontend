@@ -1,8 +1,16 @@
 import React from "react";
 import "./index.css";
 import { Modal } from "react-bootstrap";
+import { useDispatch } from "react-redux";
+import { deleteImage } from "../../actions/imageActions";
 
-const ModalWindow = props => {
+const AdminModal = props => {
+  const dispatch = useDispatch();
+
+  const yesButton = () => {
+    props.onHide();
+    dispatch(deleteImage(props.id));
+  };
   return (
     <Modal
       {...props}
@@ -21,6 +29,7 @@ const ModalWindow = props => {
           <img
             style={{ maxWidth: "100%", height: "300px" }}
             src={props.image}
+            alt="portfolio"
           ></img>
         </div>
       </Modal.Body>
@@ -28,7 +37,7 @@ const ModalWindow = props => {
         <button className="btn btn-primary" onClick={() => props.onHide()}>
           No
         </button>
-        <button className="btn btn-primary" onClick={() => props.deleteimage()}>
+        <button className="btn btn-primary" onClick={() => yesButton()}>
           Yes
         </button>
       </Modal.Footer>
@@ -36,4 +45,4 @@ const ModalWindow = props => {
   );
 };
 
-export default ModalWindow;
+export default AdminModal;

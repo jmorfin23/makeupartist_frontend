@@ -11,194 +11,167 @@ import {
   FETCH_NEXT_POSTS
 } from "./types.js";
 
-// Retrieves all blogposts from db
+const token = localStorage.getItem("token");
+
+// Retrieves all blogposts
 export const fetchBlogPosts = () => {
   return async function(dispatch) {
     try {
-      await fetch("http://127.0.0.1:5000/api/get-blogpost")
-        .then(response => response.json())
-        .then(res => {
-          if (res.status == "ok") {
-            dispatch({
-              type: FETCH_BLOG_POSTS,
-              payload: res.data
-            });
-          } else {
-            dispatch({
-              type: APP_ERROR,
-              payload: res.error
-            });
-          }
+      const response = await fetch("http://127.0.0.1:5000/api/get-blogpost");
+      const res = await response.json();
+      if (res.status === "ok") {
+        dispatch({
+          type: FETCH_BLOG_POSTS,
+          payload: res.data
         });
+      } else {
+        dispatch({
+          type: APP_ERROR,
+          payload: res.error
+        });
+      }
     } catch (error) {
       dispatch({
         type: APP_ERROR,
-        payload: error
+        payload: error.toString()
       });
     }
   };
 };
 
-//Commented out for testing other ideas
-// // Retrieves all blogposts from db
-// export const fetchBlogPosts = () => {
-//   return function(dispatch) {
-//     console.log("inside fetch blog posts");
-//     fetch("http://127.0.0.1:5000/api/get-blogpost")
-//       .then(response => response.json())
-//       .then(posts =>
-//         dispatch({
-//           type: FETCH_BLOG_POSTS,
-//           payload: posts
-//         })
-//       );
-//   };
-// };
-
-// Retrieves specified number of blogposts
+// Retrieves specified number of blogposts for home page (3)
 export const getRequestedNumBlogPost = num => {
   return async function(dispatch) {
-    console.log("inside getRequestedNumBlogPost");
-    //call loading dispatch
-    dispatch({ type: LOADING_DATA });
-    await fetch("http://127.0.0.1:5000/api/get-requested-number-blogpost", {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        number: num
-      }
-    })
-      .then(response => response.json())
-      .then(res => {
-        try {
-          if (res.status === "ok") {
-            dispatch({
-              type: GET_REQUESTED_NUM_BLOGPOST,
-              payload: res.data
-            });
-          } else {
-            dispatch({
-              type: APP_ERROR,
-              payload: res.error
-            });
+    try {
+      const response = await fetch(
+        "http://127.0.0.1:5000/api/get-requested-number-blogpost",
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            number: num
           }
-        } catch (error) {
-          dispatch({
-            type: APP_ERROR,
-            payload: error
-          });
         }
-      })
-      .then(dispatch({ type: LOADING_FINISHED }));
+      );
+      const res = await response.json();
+      if (res.status === "ok") {
+        dispatch({
+          type: GET_REQUESTED_NUM_BLOGPOST,
+          payload: res.data
+        });
+      } else {
+        dispatch({
+          type: APP_ERROR,
+          payload: res.error
+        });
+      }
+    } catch (error) {
+      dispatch({
+        type: APP_ERROR,
+        payload: error.toString()
+      });
+    }
   };
 };
 
-// Add blogpost to db
+// Add a blogpost
 export const addBlogPost = blogPostInfo => {
   return async function(dispatch) {
-    await fetch("http://127.0.0.1:5000/api/add-blogpost", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        postInfo: JSON.stringify(blogPostInfo)
-      }
-    })
-      .then(response => response.json())
-      .then(res => {
-        try {
-          if (res.status === "ok") {
-            dispatch({
-              type: ADD_BLOG_POST,
-              message: res.message
-            });
-          } else {
-            dispatch({
-              type: APP_ERROR,
-              payload: res.error
-            });
-          }
-        } catch (error) {
-          dispatch({
-            type: APP_ERROR,
-            payload: error
-          });
+    try {
+      const response = await fetch("http://127.0.0.1:5000/api/add-blogpost", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          token: token,
+          postInfo: JSON.stringify(blogPostInfo)
         }
       });
+      const res = await response.json();
+      if (res.status === "ok") {
+        dispatch({
+          type: ADD_BLOG_POST,
+          payload: res
+        });
+      } else {
+        dispatch({
+          type: APP_ERROR,
+          payload: res.error
+        });
+      }
+    } catch (error) {
+      dispatch({
+        type: APP_ERROR,
+        payload: error.toString()
+      });
+    }
   };
 };
 
-// dispatch({
-//   type: ADD_BLOG_POST,
-//   payload: res.data
-// })
-
-// Delete blogpost based on id
+// Delete a blogpost
 export const deleteBlogPost = id => {
   return async function(dispatch) {
-    await fetch("http://127.0.0.1:5000/api/delete-blog-post", {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        id: id
-      }
-    })
-      .then(response => response.json())
-      .then(res => {
-        try {
-          if (res.status === "ok") {
-            dispatch({
-              type: DELETE_BLOG_POST,
-              payload: res.data,
-              message: res.message
-            });
-          } else {
-            dispatch({
-              type: APP_ERROR,
-              payload: res.error
-            });
+    try {
+      const response = await fetch(
+        "http://127.0.0.1:5000/api/delete-blog-post",
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            id: id
           }
-        } catch (error) {
-          dispatch({
-            type: APP_ERROR,
-            payload: error
-          });
         }
+      );
+      const res = await response.json();
+      if (res.status === "ok") {
+        dispatch({
+          type: DELETE_BLOG_POST,
+          payload: res
+        });
+      } else {
+        dispatch({
+          type: APP_ERROR,
+          payload: res.error
+        });
+      }
+    } catch (error) {
+      dispatch({
+        type: APP_ERROR,
+        payload: error.toString()
       });
+    }
   };
 };
 
 // Retrieves blogpost based on path
 export const getSinglePost = path => {
   return async function(dispatch) {
-    dispatch({ type: LOADING_DATA });
-    await fetch("http://127.0.0.1:5000/api/single-post", {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        path: path
-      }
-    })
-      .then(response => response.json())
-      .then(res => {
-        try {
-          if (res.status === "ok") {
-            dispatch({
-              type: GET_SINGLE_BLOGPOST,
-              payload: res.data
-            });
-          } else {
-            dispatch({
-              type: POST_ERROR,
-              payload: res.error
-            });
-          }
-        } catch (error) {
-          dispatch({
-            type: APP_ERROR,
-            payload: error
-          });
+    try {
+      dispatch({ type: LOADING_DATA });
+      const response = await fetch("http://127.0.0.1:5000/api/single-post", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          path: path
         }
       });
+      const res = await response.json();
+      if (res.status === "ok") {
+        dispatch({
+          type: GET_SINGLE_BLOGPOST,
+          payload: res.data
+        });
+      } else {
+        dispatch({
+          type: POST_ERROR,
+          payload: res.error
+        });
+      }
+    } catch (error) {
+      dispatch({
+        type: APP_ERROR,
+        payload: error.toString()
+      });
+    }
     dispatch({ type: LOADING_FINISHED });
   };
 };
@@ -207,35 +180,31 @@ export const getSinglePost = path => {
 export const fetchNextPosts = page => {
   return async function(dispatch) {
     try {
-      console.log("**** FETCH NEXT POSTS *****");
-      console.log(page);
       dispatch({ type: LOADING_DATA });
-      await fetch("http://127.0.0.1:5000/api/get-next-posts", {
+      const response = await fetch("http://127.0.0.1:5000/api/get-next-posts", {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
           page_num: page,
           posts_per_page: 4 //posts per page
         }
-      })
-        .then(response => response.json())
-        .then(res => {
-          if (res.status == "ok") {
-            dispatch({
-              type: FETCH_NEXT_POSTS,
-              payload: res.data
-            });
-          } else {
-            dispatch({
-              type: APP_ERROR,
-              payload: res.error
-            });
-          }
+      });
+      const res = await response.json();
+      if (res.status === "ok") {
+        dispatch({
+          type: FETCH_NEXT_POSTS,
+          payload: res.data
         });
+      } else {
+        dispatch({
+          type: APP_ERROR,
+          payload: res.error
+        });
+      }
     } catch (error) {
       dispatch({
         type: APP_ERROR,
-        payload: "HTTP error"
+        payload: error.toString()
       });
     }
     dispatch({ type: LOADING_FINISHED });
