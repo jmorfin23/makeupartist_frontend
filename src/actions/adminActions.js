@@ -12,13 +12,16 @@ import {
 export const authenticateAdmin = token => {
   return async function(dispatch) {
     try {
-      const response = await fetch("http://127.0.0.1:5000/api/admin-auth", {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          token: token
+      const response = await fetch(
+        "https://kathrynsmithmakeup-backend.herokuapp.com/api/admin-auth",
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            token: token
+          }
         }
-      });
+      );
       const res = await response.json();
       if (res.status === "ok") {
         console.log("authentication success");
@@ -50,13 +53,16 @@ export const authenticateAdmin = token => {
 export const loginAdmin = token => {
   return async function(dispatch) {
     try {
-      const response = await fetch("http://127.0.0.1:5000/api/admin-login", {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          token: token
+      const response = await fetch(
+        "https://kathrynsmithmakeup-backend.herokuapp.com/api/admin-login",
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            token: token
+          }
         }
-      });
+      );
       const res = await response.json();
 
       if (res.status === "ok") {
@@ -85,13 +91,16 @@ export const loginAdmin = token => {
 export const registerAdmin = token => {
   return async function(dispatch) {
     try {
-      const response = await fetch("http://127.0.0.1:5000/api/admin-register", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          token: token
+      const response = await fetch(
+        "https://kathrynsmithmakeup-backend.herokuapp.com/api/admin-register",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            token: token
+          }
         }
-      });
+      );
       const res = await response.json();
 
       if (res.status === "ok") {
@@ -121,13 +130,16 @@ export const resetPassword = email => {
   return async function(dispatch) {
     console.log("inside reset admin password");
     try {
-      const response = await fetch("http://127.0.0.1:5000/api/reset-password", {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          email: email
+      const response = await fetch(
+        "https://kathrynsmithmakeup-backend.herokuapp.com/api/reset-password",
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            email: email
+          }
         }
-      });
+      );
       const res = await response.json();
       if (res.status === "ok") {
         dispatch({
@@ -155,7 +167,7 @@ export const updatePassword = (new_pass, token) => {
   return async function(dispatch) {
     try {
       const response = await fetch(
-        "http://127.0.0.1:5000/api/change_password",
+        "https://kathrynsmithmakeup-backend.herokuapp.com/api/change_password",
         {
           method: "GET",
           headers: {

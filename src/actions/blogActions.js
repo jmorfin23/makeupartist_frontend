@@ -17,19 +17,21 @@ const token = localStorage.getItem("token");
 export const fetchBlogPosts = () => {
   return async function(dispatch) {
     try {
-      const response = await fetch("http://127.0.0.1:5000/api/get-blogpost");
+      const response = await fetch(
+        "https://kathrynsmithmakeup-backend.herokuapp.com/api/get-blogpost"
+      );
       const res = await response.json();
       if (res.status === "ok") {
         dispatch({
           type: FETCH_BLOG_POSTS,
           payload: res.data
         });
-      } else {
-        dispatch({
-          type: APP_ERROR,
-          payload: res.error
-        });
-      }
+      } //else {
+      //   dispatch({
+      //     type: APP_ERROR,
+      //     payload: res.error
+      //   });
+      // }
     } catch (error) {
       dispatch({
         type: APP_ERROR,
@@ -44,7 +46,7 @@ export const getRequestedNumBlogPost = num => {
   return async function(dispatch) {
     try {
       const response = await fetch(
-        "http://127.0.0.1:5000/api/get-requested-number-blogpost",
+        "https://kathrynsmithmakeup-backend.herokuapp.com/api/get-requested-number-blogpost",
         {
           method: "GET",
           headers: {
@@ -59,12 +61,12 @@ export const getRequestedNumBlogPost = num => {
           type: GET_REQUESTED_NUM_BLOGPOST,
           payload: res.data
         });
-      } else {
-        dispatch({
-          type: APP_ERROR,
-          payload: res.error
-        });
-      }
+      } //else {
+      //   dispatch({
+      //     type: APP_ERROR,
+      //     payload: res.error
+      //   });
+      // }
     } catch (error) {
       dispatch({
         type: APP_ERROR,
@@ -78,14 +80,17 @@ export const getRequestedNumBlogPost = num => {
 export const addBlogPost = blogPostInfo => {
   return async function(dispatch) {
     try {
-      const response = await fetch("http://127.0.0.1:5000/api/add-blogpost", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          token: token,
-          postInfo: JSON.stringify(blogPostInfo)
+      const response = await fetch(
+        "https://kathrynsmithmakeup-backend.herokuapp.com/api/add-blogpost",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            token: token,
+            postInfo: JSON.stringify(blogPostInfo)
+          }
         }
-      });
+      );
       const res = await response.json();
       if (res.status === "ok") {
         dispatch({
@@ -112,7 +117,7 @@ export const deleteBlogPost = id => {
   return async function(dispatch) {
     try {
       const response = await fetch(
-        "http://127.0.0.1:5000/api/delete-blog-post",
+        "https://kathrynsmithmakeup-backend.herokuapp.com/api/delete-blog-post",
         {
           method: "GET",
           headers: {
@@ -147,13 +152,16 @@ export const getSinglePost = path => {
   return async function(dispatch) {
     try {
       dispatch({ type: LOADING_DATA });
-      const response = await fetch("http://127.0.0.1:5000/api/single-post", {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          path: path
+      const response = await fetch(
+        "https://kathrynsmithmakeup-backend.herokuapp.com/api/single-post",
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            path: path
+          }
         }
-      });
+      );
       const res = await response.json();
       if (res.status === "ok") {
         dispatch({
@@ -181,14 +189,17 @@ export const fetchNextPosts = page => {
   return async function(dispatch) {
     try {
       dispatch({ type: LOADING_DATA });
-      const response = await fetch("http://127.0.0.1:5000/api/get-next-posts", {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          page_num: page,
-          posts_per_page: 4 //posts per page
+      const response = await fetch(
+        "https://kathrynsmithmakeup-backend.herokuapp.com/api/get-next-posts",
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            page_num: page,
+            posts_per_page: 4 //posts per page
+          }
         }
-      });
+      );
       const res = await response.json();
       if (res.status === "ok") {
         dispatch({

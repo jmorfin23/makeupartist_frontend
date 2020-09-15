@@ -14,19 +14,21 @@ export const fetchImages = () => {
   return async function(dispatch) {
     dispatch({ type: LOADING_DATA });
     try {
-      const response = await fetch("http://127.0.0.1:5000/api/retrieve-images");
+      const response = await fetch(
+        "https://kathrynsmithmakeup-backend.herokuapp.com/api/retrieve-images"
+      );
       const res = await response.json();
       if (res.status === "ok") {
         dispatch({
           type: FETCH_IMAGES,
           payload: res.data
         });
-      } else {
-        dispatch({
-          type: APP_ERROR,
-          payload: res.error
-        });
-      }
+      } //else {
+      //   dispatch({
+      //     type: APP_ERROR,
+      //     payload: res.error
+      //   });
+      // }
     } catch (error) {
       dispatch({
         type: APP_ERROR,
@@ -42,14 +44,17 @@ export const addImage = data => {
   return async function(dispatch) {
     try {
       dispatch({ type: LOADING_DATA });
-      const response = await fetch("http://127.0.0.1:5000/api/image-save", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          token: token,
-          info: JSON.stringify(data)
+      const response = await fetch(
+        "https://kathrynsmithmakeup-backend.herokuapp.com/api/image-save",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            token: token,
+            info: JSON.stringify(data)
+          }
         }
-      });
+      );
       const res = await response.json();
       if (res.status === "ok") {
         dispatch({ type: ADD_IMAGE, payload: res });
@@ -67,14 +72,17 @@ export const addImage = data => {
 export const deleteImage = id => {
   return async function(dispatch) {
     try {
-      const response = await fetch("http://127.0.0.1:5000/api/image-delete", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          token: token,
-          id: id
+      const response = await fetch(
+        "https://kathrynsmithmakeup-backend.herokuapp.com/api/image-delete",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            token: token,
+            id: id
+          }
         }
-      });
+      );
       const res = await response.json();
       if (res.status === "ok") {
         dispatch({ type: DELETE_IMAGE, payload: res }); // for now

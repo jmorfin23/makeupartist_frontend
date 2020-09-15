@@ -35,7 +35,7 @@ class Contact extends Component {
         payload: "Please check the reCAPTCHA."
       });
 
-    const URL = "http://127.0.0.1:5000/api/contact";
+    const URL = "https://kathrynsmithmakeup-backend.herokuapp.com/api/contact";
 
     const response = await fetch(URL, {
       method: "POST",
