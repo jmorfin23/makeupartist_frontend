@@ -77,7 +77,7 @@ export const getRequestedNumBlogPost = num => {
 };
 
 // Add a blogpost
-export const addBlogPost = blogPostInfo => {
+export const addBlogPost = data => {
   return async function(dispatch) {
     try {
       const response = await fetch(
@@ -85,10 +85,9 @@ export const addBlogPost = blogPostInfo => {
         {
           method: "POST",
           headers: {
-            "Content-Type": "application/json",
-            token: token,
-            postInfo: JSON.stringify(blogPostInfo)
-          }
+            token: token
+          },
+          body: data
         }
       );
       const res = await response.json();
@@ -122,7 +121,8 @@ export const deleteBlogPost = id => {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
-            id: id
+            id: id,
+            token: token
           }
         }
       );
@@ -206,12 +206,12 @@ export const fetchNextPosts = page => {
           type: FETCH_NEXT_POSTS,
           payload: res.data
         });
-      } else {
-        dispatch({
-          type: APP_ERROR,
-          payload: res.error
-        });
-      }
+      } //else {
+      //   dispatch({
+      //     type: APP_ERROR,
+      //     payload: res.error
+      //   });
+      // }
     } catch (error) {
       dispatch({
         type: APP_ERROR,

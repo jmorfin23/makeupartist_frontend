@@ -22,13 +22,13 @@ class Admin extends Component {
 
     this.state = {
       uploadType: null,
-      image: "",
-      text: "",
-      blogTitle: "",
-      blogDate: "",
+      image: null,
       showModal: false,
       imageToDelete: null,
-      imageIdToDelete: null
+      imageIdToDelete: null,
+      text: "",
+      blogTitle: "",
+      blogDate: ""
     };
   }
 
@@ -47,86 +47,28 @@ class Admin extends Component {
     e.preventDefault();
     const { uploadType: type, image } = this.state;
 
-    if (!type || !image)
-      return this.props.dispatch({
-        type: APP_ERROR,
-        payload: "You must select a type or you did not select an image."
-      });
+    if (!type || !image) return false;
 
-    // image file type conditions
-    const conditions = ["image/png", "image/jpeg", "image/jpg"];
+    const formData = new FormData();
+    formData.append("file", image);
+    formData.append("upload_type", type);
 
-    if (!conditions.includes(image.type))
-      return this.props.dispatch({
-        type: APP_ERROR,
-        payload: `The type: ${image.type} is not allowed.`
-      });
-
-    // Upload image to cloudinary get back the URL
-    const imageURL = await this.uploadToCloud();
-
-    if (!imageURL)
-      return this.props.dispatch({
-        type: APP_ERROR,
-        payload: "The file could not be uploaded to the cloud, try again."
-      });
-
-    const imageInfo = {
-      cloudURL: imageURL,
-      uploadType: type
-    };
-
-    this.props.addImage(imageInfo);
-  };
-
-  uploadToCloud = async () => {
-    let formData = new FormData();
-
-    formData.append("file", this.state.image);
-    formData.append("upload_preset", CLOUDINARY_UPLOAD_PRESET);
-
-    try {
-      const response = await fetch(CLOUDINARY_URL, {
-        method: "POST",
-        body: formData
-      });
-
-      const data = await response.json();
-
-      // Display error this will still return a value
-      if (data.error)
-        return this.props.dispatch({
-          type: APP_ERROR,
-          payload: data.error.message
-        });
-
-      //return cloud image URL
-      return data.secure_url;
-    } catch (error) {
-      return false;
-    }
+    this.props.addImage(formData);
   };
 
   addBlogPost = async e => {
     e.preventDefault();
 
-    // upload thumbnail to the cloud
-    const cloudURL = await this.uploadToCloud();
+    const { blogTitle: title, blogDate: date, text, image } = this.state;
 
-    if (!cloudURL)
-      return this.props.dispatch({
-        type: APP_ERROR,
-        payload: "The image could not be uploaded to the cloud, try again."
-      });
+    const formData = new FormData();
 
-    const blogPostInfo = {
-      title: this.state.blogTitle,
-      date: this.state.blogDate,
-      url: cloudURL,
-      text: this.state.text
-    };
+    formData.append("title", title);
+    formData.append("date", date);
+    formData.append("text", text);
+    formData.append("image", image);
 
-    this.props.addBlogPost(blogPostInfo);
+    this.props.addBlogPost(formData);
   };
 
   render() {
@@ -177,6 +119,7 @@ class Admin extends Component {
                 <input
                   onChange={e => this.setState({ image: e.target.files[0] })}
                   type="file"
+                  accept="image/*"
                 ></input>
                 <br />
                 <button type="submit" className="btn btn-primary">

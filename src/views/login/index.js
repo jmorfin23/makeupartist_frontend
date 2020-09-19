@@ -1,9 +1,6 @@
 import React, { Component } from "react";
 import { loginAdmin, registerAdmin } from "../../actions/adminActions";
 import { connect } from "react-redux";
-import { SECRET_KEY } from "../../config.js";
-
-let jwt = require("jsonwebtoken");
 
 class Login extends Component {
   constructor(props) {
@@ -18,13 +15,12 @@ class Login extends Component {
   submitLoginForm = e => {
     e.preventDefault();
 
-    const token = jwt.sign(
-      { username: this.state.username, password: this.state.password },
-      SECRET_KEY,
-      { expiresIn: "1h" }
-    );
+    const info = {
+      username: this.state.username,
+      password: this.state.password
+    };
 
-    this.props.dispatch(registerAdmin(token));
+    this.props.dispatch(loginAdmin(info));
   };
 
   render() {

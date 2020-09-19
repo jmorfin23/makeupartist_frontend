@@ -50,17 +50,14 @@ export const authenticateAdmin = token => {
 };
 
 // login admin
-export const loginAdmin = token => {
+export const loginAdmin = login_creds => {
   return async function(dispatch) {
     try {
       const response = await fetch(
         "https://kathrynsmithmakeup-backend.herokuapp.com/api/admin-login",
         {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            token: token
-          }
+          method: "POST",
+          body: JSON.stringify(login_creds)
         }
       );
       const res = await response.json();
@@ -88,17 +85,14 @@ export const loginAdmin = token => {
 };
 
 //register an admin
-export const registerAdmin = token => {
+export const registerAdmin = data => {
   return async function(dispatch) {
     try {
       const response = await fetch(
         "https://kathrynsmithmakeup-backend.herokuapp.com/api/admin-register",
         {
           method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            token: token
-          }
+          body: JSON.stringify(data)
         }
       );
       const res = await response.json();

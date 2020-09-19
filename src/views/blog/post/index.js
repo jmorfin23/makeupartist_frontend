@@ -7,7 +7,7 @@ import { getSinglePost } from "../../../actions/blogActions.js";
 import Four04 from "../../../components/404_Page";
 import BlogSidebar from "../../../components/blogsidebar";
 
-class Post1 extends Component {
+class Post extends Component {
   componentDidMount() {
     // Retrieve blogpost
     this.props.getSinglePost(this.props.match.params.post);
@@ -135,4 +135,4 @@ const mapStateToProps = state => ({
   isLoading: state.loading.isLoading
 });
 
-export default withRouter(connect(mapStateToProps, { getSinglePost })(Post1));
+export default withRouter(connect(mapStateToProps, { getSinglePost })(Post));

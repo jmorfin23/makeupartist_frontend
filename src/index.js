@@ -9,10 +9,6 @@ import ErrorBoundary from "./components/errorBoundary";
 import jwt_decode from "jwt-decode";
 import { LOGIN_ADMIN } from "./actions/types";
 
-//STORE -> GLOBAL state
-
-//dispatch : the way we execute the action "dispatch action to reducer"
-
 try {
   const token = localStorage.getItem("token");
   if (token) {

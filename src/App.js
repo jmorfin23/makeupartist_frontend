@@ -9,7 +9,7 @@ import Services from "./views/services";
 import Portfolio from "./views/portfolio";
 import Blog from "./views/blog";
 import Contact from "./views/contact";
-import Post1 from "./views/blog/post1";
+import Post from "./views/blog/post";
 import Admin from "./views/admin";
 import Login from "./views/login";
 import { connect } from "react-redux";
@@ -55,7 +55,7 @@ class App extends Component {
           <Route exact path={"/services"} render={() => <Services />} />
           <Route exact path={"/portfolio"} render={() => <Portfolio />} />
           <Route exact path={"/blog"} render={() => <Blog />} />
-          <Route path={"/blog/:post"} render={() => <Post1 />} />
+          <Route path={"/blog/:post"} render={() => <Post />} />
           <Route exact path={"/contact"} render={() => <Contact />} />
           <Route exact path={"/reset"} render={() => <Reset />} />
           <Route path={"/reset_password/:token"} render={() => <Passwords />} />

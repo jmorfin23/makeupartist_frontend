@@ -49,13 +49,13 @@ export const addImage = data => {
         {
           method: "POST",
           headers: {
-            "Content-Type": "application/json",
-            token: token,
-            info: JSON.stringify(data)
-          }
+            token: token
+          },
+          body: data
         }
       );
       const res = await response.json();
+
       if (res.status === "ok") {
         dispatch({ type: ADD_IMAGE, payload: res });
       } else {
