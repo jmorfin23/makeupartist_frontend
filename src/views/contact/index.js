@@ -11,6 +11,7 @@ class Contact extends Component {
 
     this.state = {
       isVerified: false,
+      token: null,
       name: "",
       email: "",
       phone: "",
@@ -24,29 +25,28 @@ class Contact extends Component {
   captchaCallback = () => {
     console.log("recaptcha is loaded!");
   };
+
   submitMessage = async e => {
     e.preventDefault();
 
-    const { name, email, subject, phone, message, isVerified } = this.state;
+    const { name, email, subject, phone, message, token } = this.state;
 
-    if (!isVerified)
-      return this.props.dispatch({
-        type: APP_ERROR,
-        payload: "Please check the reCAPTCHA."
-      });
+    const formData = new FormData();
+
+    formData.append("name", name);
+    formData.append("email", email);
+    formData.append("subject", subject);
+    formData.append("phone", phone);
+    formData.append("message", message);
 
     const URL = "https://kathrynsmithmakeup-backend.herokuapp.com/api/contact";
 
     const response = await fetch(URL, {
       method: "POST",
       headers: {
-        "Contact-Type": "application/json",
-        name: name,
-        email: email,
-        subject: subject,
-        phone: phone,
-        message: message
-      }
+        Authorization: `Bearer ${token}`
+      },
+      body: formData
     });
 
     const data = await response.json();
@@ -210,8 +210,8 @@ class Contact extends Component {
                           sitekey="6LcDR8oZAAAAACFELDflcK8Me3Bk52opXFBebqYb"
                           render="explicit"
                           onloadCallback={() => this.captchaCallback()}
-                          verifyCallback={() =>
-                            this.setState({ isVerified: true })
+                          verifyCallback={token =>
+                            this.setState({ token: token })
                           }
                         />
                         ,

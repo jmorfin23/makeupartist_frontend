@@ -18,13 +18,12 @@ export const authenticateAdmin = token => {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
-            token: token
+            Authorization: `Bearer ${token}`
           }
         }
       );
       const res = await response.json();
       if (res.status === "ok") {
-        console.log("authentication success");
         dispatch({
           type: ADMIN_AUTH,
           payload: true
@@ -50,14 +49,16 @@ export const authenticateAdmin = token => {
 };
 
 // login admin
-export const loginAdmin = login_creds => {
+export const loginAdmin = credentials => {
   return async function(dispatch) {
     try {
       const response = await fetch(
         "https://kathrynsmithmakeup-backend.herokuapp.com/api/admin-login",
         {
           method: "POST",
-          body: JSON.stringify(login_creds)
+          headers: {
+            Authorization: `Basic ${credentials}`
+          }
         }
       );
       const res = await response.json();
@@ -85,14 +86,16 @@ export const loginAdmin = login_creds => {
 };
 
 //register an admin
-export const registerAdmin = data => {
+export const registerAdmin = credentials => {
   return async function(dispatch) {
     try {
       const response = await fetch(
         "https://kathrynsmithmakeup-backend.herokuapp.com/api/admin-register",
         {
           method: "POST",
-          body: JSON.stringify(data)
+          headers: {
+            Authorization: `Basic ${credentials}`
+          }
         }
       );
       const res = await response.json();
@@ -122,16 +125,15 @@ export const registerAdmin = data => {
 // admin password reset functionality
 export const resetPassword = email => {
   return async function(dispatch) {
-    console.log("inside reset admin password");
     try {
       const response = await fetch(
         "https://kathrynsmithmakeup-backend.herokuapp.com/api/reset-password",
         {
-          method: "GET",
+          method: "POST",
           headers: {
-            "Content-Type": "application/json",
-            email: email
-          }
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(email)
         }
       );
       const res = await response.json();
@@ -157,18 +159,17 @@ export const resetPassword = email => {
 
 // Updating admin password
 export const updatePassword = (new_pass, token) => {
-  console.log("inside update passsword");
   return async function(dispatch) {
     try {
       const response = await fetch(
         "https://kathrynsmithmakeup-backend.herokuapp.com/api/change_password",
         {
-          method: "GET",
+          method: "POST",
           headers: {
             "Content-Type": "application/json",
-            password: new_pass,
-            token: token
-          }
+            Authorization: `Bearer ${token}`
+          },
+          body: JSON.stringify(new_pass)
         }
       );
       const res = await response.json();

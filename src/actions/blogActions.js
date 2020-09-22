@@ -85,7 +85,7 @@ export const addBlogPost = data => {
         {
           method: "POST",
           headers: {
-            token: token
+            Authorization: `Bearer ${token}`
           },
           body: data
         }
@@ -121,8 +121,8 @@ export const deleteBlogPost = id => {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
-            id: id,
-            token: token
+            Authorization: `Bearer ${token}`,
+            id: id
           }
         }
       );

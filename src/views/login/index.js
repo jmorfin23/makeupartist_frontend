@@ -15,12 +15,11 @@ class Login extends Component {
   submitLoginForm = e => {
     e.preventDefault();
 
-    const info = {
-      username: this.state.username,
-      password: this.state.password
-    };
+    const credentials = window.btoa(
+      `${this.state.username}:${this.state.password}`
+    );
 
-    this.props.dispatch(loginAdmin(info));
+    this.props.dispatch(loginAdmin(credentials));
   };
 
   render() {

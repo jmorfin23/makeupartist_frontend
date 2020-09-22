@@ -12,9 +12,6 @@ import {
   deleteBlogPost,
   fetchBlogPosts
 } from "../../actions/blogActions.js";
-import { APP_ERROR } from "../../actions/types";
-//CLOUDINARY URL & PRESET
-import { CLOUDINARY_UPLOAD_PRESET, CLOUDINARY_URL } from "../../config";
 
 class Admin extends Component {
   constructor(props) {
@@ -50,6 +47,7 @@ class Admin extends Component {
     if (!type || !image) return false;
 
     const formData = new FormData();
+
     formData.append("file", image);
     formData.append("upload_type", type);
 

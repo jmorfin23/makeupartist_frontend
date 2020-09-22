@@ -49,7 +49,7 @@ export const addImage = data => {
         {
           method: "POST",
           headers: {
-            token: token
+            Authorization: `Bearer ${token}`
           },
           body: data
         }
@@ -78,7 +78,7 @@ export const deleteImage = id => {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            token: token,
+            Authorization: `Bearer ${token}`,
             id: id
           }
         }
