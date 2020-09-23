@@ -29,9 +29,9 @@ const Header = props => {
           >
             <i className="fa fa-bars"></i>
           </button>
-          <Link className="navbar-brand" to="/home">
+          <a className="navbar-brand" href="/home">
             <img src={companylogo} className="logo1" alt="" />
-          </Link>
+          </a>
         </div>
         {/*  End Header Navigation */}
         {/*  Collect the nav links, forms, and other content for toggling */}

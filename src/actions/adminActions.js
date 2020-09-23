@@ -62,7 +62,6 @@ export const loginAdmin = credentials => {
         }
       );
       const res = await response.json();
-
       if (res.status === "ok") {
         // add token to local storage
         localStorage.setItem("token", res.data);
