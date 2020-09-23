@@ -22,7 +22,7 @@ const HomeBlogSection = props => {
             <div key={post.id} className="col-lg-4 col-md-4 col-sm-6 col-xs-12">
               <div className="post-entry">
                 <div className="post-thumbnail">
-                  <img src="http://placehold.it/400x400" alt="" />
+                  <img src={post.url} alt="" />
                   <a href={`/blog/${post.path}`}>
                     <i className="fa fa-link"></i>
                   </a>
