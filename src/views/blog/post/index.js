@@ -75,37 +75,38 @@ class Post extends Component {
                     {/*padd-white-box*/}
                     <div className="related-post-box">
                       <div className="row">
-                        {nextPosts.length &&
-                          nextPosts.map(post => (
-                            <div
-                              key={post.id}
-                              className="col-lg-4 col-md-4 col-sm-6 col-xs-12"
-                            >
-                              <div className="post-entry post-entry-related">
-                                <div className="post-thumbnial">
-                                  <a href={`/blog/${post.path}/`}>
-                                    <img src={post.url} alt="" />
-                                  </a>
-                                </div>
-                                {/*post-thumbnial*/}
-                                <div className="post-entry-related-contents">
-                                  <h1>
+                        {nextPosts !== undefined && nextPosts.length
+                          ? nextPosts.map(post => (
+                              <div
+                                key={post.id}
+                                className="col-lg-4 col-md-4 col-sm-6 col-xs-12"
+                              >
+                                <div className="post-entry post-entry-related">
+                                  <div className="post-thumbnial">
                                     <a href={`/blog/${post.path}/`}>
-                                      {post.title}
+                                      <img src={post.url} alt="" />
                                     </a>
-                                  </h1>
-                                  <ul className="entry-meta">
-                                    <li>
-                                      <i className="fa fa-calendar"></i>
-                                      {post.date}
-                                    </li>
-                                  </ul>
+                                  </div>
+                                  {/*post-thumbnial*/}
+                                  <div className="post-entry-related-contents">
+                                    <h1>
+                                      <a href={`/blog/${post.path}/`}>
+                                        {post.title}
+                                      </a>
+                                    </h1>
+                                    <ul className="entry-meta">
+                                      <li>
+                                        <i className="fa fa-calendar"></i>
+                                        {post.date}
+                                      </li>
+                                    </ul>
+                                  </div>
+                                  {/*post-entry-related-contents*/}
                                 </div>
-                                {/*post-entry-related-contents*/}
+                                {/*post-entry*/}
                               </div>
-                              {/*post-entry*/}
-                            </div>
-                          ))}
+                            ))
+                          : null}
                         {/*end col*/}
                       </div>
                       {/*row*/}

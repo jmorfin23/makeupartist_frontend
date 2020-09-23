@@ -42,10 +42,10 @@ const BlogSidebar = () => {
           my life as a makeup artist. Sign up if you like my content!
         </p>
         <form
+          onSubmit={() =>
+            alert("The newsletter is not yet set up, try again later.")
+          }
           className="b-form-contacts ui-form"
-          id="contactForm"
-          action="#"
-          method="post"
         >
           <p>
             <input
@@ -67,7 +67,7 @@ const BlogSidebar = () => {
               type="email"
             />
           </p>
-          <button className="btn btn-primary">
+          <button type="submit" className="btn btn-primary">
             Subscribe <i className="fa fa-angle-double-right"></i>
           </button>
         </form>
