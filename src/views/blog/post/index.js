@@ -1,11 +1,12 @@
 import React, { Component } from "react";
 import "./index.css";
-import "../../../App.css";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { getSinglePost } from "../../../actions/blogActions.js";
 import Four04 from "../../../components/404_Page";
 import BlogSidebar from "../../../components/blogsidebar";
+import { PageTitleHeading } from "../../../components/pagetitleheading";
+import headingphoto from "../../../images/blog-background.jpg";
 
 class Post extends Component {
   componentDidMount() {
@@ -39,12 +40,7 @@ class Post extends Component {
       <>
         {post !== undefined && Object.keys(post).length > 0 && (
           <div className="post1">
-            <section className="section section-page-title overhead-photo my-header">
-              <div className="overlay">
-                <h1>{post.title}</h1>
-              </div>
-              {/*overlay*/}
-            </section>
+            <PageTitleHeading page={post.title} image={headingphoto} />
             {/*section-page-title*/}
             <section className="section main-section">
               <div className="container">

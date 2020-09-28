@@ -1,17 +1,12 @@
 import React from "react";
-import "./index.css";
-import "../../App.css";
 import PortfolioImage from "../../components/portfolioImage";
+import heading_background from "../../images/camera.jpg";
+import { PageTitleHeading } from "../../components/pagetitleheading";
 
 const Portfolio = () => {
   return (
     <div>
-      <section className="section section-page-title my-header portfolio-heading">
-        <div className="overlay">
-          <h1>Portfolio</h1>
-        </div>
-        {/*overlay*/}
-      </section>
+      <PageTitleHeading page={"Portfolio"} image={heading_background} />
       <section id="gallery" className="section section-gallery">
         {/* section-title */}
         <div className="section-title text-center">

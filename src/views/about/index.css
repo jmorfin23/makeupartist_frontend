@@ -7,13 +7,6 @@
   text-decoration: underline;
 }
 
-.about-heading {
-  background: url("../../images/dogs.jpg");
-}
-
-.services-image {
-  background: url("../../images/makeup.jpg");
-}
 .add-quote {
   background: url("../../images/left_quote.png") no-repeat 0 5px;
 }

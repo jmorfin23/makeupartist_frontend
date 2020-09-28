@@ -1,9 +1,9 @@
 import React, { Component } from "react";
-import "./index.css";
-import "../../App.css";
 import Recaptcha from "react-recaptcha";
 import { MESSAGE_SENT, APP_ERROR } from "../../actions/types";
 import { connect } from "react-redux";
+import { PageTitleHeading } from "../../components/pagetitleheading";
+import heading_background from "../../images/contact_me.jpg";
 
 class Contact extends Component {
   constructor(props) {
@@ -69,12 +69,7 @@ class Contact extends Component {
   render() {
     return (
       <div className="contact">
-        <section className="section section-page-title my-header contact-heading">
-          <div className="overlay">
-            <h1>Contact</h1>
-          </div>
-          {/*overlay*/}
-        </section>
+        <PageTitleHeading page={"Contact"} image={heading_background} />
         <section id="contact" className="section section-contact">
           {/* section-title */}
           <div className="section-title text-center">

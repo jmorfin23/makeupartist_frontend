@@ -29,7 +29,7 @@ const HomeBlogSection = props => {
                 </div>
                 {/* post-thumbnail*/}
                 <h2>
-                  <a href={`/blog/${post.path}`}>{post.title}</a>
+                  <a href={`/blog/${post.path}/`}>{post.title}</a>
                 </h2>
                 <ul className="entry-meta">
                   <li>
@@ -42,7 +42,7 @@ const HomeBlogSection = props => {
                   </li>
                 </ul>
                 <p>{post.content.slice(0, 350) + "..."}</p>
-                <a className="btn btn-primary" href={`/blog/${post.path}`}>
+                <a className="btn btn-primary" href={`/blog/${post.path}/`}>
                   Read More
                 </a>
               </div>

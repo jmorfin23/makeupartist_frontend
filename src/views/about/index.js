@@ -1,19 +1,15 @@
 import React from "react";
 import "./index.css";
-import "../../App.css";
 import portrait from "../../images/portrait.jpg";
 import Featured from "../../components/featured";
 import MyServices from "../../components/my-services";
+import { PageTitleHeading } from "../../components/pagetitleheading";
+import heading_background from "../../images/dogs.jpg";
 
 const About = () => {
   return (
     <div>
-      <section className="section section-page-title about-heading my-header">
-        <div className="overlay">
-          <h1>About Me</h1>
-        </div>
-        {/* overlay*/}
-      </section>
+      <PageTitleHeading page={"About Me"} image={heading_background} />
       {/* ============== end section page banner ==============*/}
       <section className="section section-about">
         <div className="container">
@@ -57,10 +53,8 @@ const About = () => {
         </div>
       </section>
       {/* section_about*/}
-      <section className="section parallax services-image my-header">
-        <MyServices />
-        {/* overlay*/}
-      </section>
+      <MyServices />
+      {/* overlay*/}
       {/* section-paralax */}
       <section className="section section-logos">
         <Featured />

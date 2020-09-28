@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import "./index.css";
-import "../../App.css";
 // Images
 import bridal from "../../images/bridal-makeup2.jpg";
 import special from "../../images/specialo.jpg";
@@ -9,6 +8,8 @@ import model from "../../images/model-photo-shoot.jpg";
 import engagement from "../../images/engagement.jpg";
 import airbrush from "../../images/airbrush-makeup.jpg";
 import MyServices from "../../components/my-services";
+import headingphoto from "../../images/makeup.jpg";
+import { PageTitleHeading } from "../../components/pagetitleheading";
 
 class Services extends Component {
   constructor(props) {
@@ -18,12 +19,7 @@ class Services extends Component {
   render() {
     return (
       <div className="services">
-        <section className="section section-page-title services-heading my-header">
-          <div className="overlay">
-            <h1>Services</h1>
-          </div>
-          {/*overlay*/}
-        </section>
+        <PageTitleHeading page={"Services"} image={headingphoto} />
         <section className="section">
           <div className="container">
             <div className="row services-sec">
@@ -105,10 +101,12 @@ class Services extends Component {
                     <img src={engagement} alt="" />
                   </p>
                   <h3>Engagement</h3>
-                  <li>Hair Styling</li>
-                  <li>In studio makeup</li>
-                  <li>Airbrush</li>
-                  <li>Skin care package</li>
+                  <ul>
+                    <li>Hair Styling</li>
+                    <li>In studio makeup</li>
+                    <li>Airbrush</li>
+                    <li>Skin care package</li>
+                  </ul>
                 </div>
               )}
               {this.state.displaySection === "Airbrush" && (
@@ -117,9 +115,11 @@ class Services extends Component {
                     <img src={airbrush} alt="" />
                   </p>
                   <h3>Airbrush Makeup</h3>
-                  <li>In studio makeup</li>
-                  <li>Full airbrush</li>
-                  <li>Skin care package</li>
+                  <ul>
+                    <li>In studio makeup</li>
+                    <li>Full airbrush</li>
+                    <li>Skin care package</li>
+                  </ul>
                 </div>
               )}
 
@@ -190,11 +190,7 @@ class Services extends Component {
           {/* container*/}
         </section>
         {/*section-services*/}
-        <section className="section parallax services-image my-header">
-          <MyServices />
-          {/*overlay*/}
-        </section>
-        {/*section-paralax*/}
+        <MyServices />
         <section className="section section-pricing">
           {/* section-title */}
           <div className="section-title text-center">

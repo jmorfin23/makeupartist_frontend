@@ -2,11 +2,3 @@
   position: sticky;
   top: 70px;
 }
-
-.services-sec ul {
-  list-style: disc !important;
-}
-
-.services-heading {
-  background: url("../../images/makeup.jpg");
-}

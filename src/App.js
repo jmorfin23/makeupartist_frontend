@@ -29,7 +29,6 @@ class App extends Component {
     this.props.history.listen((location, action) => {
       scroll.scrollToTop();
     });
-    //this.props.user.isLogged = true;
     return (
       <div className="App">
         {this.props.isLoading ? <Loader /> : null}

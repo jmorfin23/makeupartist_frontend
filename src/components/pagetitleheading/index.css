@@ -1,0 +1,10 @@
+.my-header {
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+  background-size: cover !important;
+  background-attachment: fixed !important;
+  /*margin: 0 auto!important;
+    object-fit: contain!important;
+    max-width: 100%!important;
+    */
+}

@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 import "./index.css";
-import "../../App.css";
 import { connect } from "react-redux";
 import { fetchNextPosts } from "../../actions/blogActions.js";
 import BlogSidebar from "../../components/blogsidebar";
 import MainBlogSection from "../../components/mainblogsection";
+import heading_background from "../../images/blog_img.jpg";
+import { PageTitleHeading } from "../../components/pagetitleheading";
 
 class Blog extends Component {
   constructor(props) {
@@ -21,12 +22,7 @@ class Blog extends Component {
   render() {
     return (
       <div className="blog">
-        <section className="section section-page-title blog-heading my-header">
-          <div className="overlay">
-            <h1>Blog/News</h1>
-          </div>
-          {/*overlay*/}
-        </section>
+        <PageTitleHeading page={"Blog/News"} image={heading_background} />
         {/*section-page-title*/}
         <section className="section main-section">
           <div className="container">

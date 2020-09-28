@@ -70,6 +70,7 @@ class Admin extends Component {
   };
 
   render() {
+    console.log(this.props);
     const { images, blogposts } = this.props;
     const { adminPosts: posts } = blogposts;
     return (
