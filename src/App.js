@@ -10,7 +10,7 @@ import Portfolio from "./views/portfolio";
 import Blog from "./views/blog";
 import Contact from "./views/contact";
 import Post from "./views/blog/post";
-import Admin from "./views/admin";
+import { Admin } from "./views/admin";
 import Login from "./views/login";
 import { connect } from "react-redux";
 import { fetchImages } from "./actions/imageActions.js";
@@ -29,6 +29,7 @@ class App extends Component {
     this.props.history.listen((location, action) => {
       scroll.scrollToTop();
     });
+    this.props.user.isLogged = true;
     return (
       <div className="App">
         {this.props.isLoading ? <Loader /> : null}
