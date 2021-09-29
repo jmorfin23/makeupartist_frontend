@@ -9,7 +9,7 @@
     "bootstrap": "^4.4.1",
     "dotenv": "^8.2.0",
     "husky": "^4.0.10",
-    "i": "^0.3.6",
+    "i": "^0.3.7",
     "jquery": "^3.4.1",
     "jsonwebtoken": "^8.5.1",
     "jwt-decode": "^2.2.0",
