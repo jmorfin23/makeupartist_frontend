@@ -11,7 +11,7 @@
     "husky": "^4.0.10",
     "i": "^0.3.6",
     "jquery": "^3.4.1",
-    "jsonwebtoken": "^8.5.1",
+    "jsonwebtoken": "^9.0.0",
     "jwt-decode": "^2.2.0",
     "prettier": "1.19.1",
     "pretty-quick": "^2.0.1",
